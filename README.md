@@ -1,11 +1,13 @@
-# Projekt
+﻿# Projekt
 
 ## Tähtaeg 
 
 Rühma viimane tund esitletakse
 
 ## Liikmete arv
-Võib teha üksi või kahekesi
+2
+Jaan-Martin Kuusmann
+Joosep Jõeleht
 
 **Juhul kui tehakse kahekesi, peab olema näha githubis, kes ja mida on kirjutanud. Kui ei ole näha, kes midagi kirjutanud on, tööd ei arvesta! Kui ei tea kuidas seda teha, küsi!**
 
