@@ -108,11 +108,13 @@ var radius = 500;
 var theta = 0;
 function render() {
 	// rotate camera
-	theta += 0.3;
-	camera.position.x = radius * Math.sin( THREE.Math.degToRad( theta ) );
-	camera.position.z = radius * Math.cos( THREE.Math.degToRad( theta ) );
-	camera.lookAt( scene.position );
-	camera.updateMatrixWorld();
+	if(INTERSECTED === null) {
+		theta += 0.5;
+		camera.position.x = radius * Math.sin( THREE.Math.degToRad( theta ) );
+		camera.position.z = radius * Math.cos( THREE.Math.degToRad( theta ) );
+		camera.lookAt( scene.position );
+		camera.updateMatrixWorld();
+	}
 
 	// find intersections
 	raycaster.setFromCamera( mouse, camera );
