@@ -19,41 +19,72 @@ var INTERSECTED;
 var CLICKED;
 var TEMP;
 
-// Kontrolli kas andmed on kätte saadud
-function check() {
-    if (typeof tracks == 'undefined') {
-        setTimeout(check, 500); // setTimeout(func, timeMS, params...)
-    } else {
-        init();
-				animate();
+// Pagination version - sucks
+/*function httpGetAsync(theUrl, callback)
+{
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.onreadystatechange = function() {
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+            callback(JSON.parse(xmlHttp.responseText));
     }
+    xmlHttp.open("GET", theUrl, false); // true for asynchronous, don't want async, while loop overlaps and breaks
+    xmlHttp.send();
 }
 
-check();
+var tracks = [];
+promise.then(function(result) {
+	var next_href = result.next_href;
+	result.collection.forEach(function(entry) {
+		if(entry.playback_count > 1000 && entry.genre !== null) {
+			tracks.push(entry);
+		}
+	});
+	while(tracks.length < 50 && next_href !== undefined) {
+		httpGetAsync(next_href, function(response) {
+			next_href = response.next_href;
+			response.collection.forEach(function(entry) {
+				if(entry.playback_count > 1000 && tracks.length < 50 && entry.genre !== null) {
+					tracks.push(entry);
+				}
+			});
+		});
+	}
+	init();
+	animate();
+}); */
+var tracks = [];
+promise.then(function(result) {
+	result.tracks.forEach(function (entry) {
+		tracks.push(entry);
+	})
+	init();
+	animate();
+});
 function init() {
-	console.log(tracks);
 	container = document.createElement( 'div' );
 	document.body.appendChild( container );
 	camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 10000 );
 	camera.position.set( 0, 0, 0 );
 	scene = new THREE.Scene();
 	array = [];
-	var rows = 10;
+	var rows = 5;
 	var columns = 10;
+	var count = 0;
 	for ( var i = 0; i < rows; i ++ ) {
 		for( var j = 0; j < columns; j++) {
 			var particle = new THREE.Sprite( new THREE.SpriteCanvasMaterial( { color: 0x808080, program: programStroke } ) );
 			var radius = 600;
 			var offset_angle = 360/columns;
 			var offset_random_angle = Math.floor(Math.random() * columns);
-			var rad = ((j*offset_angle)-offset_random_angle)*Math.PI/180;
-			var angle = rad;
-			particle.position.y = i*130 - 550;
+			var angle = ((j*offset_angle)-offset_random_angle)*Math.PI/180;
+			particle.track = tracks[count];
+			particle.position.y = i*300 - 550;
 			particle.position.x = Math.cos(angle)*radius;
 			particle.position.z = Math.sin(angle)*radius;
-			particle.scale.x = particle.scale.y = Math.random()*30 + 40;
+			particle.scale.x = particle.scale.y = Math.random()*30 + 80;
 			array.push(particle);
 			scene.add( particle );
+			count++;
 		}
 	}
 
@@ -88,7 +119,15 @@ function onDocumentMouseDown( event ) {
 				if ( intersects.length > 0 && !CLICKED) {
 					CLICKED = intersects[ 0 ].object;
 					TEMP = CLICKED.scale.x;
-					lerpCircle();
+					console.log(CLICKED.track);
+					console.log(CLICKED.track.genre);
+					SC.stream('/tracks/' + CLICKED.track.id).then(function(player){
+					  player.play();
+					}).then(function(callback) {
+						console.log(callback);
+						lerpCircle();
+					});
+
 				}
 }
 function animate() {
@@ -98,8 +137,8 @@ function animate() {
 function lerpCircle() {
 	if( CLICKED ) {
 		currentFrame = requestAnimationFrame( lerpCircle );
-		CLICKED.scale.x = CLICKED.scale.y += 6;
-		if (CLICKED.scale.x >= 120) {
+		CLICKED.scale.x = CLICKED.scale.y += 8;
+		if (CLICKED.scale.x >= 200) {
 			cancelAnimationFrame( currentFrame );
 			lerpCircleBack();
 		}
@@ -110,7 +149,6 @@ function lerpCircleBack() {
 		currentFrame = requestAnimationFrame( lerpCircleBack );
 		CLICKED.scale.x = CLICKED.scale.y -= 6;
 		if (CLICKED.scale.x <= TEMP) {
-			scene.remove(CLICKED);
 			TEMP = null;
 			CLICKED = null;
 			cancelAnimationFrame( currentFrame );
