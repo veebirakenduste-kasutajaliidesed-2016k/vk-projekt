@@ -18,9 +18,20 @@ var programStroke = function ( context ) {
 var INTERSECTED;
 var CLICKED;
 var TEMP;
-init();
-animate();
+
+// Kontrolli kas andmed on kätte saadud
+function check() {
+    if (typeof tracks == 'undefined') {
+        setTimeout(check, 500); // setTimeout(func, timeMS, params...)
+    } else {
+        init();
+				animate();
+    }
+}
+
+check();
 function init() {
+	console.log(tracks);
 	container = document.createElement( 'div' );
 	document.body.appendChild( container );
 	camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 10000 );
@@ -89,18 +100,20 @@ function lerpCircle() {
 		currentFrame = requestAnimationFrame( lerpCircle );
 		CLICKED.scale.x = CLICKED.scale.y += 6;
 		if (CLICKED.scale.x >= 120) {
+			cancelAnimationFrame( currentFrame );
 			lerpCircleBack();
 		}
 	}
 }
 function lerpCircleBack() {
-	cancelAnimationFrame( currentFrame );
 	if (CLICKED.scale.x > TEMP) {
-		requestAnimationFrame( lerpCircleBack );
+		currentFrame = requestAnimationFrame( lerpCircleBack );
 		CLICKED.scale.x = CLICKED.scale.y -= 6;
 		if (CLICKED.scale.x <= TEMP) {
+			scene.remove(CLICKED);
 			TEMP = null;
 			CLICKED = null;
+			cancelAnimationFrame( currentFrame );
 		}
 	}
 }
