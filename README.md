@@ -1,4 +1,4 @@
-# Projek - Google Mapsiga töötav GPS jälgimise rakendus
+# Projekt - Google Mapsiga töötav GPS jälgimise rakendus
 
 ** Paul Nestor
 
