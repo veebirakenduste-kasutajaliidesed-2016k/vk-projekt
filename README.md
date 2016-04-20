@@ -1,6 +1,6 @@
 # Projekt
 
-## Tähtaeg 
+## Tähtaeg
 
 Rühma viimane tund esitletakse
 
