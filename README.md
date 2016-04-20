@@ -1,6 +1,6 @@
 # Projekt
 
-## Tähtaeg 
+## Tähtaeg - 11.05
 
 Rühma viimane tund esitletakse
 
@@ -14,6 +14,8 @@ Võib teha üksi või kahekesi
 1. Tee kohe Pull request
 1. Muuda repositooriumi `README.md faili` vastavalt nõutele
 1. Tee valmis korralik veebirakendus
+
+#In Atom "Merge conflicts" extension
 
 ### Nõuded
 
