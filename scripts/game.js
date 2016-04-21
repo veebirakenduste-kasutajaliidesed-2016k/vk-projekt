@@ -164,6 +164,18 @@ function onDocumentMouseMove( event ) {
 function onDocumentMouseUp( event ) {
 	isDraggable = false;
 }
+function clearView() {
+		camera.position.y += 5000;
+		var howmany = scene.children.length;
+		function f() {
+		    scene.remove(scene.children[howmany]);
+		    howmany--;
+		    if( howmany >= 0 ){
+		        setTimeout( f, 100 );
+		    }
+		}
+		f();
+}
 function onDocumentMouseDown( event ) {
 	// Cancel entire raycasting and streaming process if event is within bounding box of HTML element
 	// Alternatives to this could be using jquery's height(), width()
