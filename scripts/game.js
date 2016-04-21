@@ -165,7 +165,7 @@ function onDocumentMouseUp( event ) {
 	isDraggable = false;
 }
 function clearView() {
-		camera.position.y += 5000;
+		camera.position.x += 5000;
 		var howmany = scene.children.length;
 		function f() {
 		    scene.remove(scene.children[howmany]);
