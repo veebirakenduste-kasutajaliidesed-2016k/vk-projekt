@@ -16,8 +16,26 @@
 			background-color: white;
 	  }
 		.details {
+			color: #d0d0d0;
 			display:block;
 			position: absolute;
+			margin: 12px 12px;
+			text-align: center;
+			border-radius: 12px;
+			background: #252525;
+	    border: 2px #545454 solid;
+			padding: 20px;
+			-moz-box-shadow: -2px -2px 10px #545454;
+			-webkit-box-shadow: -2px -2px 10px #545454;
+			box-shadow: -2px -2px 10px #545454;
+		}
+		.details a{
+			color: white;
+			text-decoration: none;
+			font-weight: bolder;
+		}
+		.details a:hover{
+			font-style:oblique;
 		}
 		.hidden {
 			display: none;
@@ -26,19 +44,19 @@
 	</head>
 	<body>
 		<div class="details hidden">
-			<span>Title: <span id="title"></span></span><br>
+			<span id="title"></span><br>
+			<span id="user"></span><br><br>
 			<span>Genre: <span id="genre"></span></span><br>
-			<span>User: <span id="user"></span></span><br>
 			<span>Comments: <span id="comment"></span></span><br>
 			<span>Playbacks: <span id="playback"></span></span><br>
-			<span>Favourites: <span id="favourite"></span></span>
+			<span>Favourites: <span id="favourite"></span></span><br><br>
+			<button id="button" onClick="clickAudio()">Pause</button><br><br>
+			<img src="soundcloud.png" alt="soundcloud">
+
 		</div>
 		<script src='./scripts/three.min.js'></script>
-		<script src='./scripts/keyboard.js'></script>
 		<script src="./scripts/renderers/Projector.js"></script>
 		<script src="./scripts/renderers/CanvasRenderer.js"></script>
-		<script src="./scripts/libs/stats.min.js"></script>
-		<script src='./scripts/viewportSize-min.js'></script>
 		<script src='./scripts/game.js'></script>
 
 	</body>

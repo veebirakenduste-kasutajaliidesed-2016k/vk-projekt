@@ -3,5 +3,5 @@ SC.initialize({
   client_id: '11ef1f02126a87ce1e2f29238977e930'
 });
 
-promise = SC.get('/playlists/47641135', {
+promise = SC.get('/playlists/217746411', {
 });
