@@ -1,14 +1,45 @@
-var container, stream = new Audio();
+/*
+	Problem 1: pixel bleeding on visualizer.
+		Possible reason 1: intersecting canvas
+		Possible reason 2: requestAnimationFrame lagging behind
+		Possible reason 3: WebGL
+		Possible reason 4: Canvas itself
+		Possible reason 5: camera or renderer
+	Solution 1: fill entire visualizer with canvas background, then render bars
+					* this also solved alpha problem
+*/
+// Some CORS nonsense thing
+var audioElement = new Audio();
+audioElement.crossOrigin = "anonymous";
 var camera, scene, renderer;
 var raycaster;
 var mouse, isDraggable = false;
 var currentFrame;
 var count = 0;
+var radius = 1200;
+var h = window.innerHeight/6;
 var PI2 = Math.PI * 2;
 var programFill = function ( context ) {
 	context.beginPath();
 	context.arc( 0, 0, 0.5, 0, PI2, true );
 	context.fill();
+};
+var barAmount = 80
+var binOffset = Math.cos(Math.PI/4)*radius*4/barAmount;
+// Canvas magic for the visualizer sprite
+var programVisualize = function ( context ) {
+	//canvas nonsense
+	context.fillStyle = "white";
+	context.fillRect(-79 * binOffset,-h*1.8,binOffset*160,255*1.7*2);
+	for(bin = 0; bin < audioSource.streamData.length; bin ++) {
+        var val = audioSource.streamData[bin];
+				context.fillStyle = "rgb(255,"+(85+(Math.ceil(115*bin/45)))+",0)";
+        context.fillRect(-bin * binOffset, h, binOffset - 4, val*1.5);
+				context.fillRect(bin * binOffset + binOffset, h, binOffset - 4, val*1.5);
+				context.fillStyle = "rgba(255,"+(85+(Math.ceil(115*bin/45)))+",0,0.4)";
+				context.fillRect(-bin * binOffset, h+0.5, binOffset - 4, -val*1.5);
+				context.fillRect(bin * binOffset + binOffset, h+0.5, binOffset - 4, -val*1.5);
+  }
 };
 var INTERSECTED;
 var CLICKED;
@@ -55,46 +86,113 @@ var particles = [];
 promise.then(function(result) {
 	result.tracks.forEach(function (entry) {
 		if(entry.streamable && entry.artwork_url !== null) {
+			// $%*)^£&^*"£^(*$)"!!! canvas
+			var imgDOM = new Image();
+			imgDOM.src = entry.artwork_url;
+
+			var container = function ( context ) {
+				context.lineWidth = 0.1;
+				context.beginPath();
+				context.arc( 0, 0, 0.5, 0, PI2, true );
+				context.stroke();
+				context.clip();
+				context.scale(1,-1);
+				context.drawImage(imgDOM,-0.6,-0.6,1.2, 1.2);
+			};
+			programs.push(container);
 			tracks.push(entry);
 		}
 	})
-	// $%*)^£&^*"£^(*$)"!!! canvas
-	tracks.forEach(function (entry) {
-		var imgDOM = new Image();
-		imgDOM.src = entry.artwork_url;
 
-		var container = function ( context ) {
-			context.lineWidth = 0.1;
-			context.beginPath();
-			context.arc( 0, 0, 0.5, 0, PI2, true );
-			context.stroke();
-			context.clip();
-			context.scale(1,-1);
-			context.drawImage(imgDOM,-0.6,-0.6,1.2, 1.2);
-		};
-		programs.push(container);
-	})
 	init();
 	animate();
 });
-function init() {
-	container = document.createElement( 'div' );
-	document.body.appendChild( container );
-	camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 10000 );
-	camera.position.set(1,0,1);
+function generate(permalink) {
+	SC.get('/playlists', {
+		q: permalink
+	}).then(function (e) {
+		if(e.length > 0) {
+			setTimeout( clearView(), 100 );
+			SC.get('/playlists/'+e[0].id, {
+			}).then(function (result) {
+				result.tracks.forEach(function (entry) {
+					if(entry.streamable && entry.artwork_url !== null) {
+						var imgDOM = new Image();
+						imgDOM.src = entry.artwork_url;
+
+						var container = function ( context ) {
+
+							context.lineWidth = 0.1;
+							context.beginPath();
+							context.arc( 0, 0, 0.5, 0, PI2, true );
+							context.stroke();
+							context.clip();
+							context.scale(1,-1);
+							context.drawImage(imgDOM,-0.5,-0.5,1, 1);
+						};
+						programs.push(container);
+						tracks.push(entry);
+					}
+				})
+				createScene();
+
+			});
+		} else {
+			console.log("NOPE");
+		}
+	});
+}
+var AudioSource = function() {
+    var self = this;
+    var audioCtx = new (window.AudioContext || window.webkitAudioContext); // shimmy shim shim
+    var analyser = audioCtx.createAnalyser();
+    analyser.fftSize = 256;
+    var source = audioCtx.createMediaElementSource(audioElement);
+    source.connect(analyser);
+    analyser.connect(audioCtx.destination);
+    var sampleAudioStream = function() {
+        analyser.getByteFrequencyData(self.streamData);
+        // calculate an overall volume value
+        var total = 0;
+        for (var i = 0; i < barAmount; i++) { // get the volume from the first 80 bins, else it gets too loud with treble
+            total += self.streamData[i];
+        }
+        self.volume = total;
+    };
+		// no point running through entire sampleAudioStream, if audioElement is paused, shim in a function
+    setInterval(function() {
+		  if(!audioElement.paused) {
+		    sampleAudioStream();
+		  }
+		}, 20); // every 20ms
+    this.volume = 0;
+    this.streamData = new Uint8Array(barAmount); // fftSize/2
+    this.play = function(streamUrl) {
+        audioElement.setAttribute('src', streamUrl); // AudioSource.play(stream_url)
+        audioElement.play();
+    }
+};
+var audioSource = new AudioSource();
+function createScene() {
+	count = 0;
+	// FoV will affect the width of 3D objects and related trig calcs
+	camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 1701 );
 	scene = new THREE.Scene();
+	var visualizer = new THREE.Sprite(new THREE.SpriteCanvasMaterial( { program: programVisualize } ));
+
+	visualizer.position.x = radius + 500;
+	scene.add(visualizer);
 	// rows will be fixed
 	var rows = 5;
 	// columns probably dynamic, possibly scale also
-	var columns = Math.floor(tracks.length / 5);
+	var columns = Math.floor(tracks.length / rows);
 
 	// TODO: deal with remainder, accomodate last row for remainder IF remainder exists
-	var remain = tracks.length % 5;
+	var remain = tracks.length % rows;
 	for ( var i = 0; i < rows; i ++ ) {
 		// angle equation gets messed up when j==0
 		for ( var j = 1; j < columns + 1; j++) {
 			var particle = new THREE.Sprite();
-			var radius = 1200;
 			var offset_angle = j*360/columns;
 			var offset_random_angle = offset_angle*Math.random()/columns;
 			var angle = (offset_angle - offset_random_angle)*Math.PI/180;
@@ -102,7 +200,7 @@ function init() {
 			particle.position.y = i*300 - 550;
 			particle.position.x = Math.cos(angle)*radius;
 			particle.position.z = Math.sin(angle)*radius;
-			particle.scale.x = particle.scale.y = 200;
+			particle.scale.x = particle.scale.y = 200 + Math.random()*90;
 			// custom material for each particle depending on track artwork
 			// runs all the time... every particle need custom canvas program
 			particle.programStroke = function ( context ) {
@@ -118,15 +216,18 @@ function init() {
 			count++;
 		}
 	}
+}
+function init() {
+	createScene();
 
 	raycaster = new THREE.Raycaster();
 	mouse = new THREE.Vector2();
 	renderer = new THREE.CanvasRenderer();
 	renderer.setClearColor( 0xffffff );
 	renderer.setPixelRatio( window.devicePixelRatio );
-	renderer.setSize( window.innerWidth - 4, window.innerHeight - 4 );
+	renderer.setSize( window.innerWidth - 3, window.innerHeight - 3 );
 
-	container.appendChild( renderer.domElement );
+	document.body.appendChild( renderer.domElement );
 
 	document.addEventListener( 'mousemove', onDocumentMouseMove, false );
 	document.addEventListener( 'mouseup', onDocumentMouseUp, false );
@@ -149,7 +250,8 @@ function onDocumentMouseMove( event ) {
 		// used to be in render(), not sure of pros/cons.
 		raycaster.setFromCamera( mouse, camera );
 		var intersects = raycaster.intersectObjects( scene.children );
-		if ( intersects.length > 0 && !isDraggable) {
+		//-----------------------------------------------------------v 0 is visualizer ID
+		if ( intersects.length > 0 && !isDraggable && scene.children.indexOf(intersects[0].object != 0)) {
 			if ( INTERSECTED != intersects[ 0 ].object ) {
 				if ( INTERSECTED ) INTERSECTED.material.program = programs[particles.indexOf(INTERSECTED)];
 				INTERSECTED = intersects[ 0 ].object;
@@ -165,13 +267,18 @@ function onDocumentMouseUp( event ) {
 	isDraggable = false;
 }
 function clearView() {
-		camera.position.x += 5000;
+		DETAILS[0].className = "details hidden";
+		stream.pause();
+		camera.position.x += 2500;
+		tracks = [];
+		programs = [];
+		particles = [];
 		var howmany = scene.children.length;
 		function f() {
 		    scene.remove(scene.children[howmany]);
 		    howmany--;
 		    if( howmany >= 0 ){
-		        setTimeout( f, 100 );
+		        setTimeout( f, 5 );
 		    }
 		}
 		f();
@@ -182,37 +289,44 @@ function onDocumentMouseDown( event ) {
 	// using offsetWidth and offsetHeight (need to account for visibility change)
 	var details = DETAILS[0].getBoundingClientRect();
 	event.preventDefault();
-	if(!(event.clientX < details.width && event.clientY < details.height)) {
+	switch (event.which) {
+	  case 1:
+			if(!(event.clientX < details.width && event.clientY < details.height)) {
+				mouse.x = ( event.clientX / renderer.domElement.clientWidth ) * 2 - 1;
+				mouse.y = - ( event.clientY / renderer.domElement.clientHeight ) * 2 + 1;
+				raycaster.setFromCamera( mouse, camera );
+				var intersects = raycaster.intersectObjects( scene.children );
+				if ( intersects.length > 0 && !CLICKED) {
+					CLICKED = intersects[ 0 ].object;
+					TEMP = CLICKED.scale.x;
+					DETAILS[0].className = "details";
+					document.getElementById("title").innerHTML = '<a href="'+ CLICKED.track.permalink_url + '">' + CLICKED.track.title + '</a>';
+					document.getElementById("genre").innerHTML = CLICKED.track.genre;
+					document.getElementById("user").innerHTML =
+						'<a href="'+ CLICKED.track.user.permalink_url + '">' + CLICKED.track.user.username + '</a>';
+					document.getElementById("comment").innerHTML = CLICKED.track.comment_count;
+					document.getElementById("playback").innerHTML = CLICKED.track.playback_count;
+					document.getElementById("favourite").innerHTML = CLICKED.track.favoritings_count;
+					// stream player provided is bad, clashing with flash nonsense
+					/*SC.stream('/tracks/' + CLICKED.track.id).then(function(player){
+						player.play();
+						player.on(play, function(e) {
 
-		mouse.x = ( event.clientX / renderer.domElement.clientWidth ) * 2 - 1;
-		mouse.y = - ( event.clientY / renderer.domElement.clientHeight ) * 2 + 1;
-		raycaster.setFromCamera( mouse, camera );
-		var intersects = raycaster.intersectObjects( scene.children );
-		if ( intersects.length > 0 && !CLICKED) {
-			CLICKED = intersects[ 0 ].object;
-			TEMP = CLICKED.scale.x;
-			DETAILS[0].className = "details";
-			document.getElementById("title").innerHTML = '<a href="'+ CLICKED.track.permalink_url + '">' + CLICKED.track.title + '</a>';
-			document.getElementById("genre").innerHTML = CLICKED.track.genre;
-			document.getElementById("user").innerHTML =
-				'<a href="'+ CLICKED.track.user.permalink_url + '">' + CLICKED.track.user.username + '</a>';
-			document.getElementById("comment").innerHTML = CLICKED.track.comment_count;
-			document.getElementById("playback").innerHTML = CLICKED.track.playback_count;
-			document.getElementById("favourite").innerHTML = CLICKED.track.favoritings_count;
-			// stream player provided is bad, clashing with flash nonsense
-			/*SC.stream('/tracks/' + CLICKED.track.id).then(function(player){
-				player.play();
-				player.on(play, function(e) {
-
-				});
-			});*/
-			document.getElementById("button").innerHTML = "Pause";
-			stream.src = CLICKED.track.stream_url + '?client_id=11ef1f02126a87ce1e2f29238977e930';
-			stream.play();
-			lerpCircle();
-		} else {
+						});
+					});*/
+					document.getElementById("button").innerHTML = "Pause";
+					audioSource.play(CLICKED.track.stream_url + '?client_id=11ef1f02126a87ce1e2f29238977e930');
+					lerpCircle();
+				}
+			}
+	    break;
+	  case 2:
+	    break;
+	  case 3:
 			isDraggable = true;
-		}
+      break;
+	  default:
+			console.log("weird mouse");
 	}
 }
 function animate() {
@@ -229,6 +343,7 @@ function lerpCircle() {
 		}
 	}
 }
+
 function lerpCircleBack() {
 	if (CLICKED.scale.x > TEMP) {
 		currentFrame = requestAnimationFrame( lerpCircleBack );
@@ -244,35 +359,36 @@ function lerpCircleBack() {
 
 var rotSpeed = 0.003;
 var dragMultiplier = 30;
-var last_mousex = 0;
+// save x coordinate so on mouse release, auto-rotate knows which direction to rotate
+var lastMouseX = 0;
 function render() {
-	var x = camera.position.x,
-			z = camera.position.z;
+	var x = scene.children[0].position.x,
+			z = scene.children[0].position.z;
 
-
-		if(isDraggable) {
-			camera.position.x = x * Math.cos(rotSpeed*dragMultiplier*mouse.x) - z * Math.sin(rotSpeed*dragMultiplier*mouse.x);
-			camera.position.z = z * Math.cos(rotSpeed*dragMultiplier*mouse.x) + x * Math.sin(rotSpeed*dragMultiplier*mouse.x);
-			last_mousex = mouse.x;
-		} else if (INTERSECTED === null) {
-			if(last_mousex < 0) {
-				camera.position.x = x * Math.cos(rotSpeed) + z * Math.sin(rotSpeed);
-				camera.position.z = z * Math.cos(rotSpeed) - x * Math.sin(rotSpeed);
-			} else {
-				camera.position.x = x * Math.cos(rotSpeed) - z * Math.sin(rotSpeed);
-				camera.position.z = z * Math.cos(rotSpeed) + x * Math.sin(rotSpeed);
-			}
+	if(isDraggable) {
+		scene.children[0].position.x = x * Math.cos(rotSpeed*dragMultiplier*mouse.x) - z * Math.sin(rotSpeed*dragMultiplier*mouse.x);
+		scene.children[0].position.z = z * Math.cos(rotSpeed*dragMultiplier*mouse.x) + x * Math.sin(rotSpeed*dragMultiplier*mouse.x);
+		lastMouseX = mouse.x;
+	} else if (INTERSECTED === null) {
+		if(lastMouseX < 0) {
+			scene.children[0].position.x = x * Math.cos(rotSpeed) + z * Math.sin(rotSpeed);
+			scene.children[0].position.z = z * Math.cos(rotSpeed) - x * Math.sin(rotSpeed);
+		} else {
+			scene.children[0].position.x = x * Math.cos(rotSpeed) - z * Math.sin(rotSpeed);
+			scene.children[0].position.z = z * Math.cos(rotSpeed) + x * Math.sin(rotSpeed);
 		}
-	camera.lookAt(scene.position);
+	}
+
+	camera.lookAt(scene.children[0].position);
 	renderer.render( scene, camera );
 }
 function clickAudio() {
-	if (stream.paused) {
-      stream.play();
+	if (audioElement.paused) {
+      audioElement.play();
 			document.getElementById("button").innerHTML = "Pause";
   }
   else {
-      stream.pause();
+      audioElement.pause();
 			document.getElementById("button").innerHTML = "Play";
   }
 }
