@@ -81,7 +81,6 @@ promise.then(function(result) {
 }); */
 var tracks = [];
 var programs = [];
-var particles = [];
 
 promise.then(function(result) {
 	result.tracks.forEach(function (entry) {
@@ -112,7 +111,7 @@ function generate(permalink) {
 		q: permalink
 	}).then(function (e) {
 		if(e.length > 0) {
-			setTimeout( clearView(), 100 );
+			clearView();
 			SC.get('/playlists/'+e[0].id, {
 			}).then(function (result) {
 				result.tracks.forEach(function (entry) {
@@ -134,7 +133,7 @@ function generate(permalink) {
 						tracks.push(entry);
 					}
 				})
-				createScene();
+				createTracks();
 
 			});
 		} else {
@@ -173,15 +172,7 @@ var AudioSource = function() {
     }
 };
 var audioSource = new AudioSource();
-function createScene() {
-	count = 0;
-	// FoV will affect the width of 3D objects and related trig calcs
-	camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 1701 );
-	scene = new THREE.Scene();
-	var visualizer = new THREE.Sprite(new THREE.SpriteCanvasMaterial( { program: programVisualize } ));
-
-	visualizer.position.x = radius + 500;
-	scene.add(visualizer);
+function createTracks() {
 	// rows will be fixed
 	var rows = 5;
 	// columns probably dynamic, possibly scale also
@@ -189,6 +180,7 @@ function createScene() {
 
 	// TODO: deal with remainder, accomodate last row for remainder IF remainder exists
 	var remain = tracks.length % rows;
+	var divider = Math.ceil(tracks.length/100);
 	for ( var i = 0; i < rows; i ++ ) {
 		// angle equation gets messed up when j==0
 		for ( var j = 1; j < columns + 1; j++) {
@@ -200,7 +192,7 @@ function createScene() {
 			particle.position.y = i*300 - 550;
 			particle.position.x = Math.cos(angle)*radius;
 			particle.position.z = Math.sin(angle)*radius;
-			particle.scale.x = particle.scale.y = 200 + Math.random()*90;
+			particle.scale.x = particle.scale.y = 200/divider + Math.random()*50;
 			// custom material for each particle depending on track artwork
 			// runs all the time... every particle need custom canvas program
 			particle.programStroke = function ( context ) {
@@ -210,12 +202,22 @@ function createScene() {
 				context.stroke();
 
 			};
-			particle.material = new THREE.SpriteCanvasMaterial( { color: 0x808080, program: programs[count] } );
+			particle.material = new THREE.SpriteCanvasMaterial( { color: Math.random() * 0xffaa00, program: programs[count] } );
 			scene.add(particle);
-			particles.push(particle);
 			count++;
 		}
 	}
+}
+function createScene() {
+
+	// FoV will affect the width of 3D objects and related trig calcs
+	camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 1701 );
+	scene = new THREE.Scene();
+	var visualizer = new THREE.Sprite(new THREE.SpriteCanvasMaterial( { program: programVisualize } ));
+
+	visualizer.position.x = radius + 500;
+	scene.add(visualizer);
+	createTracks();
 }
 function init() {
 	createScene();
@@ -253,12 +255,12 @@ function onDocumentMouseMove( event ) {
 		//-----------------------------------------------------------v 0 is visualizer ID
 		if ( intersects.length > 0 && !isDraggable && scene.children.indexOf(intersects[0].object != 0)) {
 			if ( INTERSECTED != intersects[ 0 ].object ) {
-				if ( INTERSECTED ) INTERSECTED.material.program = programs[particles.indexOf(INTERSECTED)];
+				if ( INTERSECTED ) INTERSECTED.material.program = programs[scene.children.indexOf(INTERSECTED) - 1];
 				INTERSECTED = intersects[ 0 ].object;
 				INTERSECTED.material.program = programFill;
 			}
 		} else {
-			if ( INTERSECTED ) INTERSECTED.material.program = programs[particles.indexOf(INTERSECTED)];
+			if ( INTERSECTED ) INTERSECTED.material.program = programs[scene.children.indexOf(INTERSECTED) - 1];
 			INTERSECTED = null;
 		}
 	}
@@ -267,21 +269,16 @@ function onDocumentMouseUp( event ) {
 	isDraggable = false;
 }
 function clearView() {
+		count = 0;
+		INTERSECTED = CLICKED = null;
 		DETAILS[0].className = "details hidden";
-		stream.pause();
-		camera.position.x += 2500;
+		audioElement.pause();
+		audioSource.streamData = new Uint8Array(barAmount);
 		tracks = [];
 		programs = [];
-		particles = [];
-		var howmany = scene.children.length;
-		function f() {
-		    scene.remove(scene.children[howmany]);
-		    howmany--;
-		    if( howmany >= 0 ){
-		        setTimeout( f, 5 );
-		    }
+		while(scene.children.length != 1) {
+			scene.children.pop();
 		}
-		f();
 }
 function onDocumentMouseDown( event ) {
 	// Cancel entire raycasting and streaming process if event is within bounding box of HTML element
@@ -337,7 +334,7 @@ function lerpCircle() {
 	if( CLICKED ) {
 		currentFrame = requestAnimationFrame( lerpCircle );
 		CLICKED.scale.x = CLICKED.scale.y += 8;
-		if (CLICKED.scale.x >= 300) {
+		if (CLICKED.scale.x >= TEMP*1.5) {
 			cancelAnimationFrame( currentFrame );
 			lerpCircleBack();
 		}
@@ -349,7 +346,7 @@ function lerpCircleBack() {
 		currentFrame = requestAnimationFrame( lerpCircleBack );
 		CLICKED.scale.x = CLICKED.scale.y -= 6;
 		if (CLICKED.scale.x <= TEMP) {
-			CLICKED.material.color = new THREE.Color(Math.random() * 0xffffff);
+			CLICKED.material.color = new THREE.Color(0xffaa00);
 			TEMP = null;
 			CLICKED = null;
 			cancelAnimationFrame( currentFrame );
