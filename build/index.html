@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Soundcloud thing</title>
+		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+		<link rel="icon" href="favicon.ico" type="image/x-icon">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/meyer-reset/2.0/reset.min.css">
+		<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="css/main.css">
+	</head>
+	<!-- oncontextmenu="return false;"-->
+	<body oncontextmenu="return false;">
+		<div class="details">
+			<div>
+				<input id="search" type="search" id="search" placeholder="Search playlists" />
+	      <span class="icon"><i class="fa fa-search"></i></span>
+			</div>
+			<div id="info" class="invisible">
+				<div id="artwork"></div>
+				<div>
+					<span id="title"></span>&nbsp&nbsp-&nbsp&nbsp<span id="user"></span><br><br>
+					<span id="genre"></span>&nbsp&nbsp
+					<button id="buy" disabled onclick="setBuy()">Buy</button>
+					<button id="download" disabled onclick="setDownload()">Download</button><br><br>
+					<audio controls id="player"></audio>
+				</div>
+				<div>
+					Playbacks: <span id="playback"></span><br>
+					Favourites: <span id="favourite"></span><br>
+					Song license: <span id="license"></span><br>
+				</div>
+			</div>
+			<img src="img/soundcloud.png" alt="powered by soundcloud" style="vertical-align:bottom">
+		</div>
+		<button id="nav" class="hide" onclick="toggleNav()">Hide</button>
+		<script src="./config.js" charset="utf-8"></script>
+		<script src='./js/app.js'></script>
+		<script src='./js/three.min.js'></script>
+		<script src="./js/renderers/Projector.js"></script>
+		<script src="./js/renderers/CanvasRenderer.js"></script>
+		<script src='./js/main.js'></script>
+	</body>
+</html>
