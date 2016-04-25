@@ -1,4 +1,4 @@
-PROJECT NAME
+#PROJECT NAME
 
 Gruppi liikmed:
 
