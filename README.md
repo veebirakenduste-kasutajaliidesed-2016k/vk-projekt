@@ -1,8 +1,4 @@
-﻿# Projekt
-
-## Tähtaeg 
-
-Rühma viimane tund esitletakse
+#Space Invaders
 
 ## Liikmete arv
 2
@@ -10,6 +6,26 @@ Jaan-Martin Kuusmann
 Joosep Jõeleht
 
 **Juhul kui tehakse kahekesi, peab olema näha githubis, kes ja mida on kirjutanud. Kui ei ole näha, kes midagi kirjutanud on, tööd ei arvesta! Kui ei tea kuidas seda teha, küsi!**
+
+##Eesmärk
+
+Ehitada juurde [GAME.md](https://github.com/jissepo/vk-projekt/blob/master/GAME.md) lingil asuvale mängule offline skoori salvestus, toimib appcache põhjal, mobiilil oleks liikumine kallutamisega ja laskmine vajutusega, paus kui mobiilne seade on püstises asendis.
+
+## Funktsionaalsuse loetelu
+
+V0.1 - appcache
+V0.2 - mäng offline
+V0.3 - Serverisse salvestamine
+V0.4 - Mobiili asendianduri baasil liigutamine
+V0.5 - Mobiili paus
+
+# Projekt
+
+## Tähtaeg
+
+Rühma viimane tund esitletakse
+
+
 
 ## Tööjuhend
 1. Üks fork'ib endale käesoleva repositooriumi ning annab vajadusele kirjutamisõiguse/ligipääsu
