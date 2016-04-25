@@ -4,6 +4,8 @@ Martti Naaber
 ### Eesmärk
 Luua rakendus, kus kasutaja saab õppida/korrata inglise-eesti suunal (ja vastupidi) inglise- ja eestikeelseid sõnu. Süsteem viskab vastava sõna ette ja kasutaja peab sisse trükkima selle tähenduse/vaste teises keeles. Kasutaja saab ise sõnu (ing+est) sisestada.
 
+http://tympanus.net/codrops/category/playground/
+
 ### Funktsionaalsused
 * v0.1 saab teha kasutaja ja sisse logida
 * v0.2 saab saab sisestada sõnu (täpsemalt siis sõnade paare)
