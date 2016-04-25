@@ -1,39 +1,27 @@
-# Projekt
+## Õppekeskkond
+Martti Naaber
 
-## Tähtaeg 
+### Eesmärk
+Luua rakendus, kus kasutaja saab õppida/korrata inglise-eesti suunal (ja vastupidi) inglise- ja eestikeelseid sõnu. Süsteem viskab vastava sõna ette ja kasutaja peab sisse trükkima selle tähenduse/vaste teises keeles. Kasutaja saab ise sõnu (ing+est) sisestada.
 
-Rühma viimane tund esitletakse
+### Funktsionaalsused
+* v0.1 saab teha kasutaja ja sisse logida
+* v0.2 saab saab sisestada sõnu (täpsemalt siis sõnade paare)
+* v0.3 süsteem viskab ekraanile sõna (ing või est) ning kasutaja saab proovida seda 'ära arvata' (sõna saab 'submittida' ühe korra, kui kasutaja arvab valesti, ütleb süsteem, et arvas valesti ja viskab ette uue sõna)
+* v0.4 süsteem peab arvestust õigesti ja valesti arvatud sõnade suhtes, st statistika
+* v0.5 kasutaja saab valida, kas sõnad esitakse randoomselt või visatakse ette kõik sõnad järjekorras (sellisel juhul peab olema arvestus valesti arvatud sõnade suhtes, st valesti arvatud sõna küsib uuesti)
 
-## Liikmete arv
-Võib teha üksi või kahekesi
+### Andmete liikumise skeem
 
-**Juhul kui tehakse kahekesi, peab olema näha githubis, kes ja mida on kirjutanud. Kui ei ole näha, kes midagi kirjutanud on, tööd ei arvesta! Kui ei tea kuidas seda teha, küsi!**
+### NÕUDED
 
-## Tööjuhend
-1. Üks fork'ib endale käesoleva repositooriumi ning annab vajadusele kirjutamisõiguse/ligipääsu
-1. Tee kohe Pull request
-1. Muuda repositooriumi `README.md faili` vastavalt nõutele
-1. Tee valmis korralik veebirakendus
+**Veebirakenduse nõuded:**
+  * rakendus töötab nii palju kui saab ka võrguta olekus, st kasutab `appcache`i;
+  * andmeid talletatakse lisaks kohalikule (localStorage) ka serveripool (soovitatavalt andmebaas või fail) – AJAX;
+  * Kasutatav ka mobiilselt seadmelt;
+  * muutujad/tabelid on inglise keeles;
+  * rakendus on piisava funktsionaalsusega ja turvaline – eelnev kokkulepe õppejõuga, mis saab valmis;
+  * kood on jaotatud vajadusel eri failidesse ja kood on kokkupakitud kujul;
 
-### Nõuded
-
-1. **README.md sisaldab:**
-    * suurelt projekti nime;
-    * kes teeb;
-    * eesmärki (3-4 lauset, mis probleemi rakendus lahendab);
-    * funktsionaalsuse loetelu prioriteedi järjekorras, nt
-        * v0.1 Saab teha kasutaja ja sisselogida
-        * v0.2 Saab lisada ...
-        * ...
-    * andmete liikumise skeem loetava pildina (mis lehed ja mis andmeid mis lehel käideldakse);
-
-2. **Veebirakenduse nõuded:**
-    * rakendus töötab nii palju kui saab ka võrguta olekus, st kasutab `appcache`i;
-    * andmeid talletatakse lisaks kohalikule (localStorage) ka serveripool (soovitatavalt andmebaas või fail) – AJAX;
-    * Kasutatav ka mobiilselt seadmelt;
-    * muutujad/tabelid on inglise keeles;
-    * rakendus on piisava funktsionaalsusega ja turvaline – eelnev kokkulepe õppejõuga, mis saab valmis;
-    * kood on jaotatud vajadusel eri failidesse ja kood on kokkupakitud kujul;
-
-3. **Funktsionaalsus**
-    * juhul kui algoritmiline keerukus on piisav siis kõiki nõudeid ei ole vaja täita – ainult eelneval kokkuleppel õppjõuga!
+**Funktsionaalsus**
+  * juhul kui algoritmiline keerukus on piisav siis kõiki nõudeid ei ole vaja täita – ainult eelneval kokkuleppel õppjõuga!
