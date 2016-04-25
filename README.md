@@ -1,7 +1,9 @@
 PROJECT NAME
 
 Gruppi liikmed:
+
 Toomas Lõõnik
+
 Ruslan Jegorov
 
 Eesmärk:
@@ -14,9 +16,13 @@ tiimipõhisele mängule.
 Saab teha...
 Saab lisada...
 
-Andmete liikumise skeem: 
+Andmete liikumise skeem:
+
 1.Salvestad oma telefoni strateegiad mille peale mõtled
+
 2.Võrgus olles laed andmed andmebaasi või kuskile üles automaatselt
+
 3.Kui andmed on võrgus saad neid teistega jagada(saad teiste andmeid ja
 mõtteid/ideid enda telefoni tõmmata ja hiljem vaadata)
+
 4.Teised jagavad oma andmeid sinuga ja kõik on õnnelikud
