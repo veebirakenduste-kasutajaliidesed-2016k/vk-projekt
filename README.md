@@ -1,8 +1,8 @@
 #PROJECT NAME
 
 ##Gruppi liikmed:
-*Toomas Lõõnik
-*Ruslan Jegorov
+* Toomas Lõõnik
+* Ruslan Jegorov
 
 ##Eesmärk:
 
