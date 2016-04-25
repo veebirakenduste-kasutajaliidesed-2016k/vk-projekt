@@ -1,12 +1,10 @@
 #PROJECT NAME
 
-Gruppi liikmed:
+##Gruppi liikmed:
+*Toomas Lõõnik
+*Ruslan Jegorov
 
-Toomas Lõõnik
-
-Ruslan Jegorov
-
-Eesmärk:
+##Eesmärk:
 
 Selle veebilehe/app'i abil saab jagada oma sõpradega jagada League of Legends'i
 strateegiaid(?). Ilma võrguta saab oma telefoni salvestada mõtteid/ideid ja hiljem 
@@ -16,7 +14,7 @@ tiimipõhisele mängule.
 Saab teha...
 Saab lisada...
 
-Andmete liikumise skeem:
+##Andmete liikumise skeem:
 
 1.Salvestad oma telefoni strateegiad mille peale mõtled
 
