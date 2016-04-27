@@ -211,7 +211,7 @@ window.onload = function () {
     }
     //Keyboard event
     keydown (function(e) {
-        // Key's value is held in e.keyCode;
+        // Ke y's value is held in e.keyCode;
     });
 
   }
