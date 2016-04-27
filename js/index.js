@@ -183,7 +183,8 @@ window.onload = function () {
 
 
 
-document.onkeypress = function () {
+    document.onkeypress = function () {
+
 
       var key;
       var char;
