@@ -24,41 +24,65 @@
     <div id="map" style="height:300px"></div>
     <div id="pano"></div>
     <script>
-
-      function initialize() {
-		var left =  59.453145;
-		var top = 24.692039;
+	  var left =  59.453145;
+		var top_c = 24.692039;
 		var right = 59.427036;    
 		var bottom = 24.823728;
-        var tartu = {lat: left - Math.random()*(left-right), lng: bottom - Math.random()*(bottom-top)};
+	  var tartu;
+	  
+	  var pano;
+
+      function initialize() {
+		
 		console.log(tartu);
 
-		var streetviewService = new google.maps.StreetViewService;
-
-		streetviewService.getPanorama(
-
-			{location: tartu, preference: google.maps.StreetViewPreference.NEAREST, radius: 7000},
-
-			function(data, status){
-				console.log(data.location.latLng);
-				loadPano(data.location.latLng);
-			}
-		);
+		
 
 
         var map = new google.maps.Map(document.getElementById('map'), {
-          center: tartu,
+          center: {lat: 58.9278205, lng: 25.6992991},
           zoom: 6,
 		  styles: [ { "elementType": "labels", "stylers": [ { "visibility": "off" } ] } ],
 		  disableDefaultUI: true
         });
-
+		
+		getPanorama();
 
 
       }
+	  
+	  function getPanorama(){
+		//console.log(bottom - Math.random()*(bottom-top_c));
+		tartu = {lat: left - Math.random()*(left-right), lng: bottom - Math.random()*(bottom-top_c)};
+	    //console.log(tartu);
+				
+		var streetviewService = new google.maps.StreetViewService;
 
+		streetviewService.getPanorama(
+
+			{location: tartu, preference: google.maps.StreetViewPreference.NEAREST, radius: 500},
+
+			function(data, status){
+				if(!data){
+					getPanorama();
+				}
+				
+				
+				
+				console.log(data.location.latLng);
+				if(pano){
+					pano.setPosition(data.location.latLng);
+					return;
+				}
+				loadPano(data.location.latLng);
+			}
+		);
+	  }
+		
+		
+		//1 kord ainult
 	  function loadPano(coordinates){
-		var panorama = new google.maps.StreetViewPanorama(
+		pano = new google.maps.StreetViewPanorama(
             document.getElementById('pano'), {
               position: coordinates,
               pov: {
@@ -70,10 +94,10 @@
 			  panControl: false,
 			  enableCloseButton: false
             });
-        setStreetView(panorama);
+        //setStreetView(panorama);
 	  }
     </script>
-	<button onClick="location.reload()" >VAJUTA</button>
+	<button onClick="getPanorama()" >VAJUTA</button>
     <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCKYLHdWZSYqmvUyybJYV1iB2FOaJsaOxY&callback=initialize">
     </script>
