@@ -77,14 +77,14 @@ window.onload = function () {
 
   // Show lives
    comments = function () {
-    showLives.innerHTML = "You have " + lives + " lives";
+    showLives.innerHTML = "Sul on " + lives + " elu";
     if (lives < 1) {
-      showLives.innerHTML = "Game Over";
+      showLives.innerHTML = "Mäng läbi";
       lose.play();
     }
     for (var i = 0; i < geusses.length; i++) {
       if (counter + space === geusses.length) {
-        showLives.innerHTML = "You Win!";
+        showLives.innerHTML = "Sa võitsid";
         win.play();
       }
     }
@@ -254,7 +254,7 @@ window.onload = function () {
 
     var catagoryIndex = categories.indexOf(chosenCategory);
     var hintIndex = chosenCategory.indexOf(word);
-    showClue.innerHTML = "Clue: - " +  hints [catagoryIndex][hintIndex];
+    showClue.innerHTML = "Vihje: - " +  hints [catagoryIndex][hintIndex];
   };
 
    // Reset
