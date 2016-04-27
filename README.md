@@ -1,6 +1,6 @@
 # Projekt - Google Mapsiga töötav GPS jälgimise rakendus
 
-** Paul Nestor
+** Töörühm - Paul Nestor
 
 ** Eesmärk:
   * Mobiilne rakendus, mis loeb GPS koordinaate ja salvestab need. Hiljem saab vaadata läbitud teekonda. Lisana Google Mapsi oma kaardi lisamine, või live jälgimine

@@ -79,6 +79,10 @@
 
     window.onload = function(){
         var app = new MapsApp();
+
+
+
+
     };
 
 })();
