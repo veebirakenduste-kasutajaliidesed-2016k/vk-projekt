@@ -23,6 +23,8 @@ window.onload = function () {
   var win = new Audio("win.mp3");
   var lose = new Audio("lose.mp3");
 
+  
+
 
 
   // create alphabet ul
