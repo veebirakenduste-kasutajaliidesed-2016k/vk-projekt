@@ -3,7 +3,7 @@ window.onload = function () {
   var alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',
         'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's',
         't', 'u', 'v', 'w', 'x', 'y', 'z'];
-  
+
   var categories;         // Array of topics
   var chosenCategory;     // Selected catagory
   var getHint ;          // Word getHint
@@ -19,6 +19,7 @@ window.onload = function () {
   var showCatagory = document.getElementById("scatagory");
   var getHint = document.getElementById("hint");
   var showClue = document.getElementById("clue");
+  var audio = new Audio("sound.mp3")
 
 
 
@@ -37,9 +38,9 @@ window.onload = function () {
       letters.appendChild(list);
     }
   }
-    
-  
-  // Select Catagory
+
+
+  // Select Category
   var selectCat = function () {
     if (chosenCategory === categories[0]) {
       catagoryName.innerHTML = "The Chosen Category Is Premier League Football Teams";
@@ -71,7 +72,7 @@ window.onload = function () {
       correct.appendChild(guess);
     }
   }
-  
+
   // Show lives
    comments = function () {
     showLives.innerHTML = "You have " + lives + " lives";
@@ -91,7 +92,7 @@ window.onload = function () {
     drawArray[drawMe]();
   }
 
-  
+
    // Hangman
   canvas =  function(){
 
@@ -101,7 +102,7 @@ window.onload = function () {
     context.strokeStyle = "#fff";
     context.lineWidth = 2;
   };
-  
+
     head = function(){
       myStickman = document.getElementById("stickman");
       context = myStickman.getContext('2d');
@@ -109,51 +110,53 @@ window.onload = function () {
       context.arc(60, 25, 10, 0, Math.PI*2, true);
       context.stroke();
     }
-    
+
   draw = function($pathFromx, $pathFromy, $pathTox, $pathToy) {
-    
+
     context.moveTo($pathFromx, $pathFromy);
     context.lineTo($pathTox, $pathToy);
-    context.stroke(); 
+    context.stroke();
+    audio.play();
+
 }
 
    frame1 = function() {
      draw (0, 150, 150, 150);
    };
-   
+
    frame2 = function() {
      draw (10, 0, 10, 600);
    };
-  
+
    frame3 = function() {
      draw (0, 5, 70, 5);
    };
-  
+
    frame4 = function() {
      draw (60, 5, 60, 15);
    };
-  
+
    torso = function() {
      draw (60, 36, 60, 70);
    };
-  
+
    rightArm = function() {
      draw (60, 46, 100, 50);
    };
-  
+
    leftArm = function() {
      draw (60, 46, 20, 50);
    };
-  
+
    rightLeg = function() {
      draw (60, 70, 100, 100);
    };
-  
+
    leftLeg = function() {
      draw (60, 70, 20, 100);
    };
-  
-  drawArray = [rightLeg, leftLeg, rightArm, leftArm,  torso,  head, frame4, frame3, frame2, frame1]; 
+
+  drawArray = [rightLeg, leftLeg, rightArm, leftArm,  torso,  head, frame4, frame3, frame2, frame1];
 
 
   // OnClick Function
@@ -166,7 +169,7 @@ window.onload = function () {
         if (word[i] === geuss) {
           geusses[i].innerHTML = geuss;
           counter += 1;
-        } 
+        }
       }
       var j = (word.indexOf(geuss));
       if (j === -1) {
@@ -178,8 +181,8 @@ window.onload = function () {
       }
     }
   }
-  
-    
+
+
   // Play
   play = function () {
     categories = [
@@ -205,7 +208,7 @@ window.onload = function () {
   }
 
   play();
-  
+
   // Hint
 
     hint.onclick = function() {

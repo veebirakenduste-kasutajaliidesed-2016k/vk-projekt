@@ -7,6 +7,7 @@ Tegijad:
 Eesmärgid:
           Lisada klaviatuurivõimalus tähtede valimisel
           Juhul, kui vale täht valitakse, siis ebameeldiv heli
+          Kui kaob internet, jääb mäng kasutajale ette
           Kui üle jõu ei käi, siis ka häälkäsklustega juhtimine
 
 Funktsionaalsus:
@@ -30,13 +31,6 @@ Funktsionaalsus:
 ### Nõuded
 
 1. **README.md sisaldab:**
-    * suurelt projekti nime;
-    * kes teeb;
-    * eesmärki (3-4 lauset, mis probleemi rakendus lahendab);
-    * funktsionaalsuse loetelu prioriteedi järjekorras, nt
-        * v0.1 Saab teha kasutaja ja sisselogida
-        * v0.2 Saab lisada ...
-        * ...
     * andmete liikumise skeem loetava pildina (mis lehed ja mis andmeid mis lehel käideldakse);
 
 2. **Veebirakenduse nõuded:**
