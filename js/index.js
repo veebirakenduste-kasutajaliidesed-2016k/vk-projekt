@@ -188,6 +188,7 @@ window.onload = function () {
     document.onkeypress = function () {
       var key;
       var char;
+      var geuss = (this.innerHTML);
       if (window.event)
               key = window.event.keyCode;
           else if (e)
@@ -197,7 +198,7 @@ window.onload = function () {
       char = String.fromCharCode(key);
       console.log(char);
 
-      this.setAttribute("class", "active");
+      //this.setAttribute("class", "active");
       this.onkeyup = null;
       for (var i = 0; i < word.length; i++) {
         if (word[i] === char) {
