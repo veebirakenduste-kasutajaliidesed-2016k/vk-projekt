@@ -9,29 +9,47 @@
  </head>
  <body>
 
-<table style="width:100%">
-  <tr>
-    <th>Raja nimi</th>
-    <th>Korvide arv</th>
-    <th>Mine mängima</th>
-  </tr>
-  <tr>
-    <td>Nõmme</td>
-    <td>5</td>
-    <td><button>Mängi</button></td>
-  </tr>
-  <tr>
-    <td>Männiku</td>
-    <td>5</td>
-    <td><button>Mängi</button></td>
-  </tr>
-  <tr>
-    <td>Keila</td>
-    <td>5</td>
-    <td><button>Mängi</button></td>
-  </tr>
-</table>
 
+
+<main role="main">
+
+  <div id="home-view">
+    <h1>Rajad</h1>
+    <table style="width:100%">
+      <tr>
+        <th>Raja nimi</th>
+        <th>Korvide arv</th>
+        <th>Mine mängima</th>
+      </tr>
+      <tr>
+        <td>Nõmme</td>
+        <td>5</td>
+        <td><button>Mängi</button></td>
+      </tr>
+      <tr>
+        <td>Männiku</td>
+        <td>5</td>
+        <td><button>Mängi</button></td>
+      </tr>
+      <tr>
+        <td>Keila</td>
+        <td>5</td>
+        <td><button>Mängi</button></td>
+      </tr>
+    </table>
+  </div>
+  <div id="info-view">
+    <h1>Mine Mängima</h1>
+    <label for="title">Nimi: </label><br>
+    <input type="text" name="title" class="title"><br>
+    <button class="start-new-game pull-right">Mine mängima</button>
+  </div>
+
+  <div id="game-view">
+    <h1>Rada</h1>
+  </div>
+
+</main>
 
  </body>
  </html>
