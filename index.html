@@ -18,26 +18,55 @@
     </style>
   </head>
   <body>
-    <div id="map"></div>
+    <div id="map" style="height:300px"></div>
     <div id="pano"></div>
     <script>
 
       function initialize() {
-        var fenway = {lat: 42.345573, lng: -71.098326};
+		var left =  58.3716668;
+		var top = 26.6493783;
+		var right = 58.3532425;
+		var bottom = 26.7652714;
+        var tartu = {lat: left + Math.random()*(left-right), lng: bottom + Math.random()*(bottom-top)};
+		console.log(tartu);
+		
+		var streetviewService = new google.maps.StreetViewService;
+
+		streetviewService.getPanorama(
+			{location: tartu, preference: google.maps.StreetViewPreference.BEST, radius: 500},
+			function(data, status){
+				console.log(data.location.latLng);
+				loadPano(data.location.latLng);
+			}
+		);
+		
+		
         var map = new google.maps.Map(document.getElementById('map'), {
-          center: fenway,
-          zoom: 14
+          center: tartu,
+          zoom: 6,
+		  styles: [ { "elementType": "labels", "stylers": [ { "visibility": "off" } ] } ],
+		  disableDefaultUI: true
         });
-        var panorama = new google.maps.StreetViewPanorama(
+		
+		
+        
+      }
+	  
+	  function loadPano(coordinates){
+		var panorama = new google.maps.StreetViewPanorama(
             document.getElementById('pano'), {
-              position: fenway,
+              position: coordinates,
               pov: {
                 heading: 34,
-                pitch: 10
-              }
+                pitch: 10,
+              },
+			  linksControl: true,
+			  disableDefaultUI: true,
+			  panControl: false,
+			  enableCloseButton: false
             });
-        map.setStreetView(panorama);
-      }
+        setStreetView(panorama);
+	  }
     </script>
     <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCKYLHdWZSYqmvUyybJYV1iB2FOaJsaOxY&callback=initialize">
