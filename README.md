@@ -26,4 +26,3 @@ Funktsionaalsus:
 2. **Veebirakenduse nõuded:**
     * rakendus töötab nii palju kui saab ka võrguta olekus, st kasutab `appcache`i;
     * andmeid talletatakse lisaks kohalikule (localStorage) ka serveripool (soovitatavalt andmebaas või fail) – AJAX;
-    * Kasutatav ka mobiilselt seadmelt;
