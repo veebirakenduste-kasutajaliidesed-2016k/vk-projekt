@@ -1,13 +1,25 @@
-# Projekt
+PROJEKT HANGMAN
 
-## Tähtaeg 
+Tegijad:
+        Delvis Ramot
+        Kevin Münter
 
-Rühma viimane tund esitletakse
+Eesmärgid:
+          Lisada klaviatuurivõimalus tähtede valimisel
+          Juhul, kui vale täht valitakse, siis ebameeldiv heli
+          Kui üle jõu ei käi, siis ka häälkäsklustega juhtimine
 
-## Liikmete arv
-Võib teha üksi või kahekesi
+Funktsionaalsus:
+                v0.1 Mäng töötab
+                v0.2 Klaviatuuriga saab tähti valida
+                v0.3 Lisatud on hääl vale valiku korral
+                v0.4 Mäng jääb ette, kui võrk kaob ära
+                v0.5 Mängu saab juhtida häälkäsklustega
 
-**Juhul kui tehakse kahekesi, peab olema näha githubis, kes ja mida on kirjutanud. Kui ei ole näha, kes midagi kirjutanud on, tööd ei arvesta! Kui ei tea kuidas seda teha, küsi!**
+
+
+
+
 
 ## Tööjuhend
 1. Üks fork'ib endale käesoleva repositooriumi ning annab vajadusele kirjutamisõiguse/ligipääsu
@@ -31,9 +43,3 @@ Võib teha üksi või kahekesi
     * rakendus töötab nii palju kui saab ka võrguta olekus, st kasutab `appcache`i;
     * andmeid talletatakse lisaks kohalikule (localStorage) ka serveripool (soovitatavalt andmebaas või fail) – AJAX;
     * Kasutatav ka mobiilselt seadmelt;
-    * muutujad/tabelid on inglise keeles;
-    * rakendus on piisava funktsionaalsusega ja turvaline – eelnev kokkulepe õppejõuga, mis saab valmis;
-    * kood on jaotatud vajadusel eri failidesse ja kood on kokkupakitud kujul;
-
-3. **Funktsionaalsus**
-    * juhul kui algoritmiline keerukus on piisav siis kõiki nõudeid ei ole vaja täita – ainult eelneval kokkuleppel õppjõuga!
