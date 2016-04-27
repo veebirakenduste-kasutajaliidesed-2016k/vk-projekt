@@ -1,4 +1,4 @@
-# Projekt
+# Eesti geoguessr
 
 ## Tähtaeg 
 
