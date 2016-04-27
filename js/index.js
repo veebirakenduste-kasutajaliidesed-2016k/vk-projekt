@@ -45,11 +45,11 @@ window.onload = function () {
   // Select Category
   var selectCat = function () {
     if (chosenCategory === categories[0]) {
-      catagoryName.innerHTML = "The Chosen Category Is Premier League Football Teams";
+      catagoryName.innerHTML = "Kategooriaks on Eesti korvpalliklubid";
     } else if (chosenCategory === categories[1]) {
-      catagoryName.innerHTML = "The Chosen Category Is Films";
+      catagoryName.innerHTML = "Kategooriaks on Eesti filmid";
     } else if (chosenCategory === categories[2]) {
-      catagoryName.innerHTML = "The Chosen Category Is Cities";
+      catagoryName.innerHTML = "Kategooriaks on Eesti linnad";
     }
   };
 
@@ -220,9 +220,9 @@ window.onload = function () {
   // Play
   play = function () {
     categories = [
-        ["everton", "liverpool", "swansea", "chelsea", "hull", "manchester-city", "newcastle-united"],
-        ["alien", "dirty-harry", "gladiator", "finding-nemo", "jaws"],
-        ["manchester", "milan", "madrid", "amsterdam", "prague"]
+        ["Rakvere-Tarvas", "Avis-Rapla", "Tartu-Rock", "Kalev-Cramo", "BC-Tallinna-Kalev", "Audentes", "BC-Valga"],
+        ["Suvi", "Mandariinid", "Klassikokkutulek", "Vehkleja", "Viimne-Reliikvia", "Raju-Reede"],
+        ["Rakvere", "Narva", "Viljandi", "Kuressaare", "Paide", "Rapla", "Tamsalu", "Tapa", "Tartu"]
     ];
 
     chosenCategory = categories[Math.floor(Math.random() * categories.length)];
