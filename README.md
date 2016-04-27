@@ -1,11 +1,11 @@
 # Projekt
 
-## Tähtaeg 
+## Tähtaeg
 
 Rühma viimane tund esitletakse
 
 ## Liikmete arv
-Võib teha üksi või kahekesi
+Võib teha üksi või kahekesi - üksi
 
 **Juhul kui tehakse kahekesi, peab olema näha githubis, kes ja mida on kirjutanud. Kui ei ole näha, kes midagi kirjutanud on, tööd ei arvesta! Kui ei tea kuidas seda teha, küsi!**
 
@@ -18,13 +18,15 @@ Võib teha üksi või kahekesi
 ### Nõuded
 
 1. **README.md sisaldab:**
-    * suurelt projekti nime;
-    * kes teeb;
-    * eesmärki (3-4 lauset, mis probleemi rakendus lahendab);
+    * Quaerere;
+    * Anton Mesila teeb üksi
+    * Saad otsida mitmest müügikuulutuste portaalist korraga. Näiteks võtaks soov.ee, okidoki.ee, kuldnebörs.ee . App teeb päringu nendele veebilehtedele ning
+    salvestab olulisemad asjad nagu nimi, kirjeldus, pilt ning link massiivi.
+
     * funktsionaalsuse loetelu prioriteedi järjekorras, nt
-        * v0.1 Saab teha kasutaja ja sisselogida
-        * v0.2 Saab lisada ...
-        * ...
+        * v0.1 Kasutaja saab teha päringuid mitmele müügiportaalile korraga
+        * v0.2 Salvestab vanad päringuid
+        * v0.3
     * andmete liikumise skeem loetava pildina (mis lehed ja mis andmeid mis lehel käideldakse);
 
 2. **Veebirakenduse nõuded:**
