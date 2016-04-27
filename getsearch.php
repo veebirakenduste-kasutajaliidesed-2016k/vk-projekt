@@ -11,9 +11,19 @@ function results ($search){
 	//http://simplehtmldom.sourceforge.net/manual.htm
 
 	foreach($html->find('li[class=classified]') as $element){
-      echo "http://www.okidoki.ee".$element->find('h3 a')[0]->href. '<br>';
 
-			echo "http://www.okidoki.ee".$element->find('h3 a')[0]->href. '<br>';
+			$href = "http://www.okidoki.ee".$element->find('h3 a')[0]->href;
+			//echo $href.'<br>';
+
+			$title =$element->find('h3 a')[0]->innertext. '<br>';
+			echo $title;
+
+			$page_contents = str_get_html(file_get_contents($href));
+			$desc = $page_contents->find('div[id=description-content]')[0];
+			//echo $desc;
+
+			$image = $page_contents->find('a img')[0];
+			echo $image.'<br>';
 
 
 	}
@@ -28,11 +38,9 @@ results($search);
 
 	$file_name = "cache.txt";
 
-	$url = "www.okidoki.ee";
-	$getResults = "?q=%23&result_type=recent";
 	$requestMethod = "GET";
 
-
+/*
 	//faili sisu tagasi objektiks
 	$file_data = json_decode(file_get_contents($file_name));
 
@@ -48,3 +56,4 @@ results($search);
 		return;
 
 	}
+*/
