@@ -180,12 +180,7 @@ window.onload = function () {
         comments();
       }
     },
-
-
-
     document.onkeypress = function () {
-
-
       var key;
       var char;
       if (window.event)
@@ -196,7 +191,7 @@ window.onload = function () {
               return true;
       char = String.fromCharCode(key);
       console.log(char);
-
+      
       this.setAttribute("class", "active");
       this.onkeyup = null;
       for (var i = 0; i < word.length; i++) {
