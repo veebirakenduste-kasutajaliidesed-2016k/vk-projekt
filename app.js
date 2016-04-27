@@ -19,15 +19,19 @@
   Discgolf.prototype = {
     init: function(){
 
-      console.log(this.track_list);
+      console.log(this.tracks);
 
-      console.log(this.track_list[0]);
-      console.log(this.track_list[0].name);
-      console.log(this.track_list[0].baskets.length);
-      for(var i = 0; i < this.track_list[0].baskets.length; i++){
-         console.log(this.track_list[0].baskets[i].nr + " " + this.track_list[0].baskets[i].par);
+      console.log(this.tracks[0]);
+      console.log(this.tracks[0].name);
+      console.log(this.tracks[0].baskets.length);
+      for(var i = 0; i < this.tracks[0].baskets.length; i++){
+         console.log(this.tracks[0].baskets[i].nr + " " + this.tracks[0].baskets[i].par);
       }
     }
+  };
+
+  window.onload = function(){
+    var app = new Discgolf();
   };
 
 })();

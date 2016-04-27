@@ -1,4 +1,4 @@
-var track_list = [
+var tracks = [
 	{
 		name: "Nõmme",
 		baskets: [
@@ -29,5 +29,5 @@ var track_list = [
 			{ nr: 5, par: 3 },
 		]
 	},
-		
+
 ];
