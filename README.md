@@ -1,22 +1,22 @@
 # Projekt
 # Ideid:
-        **joonistamine kaamera abil liigutustega?**
-          - http://jeromeetienne.github.io/augmentedgesture.js/
-        **mingi rss feed mingi ekstra lisaga?**
-        **to-do list?**
-          - tänase päeva ülesanded
-          - offline's näita hetkel failis olevaid elemente
-          - netiühenduse saamisel uuendab listi
-          - andmed localStorage's ja failis
-          - kategooria | ülesande nimetus või kategooria pildina (ikoonina) | ülesande nimetus
-          - puutetundlik: vasakule kustutab, paremale märgib tehtuks
-        **mingi informatsiooni saamine vastavalt päevale/kellale**
-          - võta tänane kuupäev ja kellaaeg
-          - bussiaeg? kinopiletid? saatekavad?
-          - kirjuta saadud andmed tekstifaili
-          - Internetiühenduse saamisel uuenda kuupäeva/kellaaega ja tekstifaili
-        **muu idee, mis vastab tavanõuetele?**
-        **idee suure algoritmilise keerukusega?**
+**joonistamine kaamera abil liigutustega?**
+  - http://jeromeetienne.github.io/augmentedgesture.js/
+**mingi rss feed mingi ekstra lisaga?**
+**to-do list?**
+  - tänase päeva ülesanded
+  - offline's näita hetkel failis olevaid elemente
+  - netiühenduse saamisel uuendab listi
+  - andmed localStorage's ja failis
+  - kategooria | ülesande nimetus või kategooria pildina (ikoonina) | ülesande nimetus
+  - puutetundlik: vasakule kustutab, paremale märgib tehtuks
+**mingi informatsiooni saamine vastavalt päevale/kellale**
+  - võta tänane kuupäev ja kellaaeg
+  - bussiaeg? kinopiletid? saatekavad?
+  - kirjuta saadud andmed tekstifaili
+  - Internetiühenduse saamisel uuenda kuupäeva/kellaaega ja tekstifaili
+**muu idee, mis vastab tavanõuetele?**
+**idee suure algoritmilise keerukusega?**
 
 ## Tähtaeg - 11.05
 
