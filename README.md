@@ -1,31 +1,28 @@
-# Projekt
+# BrickBreaker vk-edition
 
-## Tähtaeg 
+**Liikmed:**
+  * Rauno Kosula
+  * Raiko Lepik
 
-Rühma viimane tund esitletakse
+**Eesmärgid:**
+  * Teha olemasolev asi paremaks
+  * Pakkuda meelelahutust
+  *
 
-## Liikmete arv
-Võib teha üksi või kahekesi
+**Funktsionaalsused:**
+  * 0.1 - Saada kuskilt mingisugune põhi
+  * 0.2 - Pärida kasutajalt nimi
+  * 0.3 - Salvestada mängija skoor localStoragesse
+  * 0.4 - Lisada teist tüüpi pallid
+  * 0.5 - Lisada uuendused platvormile
+  * 0.6 - Lisada rohkem leveleid
+  * 0.7 - Mängija parim skoor salvestada andmebaasi
+  * 0.8 - Lisada TOP 10
 
-**Juhul kui tehakse kahekesi, peab olema näha githubis, kes ja mida on kirjutanud. Kui ei ole näha, kes midagi kirjutanud on, tööd ei arvesta! Kui ei tea kuidas seda teha, küsi!**
+**Andmete liikumise skeem:**
+  * andmete liikumise skeem loetava pildina (mis lehed ja mis andmeid mis lehel käideldakse);
 
-## Tööjuhend
-1. Üks fork'ib endale käesoleva repositooriumi ning annab vajadusele kirjutamisõiguse/ligipääsu
-1. Tee kohe Pull request
-1. Muuda repositooriumi `README.md faili` vastavalt nõutele
-1. Tee valmis korralik veebirakendus
-
-### Nõuded
-
-1. **README.md sisaldab:**
-    * suurelt projekti nime;
-    * kes teeb;
-    * eesmärki (3-4 lauset, mis probleemi rakendus lahendab);
-    * funktsionaalsuse loetelu prioriteedi järjekorras, nt
-        * v0.1 Saab teha kasutaja ja sisselogida
-        * v0.2 Saab lisada ...
-        * ...
-    * andmete liikumise skeem loetava pildina (mis lehed ja mis andmeid mis lehel käideldakse);
+---------------------------------------------------------------------------------
 
 2. **Veebirakenduse nõuded:**
     * rakendus töötab nii palju kui saab ka võrguta olekus, st kasutab `appcache`i;
