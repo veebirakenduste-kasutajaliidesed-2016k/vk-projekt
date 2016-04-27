@@ -188,6 +188,7 @@ window.onload = function () {
       var key;
       var char;
       var geuss = (this.innerHTML);
+      //check.setAttribute("class", "active");
       if (window.event)
               key = window.event.keyCode;
           else if (e)
@@ -199,11 +200,11 @@ window.onload = function () {
       this.onkeyup = null;
       for (var i = 0; i < word.length; i++) {
         if (word[i] === char) {
-          geusses[i].innerHTML = char;
+          geusses[i].innerHTML = geuss;
           counter += 1;
         }
       }
-      var j = (word.indexOf(geuss));
+      var j = (word.indexOf(geuss2));
       if (j === -1) {
         lives -= 1;
         comments();
