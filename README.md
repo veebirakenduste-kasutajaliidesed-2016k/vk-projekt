@@ -1,4 +1,22 @@
 # Projekt
+# Ideid:
+        **joonistamine kaamera abil liigutustega?**
+          - http://jeromeetienne.github.io/augmentedgesture.js/
+        **mingi rss feed mingi ekstra lisaga?**
+        **to-do list?**
+          - tänase päeva ülesanded
+          - offline's näita hetkel failis olevaid elemente
+          - netiühenduse saamisel uuendab listi
+          - andmed localStorage's ja failis
+          - kategooria | ülesande nimetus või kategooria pildina (ikoonina) | ülesande nimetus
+          - puutetundlik: vasakule kustutab, paremale märgib tehtuks
+        **mingi informatsiooni saamine vastavalt päevale/kellale**
+          - võta tänane kuupäev ja kellaaeg
+          - bussiaeg? kinopiletid? saatekavad?
+          - kirjuta saadud andmed tekstifaili
+          - Internetiühenduse saamisel uuenda kuupäeva/kellaaega ja tekstifaili
+        **muu idee, mis vastab tavanõuetele?**
+        **idee suure algoritmilise keerukusega?**
 
 ## Tähtaeg - 11.05
 
@@ -10,8 +28,8 @@ Võib teha üksi või kahekesi
 **Juhul kui tehakse kahekesi, peab olema näha githubis, kes ja mida on kirjutanud. Kui ei ole näha, kes midagi kirjutanud on, tööd ei arvesta! Kui ei tea kuidas seda teha, küsi!**
 
 ## Tööjuhend
-1. Üks fork'ib endale käesoleva repositooriumi ning annab vajadusele kirjutamisõiguse/ligipääsu
-1. Tee kohe Pull request
+1. Üks fork'ib endale käesoleva repositooriumi ning annab vajadusele kirjutamisõiguse/ligipääsu +
+1. Tee kohe Pull request +
 1. Muuda repositooriumi `README.md faili` vastavalt nõutele
 1. Tee valmis korralik veebirakendus
 
