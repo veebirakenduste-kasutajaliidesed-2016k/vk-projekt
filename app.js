@@ -12,6 +12,11 @@
     //Rajad tulevad failist tracks.js
     this.tracks = tracks;
 
+    this.currentGame = {
+      player: null,
+      selected_track: null
+    };
+
     this.init();
   };
 
@@ -21,11 +26,54 @@
     'home-view': {
       'render': function(){
         console.log('>>>>avaleht');
+
+
+        //teeme tabeli
+        var table = document.querySelector("#tracks");
+        table.innerHTML = "";
+
+        var html = "";
+
+        html += "<tr>";
+          html += "<th>Raja nimi</th>";
+          html += "<th>Korvide arv</th>";
+          html += "<th>Mine mängima</th>";
+        html += "</tr>";
+
+        for(var i = 0; i < Discgolf.instance.tracks.length; i++){
+
+          var track =  Discgolf.instance.tracks[i];
+          console.log(track);
+          console.log(track.baskets);
+          html += "<tr>";
+            html += "<td>"+track.name+"</td>";
+            html += "<td>"+track.baskets.length+"</td>";
+            html += "<td><button onclick='Discgolf.instance.insertInfo("+track.id+")'>Mine mängima</button></td>";
+          html += "</tr>";
+
+        }
+
+        table.innerHTML = html;
+
+        // LISAKS SKOORITABEL
+
       }
     },
     'info-view': {
       'render': function(){
         console.log('>>>>nime lisamine');
+
+
+        //this.currentGame.selected_track
+        //console.log(Discgolf.instance.currentGame.selected_track);
+        var id = Discgolf.instance.currentGame.selected_track;
+        var track = Discgolf.instance.tracks[id];
+        console.log(track.name);
+        document.querySelector('#info-view h1').innerHTML = "Mine mängima "+track.name;
+
+
+
+
       }
     },
     'game-view': {
@@ -71,7 +119,22 @@
       }else{
         /// 404 - ei olnud
       }
-    }
+    },
+
+    insertInfo: function(id){
+      console.log("load info for id "+id);
+
+      this.currentGame.selected_track = id;
+
+
+      window.location.hash = 'info-view';
+
+      console.log(this.tracks[id]);
+    },
+
+    startGame: function(){
+
+    },
 
 
 

@@ -1,5 +1,6 @@
 var tracks = [
 	{
+		id: 0,
 		name: "Nõmme",
 		baskets: [
 			{ nr: 1, par: 3 },
@@ -10,6 +11,7 @@ var tracks = [
 		]
 	},
 	{
+		id: 1,
 		name: "Männiku",
 		baskets: [
 			{ nr: 1, par: 5 },
@@ -20,6 +22,7 @@ var tracks = [
 		]
 	},
 	{
+		id: 2,
 		name: "Keila",
 		baskets: [
 			{ nr: 1, par: 3 },
@@ -29,5 +32,5 @@ var tracks = [
 			{ nr: 5, par: 3 },
 		]
 	},
-
+		
 ];
