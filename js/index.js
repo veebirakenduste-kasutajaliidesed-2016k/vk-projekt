@@ -20,6 +20,8 @@ window.onload = function () {
   var getHint = document.getElementById("hint");
   var showClue = document.getElementById("clue");
   var audio = new Audio("sound.mp3");
+  var win = new Audio("win.mp3");
+  var lose = new Audio("lose.mp3");
 
 
 
@@ -78,10 +80,12 @@ window.onload = function () {
     showLives.innerHTML = "You have " + lives + " lives";
     if (lives < 1) {
       showLives.innerHTML = "Game Over";
+      lose.play();
     }
     for (var i = 0; i < geusses.length; i++) {
       if (counter + space === geusses.length) {
         showLives.innerHTML = "You Win!";
+        win.play();
       }
     }
   };
