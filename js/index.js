@@ -199,6 +199,30 @@ window.onload = function () {
               return true;
       char = String.fromCharCode(key);
       console.log(char);
+
+      var list = document.querySelectorAll("ul#alphabet li");
+      //console.log(list);
+
+      var allow = true;
+
+      for(var k = 0; k < list.length; k++){
+        if(list[k].innerHTML == char && list[k].className =="active"){
+          allow = false;
+        }
+      }
+
+      if(!allow){
+        console.log(char+ " juba vajutatud");
+        return;
+      }else{
+        for(var l = 0; l < list.length; l++){
+          if(list[l].innerHTML == char){
+            list[l].className = "active";
+          }
+        }
+      }
+
+
       this.onkeyup = null;
       for ( i = 0; i < word.length; i++) {
         if (word[i] === char) {
