@@ -18,16 +18,6 @@ Funktsionaalsus:
                 v0.5 Mängu saab juhtida häälkäsklustega
 
 
-
-
-
-
-## Tööjuhend
-1. Üks fork'ib endale käesoleva repositooriumi ning annab vajadusele kirjutamisõiguse/ligipääsu
-1. Tee kohe Pull request
-1. Muuda repositooriumi `README.md faili` vastavalt nõutele
-1. Tee valmis korralik veebirakendus
-
 ### Nõuded
 
 1. **README.md sisaldab:**

@@ -3,6 +3,34 @@ window.onload = function () {
   var alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',
         'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's',
         't', 'u', 'v', 'w', 'x', 'y', 'z'];
+  var keyCodes = {
+          65: "a",
+          66: "b",
+          67: "c",
+          68: "d",
+          69: "e",
+          70: "f",
+          71: "g",
+          72: "h",
+          73: "i",
+          74: "j",
+          75: "k",
+          76: "l",
+          77: "m",
+          78: "n",
+          79: "o",
+          80: "p",
+          81: "q",
+          82: "r",
+          83: "s",
+          84: "t",
+          85: "u",
+          86: "v",
+          87: "w",
+          88: "x",
+          89: "y",
+          90: "z"
+  };
 
   var categories;         // Array of topics
   var chosenCategory;     // Selected catagory
@@ -19,8 +47,9 @@ window.onload = function () {
   var showCatagory = document.getElementById("scatagory");
   var getHint = document.getElementById("hint");
   var showClue = document.getElementById("clue");
-  var audio = new Audio("sound.mp3")
 
+  var audio = new Audio("sound.mp3")
+  var keysPressed = [];
 
 
   // create alphabet ul
@@ -180,6 +209,11 @@ window.onload = function () {
         comments();
       }
     }
+    //Keyboard event
+    keydown (function(e) {
+        // Key's value is held in e.keyCode;
+    });
+
   }
 
 
