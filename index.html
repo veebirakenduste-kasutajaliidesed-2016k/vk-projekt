@@ -15,6 +15,9 @@
         height: 100%;
         width: 45%;
       }
+	  #pano text {
+		display: none;
+	  }
     </style>
   </head>
   <body>
@@ -33,7 +36,7 @@
 		var streetviewService = new google.maps.StreetViewService;
 
 		streetviewService.getPanorama(
-			{location: tartu, preference: google.maps.StreetViewPreference.BEST, radius: 500},
+			{location: tartu, preference: google.maps.StreetViewPreference.NEAREST, radius: 500},
 			function(data, status){
 				console.log(data.location.latLng);
 				loadPano(data.location.latLng);
@@ -68,6 +71,7 @@
         setStreetView(panorama);
 	  }
     </script>
+	<button onClick="location.reload()" >VAJUTA</button>
     <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCKYLHdWZSYqmvUyybJYV1iB2FOaJsaOxY&callback=initialize">
     </script>
