@@ -1,6 +1,6 @@
 var track_list = [
 	{
-		name: "Nõmme",
+		name: "NÃµmme",
 		baskets: [
 			{ nr: 1, par: 3 },
 			{ nr: 2, par: 3 },
@@ -10,7 +10,7 @@ var track_list = [
 		]
 	},
 	{
-		name: "Männiku",
+		name: "MÃ¤nniku",
 		baskets: [
 			{ nr: 1, par: 5 },
 			{ nr: 2, par: 5 },
