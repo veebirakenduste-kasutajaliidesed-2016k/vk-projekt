@@ -2,19 +2,16 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<style>
-canvas {
-    border:1px solid #d3d3d3;
-    background-color: #f1f1f1;
-}
-</style>
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<script src="game.js"></script>
+<link rel="stylesheet" href="style.css">
 </head>
 <body onload="startGame()">
 
-<script src="game.js" charset="utf-8"></script>
-<br>
-<button onmousedown="accelerate(-0.2)" onmouseup="accelerate(0.05)">ACCELERATE</button>
-<p>Use the ACCELERATE button to stay in the air</p>
-<p>How long can you stay alive?</p>
+<div id="myconsole" style="display:none;width:100%;height:100%;position:absolute;top:0;left:0;text-align:center;padding-top:100px;"></div>
+
+
+<button onclick="playgame()">Play Game</button>
+<button onclick="pausegame()">Pause Game</button>
 </body>
 </html>
