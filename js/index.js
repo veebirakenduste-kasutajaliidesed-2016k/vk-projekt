@@ -77,14 +77,14 @@ window.onload = function () {
 
   // Show lives
    comments = function () {
-    showLives.innerHTML = "Sul on " + lives + " elu";
+    showLives.innerHTML = "You have " + lives + " lives";
     if (lives < 1) {
-      showLives.innerHTML = "Kaotasid";
+      showLives.innerHTML = "Game Over";
       lose.play();
     }
     for (var i = 0; i < geusses.length; i++) {
       if (counter + space === geusses.length) {
-        showLives.innerHTML = "Sa võitsid!";
+        showLives.innerHTML = "You Win!";
         win.play();
       }
     }
@@ -169,7 +169,7 @@ window.onload = function () {
       var geuss = (this.innerHTML);
       this.setAttribute("class", "active");
       this.onclick = null;
-      for (var i = 0; i < word.length; i++) {
+      for ( i = 0; i < word.length; i++) {
         if (word[i] === geuss) {
           geusses[i].innerHTML = geuss;
           counter += 1;
@@ -184,6 +184,7 @@ window.onload = function () {
         comments();
       }
     },
+
     document.onkeypress = function () {
       var key;
       var char;
@@ -197,13 +198,13 @@ window.onload = function () {
       char = String.fromCharCode(key);
       console.log(char);
       this.onkeyup = null;
-      for (var i = 0; i < word.length; i++) {
+      for ( i = 0; i < word.length; i++) {
         if (word[i] === char) {
           geusses[i].innerHTML = char;
           counter += 1;
         }
       }
-      var j = (word.indexOf(geuss));
+      var j = (word.indexOf(geuss=char));
       if (j === -1) {
         lives -= 1;
         comments();
