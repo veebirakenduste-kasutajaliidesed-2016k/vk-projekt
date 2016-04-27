@@ -221,9 +221,9 @@ window.onload = function () {
   // Play
   play = function () {
     categories = [
-        ["Rakvere-Tarvas", "Avis-Rapla", "Tartu-Rock", "Kalev-Cramo", "BC-Tallinna-Kalev", "Audentes", "BC-Valga"],
-        ["Suvi", "Mandariinid", "Klassikokkutulek", "Vehkleja", "Viimne-Reliikvia", "Raju-Reede"],
-        ["Rakvere", "Narva", "Viljandi", "Kuressaare", "Paide", "Rapla", "Tamsalu", "Tapa", "Tartu"]
+        ["rakvere-tarvas", "avis-rapla", "tartu-rock", "kalev-cramo", "audentes", "bc-valga"],
+        ["suvi", "mandariinid", "klassikokkutulek", "vehkleja", "viimne-reliikvia", "raju-reede"],
+        ["rakvere", "narva", "viljandi", "kuressaare", "paide", "rapla", "tamsalu", "tapa", "tartu"]
     ];
 
     chosenCategory = categories[Math.floor(Math.random() * categories.length)];
@@ -249,9 +249,9 @@ window.onload = function () {
     hint.onclick = function() {
 
       hints = [
-        ["Based in Mersyside", "Based in Mersyside", "First Welsh team to reach the Premier Leauge", "Owned by A russian Billionaire", "Once managed by Phil Brown", "2013 FA Cup runners up", "Gazza's first club"],
-        ["Science-Fiction horror film", "1971 American action film", "Historical drama", "Anamated Fish", "Giant great white shark"],
-        ["Northern city in the UK", "Home of AC and Inter", "Spanish capital", "Netherlands capital", "Czech Republic capital"]
+        ["Peatreeneriks Andres Sõber", "Peatreener Aivar Kuusmaa", "Heade mõtete linna koduklubi", "", "Kommivabrik", "Samanimeline spordikool", "Eesti kõige lõunapoolsem kossutiim"],
+        ["Oskar Lutsu meistriteos", "Oscarile kandideerinud Eesti film", "Komöödia, kus üks peaosatäitja on Genka", "Peaaegu kandideeris Oscarile", "Gabriel", "Film 90-ndate Eestist"],
+        ["Lääne-Virumaal", "Ida-Virumaal", "Viljandimaal", "Saaremaal", "Eesti süda", "Raplamaal", "Lääne-Virumaal", "Lääne-Virumaal", "Tartumaal"]
     ];
 
     var catagoryIndex = categories.indexOf(chosenCategory);
