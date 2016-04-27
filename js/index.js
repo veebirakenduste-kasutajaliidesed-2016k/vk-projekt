@@ -19,7 +19,7 @@ window.onload = function () {
   var showCatagory = document.getElementById("scatagory");
   var getHint = document.getElementById("hint");
   var showClue = document.getElementById("clue");
-  var audio = new Audio("sound.mp3")
+  var audio = new Audio("sound.mp3");
 
 
 
@@ -168,6 +168,39 @@ window.onload = function () {
       for (var i = 0; i < word.length; i++) {
         if (word[i] === geuss) {
           geusses[i].innerHTML = geuss;
+          counter += 1;
+        }
+      }
+      var j = (word.indexOf(geuss));
+      if (j === -1) {
+        lives -= 1;
+        comments();
+        animate();
+      } else {
+        comments();
+      }
+    },
+
+
+
+document.onkeypress = function () {
+
+      var key;
+      var char;
+      if (window.event)
+              key = window.event.keyCode;
+          else if (e)
+              key = e.which;
+          else
+              return true;
+      char = String.fromCharCode(key);
+      console.log(char);
+
+      this.setAttribute("class", "active");
+      this.onkeyup = null;
+      for (var i = 0; i < word.length; i++) {
+        if (word[i] === char) {
+          geusses[i].innerHTML = char;
           counter += 1;
         }
       }
