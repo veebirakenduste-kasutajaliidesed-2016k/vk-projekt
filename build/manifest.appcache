@@ -4,10 +4,10 @@ CACHE:
 index.html
 css/main.css
 img/soundcloud.png
-https://cdn.jsdelivr.net/meyer-reset/2.0/reset.min.css
 config.js
-main.js
 favicon.ico
 
 NETWORK:
+https://cdn.jsdelivr.net/meyer-reset/2.0/reset.min.css
 https://connect.soundcloud.com/sdk/sdk-3.0.0.js
+main.js

@@ -157,7 +157,6 @@
 
                 for (var key in playlists) {
                     var obj = playlists[key];
-                    console.log(obj);
                     var playlistNode = document.createElement("div");
                     playlistNode.className = "playlist";
                     playlistNode.innerHTML = "<div>Title:&nbsp" + obj.title + "<br>Genre:&nbsp" + obj.genre + "<br>Tracks:&nbsp" + obj.track_count + "<br>User:&nbsp" + obj.user.username + "</div>";
