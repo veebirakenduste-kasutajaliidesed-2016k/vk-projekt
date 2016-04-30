@@ -25,7 +25,7 @@ Streame ise ei saa salvestada, aga AJAX requestist saadud infot saab küll. Ehk 
 
 ## Nõuded
   * Enamjaolt staatiline leht, kui andmed on kätte saadud ei kao nad kuhugi, aga uue requesti tegemisel peab ikka võrgus olema.
-  * Andmeid ei talletata momendil, tulevikus peale optimeerimist ehk küll.
+  * Andmeid ei talletata momendil, tulevikus peale optimeerimist ehk küll. AppCache on olemas.
   * On kasutatav mobiiliseadmelt, tulevikus äkki Socket.io toetus (mobiil käituks puldina).
   * Muutujad peaksid kõik olema inglise keeles.
   * Ainuke turvalisuse 'leke' on client_id nägemine source'ist.
