@@ -14,6 +14,7 @@ audio {
 
 .details {
   color: $primary-color;
+  text-align: center;
   width: 100%;
   padding-bottom: 5px;
   position: absolute;
@@ -106,4 +107,42 @@ button:focus {outline:0;}
   outline:none;
   background: $primary-color;
   color: $secondary-color;
+}
+
+#playlists {
+  padding: 0;
+  width: 300px;
+  height: 100px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar {
+    width: 16px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    background: darken($tertiary-color, 10);
+}
+
+.playlist {
+  cursor: pointer;
+  padding: 0;
+  width: 100%;
+  background: $secondary-color;
+  transition: background-color 0.2s ease;
+}
+.playlist div {
+  width: 60%;
+}
+.playlist img {
+  vertical-align: middle;
+  margin-top: -30px;
+}
+.playlist:hover {
+  background: $tertiary-color;
 }

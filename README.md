@@ -1,39 +1,32 @@
-# Projekt
+# Soundcloud asi
 
-## Tähtaeg 
+## Autor: Richard Aasa
 
-Rühma viimane tund esitletakse
+## Eesmärk
+Luua rakendus mis kasutab Soundcloud API'd ja THREE.js libraryit.
+Proovida piirduda puhta javascriptiga. Ainuke õigustus muid librarysid kasutada
+oleks rakenduse kiiruse optimeerimine (näiteks UNDERSCORE.js for loop).
 
-## Liikmete arv
-Võib teha üksi või kahekesi
+## Funkstsionaalsused
+  * v0.1 Rendeerimine töötab
+  * v0.2 Stseeni ülesehitus
+  * v0.3 Kaamera liikumine
+  * v0.4 Soundcloud ühendus
+  * v0.5 CanvasSprite elementide programmid
+  * v0.6 Visualisatsioon heli jaoks
+  * v0.7 UI edasiareng koos otsinguga
+  * v0.8 Saab playlistide järgi otsida
+  * v0.9 Struktuuri muudatused
+  * v1.0 Encapsulation + postprocessing
 
-**Juhul kui tehakse kahekesi, peab olema näha githubis, kes ja mida on kirjutanud. Kui ei ole näha, kes midagi kirjutanud on, tööd ei arvesta! Kui ei tea kuidas seda teha, küsi!**
+## Andmete liikumise skeem
+Kõik toimub ühel lehel. Tehakse AJAX request soundcloud.com'i kasutades soundcloud'i enda API'd.
+Streame ise ei saa salvestada, aga AJAX requestist saadud infot saab küll. Ehk stream_uri, pildid jms. saab salvestada.
 
-## Tööjuhend
-1. Üks fork'ib endale käesoleva repositooriumi ning annab vajadusele kirjutamisõiguse/ligipääsu
-1. Tee kohe Pull request
-1. Muuda repositooriumi `README.md faili` vastavalt nõutele
-1. Tee valmis korralik veebirakendus
-
-### Nõuded
-
-1. **README.md sisaldab:**
-    * suurelt projekti nime;
-    * kes teeb;
-    * eesmärki (3-4 lauset, mis probleemi rakendus lahendab);
-    * funktsionaalsuse loetelu prioriteedi järjekorras, nt
-        * v0.1 Saab teha kasutaja ja sisselogida
-        * v0.2 Saab lisada ...
-        * ...
-    * andmete liikumise skeem loetava pildina (mis lehed ja mis andmeid mis lehel käideldakse);
-
-2. **Veebirakenduse nõuded:**
-    * rakendus töötab nii palju kui saab ka võrguta olekus, st kasutab `appcache`i;
-    * andmeid talletatakse lisaks kohalikule (localStorage) ka serveripool (soovitatavalt andmebaas või fail) – AJAX;
-    * Kasutatav ka mobiilselt seadmelt;
-    * muutujad/tabelid on inglise keeles;
-    * rakendus on piisava funktsionaalsusega ja turvaline – eelnev kokkulepe õppejõuga, mis saab valmis;
-    * kood on jaotatud vajadusel eri failidesse ja kood on kokkupakitud kujul;
-
-3. **Funktsionaalsus**
-    * juhul kui algoritmiline keerukus on piisav siis kõiki nõudeid ei ole vaja täita – ainult eelneval kokkuleppel õppjõuga!
+## Nõuded
+  * Enamjaolt staatiline leht, kui andmed on kätte saadud ei kao nad kuhugi, aga uue requesti tegemisel peab ikka võrgus olema.
+  * Andmeid ei talletata momendil, tulevikus peale optimeerimist ehk küll.
+  * On kasutatav mobiiliseadmelt, tulevikus äkki Socket.io toetus (mobiil käituks puldina).
+  * Muutujad peaksid kõik olema inglise keeles.
+  * Ainuke turvalisuse 'leke' on client_id nägemine source'ist.
+  * Organiseerimine vajab veel tööd, kuna kood on üpris mahukas.!

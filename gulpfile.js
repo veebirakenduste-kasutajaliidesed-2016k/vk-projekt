@@ -5,25 +5,16 @@ var gulp = require('gulp'),
   sass = require('gulp-sass'),
   plumber = require('gulp-plumber'),
   prefixer = require('gulp-autoprefixer'),
-  browserify = require('browserify'),
-  source = require('vinyl-source-stream');
+  concat = require('gulp-concat');
 
-gulp.task('default', ['scripts','browserify', 'sass', 'watch']);
-
+gulp.task('default', ['scripts', 'sass', 'watch']);
+// 'src/js/**/*.js'
 gulp.task('scripts', function() {
-  gulp.src('src/js/**/*.js')
+  gulp.src(['src/js/three.min.js', 'src/js/renderers/*.js', 'src/js/main.js'])
   .pipe(plumber())
+  .pipe(concat('main.js'))
   .pipe(uglify())
-  .pipe(gulp.dest('build/js'));
-});
-
-gulp.task('browserify', function() {
-    return browserify('./src/js/app.js')
-        .bundle()
-        //Pass desired output filename to vinyl-source-stream
-        .pipe(source('app.js'))
-        // Start piping stream to tasks!
-        .pipe(gulp.dest('./build/js'));
+  .pipe(gulp.dest('build'));
 });
 
 gulp.task('sass', function () {
@@ -34,6 +25,6 @@ gulp.task('sass', function () {
 });
 
 gulp.task('watch', function() {
-  gulp.watch('src/js/**/*.js', ['scripts','browserify']);
+  gulp.watch('src/js/**/*.js', ['scripts']);
   gulp.watch('src/sass/**/*.scss', ['sass']);
 })
