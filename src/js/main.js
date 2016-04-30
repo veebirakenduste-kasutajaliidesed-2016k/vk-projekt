@@ -484,7 +484,7 @@
             DETAILS[0].className = "details hidden";
         }
     });
-    document.getElementById('search').addEventListener('search', function() {
+    document.getElementById('search').addEventListener('oninput', function() {
         var result = document.getElementById('search').value;
         if (result) {
             generate(result);
