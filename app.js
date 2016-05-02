@@ -56,8 +56,6 @@
 			$('#saveText').click(function(){
 				var inputAreaVal = $('#textHead').val();
 				var textAreaVal = $('#changeFileText').val();
-				//console.log(inputAreaVal);
-				//console.log(textAreaVal);
 				onlinepad.instance.saveDiv(inputAreaVal, textAreaVal);
 			});
 			$('#close, #floater').click(function(){
@@ -101,7 +99,18 @@
 		},
 		
 		saveDiv: function(fname, ftext){
-			
+			$.ajax({
+				url: "saveFile.php",
+				data: {
+					fname: fname,
+					ftext: ftext
+				} ,
+				type: "post",
+				success:function(result){
+					console.log(result);
+				},
+				error:function(){}
+			});
 		},
    }
    
