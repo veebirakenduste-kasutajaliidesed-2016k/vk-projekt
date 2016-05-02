@@ -7,6 +7,9 @@ var startTime, ballCount = 1, hits = 0;
 var clock;
 
 window.onload = function(){
+
+	
+	console.log('here');
 	canvas = document.getElementById("canvas");
 	ctx = canvas.getContext("2d");
 
@@ -61,6 +64,9 @@ function increase(){
 }
 
 function control(e){
+	//x
+	//y
+
 	for(var i = 0; i < balls.length; i++){
 		if(balls[i].hitDetect(e.clientX, e.clientY)){
 			balls.splice(i, 1);
