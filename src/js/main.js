@@ -166,6 +166,9 @@
                     playlistNodeImage.width = 75;
                     playlistNode.appendChild(playlistNodeImage);
                     playlistsNode.appendChild(playlistNode);
+                    playlistNode.('click', function() {
+		        playPlaylist(playlistNode);
+		    });
                 }
 
             } else {
@@ -454,18 +457,30 @@
             info.className = "visible";
         }
     }
-    document.getElementById('playlists').addEventListener('click', function() {
-        if (event.target.parentNode.className === 'playlist') {
-            var nodeList = Array.prototype.slice.call(document.getElementById('playlists').children);
-            var index = nodeList.indexOf(event.target.parentNode);
-
-            clearView();
-            SC.get('/playlists/' + playlists[index].id, {}).then(function(playlist) {
+    
+    function playPlaylist(element) {
+    	var nodeList = Array.prototype.slice.call(document.getElementById('playlists').children);
+        var index = nodeList.indexOf(element);
+        
+        clearView();
+        SC.get('/playlists/' + playlists[index].id, {}).then(function(playlist) {
                 document.getElementById("playing").innerHTML = "Playlist:&nbsp&nbsp" + playlist.title;
                 createTracks(playlist);
-            });
-        }
-    });
+        });
+    }
+    
+    //document.getElementById('playlists').addEventListener('click', function() {
+    //    if (event.target.parentNode.className === 'playlist') {
+    //        var nodeList = Array.prototype.slice.call(document.getElementById('playlists').children);
+    //        var index = nodeList.indexOf(event.target.parentNode);
+
+    //        clearView();
+    //        SC.get('/playlists/' + playlists[index].id, {}).then(function(playlist) {
+    //            document.getElementById("playing").innerHTML = "Playlist:&nbsp&nbsp" + playlist.title;
+    //            createTracks(playlist);
+    //        });
+    //    }
+    //});
     document.getElementById('buy').addEventListener('click', function() {
         window.location.href = purchase;
     });
@@ -484,10 +499,19 @@
             DETAILS[0].className = "details hidden";
         }
     });
-    document.getElementById('search').addEventListener('oninput', function() {
-        var result = document.getElementById('search').value;
-        if (result) {
-            generate(result);
-        }
+    var delay = (function(){
+    	var timer = 0;
+  	return function(callback, ms){
+    		clearTimeout (timer);
+    		timer = setTimeout(callback, ms);
+  	};
+    })();
+    document.getElementById('search').addEventListener('onkeyup', function() {
+        delay(function(){
+      		var result = document.getElementById('search').value;
+	        if (result) {
+	            generate(result);
+	        }
+    	}, 1000 );
     });
 })();
