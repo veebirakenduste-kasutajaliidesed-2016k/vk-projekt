@@ -1,0 +1,79 @@
+body {
+	font-family: arial;
+	font-size: 20px;
+}
+
+.grid-item {
+	float: left;
+	width: 150px;
+	height: 130px;
+	/*border: 2px solid #b6b5b4;*/
+	border-radius: 5px;
+	margin-right:5px;
+	margin-top:5px;
+	font-size: 20px;
+}
+		
+.fname {
+	margin:auto;
+	font-family: arial;
+	font-size: 25px;
+}
+
+#header {
+	width: 100%;
+	height: 10%;
+}
+
+#header > button {
+	height:30px;
+	width: 100px;
+	background-color:gray;
+	border: 0px solid black;
+	border-radius: 5px;
+	font-family: arial;
+	font-size: 20px;
+	color: yellow;
+	margin-right: 2px;
+}
+
+.showText > button {
+	height:30px;
+	width: 150px;
+	background-color:gray;
+	border: 0px solid black;
+	border-radius: 5px;
+	font-family: arial;
+	font-size: 20px;
+	color: yellow;
+}
+
+hr {
+	height: 3px;
+	background-color:gray;
+	margin-bottom:-0px;
+}
+
+.showText {
+	position:absolute;
+	width: 50%;
+	height: 70%;
+	z-index: 3000;
+	margin-left:25%;
+	margin-right:-25%;
+	margin-top:5%;
+	background-color:white;
+	padding: 20px;
+	border-radius: 30px;
+	white-space: pre-wrap;
+	overflow-x:hidden;
+	overflow-y: scroll;
+}
+
+#floater {
+	z-index: 300;
+	position: absolute;
+	height:94vh;
+	width:99%;
+	opacity: 0;
+}
