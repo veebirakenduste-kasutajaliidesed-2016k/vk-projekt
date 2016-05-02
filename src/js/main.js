@@ -166,7 +166,7 @@
                     playlistNodeImage.width = 75;
                     playlistNode.appendChild(playlistNodeImage);
                     playlistsNode.appendChild(playlistNode);
-                    playlistNode.('click', function() {
+                    playlistNode.addEventListener('click', function() {
 		        playPlaylist(playlistNode);
 		    });
                 }
@@ -512,6 +512,6 @@
 	        if (result) {
 	            generate(result);
 	        }
-    	}, 1000 );
+    	}, 2000 );
     });
 })();
