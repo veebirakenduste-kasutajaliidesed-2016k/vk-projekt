@@ -1,39 +1,16 @@
-# Projekt
-
-## Tähtaeg 
-
-Rühma viimane tund esitletakse
-
-## Liikmete arv
-Võib teha üksi või kahekesi
-
-**Juhul kui tehakse kahekesi, peab olema näha githubis, kes ja mida on kirjutanud. Kui ei ole näha, kes midagi kirjutanud on, tööd ei arvesta! Kui ei tea kuidas seda teha, küsi!**
-
-## Tööjuhend
-1. Üks fork'ib endale käesoleva repositooriumi ning annab vajadusele kirjutamisõiguse/ligipääsu
-1. Tee kohe Pull request
-1. Muuda repositooriumi `README.md faili` vastavalt nõutele
-1. Tee valmis korralik veebirakendus
-
-### Nõuded
-
-1. **README.md sisaldab:**
-    * suurelt projekti nime;
-    * kes teeb;
-    * eesmärki (3-4 lauset, mis probleemi rakendus lahendab);
-    * funktsionaalsuse loetelu prioriteedi järjekorras, nt
-        * v0.1 Saab teha kasutaja ja sisselogida
-        * v0.2 Saab lisada ...
-        * ...
-    * andmete liikumise skeem loetava pildina (mis lehed ja mis andmeid mis lehel käideldakse);
-
-2. **Veebirakenduse nõuded:**
-    * rakendus töötab nii palju kui saab ka võrguta olekus, st kasutab `appcache`i;
-    * andmeid talletatakse lisaks kohalikule (localStorage) ka serveripool (soovitatavalt andmebaas või fail) – AJAX;
-    * Kasutatav ka mobiilselt seadmelt;
-    * muutujad/tabelid on inglise keeles;
-    * rakendus on piisava funktsionaalsusega ja turvaline – eelnev kokkulepe õppejõuga, mis saab valmis;
-    * kood on jaotatud vajadusel eri failidesse ja kood on kokkupakitud kujul;
-
-3. **Funktsionaalsus**
-    * juhul kui algoritmiline keerukus on piisav siis kõiki nõudeid ei ole vaja täita – ainult eelneval kokkuleppel õppjõuga!
+Asukoha arvamise mäng
+Robin Ginter
+Probleemi otseselt ei ole. Pigem on põhimõte meelelahutuses.
+Funktsionaalsuse prioriteedid:
+   1)Kaardi enda kuvamine ja sellel asukoha paika panemine
+   2)Valikuvariantide koostamine, kas piltide või siis fikseeritud asukohaga "street view" abil
+   3)Skoori arvestus (Esijalgu local storage'is)
+   4)Mingisugune offline tugi
+   5)Skoori üle viimine serveri poole
+   6)Koodi turvalisus
+Lehtede ülesehitus:
+   1)Mingisugune avaleht
+   2)Mängu enda leht
+   3)Võibolla sättete leht, et valida keerukust? Pole sellest veel kindel.
+   4)Edetabel tulemuste jaoks
+   5)Leht mingisugusegi offline funktsionaalsuse jaoks.
