@@ -19,6 +19,9 @@ V0.3 - Serverisse salvestamine
 V0.4 - Mobiili asendianduri baasil liigutamine
 V0.5 - Mobiili paus
 
+V1.1 - Kujundamine
+V1.2 - Eelneva skoori näitamine
+
 # Projekt
 
 ## Tähtaeg

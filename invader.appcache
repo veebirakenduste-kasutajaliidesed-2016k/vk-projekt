@@ -1,0 +1,15 @@
+CACHE MANIFEST
+#Version 1.0
+index.html
+css/core.css
+css/typeography.css
+sounds/bang.wav
+sounds/explosion.wav
+sounds/invaderkilled.wav
+sounds/shoot.wav
+js/starfield.js
+js/spaceinvaders.js
+js/scripts.js
+
+NETWORK:
+*

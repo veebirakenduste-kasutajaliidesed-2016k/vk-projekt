@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html manifest="invader.appcache">
     <head>
         <title>Space Invaders</title>
         <link rel="stylesheet" type="text/css" href="css/core.css">
         <link rel="stylesheet" type="text/css" href="css/typeography.css">
         <style>
-    
+
             /* Styling needed for a fullscreen canvas and no scrollbars. */
-            body, html { 
+            body, html {
             width: 100%;
             height: 100%;
             margin: 0;
@@ -28,7 +28,7 @@
                 margin-left: auto;
                 margin-right: auto;
             }
-            #gamecanvas { 
+            #gamecanvas {
                 width: 800px;
                 height: 600px;
             }
@@ -47,8 +47,8 @@
         <div id="info">
             <p>Move with arrow keys, fire with the space bar. The invaders get faster and drop
                 more bombs as you complete each level!</p>
-            <p><a id="muteLink" href="#" onclick="toggleMute()">mute</a> | 
-                <a href="http://github.com/dwmkerr/spaceinvaders">spaceinvaders on github</a> | 
+            <p><a id="muteLink" href="#" onclick="toggleMute()">mute</a> |
+                <a href="http://github.com/dwmkerr/spaceinvaders">spaceinvaders on github</a> |
                 <a href="http://www.dwmkerr.com/experiments">more experiments</a> | <a href="http://www.dwmkerr.com">dwmkerr.com</a></p>
         </div>
 
