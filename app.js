@@ -16,10 +16,20 @@
 	   
 		init: function(){
 		
-			$("#mein").show();			
+			$("#mein").show();
+			this.bindEvents();
 			this.loadJSON();			
 		},
-		
+
+		bindEvents: function(){
+			$('#reloadPage').click(function(){
+				location.reload();
+			});
+			
+			$('#tonewtext').click(function(){
+				onlinepad.instance.createFile();
+			});
+		},
 		
 		loadJSON: function(){			
 			$.ajax({
@@ -33,11 +43,49 @@
 			});
 		},
 		
+		createFile: function(){
+			
+			$('#floater').show();
+			$('#mein').css('filter','blur(5px)').css('webkitFilter','blur(5px)').css('mozFilter','blur(5px)').css('oFilter','blur(5px)').css('msFilter','blur(5px)');
+			$('#header').css('filter','blur(5px)').css('webkitFilter','blur(5px)').css('mozFilter','blur(5px)').css('oFilter','blur(5px)').css('msFilter','blur(5px)');
+			$('#line').css('filter','blur(5px)').css('webkitFilter','blur(5px)').css('mozFilter','blur(5px)').css('oFilter','blur(5px)').css('msFilter','blur(5px)');
+			
+			var creationDiv = '<div class="createText" style="border: 10px solid rgb(207, 216, 220);">'+
+							  '<button id="closeText" style="margin-right: 10px;">Aken kinni</button>'+
+							  '<button id="saveNewText">Salvesta</button>'+
+							  '<br><br><input id="newHead" type="text" class="newFile" placeholder="Pealkiri">'+
+							  '<br><br><textarea id="FileText" class="newFile" placeholder="Teie märkus siia..."></textarea>'+
+							  '</div>';
+			creationDiv = $(creationDiv);
+			$("body").append(creationDiv);
+			$('#FileText').autogrow({onInitialize: true});
+			
+			$('#saveNewText').click(function(){
+				var inputAreaVal = $('#newHead').val();
+				var textAreaVal = $('#FileText').val();
+				//console.log(inputAreaVal);
+				//console.log(textAreaVal);
+				onlinepad.instance.saveDiv("#####", inputAreaVal, textAreaVal);
+				location.reload();
+			});
+			
+			$('#closeText, #floater').click(function(){
+				creationDiv.remove();
+				$('#floater').hide();
+				console.log("pressed");
+				$('#mein').css('filter','none').css('webkitFilter','none').css('mozFilter','none').css('oFilter','none').css('msFilter','none');
+				$('#header').css('filter','none').css('webkitFilter','none').css('mozFilter','none').css('oFilter','none').css('msFilter','none');
+				$('#line').css('filter','none').css('webkitFilter','none').css('mozFilter','none').css('oFilter','none').css('msFilter','none');
+			});
+			
+		},
+		
 		printFile: function(fname, ftext, color){
 			var divText = '<div class="showText" style="border: 10px solid '+color+';">'+
 						  '<button id="close" style="margin-right: 10px;">Aken kinni</button>'+
 						  '<button id="edit">Muuda sisu</button>'+
 						  '<button id="saveText" style="display:none">Salvesta</button>'+
+						  '<button id="delText">Kustuta</button>'+
 						  '<h2 class="divTexts" style="display:block">'+fname+'</h2>'+
 						  '<br class="brs" style="display:none"><br class="brs" style="display:none"><input id="textHead" type="text" class="divChanges" style="display:none" value="'+fname+'">'+
 						  '<p class="divTexts" style="display:block">'+ftext+'</p>'+
@@ -53,11 +101,17 @@
 				$('.divChanges').show();
 				$('#changeFileText').autogrow({onInitialize: true});
 			});
+			
 			$('#saveText').click(function(){
 				var inputAreaVal = $('#textHead').val();
 				var textAreaVal = $('#changeFileText').val();
-				onlinepad.instance.saveDiv(inputAreaVal, textAreaVal);
+				onlinepad.instance.saveDiv(fname, inputAreaVal, textAreaVal);
 			});
+			
+			$('#delText').click(function(){
+				onlinepad.instance.delDiv(fname);
+			});
+			
 			$('#close, #floater').click(function(){
 				divText.remove();
 				$('#floater').hide();
@@ -98,19 +152,36 @@
 			});			
 		},
 		
-		saveDiv: function(fname, ftext){
+		saveDiv: function(origfname, fname, ftext){
 			$.ajax({
 				url: "saveFile.php",
 				data: {
 					fname: fname,
-					ftext: ftext
-				} ,
+					ftext: ftext,
+					origfname: origfname
+				},
 				type: "post",
 				success:function(result){
 					console.log(result);
-				},
-				error:function(){}
+				}
 			});
+			
+			location.reload();
+		},
+		
+		delDiv: function(fname){
+			$.ajax({
+				url: "delFile.php",
+				data: {
+					fname:fname
+				},
+				type: "post",
+				success:function(e){
+					console.log(e);
+				}
+			});
+			
+			location.reload();
 		},
    }
    
