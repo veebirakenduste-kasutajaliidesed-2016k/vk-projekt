@@ -7,10 +7,6 @@
 		return onlinepad.instance;
     }
     onlinepad.instance = this;
-	
-	this.openedDialog = null;
-
-    //console.log('onlinepad sees');
     this.init();
    };
    
@@ -19,11 +15,8 @@
    onlinepad.prototype = {
 	   
 		init: function(){
-			
-			//$("#mein").css( "display", "block" );		
-			$("#mein").show();		
-			
-			
+		
+			$("#mein").show();			
 			this.loadJSON();			
 		},
 		
@@ -32,8 +25,6 @@
 			$.ajax({
 				url: "getFiles.php",
 				success: function(result){					
-					console.log(result);
-					console.log(JSON.parse(result));
 					onlinepad.instance.printGrids(JSON.parse(result));
 				},
 				error: function(xhr, status, error){
@@ -46,20 +37,29 @@
 			var divText = '<div class="showText" style="border: 10px solid '+color+';">'+
 						  '<button id="close" style="margin-right: 10px;">Aken kinni</button>'+
 						  '<button id="edit">Muuda sisu</button>'+
-						  '<h2>'+fname+'</h2>'+
-						  '<p>'+ftext+'</p>'+
+						  '<button id="saveText" style="display:none">Salvesta</button>'+
+						  '<h2 class="divTexts" style="display:block">'+fname+'</h2>'+
+						  '<br class="brs" style="display:none"><br class="brs" style="display:none"><input id="textHead" type="text" class="divChanges" style="display:none" value="'+fname+'">'+
+						  '<p class="divTexts" style="display:block">'+ftext+'</p>'+
+						  '<br class="brs" style="display:none;"><br class="brs" style="display:none"><textarea id="changeFileText" class="divChanges" style="display:none">'+ftext+'</textarea>'+
 						  '</div>';
 			divText = $(divText);
-			
-			this.openedDialog = divText;
-			
-			//this.openDialog.remove();
-			
-			/*$('#mein').click(function(){
-				onlinepad.instance.openedDialog.remove();
-			});*/
-			
 			$("body").append(divText);
+			$('#edit').click(function(){				
+				$('.divTexts').hide();
+				$('#edit').hide();
+				$('.brs').show();
+				$('#saveText').css('display','block');
+				$('.divChanges').show();
+				$('#changeFileText').autogrow({onInitialize: true});
+			});
+			$('#saveText').click(function(){
+				var inputAreaVal = $('#textHead').val();
+				var textAreaVal = $('#changeFileText').val();
+				//console.log(inputAreaVal);
+				//console.log(textAreaVal);
+				onlinepad.instance.saveDiv(inputAreaVal, textAreaVal);
+			});
 			$('#close, #floater').click(function(){
 				divText.remove();
 				$('#floater').hide();
@@ -89,32 +89,20 @@
 				$('.grid').append(item);
 				
 				$(item).click(function(e){
-					
-					
-					//console.log(e);
-					var id;
-					
+					var id;					
 					id = e.target.id;
-					//siia tuleks see mis dive ja nende teksti laeb
-					//vaata blur					
-					console.log(id + ' clicked');
 					$('#floater').show();
 					$('#mein').css('filter','blur(5px)').css('webkitFilter','blur(5px)').css('mozFilter','blur(5px)').css('oFilter','blur(5px)').css('msFilter','blur(5px)');
 					$('#header').css('filter','blur(5px)').css('webkitFilter','blur(5px)').css('mozFilter','blur(5px)').css('oFilter','blur(5px)').css('msFilter','blur(5px)');
 					$('#line').css('filter','blur(5px)').css('webkitFilter','blur(5px)').css('mozFilter','blur(5px)').css('oFilter','blur(5px)').css('msFilter','blur(5px)');
-					onlinepad.instance.printFile(file.fname, file.ftext, colorid[x]);
-					//css({"propertyname":"value","propertyname":"value",...});
+					onlinepad.instance.printFile(file.fname.replace(/.txt/g,""), file.ftext, colorid[x]);
 				});
-
-					
-					//console.log($(item));
-			});
-			
-			//var temp = $(items);
-			//$('.grid').append(temp);
-			
+			});			
 		},
 		
+		saveDiv: function(fname, ftext){
+			
+		},
    }
    
    window.onload = function(){
