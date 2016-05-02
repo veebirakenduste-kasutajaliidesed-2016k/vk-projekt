@@ -3,8 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <title>Teadmiste Test</title>
+  <script src="script.js"></script>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
+  <main role="main">
+    <div id="insert-view">
+      <div class="insert">
+        <p>SIIN SISESTATAKSE SÕNU</p>
+        <a href="#test-view">siit lingilt saab testi tegema minna</a>
+      </div>
+    </div>
+    <div id="test-view">
+      <div class="test">
+        <p>SIIN TEHAKSE TESTI</p>
+        <a href="#insert-view">siit lingilt saab sõnu sisestama minna</a>
+      </div>
+    </div>
+    <div id="home-view">
+      <a href="#insert-view">SÕNADE SISESTAMINE</a>
+      <a href="#test-view">TESTI TEGEMINE</a>
+    </div>
+  </main>
 </body>
 </html>
