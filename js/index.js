@@ -89,6 +89,7 @@ window.onload = function () {
       if (counter + space === geusses.length) {
         showLives.innerHTML = "Sa võitsid";
         win.play();
+        localStorage.setItem("guessed word",word);
       }
     }
   };
@@ -251,6 +252,8 @@ window.onload = function () {
     ];
 
     chosenCategory = categories[Math.floor(Math.random() * categories.length)];
+
+
     word = chosenCategory[Math.floor(Math.random() * chosenCategory.length)];
     word = word.replace(/\s/g, "-");
     //console.log(word);
