@@ -12,17 +12,26 @@
       }
       #map, #pano {
         float: left;
-        height: 100%;
+        height: 80%;
         width: 45%;
       }
-	  #pano text {
-		display: none;
-	  }
+  	  #pano text {
+  		display: none;
+  	  }
+      #menu{
+        margin-left: 20px;
+
+      }
     </style>
   </head>
   <body>
+    <div id="menu">
+    <p id="skoor">Liigutusi</p>
+    <button onClick="getPanorama()" >UUS ASUKOHT</button>
+  </div>
     <div id="map" style="height:300px"></div>
     <div id="pano"></div>
+
     <script>
 	  var left =  59.453145;
 		var top_c = 24.692039;
@@ -37,6 +46,8 @@
 
 		//console.log(tartu);
 
+    //Add listener
+
 
 
 
@@ -46,6 +57,14 @@
 		  styles: [ { "elementType": "labels", "stylers": [ { "visibility": "off" } ] } ],
 		  disableDefaultUI: true
         });
+
+// võtab kliki peale mapi koordinaadid
+        map.addListener("click", function (event) {
+            var latitude = event.latLng.lat();
+            var longitude = event.latLng.lng();
+            console.log( latitude + ', ' + longitude );
+        });
+
 
 		getPanorama();
 
@@ -97,9 +116,10 @@
             });
         //setStreetView(panorama);
 
+
         pano.addListener('position_changed', function() {
           score = score + 1;
-            console.log(score);
+            document.getElementById("skoor").innerHTML ="Liigutusi: " +  score;
         });
 	  }
 
@@ -107,7 +127,7 @@
 
 
     </script>
-	<button onClick="getPanorama()" >VAJUTA</button>
+
     <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCKYLHdWZSYqmvUyybJYV1iB2FOaJsaOxY&callback=initialize">
     </script>
