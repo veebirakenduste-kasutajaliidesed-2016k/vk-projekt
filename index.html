@@ -26,17 +26,18 @@
     <script>
 	  var left =  59.453145;
 		var top_c = 24.692039;
-		var right = 59.427036;    
+		var right = 59.427036;
 		var bottom = 24.823728;
 	  var tartu;
-	  
+    var score = 0;
+
 	  var pano;
 
       function initialize() {
-		
-		console.log(tartu);
 
-		
+		//console.log(tartu);
+
+
 
 
         var map = new google.maps.Map(document.getElementById('map'), {
@@ -45,17 +46,17 @@
 		  styles: [ { "elementType": "labels", "stylers": [ { "visibility": "off" } ] } ],
 		  disableDefaultUI: true
         });
-		
+
 		getPanorama();
 
 
       }
-	  
+
 	  function getPanorama(){
 		//console.log(bottom - Math.random()*(bottom-top_c));
 		tartu = {lat: left - Math.random()*(left-right), lng: bottom - Math.random()*(bottom-top_c)};
 	    //console.log(tartu);
-				
+
 		var streetviewService = new google.maps.StreetViewService;
 
 		streetviewService.getPanorama(
@@ -66,9 +67,9 @@
 				if(!data){
 					getPanorama();
 				}
-				
-				
-				
+
+
+
 				console.log(data.location.latLng);
 				if(pano){
 					pano.setPosition(data.location.latLng);
@@ -78,8 +79,8 @@
 			}
 		);
 	  }
-		
-		
+
+
 		//1 kord ainult
 	  function loadPano(coordinates){
 		pano = new google.maps.StreetViewPanorama(
@@ -95,7 +96,16 @@
 			  enableCloseButton: false
             });
         //setStreetView(panorama);
+
+        pano.addListener('position_changed', function() {
+          score = score + 1;
+            console.log(score);
+        });
 	  }
+
+
+
+
     </script>
 	<button onClick="getPanorama()" >VAJUTA</button>
     <script async defer
