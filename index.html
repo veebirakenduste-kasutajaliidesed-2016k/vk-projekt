@@ -58,18 +58,26 @@
 		  disableDefaultUI: true
         });
 
-// võtab kliki peale mapi koordinaadid
-        map.addListener("click", function (event) {
-            var latitude = event.latLng.lat();
-            var longitude = event.latLng.lng();
-            console.log( latitude + ', ' + longitude );
-        });
+        // võtab kliki peale mapi koordinaadid
+                map.addListener("click", function (event) {
+
+                  correct = new google.maps.LatLng({lat: tartu.lat, lng: tartu.lng});
+
+                  var distance = google.maps.geometry.spherical.computeDistanceBetween (correct, event.latLng);
+                  alert(distance/1000);
+                    var latitude = event.latLng.lat();
+                    var longitude = event.latLng.lng();
+                //    var vahe = latitude - tartu.lat + longitude - tartu.lng;
+                //    console.log(vahe);
+                });
 
 
 		getPanorama();
 
 
       }
+
+
 
 	  function getPanorama(){
 		//console.log(bottom - Math.random()*(bottom-top_c));
@@ -126,10 +134,11 @@
 
 
 
+
     </script>
 
     <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCKYLHdWZSYqmvUyybJYV1iB2FOaJsaOxY&callback=initialize">
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCKYLHdWZSYqmvUyybJYV1iB2FOaJsaOxY&callback=initialize&libraries=geometry">
     </script>
   </body>
 </html>
