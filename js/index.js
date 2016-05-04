@@ -82,7 +82,8 @@ window.onload = function () {
     showLives.innerHTML = "Sul on " + lives + " elu";
     if (lives < 1) {
       showLives.innerHTML = "Mäng läbi";
-      lose.play(3);
+      lose.play();
+      
     }
     for (var i = 0; i < geusses.length; i++) {
       if (counter + space === geusses.length) {
