@@ -2,7 +2,7 @@ window.onload = function () {
 
   var alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',
         'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's',
-        't', 'u', 'v', 'w', 'x', 'y', 'z'];
+        't', 'u', 'v', 'w', 'x', 'y', 'z', 'õ','ä','ö','ü'];
 
   var categories;         // Array of topics
   var chosenCategory;     // Selected catagory
@@ -82,7 +82,7 @@ window.onload = function () {
     showLives.innerHTML = "Sul on " + lives + " elu";
     if (lives < 1) {
       showLives.innerHTML = "Mäng läbi";
-      lose.play();
+      lose.play(3);
     }
     for (var i = 0; i < geusses.length; i++) {
       if (counter + space === geusses.length) {
