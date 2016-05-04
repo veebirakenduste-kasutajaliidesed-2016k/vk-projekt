@@ -64,7 +64,14 @@
                   correct = new google.maps.LatLng({lat: tartu.lat, lng: tartu.lng});
 
                   var distance = google.maps.geometry.spherical.computeDistanceBetween (correct, event.latLng);
-                  alert(distance/1000);
+                  var km = distance/1000;
+                  var lopp;
+                  if(km < 10){
+                    lopp = "\nÕIGE:" + score;
+                  }else{
+                    lopp = "\nLiigutusi:" + score;
+                  }
+                  alert(lopp);
                     var latitude = event.latLng.lat();
                     var longitude = event.latLng.lng();
                 //    var vahe = latitude - tartu.lat + longitude - tartu.lng;
