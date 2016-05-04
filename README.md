@@ -18,13 +18,13 @@ Võib teha üksi või kahekesi
 ### Nõuded
 
 1. **README.md sisaldab:**
-    * suurelt projekti nime;
-    * kes teeb;
-    * eesmärki (3-4 lauset, mis probleemi rakendus lahendab);
+    * chat;
+    * Jekaterina Voroshilova, Vitali Maksimov;
+    * AJAX, jQuery, gruppi-chattimine, ruumid, ;
     * funktsionaalsuse loetelu prioriteedi järjekorras, nt
-        * v0.1 Saab teha kasutaja ja sisselogida
-        * v0.2 Saab lisada ...
-        * ...
+        * v0.1 Teha chatti ruumi
+        * v0.2 Anonüümne kirjevahetus ilma registreerimata
+        * v0.3 
     * andmete liikumise skeem loetava pildina (mis lehed ja mis andmeid mis lehel käideldakse);
 
 2. **Veebirakenduse nõuded:**
