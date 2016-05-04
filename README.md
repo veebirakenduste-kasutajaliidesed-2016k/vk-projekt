@@ -24,9 +24,9 @@ Võib teha üksi või kahekesi - üksi
     salvestab olulisemad asjad nagu nimi, kirjeldus, pilt ning link massiivi.
 
     * funktsionaalsuse loetelu prioriteedi järjekorras, nt
-        * v0.1 Kasutaja saab teha päringuid mitmele müügiportaalile korraga
+        * v0.1 Kasutaja saab teha päringuid mitmele müügiportaalile korraga(okidoki, soov)
         * v0.2 Salvestab vanad päringuid
-        * v0.3
+        * v0.3 
     * andmete liikumise skeem loetava pildina (mis lehed ja mis andmeid mis lehel käideldakse);
 
 2. **Veebirakenduse nõuded:**

@@ -5,7 +5,13 @@ $(function() {
 
   //laetud
 
-  getTweets();
+  //getTweets();
+
+  $('#searchbutton').on("click", function(){
+      var param = $('#searchfield').val();
+      console.log(param);
+      getTweets(param);
+  });
 
   $grid = $('#content').isotope({
 	  //üks kast
@@ -16,19 +22,20 @@ $(function() {
 });
 
 
-function getTweets(){
+function getTweets(param){
 
 	//ajax
+  console.log("loading...");
 
 	$.ajax({
-		url: "getfeed.php",
+		url: "getsearch.php?search="+param,
 		success: function(data){
-
+console.log("loaded");
 			//stringi teen massiiviks
-			var array = JSON.parse(data).statuses;
+			//var array = JSON.parse(data).statuses;
 
-			console.log(array);
-			printTweets(array);
+			console.log(data);
+			//printTweets(array);
 
 		},
 		error: function(error){
