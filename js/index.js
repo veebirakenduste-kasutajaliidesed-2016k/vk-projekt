@@ -83,7 +83,7 @@ window.onload = function () {
     if (lives < 1) {
       showLives.innerHTML = "Mäng läbi";
       lose.play();
-      
+
     }
     for (var i = 0; i < geusses.length; i++) {
       if (counter + space === geusses.length) {
@@ -120,11 +120,16 @@ window.onload = function () {
 
   draw = function($pathFromx, $pathFromy, $pathTox, $pathToy) {
 
+    if (lives < 1) {
+      showLives.innerHTML = "Mäng läbi";
+      }
+    else{
+
     context.moveTo($pathFromx, $pathFromy);
     context.lineTo($pathTox, $pathToy);
     context.stroke();
     audio.play();
-
+}
 };
 
    frame1 = function() {
