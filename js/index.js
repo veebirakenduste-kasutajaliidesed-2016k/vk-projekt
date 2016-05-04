@@ -119,17 +119,11 @@ window.onload = function () {
     };
 
   draw = function($pathFromx, $pathFromy, $pathTox, $pathToy) {
-
-    if (lives < 1) {
-      showLives.innerHTML = "Mäng läbi";
-      }
-    else{
-
     context.moveTo($pathFromx, $pathFromy);
     context.lineTo($pathTox, $pathToy);
     context.stroke();
     audio.play();
-}
+
 };
 
    frame1 = function() {
