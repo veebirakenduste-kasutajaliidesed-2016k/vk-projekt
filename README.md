@@ -16,13 +16,9 @@ Eesmärgiks luua rakendus, mis võtaks kasutaja füüsilise asukoha ning vastava
     * v0.4 - Kasutaja poolt etteantud kohad
     * v0.5 - Kasutaja poolt etteantud kaugus kohast
     * v0.6 - Leitakse ka sarnaseid kohti valitud kohale
+    * v0.7 - Kui offline, siis ütleb kasutajale, et ühendage internetiga
+    * v0.8 - App'i ikoonid
+    
     * .....
     
 ##Andmete liikumise skeem:
-    
-
-    
-
-
-
-
