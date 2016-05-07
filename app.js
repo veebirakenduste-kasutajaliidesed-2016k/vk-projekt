@@ -1,26 +1,27 @@
 (function(){
     "use strict";
     
-    var frontMap = function(){
-        if(frontMap.instance){
-            return frontMap.instance;
+    var placeFinder = function(){
+        if(placeFinder.instance){
+            return placeFinder.instance;
         }
         
-    frontMap.instance = this;
+    placeFinder.instance = this;
     
     this.geoLocation();
+    
     };
     
-    window.frontMap = frontMap;
+    window.placeFinder = placeFinder;
     
-    frontMap.prototype = {
+    placeFinder.prototype = {
       
         init: function(position) {
             if(navigator.onLine) {
                 this.map;
                 this.center = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-                console.log('working'); 
                 this.initialize();
+                this.getValuesListener();
                 
             } else {
                 
@@ -31,8 +32,6 @@
         this.map = new google.maps.Map(document.getElementById('map'), {
         center: this.center,
         zoom: 13,
-    
-            
 
     });
     },
@@ -43,21 +42,37 @@
         if (window.navigator && window.navigator.geolocation) {
             this.geolocation = window.navigator.geolocation;
         }
+        
         if (this.geolocation) {
             this.geolocation.getCurrentPosition(function(position) {
-            frontMap.instance.init(position);
-            console.log(position);
-            console.log(position.coords.latitude);
-            console.log(position.coords.longitude);
-            
-                
+            placeFinder.instance.init(position);   
         });
     }},
-      
+        
+    getValuesListener: function(){
+        document.getElementById('getValues').addEventListener('click', this.getValues.bind(this));
+        
+    },
+    getValues: function() {
+      var placeVar = document.getElementById('placeValue').value;  
+      var rangeVar = document.getElementById('rangeValue').value;  
+      console.log(placeVar);
+      console.log(rangeVar);
+      placeFinder.instance.requestVariables(placeVar, rangeVar);
+    
+    }, 
+    requestVariables: function(placeVar, rangeVar){
+        this.request = {
+            location: this.center,
+            radius: rangeVar,
+            types: placeVar
+        }
+        console.log(this.request.location+','+this.request.radius+','+this.request.types);
+    },   
 };
             
    window.onload = function() {
-     var app = new frontMap();
+     var app = new placeFinder();
    };
 
 })();
