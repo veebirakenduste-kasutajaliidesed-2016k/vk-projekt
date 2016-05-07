@@ -5,7 +5,7 @@
 
 */
 
-/*  
+/*
     Game Class
 
     The Game class represents a Space Invaders game.
@@ -53,6 +53,11 @@ function Game() {
     this.intervalId = 0;
     this.score = 0;
     this.level = 1;
+    this.sent = 0;
+    this.get = 0;
+    this.scores = [];
+    this.scoresHelp = [];
+    this.started = 0;
 
     //  The state stack.
     this.stateStack = [];
@@ -60,6 +65,7 @@ function Game() {
     //  Input/output
     this.pressedKeys = {};
     this.gameCanvas =  null;
+    this.mobileX = 90;
 
     //  All sounds.
     this.sounds = null;
@@ -85,18 +91,18 @@ Game.prototype.initialise = function(gameCanvas) {
 };
 
 Game.prototype.moveToState = function(state) {
- 
+
    //  If we are in a state, leave it.
    if(this.currentState() && this.currentState().leave) {
      this.currentState().leave(game);
      this.stateStack.pop();
    }
-   
+
    //  If there's an enter function for the new state, call it.
    if(state.enter) {
      state.enter(game);
    }
- 
+
    //  Set the current state.
    this.stateStack.pop();
    this.stateStack.push(state);
@@ -115,6 +121,7 @@ Game.prototype.start = function() {
     //  Start the game loop.
     var game = this;
     this.intervalId = setInterval(function () { GameLoop(game);}, 1000 / this.config.fps);
+
 
 };
 
@@ -147,7 +154,7 @@ function GameLoop(game) {
 
         //  Get the drawing context.
         var ctx = this.gameCanvas.getContext("2d");
-        
+
         //  Update if we have an update function. Also draw
         //  if we have a draw function.
         if(currentState.update) {
@@ -217,6 +224,8 @@ WelcomeState.prototype.enter = function(game) {
     game.sounds.loadSound('shoot', 'sounds/shoot.wav');
     game.sounds.loadSound('bang', 'sounds/bang.wav');
     game.sounds.loadSound('explosion', 'sounds/explosion.wav');
+
+
 };
 
 WelcomeState.prototype.update = function (game, dt) {
@@ -231,12 +240,34 @@ WelcomeState.prototype.draw = function(game, dt, ctx) {
 
     ctx.font="30px Arial";
     ctx.fillStyle = '#ffffff';
-    ctx.textBaseline="center"; 
-    ctx.textAlign="center"; 
-    ctx.fillText("Space Invaders", game.width / 2, game.height/2 - 40); 
+    ctx.textBaseline="center";
+    ctx.textAlign="center";
+    ctx.fillText("Space Invaders", game.width / 2, game.height/2 - 40);
     ctx.font="16px Arial";
 
-    ctx.fillText("Press 'Space' to start.", game.width / 2, game.height/2); 
+    ctx.fillText("Press 'Space' to start.", game.width / 2, game.height/2);
+    if(game.get == 0){
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (xhttp.readyState == 4 && xhttp.status == 200) {
+        var result =JSON.parse(xhttp.responseText);
+        game.scores = result;
+        console.log(game.scores);
+        game.scores.sort(dynamicSort("-score"));
+        var halp = 0;
+        var scoreUl = document.getElementById('scoreUl');
+        for(var i = 0; i < 9; i++){
+          var li = document.createElement('li');
+          li.appendChild(document.createTextNode("Level: "+game.scores[i].level+"Score: "+game.scores[i].score));
+          scoreUl.appendChild(li);
+        }
+      }
+    };
+
+    xhttp.open("GET", "../saveData.php", true);
+    xhttp.send();
+    game.get = 1;
+  }
 };
 
 WelcomeState.prototype.keyDown = function(game, keyCode) {
@@ -264,22 +295,38 @@ GameOverState.prototype.draw = function(game, dt, ctx) {
 
     ctx.font="30px Arial";
     ctx.fillStyle = '#ffffff';
-    ctx.textBaseline="center"; 
-    ctx.textAlign="center"; 
-    ctx.fillText("Game Over!", game.width / 2, game.height/2 - 40); 
+    ctx.textBaseline="center";
+    ctx.textAlign="center";
+    ctx.fillText("Game Over!", game.width / 2, game.height/2 - 40);
     ctx.font="16px Arial";
     ctx.fillText("You scored " + game.score + " and got to level " + game.level, game.width / 2, game.height/2);
     ctx.font="16px Arial";
-    ctx.fillText("Press 'Space' to play again.", game.width / 2, game.height/2 + 40);   
+    ctx.fillText("Press 'Space' to play again.", game.width / 2, game.height/2 + 40);
+    if(game.sent == 0){
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+        if (xhttp.readyState == 4 && xhttp.status == 200) {
+
+          console.log('salvestas serverisse');
+
+        }
+      };
+
+      xhttp.open("GET", "../saveData.php?score="+game.score+"&level=" +game.level, true);
+      xhttp.send();
+      game.sent = 1;
+    }
 };
 
 GameOverState.prototype.keyDown = function(game, keyCode) {
     if(keyCode == 32) /*space*/ {
         //  Space restarts the game.
+        game.sent = 0;
         game.lives = 3;
         game.score = 0;
         game.level = 1;
         game.moveToState(new LevelIntroState(1));
+        game.started = 0;
     }
 };
 
@@ -335,14 +382,25 @@ PlayState.prototype.enter = function(game) {
     this.invaderCurrentVelocity = this.invaderInitialVelocity;
     this.invaderVelocity = {x: -this.invaderInitialVelocity, y:0};
     this.invaderNextVelocity = null;
+
 };
 
 PlayState.prototype.update = function(game, dt) {
-    
-    //  If the left or right arrow keys are pressed, move
-    //  the ship. Check this on ticks rather than via a keydown
-    //  event for smooth movement, otherwise the ship would move
-    //  more like a text editor caret.
+  //https://developer.mozilla.org/en-US/docs/Web/API/Detecting_device_orientation
+  //  If the left or right arrow keys are pressed, move
+  //  the ship. Check this on ticks rather than via a keydown
+  //  event for smooth movement, otherwise the ship would move
+  //  more like a text editor caret.
+
+    game.gameCanvas.addEventListener("touchstart", this.fireRocket, false);
+    game.gameCanvas.addEventListener("touchmove", this.fireRocket, true);
+    game.gameCanvas.addEventListener("touchend", this.fireRocket, false);
+    if(game.mobileX<85){
+      this.ship.x -= this.shipSpeed * dt;
+    } else if (game.mobileX>95){
+      this.ship.x += this.shipSpeed * dt;
+    }
+
     if(game.pressedKeys[37]) {
         this.ship.x -= this.shipSpeed * dt;
     }
@@ -432,7 +490,7 @@ PlayState.prototype.update = function(game, dt) {
     if(hitBottom) {
         this.lives = 0;
     }
-    
+
     //  Check for rocket/invader collisions.
     for(i=0; i<this.invaders.length; i++) {
         var invader = this.invaders[i];
@@ -443,7 +501,7 @@ PlayState.prototype.update = function(game, dt) {
 
             if(rocket.x >= (invader.x - invader.width/2) && rocket.x <= (invader.x + invader.width/2) &&
                 rocket.y >= (invader.y - invader.height/2) && rocket.y <= (invader.y + invader.height/2)) {
-                
+
                 //  Remove the rocket, set 'bang' so we don't process
                 //  this rocket again.
                 this.rockets.splice(j--, 1);
@@ -477,7 +535,7 @@ PlayState.prototype.update = function(game, dt) {
         var chance = this.bombRate * dt;
         if(chance > Math.random()) {
             //  Fire!
-            this.bombs.push(new Bomb(invader.x, invader.y + invader.height / 2, 
+            this.bombs.push(new Bomb(invader.x, invader.y + invader.height / 2,
                 this.bombMinVelocity + Math.random()*(this.bombMaxVelocity - this.bombMinVelocity)));
         }
     }
@@ -491,13 +549,13 @@ PlayState.prototype.update = function(game, dt) {
             game.lives--;
             game.sounds.playSound('explosion');
         }
-                
+
     }
 
     //  Check for invader/ship collisions.
     for(var i=0; i<this.invaders.length; i++) {
         var invader = this.invaders[i];
-        if((invader.x + invader.width/2) > (this.ship.x - this.ship.width/2) && 
+        if((invader.x + invader.width/2) > (this.ship.x - this.ship.width/2) &&
             (invader.x - invader.width/2) < (this.ship.x + this.ship.width/2) &&
             (invader.y + invader.height/2) > (this.ship.y - this.ship.height/2) &&
             (invader.y - invader.height/2) < (this.ship.y + this.ship.height/2)) {
@@ -524,7 +582,7 @@ PlayState.prototype.draw = function(game, dt, ctx) {
 
     //  Clear the background.
     ctx.clearRect(0, 0, game.width, game.height);
-    
+
     //  Draw ship.
     ctx.fillStyle = '#999999';
     ctx.fillRect(this.ship.x - (this.ship.width / 2), this.ship.y - (this.ship.height / 2), this.ship.width, this.ship.height);
@@ -574,7 +632,8 @@ PlayState.prototype.draw = function(game, dt, ctx) {
 
 PlayState.prototype.keyDown = function(game, keyCode) {
 
-    if(keyCode == 32) {
+
+    if(keyCode == 32 || touchstart()) {
         //  Fire!
         this.fireRocket();
     }
@@ -589,10 +648,10 @@ PlayState.prototype.keyUp = function(game, keyCode) {
 };
 
 PlayState.prototype.fireRocket = function() {
-    //  If we have no last rocket time, or the last rocket time 
+    //  If we have no last rocket time, or the last rocket time
     //  is older than the max rocket rate, we can fire.
     if(this.lastRocketTime === null || ((new Date()).valueOf() - this.lastRocketTime) > (1000 / this.config.rocketMaxFireRate))
-    {   
+    {
         //  Add a rocket.
         this.rockets.push(new Rocket(this.ship.x, this.ship.y - 12, this.config.rocketVelocity));
         this.lastRocketTime = (new Date()).valueOf();
@@ -627,7 +686,7 @@ PauseState.prototype.draw = function(game, dt, ctx) {
     return;
 };
 
-/*  
+/*
     Level Intro State
 
     The Level Intro state shows a 'Level X' message and
@@ -646,12 +705,12 @@ LevelIntroState.prototype.update = function(game, dt) {
     }
     this.countdown -= dt;
 
-    if(this.countdown < 2) { 
-        this.countdownMessage = "2"; 
+    if(this.countdown < 2) {
+        this.countdownMessage = "2";
     }
-    if(this.countdown < 1) { 
-        this.countdownMessage = "1"; 
-    } 
+    if(this.countdown < 1) {
+        this.countdownMessage = "1";
+    }
     if(this.countdown <= 0) {
         //  Move to the next level, popping this state.
         game.moveToState(new PlayState(game.config, this.level));
@@ -666,17 +725,17 @@ LevelIntroState.prototype.draw = function(game, dt, ctx) {
 
     ctx.font="36px Arial";
     ctx.fillStyle = '#ffffff';
-    ctx.textBaseline="middle"; 
-    ctx.textAlign="center"; 
+    ctx.textBaseline="middle";
+    ctx.textAlign="center";
     ctx.fillText("Level " + this.level, game.width / 2, game.height/2);
     ctx.font="24px Arial";
-    ctx.fillText("Ready in " + this.countdownMessage, game.width / 2, game.height/2 + 36);      
+    ctx.fillText("Ready in " + this.countdownMessage, game.width / 2, game.height/2 + 36);
     return;
 };
 
 
 /*
- 
+
   Ship
 
   The ship has a position and that's about it.
@@ -712,11 +771,11 @@ function Bomb(x, y, velocity) {
     this.y = y;
     this.velocity = velocity;
 }
- 
-/*
-    Invader 
 
-    Invader's have position, type, rank/file and that's about it. 
+/*
+    Invader
+
+    Invader's have position, type, rank/file and that's about it.
 */
 
 function Invader(x, y, rank, file, type) {
@@ -812,3 +871,42 @@ Sounds.prototype.playSound = function(name) {
     source.connect(this.audioContext.destination);
     source.start(0);
 };
+function dynamicSort(property) {
+var sortOrder = 1;
+if(property[0] === "-") {
+sortOrder = -1;
+property = property.substr(1);
+}
+return function (a,b) {
+var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
+return result * sortOrder;
+};
+}
+
+var output = document.querySelector('.output');
+
+function handleOrientation(event) {
+  var x = event.beta;  // In degree in the range [-180,180]
+  var y = event.gamma; // In degree in the range [-90,90]
+  var z = event.alpha; // 0; 360
+  if (x >  90) { x =  90;}
+  if (x < -90) { x = -90;}
+
+  // To make computation easier we shift the range of
+  // x and y to [0,180]
+  x += 90;
+  y += 90;
+  output.innerHTML = "beta : " + x + "\n";
+  output.innerHTML += "gamma: " + y + "\n";
+  output.innerHTML += "alpha: " + z + "\n";
+  // Because we don't want to have the device upside down
+  // We constrain the x value to the range [-90,90]
+  game.mobileX = x;
+  if(((y <= 20  || y >= 70)||(y <= 120 || y >= 170)) && game.started == 0){
+    game.level = 1;
+    game.score = 0;
+    game.lives = 3;
+    game.started = 1;
+    game.moveToState(new LevelIntroState(game.level));
+  }
+}
