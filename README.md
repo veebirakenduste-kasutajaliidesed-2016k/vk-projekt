@@ -1,39 +1,24 @@
-# Projekt
+#Projekt
 
-## Tähtaeg 
+##Projekti nimi: 
+NIMI
 
-Rühma viimane tund esitletakse
+##Tegijad: 
+Ole Loigu, Raoul Kirsima
 
-## Liikmete arv
-Võib teha üksi või kahekesi
+##Eesmärk:
+Eesmärgiks luua rakendus, mis võtaks kasutaja füüsilise asukoha ning vastavalt kasutaja soovidele leida kas söögikohad, baarid, klubid ja nii edasi. Nii lokaali distants kui ka tüüp on muudetav kasutaja poolt.
 
-**Juhul kui tehakse kahekesi, peab olema näha githubis, kes ja mida on kirjutanud. Kui ei ole näha, kes midagi kirjutanud on, tööd ei arvesta! Kui ei tea kuidas seda teha, küsi!**
-
-## Tööjuhend
-1. Üks fork'ib endale käesoleva repositooriumi ning annab vajadusele kirjutamisõiguse/ligipääsu
-1. Tee kohe Pull request
-1. Muuda repositooriumi `README.md faili` vastavalt nõutele
-1. Tee valmis korralik veebirakendus
-
-### Nõuded
-
-1. **README.md sisaldab:**
-    * suurelt projekti nime;
-    * kes teeb;
-    * eesmärki (3-4 lauset, mis probleemi rakendus lahendab);
-    * funktsionaalsuse loetelu prioriteedi järjekorras, nt
-        * v0.1 Saab teha kasutaja ja sisselogida
-        * v0.2 Saab lisada ...
-        * ...
-    * andmete liikumise skeem loetava pildina (mis lehed ja mis andmeid mis lehel käideldakse);
-
-2. **Veebirakenduse nõuded:**
-    * rakendus töötab nii palju kui saab ka võrguta olekus, st kasutab `appcache`i;
-    * andmeid talletatakse lisaks kohalikule (localStorage) ka serveripool (soovitatavalt andmebaas või fail) – AJAX;
-    * Kasutatav ka mobiilselt seadmelt;
-    * muutujad/tabelid on inglise keeles;
-    * rakendus on piisava funktsionaalsusega ja turvaline – eelnev kokkulepe õppejõuga, mis saab valmis;
-    * kood on jaotatud vajadusel eri failidesse ja kood on kokkupakitud kujul;
-
-3. **Funktsionaalsus**
-    * juhul kui algoritmiline keerukus on piisav siis kõiki nõudeid ei ole vaja täita – ainult eelneval kokkuleppel õppjõuga!
+##Funktsionaalsuse loetelu:
+    * v0.1 - Kuvab kaardi
+    * v0.2 - Võtab kasutaja asukoha
+    * v0.3 - Leia fikseeritud kaugusega ja ettemääratud liigiga asukoha
+    * v0.4 - Kasutaja poolt etteantud kohad
+    * v0.5 - Kasutaja poolt etteantud kaugus kohast
+    * v0.6 - Leitakse ka sarnaseid kohti valitud kohale
+    * v0.7 - Kui offline, siis ütleb kasutajale, et ühendage internetiga
+    * v0.8 - App'i ikoonid
+    
+    * .....
+    
+##Andmete liikumise skeem:

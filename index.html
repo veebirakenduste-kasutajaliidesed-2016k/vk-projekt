@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="main.css">
+      <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDw4bGHuXMlaehnDaaBlsrJ4GkqV7XqB2s&libraries=places">
+      </script>
+      <script src="app.js"></script>
+  </head>
+  <body>
+   
+    <div id="map"></div>
+    <div id="placesOptions">
+    <label>Koht:
+<select id="placeValue">
+  <option value="['cafe']">Kohvikud</option>
+  <option value="['restaurant']">Restoranid</option>
+  <option value="['bar']">Baarid</option>
+  <option value="['pub']">Pubid</option>
+  <option value="['club']">Klubid</option>
+</select>
+   </label>
+    </div>
+    <div id="rangeOptions">
+    <label>Kaugus
+ <select id="rangeValue">
+  <option value="5000">5 Km</option>
+  <option value="10000">10 Km</option>
+  <option value="15000">15 Km</option>
+  <option value="20000">20 Km</option>
+  <option value="50000">50 Km</option>
+</select>
+        </label>
+    </div>
+    <div>
+        <button id="getValues">Cherchez</button>
+    </div>
+  </body>
+</html>
