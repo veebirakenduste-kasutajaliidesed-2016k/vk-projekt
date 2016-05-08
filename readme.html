@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Скроллер изображений</title>
+</head>
+
+<body>
+
+<div class="les">
+  <p>В этом уроке мы рассмотрим виджет -  "Скроллер изображений" на jQuery. Подобных виджетов существует немало, этот отличается тем, что прокрутка начинает происходить самостоятельно, после загрузки страницы, но напрвление прокрутки пользователь сможет задавать сам. Для начала предлагаю ознакомиться с демкой.</p>
+ 
+  <p><strong>Не правда ли классно? </strong>Теперь о том как такую вещь реализовать.</p>
+<p>Скрипт для работы использует БД Mysql. Давайте создадим в базе таблицу shoutbox, для упрощения задачи вам и себе привожу готовый SQL-запрос:</p>
+  <pre><code>
+  <br />CREATE TABLE `shoutbox` (<br />`id` INT( 5 ) NOT NULL AUTO_INCREMENT ,<br />`date` TIMESTAMP NOT NULL ,<br />`user` VARCHAR( 25 ) NOT NULL ,<br />`message` VARCHAR( 255 ) NOT NULL ,<br />PRIMARY KEY ( `id` ) <br />) CHARACTER SET = utf8;<br />    </code></pre>
+<p>Обрабатывает сообщения файл <strong>shoutbox.php</strong>. Найдите внем следующие строки и отредактируйте:<br />
+</p>
+<pre><code>define(&quot;HOST&quot;, &quot;Ваш MySql-хост - обычно это localhost&quot;);<br />define(&quot;USER&quot;, &quot;имя пользователя MySql&quot;);<br />define(&quot;PASSWORD&quot;, &quot;пароль к вашей MySql &quot;);<br />define(&quot;DB&quot;, &quot;Имя БД&quot;); </code></pre>
+  <p>Думаю с этим сложностей быть не должно :) Еще пара настройек в этом же файле:</p>
+<pre><code>header (&quot;Location: index.html&quot;);
+$res = getContent($link, 50); </code></pre>
+<p><strong>header - </strong>Здесь мы отправляем нерадивых юзеров, которые пытаются напрямую вызвать работу файла <strong>shoutbox.php</strong> на страницу index.html.<br />
+  <strong>getContent($link, 50) </strong> - количество сообщений на страницу. В данном примере будет выбрано 50 последних сообщений.</p>
+<p>Теперь в нужном месте вставляем форму отправки сообщения и div - контейнер, который будет содержать последние сообщения чата:<br />
+</p>
+<pre><code>&lt;form method=&quot;post&quot; id=&quot;form&quot;&gt;<br />	&lt;table&gt;<br />		&lt;tr&gt;<br />			&lt;td&gt;&lt;label&gt;Ваше имя&lt;/label&gt;&lt;/td&gt;<br />			&lt;td&gt;&lt;input class=&quot;text user&quot; id=&quot;nick&quot; type=&quot;text&quot; MAXLENGTH=&quot;25&quot; /&gt;&lt;/td&gt;<br />		&lt;/tr&gt;<br />		&lt;tr&gt;<br />			&lt;td&gt;&lt;label&gt;Сообщение&lt;/label&gt;&lt;/td&gt;<br />			&lt;td&gt;&lt;input class=&quot;text&quot; id=&quot;message&quot; type=&quot;text&quot; MAXLENGTH=&quot;255&quot; /&gt;&lt;/td&gt;<br />		&lt;/tr&gt;<br />		&lt;tr&gt;<br />			&lt;td&gt;&lt;/td&gt;<br />			&lt;td&gt;&lt;input id=&quot;send&quot; type=&quot;submit&quot; value=&quot;Отправить&quot; /&gt;&lt;/td&gt;<br />		&lt;/tr&gt;<br />	&lt;/table&gt;<br />	&lt;/form&gt;<br />&lt;div id=&quot;container&quot;&gt;<br />&lt;div class=&quot;content&quot;&gt;<br />			&lt;h1&gt;Последние сообщения&lt;/h1&gt;<br />			&lt;div id=&quot;loading&quot;&gt;&lt;img src=&quot;css/images/loading.gif&quot; alt=&quot;Загрузка...&quot; /&gt;&lt;/div&gt;<br />			&lt;ul&gt;<br />			&lt;/div&gt;<br />&lt;/div&gt;<br />&lt;script type=&quot;text/javascript&quot; src=&quot;jquery.js&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;shoutbox.js&quot;&gt;&lt;/script&gt;  </code></pre>
+   <p>Обычная форма с 3-ми input. После формы идет div#container, пусть вас не смущает наличие одинокого тега <strong>p</strong>. Все сообщения выводяться в виде  &lt;p&gt;Имя - сообщение&lt;/p&gt; (см. файл <strong>shoutbox.php</strong>). И в конце мы подключаем jQuery и сам скрипт <strong>shoutbox.js</strong> (можете это сделать и традиционно между тегами head)</p>
+   <p><strong>CSS </strong>здесь отвечает только за внешний вид чата. Поэтому подробно рассматривать его в этом уроке не будем. Просто не забудьте включить стили из файла css/general.cssна вашу страницу, или, что еще лучше, сделайте индивидуальный дизайн. Единственное что стоит помнить - id и class из приведенного выше кода использует и скрипт <strong>shoutbox.js</strong>, поэтому если вы будите изменять  имена id и class на свои, не забудте сделать это также в <strong>shoutbox.js</strong></p>
+<p>Вот и все. Удачи</p>   
+</div>
+</body>
+</html>
