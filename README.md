@@ -1,6 +1,6 @@
 # Projekt
 
-## Tähtaeg 
+## Tähtaeg
 
 Rühma viimane tund esitletakse
 
@@ -16,7 +16,7 @@ Võib teha üksi või kahekesi
 1. Tee valmis korralik veebirakendus
 
 ### Nõuded
-
+dd
 1. **README.md sisaldab:**
     * chat;
     * Jekaterina Voroshilova, Vitali Maksimov;
@@ -24,7 +24,7 @@ Võib teha üksi või kahekesi
     * funktsionaalsuse loetelu prioriteedi järjekorras, nt
         * v0.1 Teha chatti ruumi
         * v0.2 Anonüümne kirjevahetus ilma registreerimata
-        * v0.3 
+        * v0.3
     * andmete liikumise skeem loetava pildina (mis lehed ja mis andmeid mis lehel käideldakse);
 
 2. **Veebirakenduse nõuded:**
