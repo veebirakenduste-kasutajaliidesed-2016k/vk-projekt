@@ -13,11 +13,14 @@ Ehitada juurde [GAME.md](https://github.com/jissepo/vk-projekt/blob/master/GAME.
 
 ## Funktsionaalsuse loetelu
 
-V0.1 - appcache
-V0.2 - mäng offline
-V0.3 - Serverisse salvestamine
-V0.4 - Mobiili asendianduri baasil liigutamine
+V0.1 - appcache - olemas
+V0.2 - mäng offline - olemas
+V0.3 - Serverisse salvestamine - olemas
+V0.4 - Mobiili asendianduri baasil liigutamine - olemas
 V0.5 - Mobiili paus
+
+V1.1 - Kujundamine
+V1.2 - Eelneva skoori näitamine -  olemas
 
 # Projekt
 

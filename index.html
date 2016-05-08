@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html manifest="invader.appcache">
     <head>
         <title>Space Invaders</title>
         <link rel="stylesheet" type="text/css" href="css/core.css">
         <link rel="stylesheet" type="text/css" href="css/typeography.css">
         <style>
-    
+
             /* Styling needed for a fullscreen canvas and no scrollbars. */
-            body, html { 
+            body, html {
             width: 100%;
             height: 100%;
             margin: 0;
@@ -24,18 +24,26 @@
                 top: 0px;
             }
             #gamecontainer {
-                width: 800px;
-                margin-left: auto;
-                margin-right: auto;
+                width: 80%;
+                float: left;
             }
-            #gamecanvas { 
-                width: 800px;
+            #gamecanvas {
+                width: 80%;
                 height: 600px;
             }
             #info {
-                width: 800px;
-                margin-left: auto;
-                margin-right: auto;
+                width: 20%;
+                color: yellow;
+                float:left;
+            }
+            #score {
+              width: 20%;
+              color: yellow;
+              float:left;
+            }
+            li{
+              width: 100%;
+              color: blue;
             }
         </style>
     </head>
@@ -47,9 +55,15 @@
         <div id="info">
             <p>Move with arrow keys, fire with the space bar. The invaders get faster and drop
                 more bombs as you complete each level!</p>
-            <p><a id="muteLink" href="#" onclick="toggleMute()">mute</a> | 
-                <a href="http://github.com/dwmkerr/spaceinvaders">spaceinvaders on github</a> | 
+            <p><a id="muteLink" href="#" onclick="toggleMute()">mute</a> |
+                <a href="http://github.com/dwmkerr/spaceinvaders">spaceinvaders on github</a> |
                 <a href="http://www.dwmkerr.com/experiments">more experiments</a> | <a href="http://www.dwmkerr.com">dwmkerr.com</a></p>
+        </div>
+        <div id="score">
+          <p id="scoreP">High scores</p>
+          <ul id="scoreUl">
+          </ul>
+          <pre class="output"></pre>
         </div>
 
         <script src="js/starfield.js"></script>
@@ -64,8 +78,8 @@
 
             //  Setup the canvas.
             var canvas = document.getElementById("gameCanvas");
-            canvas.width = 800;
-            canvas.height = 600;
+            canvas.width = window.innerWidth*0.75;
+            canvas.height = window.innerHeight*0.75;
 
             //  Create the game.
             var game = new Game();
@@ -75,6 +89,8 @@
 
             //  Start the game.
             game.start();
+
+            window.addEventListener('deviceorientation', handleOrientation);
 
             //  Listen for keyboard events.
             window.addEventListener("keydown", function keydown(e) {
