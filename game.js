@@ -34,20 +34,11 @@ var myObstacles = [];
 var ballcolor = "white";
 
 function startGame() {
-    var x = 0, y = 12;
     myGameArea.start();
-    myGamePiece = new component(100, 10, "blue", myGameArea.canvas.width / 2 - 50, myGameArea.canvas.height - 20);
+    myGamePiece = new component(myGameArea.canvas.width, 10, "blue", myGameArea.canvas.width / 2 - 50, myGameArea.canvas.height - 20);
     myball = new component(10, 10, ballcolor, myGameArea.canvas.width / 2 - 2.5 - 100, 110);
-    for (i = 0; i < 68; i++) {
-        if ((x + 30) > myGameArea.canvas.width) {
-            x = 0;
-            y = y + 15;
-        }
-        if (x === 0) {x = 20; }
-        x = x + 5;
-        myObstacles.push(new component(30, 10, "red", x, y));
-        x = x + 30;
-    }
+    myGameArea.currentlevel = 1;
+    myGameArea.level = Levels.instance.level1();
     myGameArea.setsize();
     myball.speedY -= 2;
     myball.speedX -= 2;
@@ -216,6 +207,17 @@ var lastspeedX = 0;
 var ss = 0;
 function updateGameArea() {
     var x, y, speed = 0;
+
+    if(myObstacles.length === 0) {
+      if(myGameArea.currentlevel === 1) {
+        myGameArea.level = Levels.instance.level2();
+        myGameArea.currentlevel++;
+      }else if(myGameArea.currentlevel === 2) {
+        myGameArea.level = Levels.instance.level3();
+        myGameArea.currentlevel++;
+      }
+    }
+
     for (i = 0; i < myObstacles.length; i += 1) {
         if (myball.crashWith(myObstacles[i])) {
             if (myball.crashLeft(myObstacles[i]) || myball.crashRight(myObstacles[i])) {
