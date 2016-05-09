@@ -56,6 +56,8 @@ function startGame() {
 var myGameArea = {
     canvas : document.createElement("canvas"),
     start : function() {
+        this.score = 0;
+        localStorage.setItem("score", this.score);
         this.canvas.width = 640;
         this.canvas.height = 250;
         this.pause = false;
@@ -63,6 +65,15 @@ var myGameArea = {
         this.canvas.style.cursor = "none"; //hide the original cursor
         this.context = this.canvas.getContext("2d");
         myGameArea.interval = setInterval(updateGameArea, 20);
+
+
+        setInterval(function() {
+          myGameArea.score = localStorage.getItem("score");
+          myGameArea.context.fillStyle = "red";
+          myGameArea.context.font = "30px Arial";
+          myGameArea.context.fillText(myGameArea.score,180,90);
+        }, 10);
+
         document.body.insertBefore(this.canvas, document.body.childNodes[0]);
         window.addEventListener('mousemove', function (e) {
             myGameArea.x = e.pageX;
@@ -213,6 +224,8 @@ function updateGameArea() {
                 myball.speedY = -(myball.speedY);
             }
             myObstacles.splice(i, 1);
+            myGameArea.score++;
+            localStorage.setItem("score", myGameArea.score);
         }
     }
     if (myGameArea.tiltX) {
