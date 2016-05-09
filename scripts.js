@@ -36,7 +36,6 @@
             window.addEventListener("devicemotion", this.handleMotionUp.bind(this));
             window.addEventListener("devicemotion", this.handleMotionDown.bind(this));
 
-
         },
 
 
