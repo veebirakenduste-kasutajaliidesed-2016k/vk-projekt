@@ -1,4 +1,4 @@
-#Space Invaders
+﻿#Space Invaders
 
 ## Liikmete arv
 2
@@ -58,3 +58,6 @@ Rühma viimane tund esitletakse
 
 3. **Funktsionaalsus**
     * juhul kui algoritmiline keerukus on piisav siis kõiki nõudeid ei ole vaja täita – ainult eelneval kokkuleppel õppjõuga!
+
+4. **Igaks juhuks**
+	adshkfjhkajshgkjhsajkghlöhaslkgjlkjagldjl
