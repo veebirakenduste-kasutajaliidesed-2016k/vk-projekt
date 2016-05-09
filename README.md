@@ -26,7 +26,8 @@ Võib teha üksi või kahekesi
         * v0.2 Punktide arvestus
         * v0.3 Ajalimiidi lisamine ühe külje keeramiseks.
         * v0.4 3 valega mängu lõpp
-        * v0.5 Aeg kiiremaks
+        * v0.5 Nime küsimine ja skoori salvestamine serverisse.
+        * v0.6 Aeg kiiremaks
         * 
         * v1.0.1 Heli lisamine (ütleb asendi)
         * ...
