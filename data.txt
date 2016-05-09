@@ -1,1 +1,1 @@
-[]
+[{"fuelQuantity":"100","fuelCost":"120","trip":"800"},{"fuelQuantity":"50","fuelCost":"60","trip":"400"}]

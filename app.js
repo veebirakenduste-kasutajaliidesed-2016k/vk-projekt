@@ -7,7 +7,8 @@
         }
 
     averageFuel.instance = this;
-    var fuelText = document.getElementById('output');
+    this.fuelText = document.getElementById('output');
+
     this.init();  //SIIA PANED ALGSE FUNKTSIOONI
 
     };
@@ -28,14 +29,17 @@
       */
 
       init:function(){
-        var fromServer;
+        var serverData=[];
+        serverData = this.fromServer();
+
+        if(serverData !== null){
+          for(var i = 0; i<serverData.length; i++){
+            averageFuel.instance.fuelText.innerHTML += fromServer [i].fuelCost;
+            this.getValuesListener();
+        }
+      }else{
         this.getValuesListener();
-        if((fromServer=this.fromServer()) != NULL){
-          for(var i = 0; i<fromServer.length; i++)
-        {
-          var fuelText = document.getElementById('output');
-          fuelText.innerHTML += fromServer [i].fuelCost;
-        }}
+      }
 
       },
 
@@ -55,9 +59,16 @@
         console.log(fuelQuantity);
         console.log(fuelCost);
         console.log(trip);
+        this.toServer(fuelQuantity, fuelCost, trip);
+        this.fuelWasted(trip, fuelQuantity);
       },
+      fuelWasted:function(trip, fuelQuantity){
+        var average = fuelQuantity/(trip/100);
+        console.log(average);
+      },
+      //moneyWasted:function()
 
-      toServer: function(fuelCost){
+      toServer: function(fuelQuantity, fuelCost, trip){
       var xhttp = new XMLHttpRequest();
       xhttp.onreadystatechange = function() {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
@@ -67,22 +78,23 @@
         }
       };
 
-      xhttp.open("GET", "saveData.php?fuelCost="+fuelCost, true);
+      xhttp.open("GET", "saveData.php?fuelQuantity="+fuelQuantity+"&fuelCost="+fuelCost+"&trip="+trip, true);
       xhttp.send();
 
     },
     fromServer: function(){
       var xhttp = new XMLHttpRequest();
+
       xhttp.onreadystatechange = function() {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
 
-          var result =JSON.parse(xhttp.responseText);
 
+          var result =JSON.parse(xhttp.responseText);
+          return result;
         }
       };
       xhttp.open("GET", "saveData.php", true);
       xhttp.send();
-      return result;
     }
 
     };
