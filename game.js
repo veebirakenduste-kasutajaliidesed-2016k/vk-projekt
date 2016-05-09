@@ -30,17 +30,29 @@ while(name === "") {
 var myball;
 var myGamePiece;
 var myObstacles = [];
-var ballcolor = "white";
+this.ballcolor = "white";
 
 function startGame() {
     myGameArea.start();
     myGamePiece = new component(100, 10, "blue", myGameArea.canvas.width / 2 - 50, myGameArea.canvas.height - 20);
-    myball = new component(10, 10, ballcolor, myGameArea.canvas.width / 2 - 2.5 - 100, 110);
+    myball = new component(10, 10, this.ballcolor, myGameArea.canvas.width / 2 - 2.5 - 100, 110);
     myGameArea.currentlevel = 1;
     myGameArea.level = Levels.instance.level1();
     myGameArea.setsize();
     myball.speedY -= 2;
     myball.speedX -= 2;
+}
+
+function updateBall() {
+  if(this.ballcolor === "blue") {
+    myball = new component(3, 3, this.ballcolor, myball.x, myball.y);
+
+  } else {
+    myball = new component(10, 10, this.ballcolor, myball.x, myball.y);
+
+  }
+  myball.speedY -= 2;
+  myball.speedX -= 2;
 }
 
 var myGameArea = {
@@ -223,17 +235,29 @@ function updateGameArea() {
 
     for (i = 0; i < myObstacles.length; i += 1) {
         if (myball.crashWith(myObstacles[i])) {
+          var random = Math.random();
+          if(random > 0.2 && random < 0.3) {
+            this.ballcolor = "orange";
+            this.updateBall();
+          } else if(random < 0.05) {
+            this.ballcolor = "white";
+            this.updateBall();
+          } else if(random > 0.3) {
+            this.ballcolor = "blue";
+            this.updateBall();
+          }
+          if(this.ballcolor === "orange") {
+
+          } else if(this.ballcolor !== "orange") {
             if (myball.crashLeft(myObstacles[i]) || myball.crashRight(myObstacles[i])) {
                 myball.speedX = -(myball.speedX);
-                msg = new SpeechSynthesisUtterance("o");
-                msg.pitch = 2;
-                window.speechSynthesis.speak(msg);
             } else {
                 myball.speedY = -(myball.speedY);
-                msg = new SpeechSynthesisUtterance("o");
-                msg.pitch = 2;
-                window.speechSynthesis.speak(msg);
             }
+          }
+            msg = new SpeechSynthesisUtterance("o");
+            msg.pitch = 2;
+            window.speechSynthesis.speak(msg);
             myObstacles.splice(i, 1);
             myGameArea.score++;
             localStorage.setItem("score", myGameArea.score);
