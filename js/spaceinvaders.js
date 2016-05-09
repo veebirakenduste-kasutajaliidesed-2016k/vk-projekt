@@ -392,9 +392,9 @@ PlayState.prototype.update = function(game, dt) {
   //  event for smooth movement, otherwise the ship would move
   //  more like a text editor caret.
 
-    game.gameCanvas.addEventListener("touchstart", this.fireRocket, false);
-    game.gameCanvas.addEventListener("touchmove", this.fireRocket, true);
-    game.gameCanvas.addEventListener("touchend", this.fireRocket, false);
+    window.addEventListener("touchstart", this.fireRocket, true);
+    window.addEventListener("touchmove", this.fireRocket, true);
+    window.addEventListener("touchend", this.fireRocket, true);
     if(game.mobileX<85){
       this.ship.x -= this.shipSpeed * dt;
     } else if (game.mobileX>95){
@@ -647,9 +647,10 @@ PlayState.prototype.keyUp = function(game, keyCode) {
 
 };
 
-PlayState.prototype.fireRocket = function() {
+PlayState.prototype.fireRocket = function(event) {
     //  If we have no last rocket time, or the last rocket time
     //  is older than the max rocket rate, we can fire.
+  //  event.preventDefault();
     if(this.lastRocketTime === null || ((new Date()).valueOf() - this.lastRocketTime) > (1000 / this.config.rocketMaxFireRate))
     {
         //  Add a rocket.
