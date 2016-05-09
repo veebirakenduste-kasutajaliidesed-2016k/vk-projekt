@@ -1,4 +1,3 @@
-
 function playgame() {
     if (!myGameArea.interval) {
         myGameArea.interval = setInterval(updateGameArea, 20);
