@@ -27,6 +27,7 @@
 
 </head>
 <body>
+	<div id="health"></div>
 	<div id="score"></div>
 	<div id="time"></div>
 	<div style="position: relative;">
@@ -70,12 +71,12 @@ var b = {};
 
 control(b);
 
-c.clearRect(0,0,500, 500);
+c.fillStyle = 'blue';
 
-c.fillStyle = 'red';
+//c.clearRect(0,0,500, 500);
 
 //RING
-c.arc(x, y, 30, 0, Math.PI*2, true);
+c.arc(x, y, 10, 0, Math.PI*2, true);
 c.closePath();
 c.fill();
 
