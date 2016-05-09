@@ -31,10 +31,11 @@ var myball;
 var myGamePiece;
 var myObstacles = [];
 this.ballcolor = "white";
+this.pieceColor = "yellow";
 
 function startGame() {
     myGameArea.start();
-    myGamePiece = new component(100, 10, "blue", myGameArea.canvas.width / 2 - 50, myGameArea.canvas.height - 20);
+    myGamePiece = new component(100, 10, this.pieceColor, myGameArea.canvas.width / 2 - 50, myGameArea.canvas.height - 20);
     myball = new component(10, 10, this.ballcolor, myGameArea.canvas.width / 2 - 2.5 - 100, 110);
     myGameArea.currentlevel = 1;
     myGameArea.level = Levels.instance.level1();
@@ -49,10 +50,19 @@ function updateBall() {
 
   } else {
     myball = new component(10, 10, this.ballcolor, myball.x, myball.y);
-
   }
   myball.speedY -= 2;
   myball.speedX -= 2;
+}
+
+function updatePiece() {
+  if(this.pieceColor === "blue") {
+    myGamePiece = new component(30, 10, this.pieceColor, myGamePiece.x, myGamePiece.y);
+  } else if(this.pieceColor === "yellow"){
+    myGamePiece = new component(100, 10, this.pieceColor, myGamePiece.x, myGamePiece.y);
+  } else if(this.pieceColor === "red"){
+    myGamePiece = new component(200, 10, this.pieceColor, myGamePiece.x, myGamePiece.y);
+  }
 }
 
 var myGameArea = {
@@ -242,9 +252,17 @@ function updateGameArea() {
           } else if(random < 0.05) {
             this.ballcolor = "white";
             this.updateBall();
-          } else if(random > 0.3) {
+            this.pieceColor = "yellow";
+            this.updatePiece();
+          } else if(random > 0.3 && random < 0.5) {
             this.ballcolor = "blue";
             this.updateBall();
+          } else if(random > 0.5 && random < 0.7) {
+            this.pieceColor = "blue";
+            this.updatePiece();
+          } else if(random > 0.8 && random < 0.9) {
+            this.pieceColor = "red";
+            this.updatePiece();
           }
           if(this.ballcolor === "orange") {
 
