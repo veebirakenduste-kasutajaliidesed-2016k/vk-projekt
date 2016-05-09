@@ -1,11 +1,11 @@
-# Projekt
+TÕLKERAKENDUS
 
 ## Tähtaeg 
 
 Rühma viimane tund esitletakse
 
 ## Liikmete arv
-Võib teha üksi või kahekesi
+1
 
 **Juhul kui tehakse kahekesi, peab olema näha githubis, kes ja mida on kirjutanud. Kui ei ole näha, kes midagi kirjutanud on, tööd ei arvesta! Kui ei tea kuidas seda teha, küsi!**
 
