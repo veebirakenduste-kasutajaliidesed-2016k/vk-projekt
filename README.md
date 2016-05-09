@@ -58,13 +58,7 @@ function select_en(event) {
 	responsiveVoice.speak(en);
 }
 
-**Juhul kui tehakse kahekesi, peab olema näha githubis, kes ja mida on kirjutanud. Kui ei ole näha, kes midagi kirjutanud on, tööd ei arvesta! Kui ei tea kuidas seda teha, küsi!**
-
-## Tööjuhend
-1. Üks fork'ib endale käesoleva repositooriumi ning annab vajadusele kirjutamisõiguse/ligipääsu
-1. Tee kohe Pull request
-1. Muuda repositooriumi `README.md faili` vastavalt nõutele
-1. Tee valmis korralik veebirakendus
+Rakenduse idee on võrrelda lausestruktuure erinevates keeltes, sel puhul inglise-eesti. Saab sõnu lauses eraldi valida/kuulata ning sõnu paari panna ja lahutada, juba paaristatud sõnu asendada.
 
 ### Nõuded
 
