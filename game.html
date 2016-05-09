@@ -42,7 +42,7 @@
 
 console.log('here');
 
-var aGesture	= new AugmentedGesture().enableDatGui().start();
+var aGesture	= new AugmentedGesture().start();
 
 //setTimeout(function(){
 //	aGesture.destroy();
@@ -69,16 +69,22 @@ var b = {};
  b.clientX = x;
  b.clientY = y;
 
+ bx = x;
+ by = y;
+
 control(b);
 
-c.fillStyle = 'blue';
+//setInterval(clearScreen, 3000);
 
-//c.clearRect(0,0,500, 500);
+/*function clearScreen( )
+{
+	c		= a.getContext('2d');
+	c.clearRect(0,0,window.innerWidth, window.innerHeight);
+}*/
 
-//RING
-c.arc(x, y, 10, 0, Math.PI*2, true);
-c.closePath();
-c.fill();
+
+
+
 
 
 

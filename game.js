@@ -2,8 +2,10 @@ var canvas, health = 0;
 var ctx,
 	balls = [];
 
-var startTime, ballCount = 1, hits = 0, score = 1;
+var startTime, ballCount = 1, hits = 0, score = 0;
 var clock;
+
+var bx = 0,  by = 0;
 
 window.onload = function(){
 	canvas = document.getElementById("canvas");
@@ -74,11 +76,11 @@ function control(e){
 			hits++;
 			if(hits === 10){
 				// Iga 10 järjest löögi korral läheb skoori multiplier suuremaks
-				multiplier++;
+				multiplier = multiplier + 10 - 1;
 			}
-			document.getElementById("score").innerHTML = (score);
-			score = hits * multiplier;
 			if(score === 0){document.getElementById("score").innerHTML = "";}
+			score = hits * multiplier;
+			document.getElementById("score").innerHTML = (score);
 			drawBalls(ballCount);
 			break;
 		}
@@ -101,9 +103,19 @@ function Ring(x, y, r){
 		return pythagoras(this.x, this.y, mx, my) <= this.r;
 	};
 	this.draw = function(){
+		ctx.fillStyle = 'black';
 		ctx.beginPath();
 		ctx.arc(this.x, this.y, this.r, 0, 2 * Math.PI, false);
 		ctx.fill();
+
+		ctx.fillStyle = 'blue';
+
+		//RING
+		ctx.beginPath();
+		ctx.arc(bx, by, 10, 0, Math.PI*2, true);
+		ctx.closePath();
+		ctx.fill();
+
 	};
 }
 
