@@ -34,7 +34,7 @@ var ballcolor = "white";
 
 function startGame() {
     myGameArea.start();
-    myGamePiece = new component(myGameArea.canvas.width, 10, "blue", myGameArea.canvas.width / 2 - 50, myGameArea.canvas.height - 20);
+    myGamePiece = new component(100, 10, "blue", myGameArea.canvas.width / 2 - 50, myGameArea.canvas.height - 20);
     myball = new component(10, 10, ballcolor, myGameArea.canvas.width / 2 - 2.5 - 100, 110);
     myGameArea.currentlevel = 1;
     myGameArea.level = Levels.instance.level1();
@@ -205,9 +205,13 @@ function component(width, height, color, x, y) {
 var lastspeedX = 0;
 var ss = 0;
 function updateGameArea() {
+    var msg = "";
     var x, y, speed = 0;
 
     if(myObstacles.length === 0) {
+      msg = new SpeechSynthesisUtterance("WOW MLG 420 SMOKE JAVASCRIPT ALL DAY");
+      msg.pitch = 2;
+      window.speechSynthesis.speak(msg);
       if(myGameArea.currentlevel === 1) {
         myGameArea.level = Levels.instance.level2();
         myGameArea.currentlevel++;
@@ -221,12 +225,21 @@ function updateGameArea() {
         if (myball.crashWith(myObstacles[i])) {
             if (myball.crashLeft(myObstacles[i]) || myball.crashRight(myObstacles[i])) {
                 myball.speedX = -(myball.speedX);
+                msg = new SpeechSynthesisUtterance("o");
+                msg.pitch = 2;
+                window.speechSynthesis.speak(msg);
             } else {
                 myball.speedY = -(myball.speedY);
+                msg = new SpeechSynthesisUtterance("o");
+                msg.pitch = 2;
+                window.speechSynthesis.speak(msg);
             }
             myObstacles.splice(i, 1);
             myGameArea.score++;
             localStorage.setItem("score", myGameArea.score);
+            msg = new SpeechSynthesisUtterance(myGameArea.score);
+            msg.pitch = 2;
+            window.speechSynthesis.speak(msg);
         }
     }
     if (myGameArea.tiltX) {
@@ -238,6 +251,9 @@ function updateGameArea() {
         lastspeedX = myGameArea.x;
     }
     if (myball.crashWith(myGamePiece)) {
+        msg = new SpeechSynthesisUtterance("haha");
+        msg.pitch = 2;
+        window.speechSynthesis.speak(msg);
         myball.speedY = -(myball.speedY);
         myball.speedX = myball.speedX + speed;
         if (myball.speedX > 2) {myball.speedX = 2; }
