@@ -1,3 +1,4 @@
+
 function playgame() {
     if (!myGameArea.interval) {
         myGameArea.interval = setInterval(updateGameArea, 20);
@@ -9,23 +10,42 @@ function pausegame() {
     myGameArea.pause = true;
 }
 
+var name = "";
+
+while(name === "") {
+  if(localStorage.getItem("name")) {
+    name = localStorage.getItem("name");
+  } else {
+    name = prompt("Sisesta nimi");
+  }
+
+  if(name === 'null') {
+    name = "";
+  }
+  if(name.length > 0) {
+    localStorage.setItem("name", name);
+  }
+}
+
+
 var myball;
 var myGamePiece;
 var myObstacles = [];
+var ballcolor = "white";
 
 function startGame() {
     var x = 0, y = 12;
     myGameArea.start();
-    myGamePiece = new component(100, 10, "red", myGameArea.canvas.width / 2 - 50, myGameArea.canvas.height - 20);
-    myball = new component(5, 5, "black", myGameArea.canvas.width / 2 - 2.5 - 100, 110);
+    myGamePiece = new component(100, 10, "blue", myGameArea.canvas.width / 2 - 50, myGameArea.canvas.height - 20);
+    myball = new component(10, 10, ballcolor, myGameArea.canvas.width / 2 - 2.5 - 100, 110);
     for (i = 0; i < 68; i++) {
         if ((x + 30) > myGameArea.canvas.width) {
             x = 0;
             y = y + 15;
         }
-        if (x == 0) {x = 20; }
+        if (x === 0) {x = 20; }
         x = x + 5;
-        myObstacles.push(new component(30, 10, "green", x, y));
+        myObstacles.push(new component(30, 10, "red", x, y));
         x = x + 30;
     }
     myGameArea.setsize();
@@ -47,11 +67,11 @@ var myGameArea = {
         window.addEventListener('mousemove', function (e) {
             myGameArea.x = e.pageX;
             myGameArea.y = e.pageY;
-        })
+        });
         window.addEventListener('devicemotion', function (e) {
             e.preventDefault();
             var orientation = window.orientation;
-            if (orientation == 0) {
+            if (orientation === 0) {
                 myGameArea.tiltX = e.accelerationIncludingGravity.x / myGameArea.scale;
                 myGameArea.tiltY = -(e.accelerationIncludingGravity.y / myGameArea.scale);
             } else if (orientation == 90) {
@@ -82,7 +102,7 @@ var myGameArea = {
         this.scale = this.currentWidth / this.canvas.width;
     }
 
-}
+};
 
 function component(width, height, color, x, y) {
     this.width = width;
@@ -95,7 +115,7 @@ function component(width, height, color, x, y) {
         ctx = myGameArea.context;
         ctx.fillStyle = color;
         ctx.fillRect(this.x, this.y, this.width, this.height);
-    }
+    };
     this.crashLeft = function(otherobj) {
         var myleft = this.x;
         var myright = this.x + (this.width);
@@ -110,7 +130,7 @@ function component(width, height, color, x, y) {
             crash = true;
         }
         return crash;
-    }
+    };
     this.crashRight = function(otherobj) {
         var myleft = this.x;
         var myright = this.x + (this.width);
@@ -125,7 +145,7 @@ function component(width, height, color, x, y) {
             crash = true;
         }
         return crash;
-    }
+    };
     this.crashWith = function(otherobj) {
         var myleft = this.x;
         var myright = this.x + (this.width);
@@ -140,7 +160,7 @@ function component(width, height, color, x, y) {
             crash = false;
         }
         return crash;
-    }
+    };
     this.hitLeftBoundary = function() {
         var hit = false;
         var leftPos = this.x;
@@ -148,7 +168,7 @@ function component(width, height, color, x, y) {
             hit = true;
         }
         return hit;
-    }
+    };
     this.hitRightBoundary = function() {
         var hit = false;
         var rightPos = this.x + this.width;
@@ -156,7 +176,7 @@ function component(width, height, color, x, y) {
             hit = true;
         }
         return hit;
-    }
+    };
     this.hitTopBoundary = function() {
         var hit = false;
         var topPos = this.y;
@@ -164,7 +184,7 @@ function component(width, height, color, x, y) {
             hit = true;
         }
         return hit;
-    }
+    };
     this.hitBottomBoundary = function() {
         var hit = false;
         var bottomPos = this.y + (this.height);
@@ -172,14 +192,14 @@ function component(width, height, color, x, y) {
             hit = true;
         }
         return hit;
-    }
+    };
     this.hitAnyBoundary = function() {
         if (this.hitLeftBoundary()) {return true;}
         if (this.hitRightBoundary()) {return true;}
         if (this.hitTopBoundary()) {return true;}
         if (this.hitBottomBoundary()) {return true;}
         return false;
-    }
+    };
 }
 var lastspeedX = 0;
 var ss = 0;
@@ -224,7 +244,7 @@ function updateGameArea() {
         if (myGamePiece.x < 0) {myGamePiece.x = 0;}
         if (myGamePiece.x > myGameArea.canvas.width - myGamePiece.width) {myGamePiece.x = myGameArea.canvas.width - myGamePiece.width;}
     }
-    if (myGameArea.pause == false) {
+    if (myGameArea.pause === false) {
         myGameArea.clear();
         myGameArea.frameNo += 1;
         for (i = 0; i < myObstacles.length; i += 1) {
