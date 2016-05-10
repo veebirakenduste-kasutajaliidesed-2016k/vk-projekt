@@ -1,5 +1,5 @@
 <?php
-
+#Miski läks gitis katki, uus katse
 require_once("config.php");
 $database = "vhost45490s3";
 
