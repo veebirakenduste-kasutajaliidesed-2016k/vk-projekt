@@ -16,20 +16,25 @@ body{
 .stats, .upgrades{
 	width:200px;
 	height:100%;
-	background-color:grey;
+	/**background-color:grey; **/
 }
 .btn{
-	color:white;
-	height:50px;
-	line-height:50px;
-	font-size:20px;
-	text-align:center;
-	border:1px solid #ddd;
+color: white;
+height: 50px;
+line-height: 50px;
+font-size: 20px;
+text-align: center;
+border: 1px solid #ddd;
+background-color: #DB0A5B;
 }
 .gameArea{
 	height:100%;
 }
 .gameArea__buttons{
-	width:300px;
-	margin:0 auto;
+	width: 300px;
+	margin: 0 auto;
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	bottom: 0;
 }
