@@ -134,6 +134,7 @@ getTop();
 
 var myGameArea = {
     canvas : document.createElement("canvas"),
+
     start : function() {
         this.lives = 3;
         this.score = 0;
