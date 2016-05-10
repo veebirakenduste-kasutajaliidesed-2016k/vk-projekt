@@ -68,6 +68,7 @@ function updatePiece() {
 var myGameArea = {
     canvas : document.createElement("canvas"),
     start : function() {
+        this.lives = 3;
         this.score = 0;
         localStorage.setItem("score", this.score);
         this.canvas.width = 640;
@@ -78,7 +79,6 @@ var myGameArea = {
         this.context = this.canvas.getContext("2d");
         myGameArea.interval = setInterval(updateGameArea, 20);
 
-
         setInterval(function() {
           myGameArea.score = localStorage.getItem("score");
           myGameArea.context.fillStyle = "red";
@@ -87,12 +87,16 @@ var myGameArea = {
         }, 10);
 
         function drawLives() {
-              ctx.font = "16px Arial";
-              ctx.fillStyle = "blue";
-              ctx.fillText("Lives: "+lives, canvas.width-65, 20);
-              drawLives();
-}
+          setInterval(function() {
+            myGameArea.context.font = "25px Arial";
+            myGameArea.context.fillStyle = "blue";
+            myGameArea.context.fillText("Lives: "+lives, 10,200);
 
+          }, 1);
+
+
+          }
+          drawLives();
         document.body.insertBefore(this.canvas, document.body.childNodes[0]);
         window.addEventListener('mousemove', function (e) {
             myGameArea.x = e.pageX;
@@ -122,7 +126,7 @@ var myGameArea = {
     stop : function() {
         clearInterval(this.interval);
         this.pause = true;
-        alert("GAME OVER");
+        alert("Soovid uuesti mängida?");
        document.location.reload();
     },
     setsize : function() {
