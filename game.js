@@ -89,6 +89,17 @@ function updatePiece() {
   }
 }
 
+function saveScore() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (xhttp.readyState == 4 && xhttp.status == 200) {
+
+    }
+  };
+  xhttp.open("GET", "save.php?name="+name+"&score="+myGameArea.score, true);
+  xhttp.send();
+}
+
 var myGameArea = {
     canvas : document.createElement("canvas"),
     start : function() {
@@ -153,25 +164,16 @@ var myGameArea = {
         lives--;
         this.ballcolor = "white";
         newBall();
-
-
         if(lives === 0){
-            clearInterval(this.interval);
-            this.pause = true;
-            alert("Soovid uuesti mängida?");
-            document.location.reload();
+                    clearInterval(this.interval);
+                    saveScore();
+                    this.pause = true;
+                    alert("Soovid uuesti mängida?");
+                    document.location.reload();
 
-          }
-          function loadDoc() {
-  var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
-    if (xhttp.readyState == 4 && xhttp.status == 200) {
-      document.getElementById("score").innerHTML = xhttp.responseText;
-    }
-  };
-  xhttp.open("GET", "save.php", true);
-  xhttp.send();
-}
+
+                  }
+
     },
     setsize : function() {
         this.ratio = this.canvas.height / this.canvas.width,
@@ -297,6 +299,8 @@ function updateGameArea() {
       }else if(myGameArea.currentlevel === 2) {
         myGameArea.level = Levels.instance.level3();
         myGameArea.currentlevel++;
+      }else if(myGameArea.currentlevel === 3){
+        myGameArea.stop();
       }
     }
 
