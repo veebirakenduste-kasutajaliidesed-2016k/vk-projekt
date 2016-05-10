@@ -48,7 +48,7 @@
     },
     bindEvents: function(){
       var game = this;
-      $('.cookie').click(function(){
+      $('.btn--cookie').click(function(){
         game.addCookie(1);
         game.updateCookieAmount();
       });
@@ -57,10 +57,7 @@
         console.log("upgrade" + this.Index);
         game.upgradeSkills(this.Index);
       });
-      $('.autoclicker').click(function(){
-        
-      });
-      $('.delete').click(function(){
+      $('.btn--delete').click(function(){
         game.delete();
       });
     },
@@ -68,7 +65,7 @@
       this.cookies += amount;
     },
     updateCookieAmount: function(){
-      $('.cookieamount').html(this.cookies);
+      $('.stats__cookieAmount').html(this.cookies);
     },
     save: function(){
       localStorage.setItem("cookies", this.cookies);

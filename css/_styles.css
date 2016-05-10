@@ -1,5 +1,35 @@
+html, body{
+	height:100%;
+}
+body{
+	background-image:url("../vktaust.svg");
+	background-repeat:no-repeat;
+	background-size:cover;
+	background-position:center;
+}
 .upgrade{
-	width:50px;
+
+}
+.container{
+	height:100%;
+}
+.stats, .upgrades{
+	width:200px;
+	height:100%;
+	background-color:grey;
+}
+.btn{
+	color:white;
 	height:50px;
-	border:1px solid black;
+	line-height:50px;
+	font-size:20px;
+	text-align:center;
+	border:1px solid #ddd;
+}
+.gameArea{
+	height:100%;
+}
+.gameArea__buttons{
+	width:300px;
+	margin:0 auto;
 }
