@@ -72,17 +72,19 @@ var myGameArea = {
 
         setInterval(function() {
           myGameArea.score = localStorage.getItem("score");
-          myGameArea.context.fillStyle = "green";
+          myGameArea.context.fillStyle = "red";
           myGameArea.context.font = "30px Arial";
           myGameArea.context.fillText(myGameArea.score,180,90);
         }, 10);
 
         setInterval(function() {
           myGameArea.Bestscore = localStorage.getItem("Bestscore");
-          myGameArea.context.fillStyle = "red";
+          myGameArea.context.fillStyle = "blue";
           myGameArea.context.font = "30px Arial";
-          myGameArea.context.fillText(myGameArea.Bestscore,200,110);
+          myGameArea.context.fillText(myGameArea.Bestscore,550,110);
         }, 90);
+
+
 
         document.body.insertBefore(this.canvas, document.body.childNodes[0]);
         window.addEventListener('mousemove', function (e) {
