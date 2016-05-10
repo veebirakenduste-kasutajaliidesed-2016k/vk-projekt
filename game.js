@@ -150,14 +150,14 @@ var myGameArea = {
           myGameArea.score = localStorage.getItem("score");
           myGameArea.context.fillStyle = "red";
           myGameArea.context.font = "30px Arial";
-          myGameArea.context.fillText(myGameArea.score,180,90);
+          myGameArea.context.fillText(myGameArea.score,300,150);
         }, 10);
 
         function drawLives() {
           setInterval(function() {
             myGameArea.context.font = "25px Arial";
             myGameArea.context.fillStyle = "blue";
-            myGameArea.context.fillText("Lives: "+lives, 10,200);
+            myGameArea.context.fillText("Elusi: "+lives, 5,245);
 
           }, 1);
 
