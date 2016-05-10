@@ -3,33 +3,60 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Street View side-by-side</title>
+    <title>Street View liikumismäng</title>
     <style>
       html, body {
         height: 100%;
         margin: 0;
         padding: 0;
       }
-      #map, #pano {
-        float: left;
-        height: 80%;
-        width: 45%;
+      h2 {
+      	right: 20px;
       }
+      #map {
+        position: absolute;
+    	right: 30px;
+        bottom: 60px;
+        height: 10%;
+        width: 25%;
+      }
+
+      #pano {
+      	position: absolute;
+        bottom: 60px;
+        left: 20px;
+        height: 80%;
+        width: 70%;
+      }
+
   	  #pano text {
   		display: none;
   	  }
       #menu{
-        margin-left: 20px;
+      	position: absolute;
+        right: 30px;
+        top: 100px;
+        width: 320px;
 
       }
+
+
     </style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
   </head>
   <body>
+  <h2>Google Streeview orienteerumis mäng </h2>
     <div id="menu">
-    <p id="skoor">Liigutusi</p>
-    <button onClick="getPanorama()" >UUS ASUKOHT</button>
+    <p>Tegemist on orienteerumis mänguga kus on võimalik streetview abil Tallinna tänavatel liikuda. Vasakul aknas on näha tänavapilti ning all paremal on kaart kus saab märkida kaardil oleva tänava asukohta. </p>
+
+    <p>Mängu eesmärgiks on võimalikult väikese arvu liigutustega arvata ära võimalikult täpne asukoht.</p>
+    <br>
+    <br>
+    <br>
+    <p id="skoor">Liigutusi tänaval</p>
+    <button onClick="getPanorama()" >LOOSI UUS ASUKOHT</button>
   </div>
-    <div id="map" style="height:300px"></div>
+    <div id="map" style="height:200px"></div>
     <div id="pano"></div>
 
     <script>
@@ -52,8 +79,8 @@
 
 
         var map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: 58.9278205, lng: 25.6992991},
-          zoom: 6,
+          center: {lat: 59.4250586, lng: 24.5981588},
+          zoom: 9,
 		  styles: [ { "elementType": "labels", "stylers": [ { "visibility": "off" } ] } ],
 		  disableDefaultUI: true
         });
