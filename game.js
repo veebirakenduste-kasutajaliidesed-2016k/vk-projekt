@@ -44,6 +44,12 @@ function startGame() {
     myball.speedX -= 2;
 }
 
+function newBall(){
+    myball = new component(10, 10, this.ballcolor, myGameArea.canvas.width / 2 - 2.5 - 100, 110);
+    myball.speedY -= 2;
+    myball.speedX -= 2;
+}
+
 function updateBall() {
   if(this.ballcolor === "blue") {
     myball = new component(3, 3, this.ballcolor, myball.x, myball.y);
@@ -94,9 +100,11 @@ var myGameArea = {
 
           }, 1);
 
-
           }
           drawLives();
+
+
+
         document.body.insertBefore(this.canvas, document.body.childNodes[0]);
         window.addEventListener('mousemove', function (e) {
             myGameArea.x = e.pageX;
@@ -124,10 +132,20 @@ var myGameArea = {
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
     },
     stop : function() {
-        clearInterval(this.interval);
-        this.pause = true;
-        alert("Soovid uuesti mängida?");
-       document.location.reload();
+        lives--;
+        this.ballcolor = "white";
+        newBall();
+
+
+        if(lives === 0){
+            clearInterval(this.interval);
+            this.pause = true;
+            alert("Soovid uuesti mängida?");
+            document.location.reload();
+
+          }
+
+
     },
     setsize : function() {
         this.ratio = this.canvas.height / this.canvas.width,
