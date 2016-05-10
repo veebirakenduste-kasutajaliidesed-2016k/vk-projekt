@@ -100,6 +100,20 @@ function saveScore() {
   xhttp.send();
 }
 
+function bestscore() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (xhttp.readyState == 4 && xhttp.status == 200) {
+      if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                console.log(xmlhttp.responseText);
+            }
+
+    }
+  };
+xhttp.open("GET", "get.php?mybest="+name, true);
+  xhttp.send();
+}
+
 var myGameArea = {
     canvas : document.createElement("canvas"),
     start : function() {
@@ -169,10 +183,11 @@ var myGameArea = {
                     saveScore();
                     this.pause = true;
                     alert("Soovid uuesti mängida?");
+                    bestscore();
                     document.location.reload();
 
-
                   }
+
 
     },
     setsize : function() {
