@@ -102,17 +102,34 @@ function saveScore() {
 
 function bestscore() {
   var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
-    if (xhttp.readyState == 4 && xhttp.status == 200) {
-      if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                console.log(xmlhttp.responseText);
-            }
 
-    }
+  xhttp.onreadystatechange = function() {
+      if (xhttp.readyState == 4 && xhttp.status == 200) {
+      console.log(xhttp.responseText);
+      bestscore();
+      showbestscore(xhttp.responseText);
+      }
   };
-xhttp.open("GET", "get.php?mybest="+name, true);
+  xhttp.open("GET", "get.php?mybest="+name, true);
   xhttp.send();
 }
+
+function showbestscore(bestscore){
+  setInterval(function() {
+    myGameArea.bestscore();
+    myGameArea.context.fillStyle = "red";
+    myGameArea.context.font = "30px Arial";
+    myGameArea.context.fillText(bestscore,180,90);
+  }, 10);
+
+}
+
+setInterval(function() {
+  myGameArea.score = localStorage.getItem("score");
+  myGameArea.context.fillStyle = "red";
+  myGameArea.context.font = "30px Arial";
+  myGameArea.context.fillText(myGameArea.score,180,90);
+}, 10);
 
 var myGameArea = {
     canvas : document.createElement("canvas"),
@@ -183,7 +200,6 @@ var myGameArea = {
                     saveScore();
                     this.pause = true;
                     alert("Soovid uuesti mängida?");
-                    bestscore();
                     document.location.reload();
 
                   }

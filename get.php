@@ -44,7 +44,7 @@ function myBest($name, $mysqli) {
     }
   }
 
-  return($best);
+  echo($best);
   $stmt->close();
 }
 
