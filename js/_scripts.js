@@ -31,7 +31,7 @@
     }else{
       console.log("###NO SAVE FOUND###");
     }
-    this.updateCookieAmount();
+    this.updateStats();
     this.bindEvents();
     this.main();
     console.log(this.cookies);
@@ -40,7 +40,7 @@
       var game = this;
       setInterval(function(){
         game.addCookie(game.cps);
-        game.updateCookieAmount();
+        game.updateStats();
         console.log(game.cookies); 
         console.log("CPS: "+game.cps);
         game.save();
@@ -50,7 +50,7 @@
       var game = this;
       $('.btn--cookie').click(function(){
         game.addCookie(1);
-        game.updateCookieAmount();
+        game.updateStats();
       });
       $('.upgrade').click(function(){
         this.Index = $(".upgrade").index(this);
@@ -64,27 +64,25 @@
     addCookie: function(amount){
       this.cookies += amount;
     },
-    updateCookieAmount: function(){
+    updateStats: function(){
       $('.stats__cookieAmount').html(this.cookies);
+      $('.stats__cps').html(this.cps);
+
     },
     save: function(){
       localStorage.setItem("cookies", this.cookies);
       localStorage.setItem("cps", this.cps);
-      localStorage.setItem("upgrade1", this.upgrade1);
     },
     delete: function(){
       localStorage.removeItem("cookies");
       localStorage.removeItem("cps");
-      localStorage.removeItem("upgrade1");
       this.cookies = 0;
       this.cps = 0;
-      this.upgrade1 = 0;
       console.log("Save Deleted");
     },
     load: function(){
       this.cookies = parseInt(localStorage.getItem("cookies"));
       this.cps = parseInt(localStorage.getItem("cps"));
-      this.upgrade1 = parseInt(localStorage.getItem("upgrade1"));
     },
     upgradeSkills: function(index){
       var cost = Math.floor(Math.pow(10,index) * Math.pow(1.1,this.upgrade[index]));
@@ -93,7 +91,9 @@
         console.log(this.upgrade[index]);
         this.upgrade[index] += 1;
         this.cps += this.upgradeCPS[index];
-        this.updateCookieAmount();
+        this.updateStats();
+        $('.upgrade .upgrade__amount').eq(index).html(this.upgrade[index]);
+        $('.upgrade .upgrade__cost').eq(index).html(cost);
       }else{
         console.log("Need mo money");
       }        
