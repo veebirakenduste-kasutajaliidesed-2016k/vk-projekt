@@ -151,7 +151,7 @@ var myGameArea = {
       document.getElementById("score").innerHTML = xhttp.responseText;
     }
   };
-  xhttp.open("GET", "save.php", true);
+  xhttp.open("GET", "save.php?name="+name +"&score="+score, true);
   xhttp.send();
 }
     },
@@ -279,6 +279,8 @@ function updateGameArea() {
       }else if(myGameArea.currentlevel === 2) {
         myGameArea.level = Levels.instance.level3();
         myGameArea.currentlevel++;
+      }else if(myGameArea.currentlevel === 3){
+        myGameArea.stop();
       }
     }
 
