@@ -23,7 +23,7 @@
   ClickerGame.prototype = {
 
     init: function(){
-    console.log('Rakendus läks tööle');
+    console.log('###GAME STARTED###');
     if(JSON.parse(localStorage.getItem("cookies"))){
       this.load();
       console.log("###GAME LOADED###");
