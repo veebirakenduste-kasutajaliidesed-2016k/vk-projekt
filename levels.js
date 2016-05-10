@@ -31,7 +31,11 @@
               x = 20;
             }
             x = x + 5;
-            myObstacles.push(new component(30, 10, "blue", x, y));
+            if(i % 2 === 0) {
+              myObstacles.push(new component(30, 10, "red", x, y));
+            } else {
+              myObstacles.push(new component(30, 10, "orange", x, y));
+            }
             x = x + 30;
         }
       },
@@ -55,7 +59,11 @@
             }
 
 
-            myObstacles.push(new component(30, 10, "yellow", x, y));
+            if(i % 2 === 0) {
+              myObstacles.push(new component(30, 10, "yellow", x, y));
+            } else {
+              myObstacles.push(new component(30, 10, "green", x, y));
+            }
             x = x + 30;
         }
       },
@@ -85,7 +93,13 @@
             }
 
 
-            myObstacles.push(new component(30, 10, "green", x, y));
+            if(i % 2 === 0) {
+              myObstacles.push(new component(30, 10, "red", x, y));
+            } else if(i % 3 === 0){
+              myObstacles.push(new component(30, 10, "blue", x, y));
+            } else {
+              myObstacles.push(new component(30, 10, "pink", x, y));
+            }
             x = x + 30;
         }
       }

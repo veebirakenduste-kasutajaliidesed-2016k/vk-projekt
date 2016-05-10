@@ -10,6 +10,8 @@ function pausegame() {
 }
 
 var name = "";
+var finished = true;
+var laserExists = false;
 
 while(name === "") {
   if(localStorage.getItem("name")) {
@@ -42,6 +44,22 @@ function startGame() {
     myGameArea.setsize();
     myball.speedY -= 2;
     myball.speedX -= 2;
+}
+
+function laserBeams()  {
+  laserExists = true;
+  laserint = setInterval(function() {
+    if(finished === true) {
+      laser = new component(2, 10, "red", myGamePiece.x + myGamePiece.width / 2, myGamePiece.y - 20);
+
+    }
+
+  }, 500);
+
+  setTimeout(function() {
+    clearInterval(laserint);
+    laserExists = false;
+  }, 5100);
 }
 
 function newBall(){
@@ -305,6 +323,9 @@ function updateGameArea() {
           } else if(random > 0.9 && random < 0.95){
             lives++;
           }
+          if(random > 0) {
+            this.laserBeams();
+          }
           if(this.ballcolor === "orange") {
 
           } else if(this.ballcolor !== "orange") {
@@ -324,6 +345,22 @@ function updateGameArea() {
             msg.pitch = 2;
             window.speechSynthesis.speak(msg);
         }
+
+        //Laseri pihta saamine
+        if(laserExists) {
+          if (laser.crashWith(myObstacles[i])) {
+
+              msg = new SpeechSynthesisUtterance("pew");
+              msg.pitch = 2;
+              window.speechSynthesis.speak(msg);
+              myObstacles.splice(i, 1);
+              myGameArea.score++;
+              localStorage.setItem("score", myGameArea.score);
+              msg = new SpeechSynthesisUtterance(myGameArea.score);
+              msg.pitch = 2;
+              window.speechSynthesis.speak(msg);
+          }
+      }
     }
     if (myGameArea.tiltX) {
         myGamePiece.speedX = myGameArea.tiltX + 1;
@@ -369,6 +406,14 @@ function updateGameArea() {
         myGamePiece.x += myGamePiece.speedX;
         myGamePiece.y += myGamePiece.speedY;
         myGamePiece.update();
+        if(laserExists === true) {
+          laser.y -= 10;
+          finished = false;
+          if(laser.y < 0) {
+            finished = true;
+          }
+          laser.update();
+        }
         if (myGameArea.frameNo == 1) {
             myGameArea.pause = true;
         }
