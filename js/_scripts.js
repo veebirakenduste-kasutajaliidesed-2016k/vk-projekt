@@ -41,8 +41,6 @@
       setInterval(function(){
         game.addCookie(game.cps);
         game.updateStats();
-        console.log(game.cookies); 
-        console.log("CPS: "+game.cps);
         game.save();
       }, 1000);
     },
@@ -72,10 +70,12 @@
     save: function(){
       localStorage.setItem("cookies", this.cookies);
       localStorage.setItem("cps", this.cps);
+      localStorage.setItem("upgrades", this.upgrade);
     },
     delete: function(){
       localStorage.removeItem("cookies");
       localStorage.removeItem("cps");
+      localStorage.removeItem("upgrades");
       this.cookies = 0;
       this.cps = 0;
       console.log("Save Deleted");
@@ -83,6 +83,9 @@
     load: function(){
       this.cookies = parseInt(localStorage.getItem("cookies"));
       this.cps = parseInt(localStorage.getItem("cps"));
+      for(var i = 0; i<this.upgrade.length; i++){
+        this.upgrade[i] = parseInt(localStorage.getItem("upgrades")[i]);
+      }      
     },
     upgradeSkills: function(index){
       var cost = Math.floor(Math.pow(10,index) * Math.pow(1.1,this.upgrade[index]));
