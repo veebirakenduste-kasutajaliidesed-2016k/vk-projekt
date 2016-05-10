@@ -31,7 +31,7 @@
               x = 20;
             }
             x = x + 5;
-            myObstacles.push(new component(30, 10, "red", x, y));
+            myObstacles.push(new component(30, 10, "blue", x, y));
             x = x + 30;
         }
       },
@@ -55,7 +55,7 @@
             }
 
 
-            myObstacles.push(new component(30, 10, "red", x, y));
+            myObstacles.push(new component(30, 10, "yellow", x, y));
             x = x + 30;
         }
       },
@@ -85,7 +85,7 @@
             }
 
 
-            myObstacles.push(new component(30, 10, "red", x, y));
+            myObstacles.push(new component(30, 10, "green", x, y));
             x = x + 30;
         }
       }
