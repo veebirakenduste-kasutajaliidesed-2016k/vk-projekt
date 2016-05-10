@@ -70,6 +70,7 @@
         var track = Discgolf.instance.tracks[id];
         console.log(track.name);
         document.querySelector('#info-view h1').innerHTML = "Mine mängima "+track.name;
+        // document.querySelector('.start-new-game').addEventListener('click', this.startGame);
 
 
 
@@ -109,6 +110,10 @@
       }
     },
 
+    bindEvents: function(){
+      document.querySelector('.start-new-game').addEventListener('click', this.startGame.bind(this));
+    },
+
     routeChange: function(event){
       //kirjutan muuutujasse lehe nime, võtan maha #
       this.currentRoute = location.hash.slice(1);
@@ -133,12 +138,24 @@
     },
 
     startGame: function(){
+      var name = document.querySelector('.name').value;
+      if(name !== ""){
+        console.log("nimi on "+name);
+        var new_name = new Name(name);
+      }
 
+      this.currentGame.player = name;
+
+      window.location.hash = 'game-view';
     },
 
 
 
 
+  };//appi l6pp
+  var Name = function(new_name){
+    this.name = new_name;
+    console.log('uus nimi on'+name);
   };
 
   window.onload = function(){
