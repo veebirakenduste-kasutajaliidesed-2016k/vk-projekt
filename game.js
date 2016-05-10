@@ -464,3 +464,5 @@ function updateGameArea() {
         }
     }
 }
+
+//Lõpuks valmis!!!!!!!!
