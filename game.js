@@ -1,4 +1,3 @@
-
 function playgame() {
     if (!myGameArea.interval) {
         myGameArea.interval = setInterval(updateGameArea, 20);
@@ -27,40 +26,50 @@ while(name === "") {
   }
 }
 
-
-
+var lives = 3;
 var myball;
 var myGamePiece;
 var myObstacles = [];
-var ballcolor = "white";
+this.ballcolor = "white";
+this.pieceColor = "yellow";
 
 function startGame() {
-    var x = 0, y = 12;
     myGameArea.start();
-    myGamePiece = new component(100, 10, "blue", myGameArea.canvas.width / 2 - 50, myGameArea.canvas.height - 20);
-    myball = new component(10, 10, ballcolor, myGameArea.canvas.width / 2 - 2.5 - 100, 110);
-    for (i = 0; i < 68; i++) {
-        if ((x + 30) > myGameArea.canvas.width) {
-            x = 0;
-            y = y + 15;
-        }
-        if (x === 0) {x = 20; }
-        x = x + 5;
-        myObstacles.push(new component(30, 10, "red", x, y));
-        x = x + 30;
-    }
+    myGamePiece = new component(100, 10, this.pieceColor, myGameArea.canvas.width / 2 - 50, myGameArea.canvas.height - 20);
+    myball = new component(10, 10, this.ballcolor, myGameArea.canvas.width / 2 - 2.5 - 100, 110);
+    myGameArea.currentlevel = 1;
+    myGameArea.level = Levels.instance.level1();
     myGameArea.setsize();
     myball.speedY -= 2;
     myball.speedX -= 2;
+}
+
+function updateBall() {
+  if(this.ballcolor === "blue") {
+    myball = new component(3, 3, this.ballcolor, myball.x, myball.y);
+
+  } else {
+    myball = new component(10, 10, this.ballcolor, myball.x, myball.y);
+  }
+  myball.speedY -= 2;
+  myball.speedX -= 2;
+}
+
+function updatePiece() {
+  if(this.pieceColor === "blue") {
+    myGamePiece = new component(30, 10, this.pieceColor, myGamePiece.x, myGamePiece.y);
+  } else if(this.pieceColor === "yellow"){
+    myGamePiece = new component(100, 10, this.pieceColor, myGamePiece.x, myGamePiece.y);
+  } else if(this.pieceColor === "red"){
+    myGamePiece = new component(200, 10, this.pieceColor, myGamePiece.x, myGamePiece.y);
+  }
 }
 
 var myGameArea = {
     canvas : document.createElement("canvas"),
     start : function() {
         this.score = 0;
-        this.Bestscore = 100;
         localStorage.setItem("score", this.score);
-        localStorage.setItem("Bestscore", this.Bestscore);
         this.canvas.width = 640;
         this.canvas.height = 250;
         this.pause = false;
@@ -77,14 +86,12 @@ var myGameArea = {
           myGameArea.context.fillText(myGameArea.score,180,90);
         }, 10);
 
-        setInterval(function() {
-          myGameArea.Bestscore = localStorage.getItem("Bestscore");
-          myGameArea.context.fillStyle = "blue";
-          myGameArea.context.font = "30px Arial";
-          myGameArea.context.fillText(myGameArea.Bestscore,550,110);
-        }, 90);
-
-
+        function drawLives() {
+              ctx.font = "16px Arial";
+              ctx.fillStyle = "blue";
+              ctx.fillText("Lives: "+lives, canvas.width-65, 20);
+              drawLives();
+}
 
         document.body.insertBefore(this.canvas, document.body.childNodes[0]);
         window.addEventListener('mousemove', function (e) {
@@ -115,6 +122,8 @@ var myGameArea = {
     stop : function() {
         clearInterval(this.interval);
         this.pause = true;
+        alert("GAME OVER");
+       document.location.reload();
     },
     setsize : function() {
         this.ratio = this.canvas.height / this.canvas.width,
@@ -227,17 +236,61 @@ function component(width, height, color, x, y) {
 var lastspeedX = 0;
 var ss = 0;
 function updateGameArea() {
+    var msg = "";
     var x, y, speed = 0;
+
+    if(myObstacles.length === 0) {
+      msg = new SpeechSynthesisUtterance("WOW MLG 420 SMOKE JAVASCRIPT ALL DAY");
+      msg.pitch = 2;
+      window.speechSynthesis.speak(msg);
+      if(myGameArea.currentlevel === 1) {
+        myGameArea.level = Levels.instance.level2();
+        myGameArea.currentlevel++;
+      }else if(myGameArea.currentlevel === 2) {
+        myGameArea.level = Levels.instance.level3();
+        myGameArea.currentlevel++;
+      }
+    }
+
     for (i = 0; i < myObstacles.length; i += 1) {
         if (myball.crashWith(myObstacles[i])) {
+          var random = Math.random();
+          if(random > 0.2 && random < 0.3) {
+            this.ballcolor = "orange";
+            this.updateBall();
+          } else if(random < 0.05) {
+            this.ballcolor = "white";
+            this.updateBall();
+            this.pieceColor = "yellow";
+            this.updatePiece();
+          } else if(random > 0.3 && random < 0.5) {
+            this.ballcolor = "blue";
+            this.updateBall();
+          } else if(random > 0.5 && random < 0.7) {
+            this.pieceColor = "blue";
+            this.updatePiece();
+          } else if(random > 0.8 && random < 0.9) {
+            this.pieceColor = "red";
+            this.updatePiece();
+          }
+          if(this.ballcolor === "orange") {
+
+          } else if(this.ballcolor !== "orange") {
             if (myball.crashLeft(myObstacles[i]) || myball.crashRight(myObstacles[i])) {
                 myball.speedX = -(myball.speedX);
             } else {
                 myball.speedY = -(myball.speedY);
             }
+          }
+            msg = new SpeechSynthesisUtterance("o");
+            msg.pitch = 2;
+            window.speechSynthesis.speak(msg);
             myObstacles.splice(i, 1);
             myGameArea.score++;
             localStorage.setItem("score", myGameArea.score);
+            msg = new SpeechSynthesisUtterance(myGameArea.score);
+            msg.pitch = 2;
+            window.speechSynthesis.speak(msg);
         }
     }
     if (myGameArea.tiltX) {
@@ -249,6 +302,9 @@ function updateGameArea() {
         lastspeedX = myGameArea.x;
     }
     if (myball.crashWith(myGamePiece)) {
+        msg = new SpeechSynthesisUtterance("haha");
+        msg.pitch = 2;
+        window.speechSynthesis.speak(msg);
         myball.speedY = -(myball.speedY);
         myball.speedX = myball.speedX + speed;
         if (myball.speedX > 2) {myball.speedX = 2; }
@@ -285,5 +341,4 @@ function updateGameArea() {
             myGameArea.pause = true;
         }
     }
-
 }
