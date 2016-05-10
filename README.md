@@ -9,4 +9,5 @@ Rakendus peaks teoorias lahendama probleemi "liiga palju vaba aega". Üldiselt m
 2. Saving/loading
 3. Mõelda välja "plot" ja hakata sprite lisama+ lisaehitised
 4. Random events, negatiivsed ja positiivsed
-5. TBD
+5. Teha paremaks/huvitavamaks
+6. Bugfixing

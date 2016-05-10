@@ -56,3 +56,11 @@ margin-bottom: 0;
 	transform: translateX(-50%);
 	bottom: 0;
 }
+.stats__cookieAmount{
+	color:#FFF;
+	font-size:45px;
+}
+.stats__cps{
+	color:#DDD;
+	font-size:30px;
+}
