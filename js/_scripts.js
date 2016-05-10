@@ -15,7 +15,6 @@
     this.upgrade = [0,0,0,0,0];
     this.upgradeCPS = [1, 10, 100, 250, 1000];
     console.log(this);
-
     this.init();
   };
 
@@ -65,7 +64,6 @@
     updateStats: function(){
       $('.stats__cookieAmount').html(this.cookies);
       $('.stats__cps').html(this.cps);
-
     },
     save: function(){
       localStorage.setItem("cookies", this.cookies);
@@ -78,6 +76,7 @@
       localStorage.removeItem("upgrades");
       this.cookies = 0;
       this.cps = 0;
+      this.upgrade = [0,0,0,0,0]
       console.log("Save Deleted");
     },
     load: function(){
@@ -85,6 +84,9 @@
       this.cps = parseInt(localStorage.getItem("cps"));
       for(var i = 0; i<this.upgrade.length; i++){
         this.upgrade[i] = parseInt(localStorage.getItem("upgrades")[i]);
+        $('.upgrade .upgrade__amount').eq(i).html(this.upgrade[i]);
+        var cost = Math.floor(Math.pow(10,i) * Math.pow(1.1,this.upgrade[i]));
+        $('.upgrade .upgrade__cost').eq(i).html(cost);
       }      
     },
     upgradeSkills: function(index){
