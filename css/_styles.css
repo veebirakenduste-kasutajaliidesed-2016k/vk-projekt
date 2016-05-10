@@ -25,7 +25,16 @@ line-height: 50px;
 font-size: 20px;
 text-align: center;
 border: 1px solid #ddd;
-background-color: #DB0A5B;
+background-color: rgba(246, 36, 89, 0.7);
+}
+.btn--delete{
+	font-size: 10px;
+  height: 20px;
+  text-align: center;
+  width: 75px;
+  line-height: 2;
+  float: right;
+
 }
 .gameArea{
 	height:100%;
