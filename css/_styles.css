@@ -22,10 +22,19 @@ body{
 color: white;
 height: 50px;
 line-height: 50px;
-font-size: 20px;
+font-size: 15px;
 text-align: center;
 border: 1px solid #ddd;
 background-color: rgba(246, 36, 89, 0.7);
+}
+.btn--upgrade{
+height: 90px;
+
+line-height: 20px;
+margin-bottom: 0;
+}
+.upgrade__amount{
+margin-bottom: 0;
 }
 .btn--delete{
 	font-size: 10px;
