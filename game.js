@@ -106,7 +106,6 @@ function bestscore() {
   xhttp.onreadystatechange = function() {
       if (xhttp.readyState == 4 && xhttp.status == 200) {
       console.log(xhttp.responseText);
-      bestscore();
       showbestscore(xhttp.responseText);
       }
   };
@@ -118,17 +117,28 @@ function showbestscore(bestscore){
   setInterval(function() {
     myGameArea.context.fillStyle = "red";
     myGameArea.context.font = "30px Arial";
-    myGameArea.context.fillText(bestscore,180,90);
+    myGameArea.context.fillText(bestscore,580,245);
   }, 10);
 
 }
 
-setInterval(function() {
-  myGameArea.score = localStorage.getItem("score");
-  myGameArea.context.fillStyle = "red";
-  myGameArea.context.font = "30px Arial";
-  myGameArea.context.fillText(myGameArea.score,180,90);
-}, 10);
+function getTop() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (xhttp.readyState == 4 && xhttp.status == 200) {
+      var array = JSON.parse(xhttp.responseText);
+
+      for(var i = 0; i < array.length; i++) {
+        document.querySelector("#top10").innerHTML += "<tr><td>" + array[i].name + "</td><td>" + array[i].score + "</td></tr>";
+      }
+      console.log(array);
+    }
+  };
+  xhttp.open("GET", "get.php?topten", true);
+  xhttp.send();
+}
+
+getTop();
 
 var myGameArea = {
     canvas : document.createElement("canvas"),
@@ -149,14 +159,14 @@ var myGameArea = {
           myGameArea.score = localStorage.getItem("score");
           myGameArea.context.fillStyle = "red";
           myGameArea.context.font = "30px Arial";
-          myGameArea.context.fillText(myGameArea.score,180,90);
+          myGameArea.context.fillText(myGameArea.score,300,140);
         }, 10);
 
         function drawLives() {
           setInterval(function() {
             myGameArea.context.font = "25px Arial";
             myGameArea.context.fillStyle = "blue";
-            myGameArea.context.fillText("Lives: "+lives, 10,200);
+            myGameArea.context.fillText("Elusi: "+lives, 10,245);
 
           }, 1);
 
@@ -358,7 +368,7 @@ function updateGameArea() {
           } else if(random > 0.9 && random < 0.95){
             lives++;
           }
-          if(random > 0) {
+          if(random > 0.95 && random < 1) {
             this.laserBeams();
           }
           if(this.ballcolor === "orange") {
