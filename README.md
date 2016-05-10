@@ -21,7 +21,7 @@
 
 **Andmete liikumise skeem:**
 
-[[https://github.com/Raunts26/vk-projekt/blob/master/skeem.png|alt=skeem]]
+[[https://github.com/Raunts26/vk-projekt/blob/master/skeem.png]]
 
 ---------------------------------------------------------------------------------
 
