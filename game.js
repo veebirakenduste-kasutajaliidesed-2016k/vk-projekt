@@ -116,7 +116,6 @@ function bestscore() {
 
 function showbestscore(bestscore){
   setInterval(function() {
-    myGameArea.bestscore();
     myGameArea.context.fillStyle = "red";
     myGameArea.context.font = "30px Arial";
     myGameArea.context.fillText(bestscore,180,90);
@@ -144,6 +143,7 @@ var myGameArea = {
         this.canvas.style.cursor = "none"; //hide the original cursor
         this.context = this.canvas.getContext("2d");
         myGameArea.interval = setInterval(updateGameArea, 20);
+        bestscore();
 
         setInterval(function() {
           myGameArea.score = localStorage.getItem("score");

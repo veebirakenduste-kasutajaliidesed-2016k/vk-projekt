@@ -20,7 +20,8 @@
   * 0.8 - Lisada TOP 10
 
 **Andmete liikumise skeem:**
-  * andmete liikumise skeem loetava pildina (mis lehed ja mis andmeid mis lehel käideldakse);
+
+[[https://github.com/Raunts26/vk-projekt/blob/master/skeem.png]]
 
 ---------------------------------------------------------------------------------
 

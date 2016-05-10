@@ -21,7 +21,7 @@ function topTen($mysqli) {
     array_push($array, $player);
   }
 
-  return($array);
+  echo(json_encode($array));
   $stmt->close();
 }
 
