@@ -114,6 +114,24 @@ xhttp.open("GET", "get.php?mybest="+name, true);
   xhttp.send();
 }
 
+function getTop() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (xhttp.readyState == 4 && xhttp.status == 200) {
+      var array = JSON.parse(xhttp.responseText);
+
+      for(var i = 0; i < array.length; i++) {
+        document.querySelector("#top10").innerHTML += "<tr><td>" + array[i].name + "</td><td>" + array[i].score + "</td></tr>";
+      }
+      console.log(array);
+    }
+  };
+  xhttp.open("GET", "get.php?topten", true);
+  xhttp.send();
+}
+
+getTop();
+
 var myGameArea = {
     canvas : document.createElement("canvas"),
     start : function() {

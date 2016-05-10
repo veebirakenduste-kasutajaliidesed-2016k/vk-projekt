@@ -1,7 +1,7 @@
 <?php
 #Miski läks gitis katki, uus katse
 require_once("config.php");
-$database = "if15_brickmang";
+$database = "vhost45490s3";
 
 $mysqli = new mysqli($servername, $server_username, $server_password, $database);
 
@@ -21,7 +21,7 @@ function topTen($mysqli) {
     array_push($array, $player);
   }
 
-  return($array);
+  echo(json_encode($array));
   $stmt->close();
 }
 
