@@ -294,6 +294,8 @@ function updateGameArea() {
           } else if(random > 0.8 && random < 0.9) {
             this.pieceColor = "red";
             this.updatePiece();
+          } else if(random > 0.9 && random < 0.95){
+            lives++;
           }
           if(this.ballcolor === "orange") {
 
