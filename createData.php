@@ -11,7 +11,7 @@
 
 		//echo count(	$syns);
 
-		if(count(	$syns) > 3){
+		if(count(	$syns) > 2){
 
 
 
