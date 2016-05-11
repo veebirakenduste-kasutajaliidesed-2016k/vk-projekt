@@ -1,88 +1,38 @@
-(function(){
-    "use strict";
+// Note: This example requires that you consent to location sharing when
+// prompted by your browser. If you see the error "The Geolocation service
+// failed.", it means you probably did not give permission for the browser to
+// locate you.
 
-    var MapsApp = function(){
+function initMap() {
+  var map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: -34.397, lng: 150.644},
+    zoom: 6
+  });
+  var infoWindow = new google.maps.InfoWindow({map: map});
 
-        if(MapsApp.instance){
-            return MapsApp.instance;
-        }
-        MapsApp.instance = this;
+  // Try HTML5 geolocation.
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      var pos = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      };
 
-        this.container = null;
-		this.map = null;
+      infoWindow.setPosition(pos);
+      infoWindow.setContent('Location found.');
+      map.setCenter(pos);
+    }, function() {
+      handleLocationError(true, infoWindow, map.getCenter());
+    });
+  } else {
+    // Browser doesn't support Geolocation
+    handleLocationError(false, infoWindow, map.getCenter());
+  }
+}
 
-        this.init();
-    };
-
-    window.MapsApp = MapsApp;
-
-    MapsApp.prototype = {
-
-        init: function(){
-
-            console.log('MapsApp started');
-
-            this.container = document.querySelector('#map-container');
-
-			var options = {
-				center: {
-					lat: 59.439252,
-					lng: 24.7721997
-				},
-				zoom: 10,
-				styles: [ { "elementType": "labels", "stylers":
-        [ { "visibility": "off" } ] },{ "featureType": "water", "stylers":
-        [ { "color": "#8080ed" } ] },{ "featureType": "road.highway", "stylers":
-        [ { "hue": "#ff0022" } ] } ],
-				streetViewControl: false,
-				mapTypeControl: false
-
-			};
-
-			this.map = new google.maps.Map(this.container, options);
-
-      this.map.addListener('click', function(e){
-        console.log(e.latLng.lat());
-        MapsApp.instance.createMarker(e.latLng.lat(), e.latLng.lng());
-      });
-
-        },
-        /*
-        createMarker: function(newLat, newLng){
-          var markerOptions = {
-            map: this.map,
-            position: {lat: newLat, lng:newLng},
-            animation: google.maps.Animation.BOUNCE
-          };
-          var newMarker = new google.maps.Marker(markerOptions);
-          var infoOptions = {
-            content: "<strong>Tere</strong>"
-          };
-          var infoWindow = new google.maps.InfoWindow(infoOptions);
-          //seome markeriga
-          infoWindow.open(this.map, newMarker);
-        }*/
-
-    };
-    function getLocation() {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(showPosition);
-        } else {
-            alert("Geolocation is not supported by this browser.");
-        }
-    }
-
-    function showPosition(position) {
-        console.log("Latitude: " + position.coords.latitude +
-        " Longitude: " + position.coords.longitude);	
-    }
-
-    window.onload = function(){
-        var app = new MapsApp();
-
-
-
-
-    };
-
-})();
+function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+  infoWindow.setPosition(pos);
+  infoWindow.setContent(browserHasGeolocation ?
+                        'Error: The Geolocation service failed.' :
+                        'Error: Your browser doesn\'t support geolocation.');
+}
