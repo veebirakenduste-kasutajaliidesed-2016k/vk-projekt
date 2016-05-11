@@ -26,6 +26,7 @@ font-size: 15px;
 text-align: center;
 border: 1px solid #ddd;
 background-color: rgba(246, 36, 89, 0.7);
+cursor: pointer;
 }
 .btn--upgrade{
 height: 90px;
