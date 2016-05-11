@@ -24,7 +24,7 @@
 
 
 	}
-	echo count($newArray);
+	//echo count($newArray);
 	echo json_encode($newArray);
 
 
