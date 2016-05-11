@@ -2,7 +2,7 @@
 	require_once("simple_html_dom.php");
 # http://php.net/manual/en/function.file-get-contents.php
 
-  $words = ['paks', 'rõõmus'];
+  $words = ['paks', 'rõõmus','nuga','armas','kallis','päike','sale','muruniiduk','hekk','käärid','kahvel','lusikas','televiisor','arvuti','hiir','karu','hunt','rebane','lamp','õlg','käsi','klaviatuur','nupp','pilt','maal','roomaja','kiri','male','tool','laud','tahvel','marker','vesi','hapnik','sool','meri','ookena','vaal','uks','kilpkonn','aken','kott','selg','juhe','lift','valgus','generaator','elekter','gravitatsioon'];
 
 	$newArray = array();
 
