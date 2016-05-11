@@ -263,10 +263,10 @@ xhttp.onreadystatechange = function() {
 xhttp.open("GET", "createData.php", true);
 xhttp.send();
 
-  //prinditav sõna
+  //arvatab sõna
     word = chosenCategory[Math.floor(Math.random() * chosenCategory.length)];
     word = word.replace(/\s/g, "-");
-    //console.log(word);
+
     buttons();
 
     geusses = [ ];
@@ -291,8 +291,8 @@ xhttp.send();
         ["Lääne-Virumaal", "Ida-Virumaal", "Viljandimaal", "Saaremaal", "Eesti süda", "Raplamaal", "Lääne-Virumaal", "Lääne-Virumaal", "Tartumaal"]
     ];
 
-    var catagoryIndex = categories.indexOf(chosenCategory);
-    var hintIndex = chosenCategory.indexOf(word);
+//    var catagoryIndex = categories.indexOf(chosenCategory);
+  //  var hintIndex = chosenCategory.indexOf(word);
     showClue.innerHTML = "Vihje: - " +  hints [catagoryIndex][hintIndex];
   };
 
