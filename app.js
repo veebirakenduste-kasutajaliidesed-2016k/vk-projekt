@@ -70,7 +70,10 @@
         var track = Discgolf.instance.tracks[id];
         console.log(track.name);
         document.querySelector('#info-view h1').innerHTML = "Mine mängima "+track.name;
-        // document.querySelector('.start-new-game').addEventListener('click', this.startGame);
+        //  var html = "";
+        //  html += "<input type='text' name='name' class='name'>";
+        //  html += "<button onclick='Discgolf.instance.startGame("+track.id+")'>Mine mängima</button>";
+
 
 
 
@@ -98,6 +101,9 @@
       for(var i = 0; i < this.tracks[0].baskets.length; i++){
          console.log(this.tracks[0].baskets[i].nr + " " + this.tracks[0].baskets[i].par);
       }
+
+      this.bindEvents();
+
       //aadressirea vahetus
       window.addEventListener('hashchange', this.routeChange.bind(this));
       // kui aadressireal ei ole hashi siis lisan juurde
@@ -108,6 +114,8 @@
         //esimesel käivitamisel vaatame urli üle ja uuendame menüüd
         this.routeChange();
       }
+
+
     },
 
     bindEvents: function(){
@@ -139,9 +147,13 @@
 
     startGame: function(){
       var name = document.querySelector('.name').value;
-      if(name !== ""){
-        console.log("nimi on "+name);
-        var new_name = new Name(name);
+      console.log("nimi on "+name);
+      if(name === ""){
+    
+        alert('nimi ei saa  olla tühi');
+        return;
+
+
       }
 
       this.currentGame.player = name;
@@ -153,10 +165,7 @@
 
 
   };//appi l6pp
-  var Name = function(new_name){
-    this.name = new_name;
-    console.log('uus nimi on'+name);
-  };
+
 
   window.onload = function(){
     var app = new Discgolf();
