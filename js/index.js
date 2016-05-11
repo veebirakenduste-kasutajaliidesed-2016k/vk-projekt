@@ -259,7 +259,7 @@ window.onload = function () {
   //arvatav sõna
   data.forEach(function(entry){
     console.log(entry);
-    word = "tere";
+    word = entry.word;
     word = word.replace(/\s/g, "-");
   });
 
