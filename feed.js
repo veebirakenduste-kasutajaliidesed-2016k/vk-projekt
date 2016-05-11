@@ -10,7 +10,7 @@ $(function() {
   $('#searchbutton').on("click", function(){
       var param = $('#searchfield').val();
       console.log(param);
-      getTweets(param);
+      getPosts(param);
   });
 
   $grid = $('#content').isotope({
@@ -22,7 +22,7 @@ $(function() {
 });
 
 
-function getTweets(param){
+function getPosts(param){
 
 	//ajax
   console.log("loading...");
@@ -33,8 +33,8 @@ function getTweets(param){
 console.log("loaded");
 			//stringi teen massiiviks
 			//var array = JSON.parse(data).statuses;
-
-			console.log(data);
+      var array = JSON.parse(data);
+			console.log(array);
 			//printTweets(array);
 
 		},
@@ -45,17 +45,19 @@ console.log("loaded");
 
 }
 
-function printTweets(newTweets){
+function printPosts(newPosts){
 
 	var html = '';
 
-	$(newTweets).each(function(i, tweet){
+	$(newPosts).each(function(i, post){
 
 		html += '<div class="item">'+
-
-			'<div class="profile-image" style="background-image:url('+tweet.user.profile_image_url.replace("_normal", "")+')"></div>'+
-			'<p>'+tweet.user.name+'</p>'+
-			'<p>'+tweet.text+'</p>'+
+		
+			'<h1>'+post.title'</h1>'+
+			'<p>'+post.image+'</p>'+
+			'<p><a href='+post.href+'>'+post.title+'</p>'+
+			'<p>'+post.desc+'</p>'+
+			
 
 		'</div>';
 
@@ -63,10 +65,10 @@ function printTweets(newTweets){
 
 	//$("#content").append( $(html) );
 
-	var tweetsHTML = $(html);
+	var postsHTML = $(html);
 
-	$grid.prepend(tweetsHTML)
-	     .isotope('prepended', tweetsHTML)
+	$grid.prepend(postsHTML)
+	     .isotope('prepended', postsHTML)
 		 .isotope('layout');
 
 	//oota ja siis küsi uuesti
