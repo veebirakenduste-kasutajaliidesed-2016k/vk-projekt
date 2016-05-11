@@ -45,7 +45,7 @@ window.onload = function () {
 
 
   // Select Category
-  var selectCat = function () {
+  /*var selectCat = function () {
     if (chosenCategory === categories[0]) {
       catagoryName.innerHTML = "Kategooriaks on Eesti korvpalliklubid";
     } else if (chosenCategory === categories[1]) {
@@ -53,7 +53,7 @@ window.onload = function () {
     } else if (chosenCategory === categories[2]) {
       catagoryName.innerHTML = "Kategooriaks on Eesti linnad";
     }
-  };
+  };*/
 
   // Create geusses ul
    result = function () {
@@ -245,20 +245,24 @@ window.onload = function () {
 
   // Play
   play = function () {
-    categories = [
+  /*  categories = [
         ["rakvere-tarvas", "avis-rapla", "tartu-rock", "kalev-cramo", "audentes", "bc-valga"],
         ["suvi", "mandariinid", "klassikokkutulek", "vehkleja", "viimne-reliikvia", "raju-reede"],
         ["rakvere", "narva", "viljandi", "kuressaare", "paide", "rapla", "tamsalu", "tapa", "tartu"]
     ];
 
-    chosenCategory = categories[Math.floor(Math.random() * categories.length)];
+    chosenCategory = categories[Math.floor(Math.random() * categories.length)];*/
 
     var data = [{"word":"paks","syns":["ebasünnis","mahukas","pära","rase","suur","tihe","umbne"]},{"word":"armas","syns":["heatahtlik","kena","kena"]},{"word":"kallis","syns":["armas","kulukas","kõrge","väärtuslik","õilis"]},{"word":"kahvel","syns":["ehmunud","kahevahel","plaat"]},{"word":"hunt","syns":["julmur","kogenud","väga"]},{"word":"nupp","syns":["aru","kirjutis","pea"]},{"word":"pilt","syns":["film","foto","kujutlus","maal","seisund","vaade","ülevaade"]},{"word":"kiri","syns":["dokument","epistolaarne","kirjaoskus","kuulutus","käekiri","muster","mustriline","piibel","tekstuur","tõend"]},{"word":"vesi","syns":["higi","kusi","lurr","paljusõnalisus","veekogu"]},{"word":"hapnik","syns":["ainus","edev","haigutus","haruldus","hellik","herilane","hõre","hüpiknukk","hüppaja","katkendlik","kelk","lapergune","lihtsameelne","lõke","naine","pirtsakas","pops","pärg","rakkekohustuslane","võitlus"]},{"word":"meri","syns":["avameri","kiitlema","tusane"]},{"word":"ookena","syns":["enne","heatahtlik","kiiresti","noorelt","nõus","rohke"]},{"word":"juhe","syns":["autojuht","dirigent","hirmus","hoog","juhtiv","juhtum","kohev","koit","lõhn","nägu","saatja","suur","taipamatu","väga","värving"]},{"word":"valgus","syns":["headus","optiline","rõõm"]},{"word":"gravitatsioon","syns":["laevandus","laevasõit","lennundus","õnnitlus"]},{"word":"tume","syns":["madal","must","rõhuv","segane","tuhm","võhiklik"]},{"word":"s\u00e4rav","syns":["efektne","ere","rõõmus","tore"]},{"word":"j\u00e4me","syns":["ebasünnis","madal","paks","rohmakas","rohmakas","suur","sõmer"]},{"word":"kandiline","syns":["nurgeline","purjus","rohmakas"]},{"word":"kole","syns":["hirmus","suur","väga"]},{"word":"kiire","syns":["jõudus","kiirgus","rutt"]},{"word":"karvane","syns":["ebasünnis","karvik","rikas","vihane","õel"]},{"word":"hele","syns":["blond","ere","terav","valge","õnnelik"]},{"word":"kiilakas","syns":["kiilas","kõrvakiil","nudi"]},{"word":"paindlik","syns":["elastne","järeleandlik","nõtke","nõtke"]},{"word":"ilus","syns":["rohke","sobilik","tore"]},{"word":"hing","syns":["elu","hingamine","hingeelu","inimene","rind","õhk"]},{"word":"\u00fchendus","syns":["kommunikatsioon","liit","side"]},{"word":"nupp","syns":["aru","kirjutis","pea"]},{"word":"tark","syns":["kaine","keeruline","nõid"]},{"word":"loll","syns":["nõrgamõistuslik","piinlik","rumal","tobe","tobu","võhiklik"]},{"word":"\u00fcksik","syns":["ainus","haruldane","konkreetne","paaritu","ühene","üksildane"]},{"word":"libe","syns":["kaval","kiilas","leelis","pugejalik"]},{"word":"kuri","syns":["halb","halbus","karm","kurat","raske","ränk","suur","vihane","õel"]},{"word":"armas","syns":["heatahtlik","kena","kena"]},{"word":"sujuv","syns":["harmooniline","ladus","nõtke"]},{"word":"rumal","syns":["ebasünnis","nõrgamõistuslik","tobe","võhiklik"]},{"word":"tark","syns":["kaine","keeruline","nõid"]}];
     console.log(data);
 
-  //arvatab sõna
-    word = chosenCategory[Math.floor(Math.random() * chosenCategory.length)];
+  //arvatav sõna
+  data.forEach(function(entry){
+    console.log(entry);
+    word = "tere";
     word = word.replace(/\s/g, "-");
+  });
+
 
     buttons();
 
@@ -268,7 +272,7 @@ window.onload = function () {
     space = 0;
     result();
     comments();
-    selectCat();
+  //  selectCat();
     canvas();
   };
 
@@ -278,15 +282,15 @@ window.onload = function () {
 
     hint.onclick = function() {
 
-      hints = [
+  /*    hints = [
         ["Peatreeneriks Andres Sõber", "Peatreener Aivar Kuusmaa", "Heade mõtete linna koduklubi", "Kommivabrik", "Samanimeline spordikool", "Eesti kõige lõunapoolsem kossutiim"],
         ["Oskar Lutsu meistriteos", "Oscarile kandideerinud Eesti film", "Komöödia, kus üks peaosatäitja on Genka", "Peaaegu kandideeris Oscarile", "Gabriel", "Film 90-ndate Eestist"],
         ["Lääne-Virumaal", "Ida-Virumaal", "Viljandimaal", "Saaremaal", "Eesti süda", "Raplamaal", "Lääne-Virumaal", "Lääne-Virumaal", "Tartumaal"]
-    ];
+    ];*/
 
 //    var catagoryIndex = categories.indexOf(chosenCategory);
   //  var hintIndex = chosenCategory.indexOf(word);
-    showClue.innerHTML = "Vihje: - " +  hints [catagoryIndex][hintIndex];
+    showClue.innerHTML = "Sünonüümid: - " +  hints [catagoryIndex][hintIndex];
   };
 
    // Reset
