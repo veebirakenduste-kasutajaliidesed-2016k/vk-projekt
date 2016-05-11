@@ -60,18 +60,18 @@
     <div id="pano"></div>
 
     <script>
-	  var left =  59.453145;
+		var left =  59.453145;
 		var top_c = 24.692039;
 		var right = 59.427036;
 		var bottom = 24.823728;
-	  var tartu;
-    var score = 0;
+		var asukoht;
+		var score = 0;
 
 	  var pano;
 
       function initialize() {
 
-		//console.log(tartu);
+		//console.log(asukoht);
 
     //Add listener
 
@@ -88,20 +88,20 @@
         // võtab kliki peale mapi koordinaadid
                 map.addListener("click", function (event) {
 
-                  correct = new google.maps.LatLng({lat: tartu.lat, lng: tartu.lng});
+                  correct = new google.maps.LatLng({lat: asukoht.lat, lng: asukoht.lng});
 
                   var distance = google.maps.geometry.spherical.computeDistanceBetween (correct, event.latLng);
-                  var km = distance/1000;
+                  var km = Math.round(distance/1000.5);
                   var lopp;
                   if(km < 10){
-                    lopp = "\nÕIGE:" + score;
+                    lopp = "\n ÕIGE:" + km + "km mõõda";
                   }else{
-                    lopp = "\nLiigutusi:" + score;
+                    lopp = "\n Vale:" + km + "km mõõda";
                   }
                   alert(lopp);
                     var latitude = event.latLng.lat();
                     var longitude = event.latLng.lng();
-                //    var vahe = latitude - tartu.lat + longitude - tartu.lng;
+                //    var vahe = latitude - asukoht.lat + longitude - asukoht.lng;
                 //    console.log(vahe);
                 });
 
@@ -115,14 +115,14 @@
 
 	  function getPanorama(){
 		//console.log(bottom - Math.random()*(bottom-top_c));
-		tartu = {lat: left - Math.random()*(left-right), lng: bottom - Math.random()*(bottom-top_c)};
-	    //console.log(tartu);
+		asukoht = {lat: left - Math.random()*(left-right), lng: bottom - Math.random()*(bottom-top_c)};
+	    //console.log(asukoht);
 
 		var streetviewService = new google.maps.StreetViewService;
 
 		streetviewService.getPanorama(
 
-			{location: tartu, preference: google.maps.StreetViewPreference.NEAREST, radius: 500},
+			{location: asukoht, preference: google.maps.StreetViewPreference.NEAREST, radius: 500},
 
 			function(data, status){
 				if(!data){
