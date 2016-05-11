@@ -2,7 +2,7 @@
 	require_once("simple_html_dom.php");
 # http://php.net/manual/en/function.file-get-contents.php
 
-  $words = ['naljakas'];
+  $words = ['paks'];
 
   results($words[0]);
 
@@ -24,10 +24,12 @@ function results ($search){
       array_push($syns, $syn);
 
       //obje
-
+			echo $syn;
+			echo " ";
 	}
   //json_decode[]
-  var_dump($syns);
+  //var_dump($syns);
+
 
 
 
@@ -37,21 +39,3 @@ function results ($search){
 	$file_name = "cache.txt";
 
 	$requestMethod = "GET";
-
-/*
-	//faili sisu tagasi objektiks
-	$file_data = json_decode(file_get_contents($file_name));
-
-	//võrdlen aega
-	$delay = 10; //10 sekundit
-
-	//kas on möödunud vähem kui delayga määrasime
-	if(strtotime(date("c")) - (strtotime($file_data->date)) < $delay ){
-
-		//on liiga vähe möödas
-		echo json_encode($file_data);
-
-		return;
-
-	}
-*/
