@@ -16,9 +16,3 @@ Funktsionaalsus:
                 v0.3 Lisatud on hääl vale valiku korral.
                 v0.4 Mäng jääb ette, kui võrk kaob ära.
                 v0.5 Mängu saab juhtida häälkäsklustega.
-
-
-### Nõuded
-
-1. **README.md sisaldab:**
-    * andmete liikumise skeem loetava pildina (mis lehed ja mis andmeid mis lehel käideldakse);
