@@ -253,7 +253,17 @@ window.onload = function () {
 
     chosenCategory = categories[Math.floor(Math.random() * categories.length)];
 
+var xhttp = new XMLHttpRequest();
+xhttp.onreadystatechange = function() {
+  if (xhttp.readyState == 4 && xhttp.status == 200) {
+    var guessword = JSON
 
+  }
+};
+xhttp.open("GET", "createData.php", true);
+xhttp.send();
+
+  //prinditav sõna
     word = chosenCategory[Math.floor(Math.random() * chosenCategory.length)];
     word = word.replace(/\s/g, "-");
     //console.log(word);
