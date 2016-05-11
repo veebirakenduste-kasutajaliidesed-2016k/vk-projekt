@@ -4,6 +4,7 @@
     <title>Geolocation</title>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
     <style>
       html, body {
         height: 100%;
@@ -16,43 +17,18 @@
     </style>
   </head>
   <body>
+    <button id="menutoggle">menu</button>
+    <div id="menu">
+      <input type="text" id="username">
+      <select name="mapselect" id="mapselect">
+        <option value="map1">map1</option>
+        <option value="map2">map2</option>
+      </select>
+      <button id="start">start</button><br>
+      <button id="stop">stop</button>
+    </div>
     <div id="map"></div>
-    <script>
-      function initMap() {
-        // Initialize the Google Maps API v3
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 17,
-          mapTypeId: google.maps.MapTypeId.ROADMAP
-        });
-
-        var marker = null;
-
-        function autoUpdate() {
-          navigator.geolocation.getCurrentPosition(function(position) {
-            var newPoint = new google.maps.LatLng(position.coords.latitude,
-                                                  position.coords.longitude);
-            var lat = newPoint.lat();
-            console.log(lat);
-
-            if (marker) {
-              // Marker already created - Move it
-              marker.setPosition(newPoint);
-            }
-            else {
-              // Marker does not exist - Create it
-              marker = new google.maps.Marker({
-                position: newPoint,
-                map: map
-              });
-            }
-            map.setCenter(newPoint);
-          });
-          // Call the autoUpdate() function every 5 seconds
-          //setTimeout(autoUpdate, 1000);
-        }
-        autoUpdate();
-      }
-    </script>
+    <script src="gps.js"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDuq0LX-zgHInF8_dyogcUqXkBdM1K0gfk&callback=initMap">
     </script>
   </body>

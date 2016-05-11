@@ -3,13 +3,20 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Map</title>
-		<script src="maps.js" charset="utf-8"></script>
-		<script async defer
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAXPhXY7HwYWQRvMfDN5vJd6HuzKB9xaRY&callback=initMap">
+		<script>
+		getLocation();
+		function getLocation() {
+			if (navigator.geolocation) {
+					navigator.geolocation.getCurrentPosition(showPosition);
+			} else {
+					console.log("Geolocation is not supported by this browser.");
+			}
+		}
+		function showPosition(position) {
+			console.log("Latitude: " + position.coords.latitude + "Longitude: " + position.coords.longitude);
+		}
+
 		</script>
-		<style type="text/css">
-			html, body, #map-container { height: 100%; margin: 0; padding: 0;}
-	    </style>
 	</head>
 <body>
 	<div id="map-container"></div>
