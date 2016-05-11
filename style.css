@@ -1,0 +1,56 @@
+html{
+  height:100%;
+  margin:0;
+  padding:0;
+  background-color:NavajoWhite;
+}
+body{
+  border:ridge;
+  border-width: thick;
+  width:300px;
+  margin:auto;
+  background-color:white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+#clock, #date, #weekday, #myName, #busNumber, #busText, #busTime, #nextBusText{
+  text-align: center;
+}
+
+ul{
+  text-align: center;
+  margin-left: -40px;
+}
+
+li{
+  list-style: none;
+}
+
+#busNumber, #busText, #busTime{
+  margin-top: 0px;
+  margin-right: 0px;
+  margin-bottom: auto;
+  margin-left: auto;
+}
+
+#busNumber, #busTime{
+  font-weight: bold;
+  font-size: 50px;
+}
+
+#clock{
+  font-weight:900;
+  font-size: 300%;
+  font-family:
+}
+
+#date, #myName{
+  font-style: italic;
+}
+
+#myName{
+  font-family: 'Poiret One', cursive;
+  font-weight: bold;
+}
