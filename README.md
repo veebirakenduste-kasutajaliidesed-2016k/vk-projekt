@@ -16,3 +16,7 @@ Funktsionaalsus:
                 v0.3 Lisatud on hääl vale valiku korral.
                 v0.4 Mäng jääb ette, kui võrk kaob ära.
                 v0.5 Mängu saab juhtida häälkäsklustega.
+
+Kasutasime createData.php faili, et saada oma sõnade massiivis olevatele sõnadele sünonüümid.
+Kuvasime need php-s välja ja saime copy-pasteda omale massiivi, kus sõnad olid vastavuses sünonüümidega.
+Nüüd kuvatakse "Vihje" nuppu vajutades arvatava sõna sünonüüme.
