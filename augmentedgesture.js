@@ -63,7 +63,7 @@ AugmentedGesture.MicroeventMixin	= function(destObj){
 	destObj.trigger	= function(event /* , args... */){
 		if(this._events === undefined) 	this._events	= {};
 		if( this._events[event] === undefined )	return;
-		var tmpArray	= this._events[event].slice(); 
+		var tmpArray	= this._events[event].slice();
 		for(var i = 0; i < tmpArray.length; i++){
 			tmpArray[i].apply(this, Array.prototype.slice.call(arguments, 1))
 		}
@@ -145,7 +145,7 @@ AugmentedGesture.prototype.domElementThumbnail	= function(){
 	domElement.style.top		= '0px';
 	domElement.style.left		= '0px';
 	domElement.style.width		= "320px";
-	domElement.style.height		= "240px";		
+	domElement.style.height		= "240px";
 	// for chained API
 	return this;
 }
@@ -294,7 +294,7 @@ AugmentedGesture.prototype.enableDatGui	= function(){
 		}.bind(this));
 
 		// try to save value but doesnt work
-		//gui.remember(guiOpts);		
+		//gui.remember(guiOpts);
 	}.bind(this));
 	return this;	// for chained API
 };
@@ -357,8 +357,8 @@ AugmentedGesture.prototype.pointers	= function(){
 
 AugmentedGesture.prototype._videoCtor	= function(){
 	var video	= document.createElement('video');
-	video.width	= 320;
-	video.height	= 240;
+	video.width	= 640;
+	video.height	= 480;
 	video.autoplay	= true;
 	navigator.webkitGetUserMedia({video: true}, function(stream){
 		video.src	= webkitURL.createObjectURL(stream);
@@ -390,19 +390,19 @@ AugmentedGesture.prototype._update	= function()
 	// update canvas size if needed
 	if( canvas.width  != guiOpts.general.video.w )	canvas.width	= guiOpts.general.video.w;
 	if( canvas.height != guiOpts.general.video.h )	canvas.height	= guiOpts.general.video.h;
-	
+
 	var canvasW	= canvas.width;
 	var canvasH	= canvas.height;
-	
+
 	// draw video into a canvas2D
 	ctx.drawImage(this._video, 0, 0, canvas.width, canvas.height);
 
 	var imageData	= ctx.getImageData(0,0, canvas.width, canvas.height);
-	// flip horizontal 
+	// flip horizontal
 	ImgProc.fliph(imageData);
 	//ImgProc.luminance(imageData);
 
-	
+
 	function imageDataToPointer(imageData, pointerId){
 		var tmpImgData	= ImgProc.duplicate(imageData, ctx);
 		var pointerOpts	= guiOpts.pointers[pointerId];
@@ -453,7 +453,7 @@ AugmentedGesture.prototype._update	= function()
 
 		// is immediate pointer invalid
 		var pointerInv	= (pointerMax.h.max === 0 || pointerMax.v.max === 0 ) ? true : false;
-		// if immediate pointer is invalid, 
+		// if immediate pointer is invalid,
 		if( pointerInv ){
 			// if it was invalid already, do nothing
 			if( this._pointersPos[pointerId] === null )	return;
@@ -624,7 +624,7 @@ ImgProc.copy	= function(srcImgData, dstImgData)
 
 /**
  * Sobel operator
- * 
+ *
  * see http://en.wikipedia.org/wiki/Sobel_operator
 */
 ImgProc.sobel = function(srcImgProc, dstImgProc)
@@ -642,7 +642,7 @@ ImgProc.sobel = function(srcImgProc, dstImgProc)
 				[ 0, 0, 0],
 				[ 1, 2, 1]
 			];
-  
+
 	var greyAt = function(p, x, y) {
 		var offset	= x * 4 + y * w * 4;
 		return p[offset] * 0.3 + p[offset + 1] * 0.59 + p[offset + 2] * 0.11;
@@ -653,13 +653,13 @@ ImgProc.sobel = function(srcImgProc, dstImgProc)
 			var px = (sobel_x[0][0] * greyAt(pSrc, x-1,y-1)) + (sobel_x[0][1] * greyAt(pSrc, x,y-1)) + (sobel_x[0][2] * greyAt(pSrc, x+1,y-1)) +
 				 (sobel_x[1][0] * greyAt(pSrc, x-1,y))   + (sobel_x[1][1] * greyAt(pSrc, x,y))   + (sobel_x[1][2] * greyAt(pSrc, x+1,y))   +
 				 (sobel_x[2][0] * greyAt(pSrc, x-1,y+1)) + (sobel_x[2][1] * greyAt(pSrc, x,y+1)) + (sobel_x[2][2] * greyAt(pSrc, x+1,y+1))
-			
+
 			var py = (sobel_y[0][0] * greyAt(pSrc, x-1,y-1)) + (sobel_y[0][1] * greyAt(pSrc, x,y-1)) + (sobel_y[0][2] * greyAt(pSrc, x+1,y-1)) +
 				 (sobel_y[1][0] * greyAt(pSrc, x-1,y))   + (sobel_y[1][1] * greyAt(pSrc, x,y))   + (sobel_y[1][2] * greyAt(pSrc, x+1,y))   +
 				 (sobel_y[2][0] * greyAt(pSrc, x-1,y+1)) + (sobel_y[2][1] * greyAt(pSrc, x,y+1)) + (sobel_y[2][2] * greyAt(pSrc, x+1,y+1))
-	
+
 			var val = Math.ceil(Math.sqrt(px * px + py * py));
-			
+
 			var offset	= y * w * 4 + x * 4;
 			pDst[offset+0]	= val;
 			pDst[offset+1]	= val;
@@ -770,12 +770,12 @@ ImgProc.windowedAverageHistogram	= function(hist, width)
 
 	for(var i = 0; i < hist.length; i++){
 		// update window forward
-		if( i + halfW < hist.length ){	
+		if( i + halfW < hist.length ){
 			winSum	+= origHist[i+halfW];
 			winLen	++;
 		}
 		// update window backward
-		if( i-halfW >= 0 ){	
+		if( i-halfW >= 0 ){
 			winSum	-= origHist[i-halfW];
 			winLen	--;
 		}
@@ -920,7 +920,7 @@ ImgProc.computeColorHistogram	= function(imageData)
 		g	: new Float64Array(256),
 		b	: new Float64Array(256)
 	};
-	
+
 	for(var i = 0, y = 0; y < h; y++){
 		for(var x = 0; x < w; x++, i += 4){
 			hist.r[ p[i+0] ]++;
@@ -1020,20 +1020,20 @@ ImgProc.displayColorHistogram	= function(imageData, colorHistogram)
     var vendors = ['ms', 'moz', 'webkit', 'o'];
     for(var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
         window.requestAnimationFrame = window[vendors[x]+'RequestAnimationFrame'];
-        window.cancelAnimationFrame = window[vendors[x]+'CancelAnimationFrame'] 
+        window.cancelAnimationFrame = window[vendors[x]+'CancelAnimationFrame']
                                    || window[vendors[x]+'CancelRequestAnimationFrame'];
     }
- 
+
     if (!window.requestAnimationFrame)
         window.requestAnimationFrame = function(callback, element) {
             var currTime = new Date().getTime();
             var timeToCall = Math.max(0, 16 - (currTime - lastTime));
-            var id = window.setTimeout(function() { callback(currTime + timeToCall); }, 
+            var id = window.setTimeout(function() { callback(currTime + timeToCall); },
               timeToCall);
             lastTime = currTime + timeToCall;
             return id;
         };
- 
+
     if (!window.cancelAnimationFrame)
         window.cancelAnimationFrame = function(id) {
             clearTimeout(id);
@@ -1091,7 +1091,7 @@ dat.utils.css = (function () {
 
 
 dat.utils.common = (function () {
-  
+
   var ARR_EACH = Array.prototype.forEach;
   var ARR_SLICE = Array.prototype.slice;
 
@@ -1101,38 +1101,38 @@ dat.utils.common = (function () {
    * http://documentcloud.github.com/underscore/
    */
 
-  return { 
-    
+  return {
+
     BREAK: {},
-  
+
     extend: function(target) {
-      
+
       this.each(ARR_SLICE.call(arguments, 1), function(obj) {
-        
+
         for (var key in obj)
-          if (!this.isUndefined(obj[key])) 
+          if (!this.isUndefined(obj[key]))
             target[key] = obj[key];
-        
+
       }, this);
-      
+
       return target;
-      
+
     },
-    
+
     defaults: function(target) {
-      
+
       this.each(ARR_SLICE.call(arguments, 1), function(obj) {
-        
+
         for (var key in obj)
-          if (this.isUndefined(target[key])) 
+          if (this.isUndefined(target[key]))
             target[key] = obj[key];
-        
+
       }, this);
-      
+
       return target;
-    
+
     },
-    
+
     compose: function() {
       var toCall = ARR_SLICE.call(arguments);
             return function() {
@@ -1143,34 +1143,34 @@ dat.utils.common = (function () {
               return args[0];
             }
     },
-    
+
     each: function(obj, itr, scope) {
 
-      
-      if (ARR_EACH && obj.forEach === ARR_EACH) { 
-        
+
+      if (ARR_EACH && obj.forEach === ARR_EACH) {
+
         obj.forEach(itr, scope);
-        
+
       } else if (obj.length === obj.length + 0) { // Is number but not NaN
-        
+
         for (var key = 0, l = obj.length; key < l; key++)
-          if (key in obj && itr.call(scope, obj[key], key) === this.BREAK) 
+          if (key in obj && itr.call(scope, obj[key], key) === this.BREAK)
             return;
-            
+
       } else {
 
-        for (var key in obj) 
+        for (var key in obj)
           if (itr.call(scope, obj[key], key) === this.BREAK)
             return;
-            
+
       }
-            
+
     },
-    
+
     defer: function(fnc) {
       setTimeout(fnc, 0);
     },
-    
+
     toArray: function(obj) {
       if (obj.toArray) return obj.toArray();
       return ARR_SLICE.call(obj);
@@ -1179,41 +1179,41 @@ dat.utils.common = (function () {
     isUndefined: function(obj) {
       return obj === undefined;
     },
-    
+
     isNull: function(obj) {
       return obj === null;
     },
-    
+
     isNaN: function(obj) {
       return obj !== obj;
     },
-    
+
     isArray: Array.isArray || function(obj) {
       return obj.constructor === Array;
     },
-    
+
     isObject: function(obj) {
       return obj === Object(obj);
     },
-    
+
     isNumber: function(obj) {
       return obj === obj+0;
     },
-    
+
     isString: function(obj) {
       return obj === obj+'';
     },
-    
+
     isBoolean: function(obj) {
       return obj === false || obj === true;
     },
-    
+
     isFunction: function(obj) {
       return Object.prototype.toString.call(obj) === '[object Function]';
     }
-  
+
   };
-    
+
 })();
 
 
@@ -1388,7 +1388,7 @@ dat.dom.dom = (function (common) {
   var dom = {
 
     /**
-     * 
+     *
      * @param elem
      * @param selectable
      */
@@ -1608,7 +1608,7 @@ dat.dom.dom = (function (common) {
 
     // http://stackoverflow.com/posts/2684561/revisions
     /**
-     * 
+     *
      * @param elem
      */
     isActive: function(elem) {
@@ -1972,7 +1972,7 @@ dat.controllers.NumberControllerSlider = (function (NumberController, dom, css, 
    *
    * @extends dat.controllers.Controller
    * @extends dat.controllers.NumberController
-   * 
+   *
    * @param {Object} object The object to be manipulated
    * @param {string} property The name of the property to be manipulated
    * @param {Number} minValue Minimum allowed value
@@ -1989,11 +1989,11 @@ dat.controllers.NumberControllerSlider = (function (NumberController, dom, css, 
 
     this.__background = document.createElement('div');
     this.__foreground = document.createElement('div');
-    
+
 
 
     dom.bind(this.__background, 'mousedown', onMouseDown);
-    
+
     dom.addClass(this.__background, 'slider');
     dom.addClass(this.__foreground, 'slider-fg');
 
@@ -2011,7 +2011,7 @@ dat.controllers.NumberControllerSlider = (function (NumberController, dom, css, 
 
       var offset = dom.getOffset(_this.__background);
       var width = dom.getWidth(_this.__background);
-      
+
       _this.setValue(
       	map(e.clientX, offset.left, offset.left + width, _this.__min, _this.__max)
       );
@@ -2068,7 +2068,7 @@ dat.controllers.NumberControllerSlider = (function (NumberController, dom, css, 
 	}
 
   return NumberControllerSlider;
-  
+
 })(dat.controllers.NumberController,
 dat.dom.dom,
 dat.utils.css,
@@ -2116,7 +2116,7 @@ dat.controllers.FunctionController = (function (Controller, dom, common) {
       FunctionController.prototype,
       Controller.prototype,
       {
-        
+
         fire: function() {
           if (this.__onChange) {
             this.__onChange.call(this);
@@ -2191,10 +2191,10 @@ dat.controllers.BooleanController = (function (Controller, dom, common) {
         },
 
         updateDisplay: function() {
-          
+
           if (this.getValue() === true) {
             this.__checkbox.setAttribute('checked', 'checked');
-            this.__checkbox.checked = true;    
+            this.__checkbox.checked = true;
           } else {
               this.__checkbox.checked = false;
           }
@@ -3957,7 +3957,7 @@ dat.controllers.StringController = (function (Controller, dom, common) {
         this.blur();
       }
     });
-    
+
 
     function onChange() {
       _this.setValue(_this.__input.value);
@@ -4083,7 +4083,7 @@ dat.controllers.ColorController = (function (Controller, dom, Color, interpret, 
       borderRadius: '12px',
       zIndex: 1
     });
-    
+
     common.extend(this.__hue_knob.style, {
       position: 'absolute',
       width: '15px',
@@ -4106,7 +4106,7 @@ dat.controllers.ColorController = (function (Controller, dom, Color, interpret, 
       height: '100%',
       background: 'none'
     });
-    
+
     linearGradient(value_field, 'top', 'rgba(0,0,0,0)', '#000');
 
     common.extend(this.__hue_field.style, {
@@ -4293,16 +4293,16 @@ dat.controllers.ColorController = (function (Controller, dom, Color, interpret, 
       }
 
   );
-  
+
   var vendors = ['-moz-','-o-','-webkit-','-ms-',''];
-  
+
   function linearGradient(elem, x, a, b) {
     elem.style.background = '';
     common.each(vendors, function(vendor) {
       elem.style.cssText += 'background: ' + vendor + 'linear-gradient('+x+', '+a+' 0%, ' + b + ' 100%); ';
     });
   }
-  
+
   function hueGradient(elem) {
     elem.style.background = '';
     elem.style.cssText += 'background: -moz-linear-gradient(top,  #ff0000 0%, #ff00ff 17%, #0000ff 34%, #00ffff 50%, #00ff00 67%, #ffff00 84%, #ff0000 100%);'
@@ -4637,7 +4637,7 @@ dat.dom.CenteredDiv = (function (dom, common) {
   CenteredDiv.prototype.show = function() {
 
     var _this = this;
-    
+
 
 
     this.backgroundElement.style.display = 'block';
@@ -4687,7 +4687,7 @@ dat.dom.CenteredDiv = (function (dom, common) {
     this.domElement.style.left = window.innerWidth/2 - dom.getWidth(this.domElement) / 2 + 'px';
     this.domElement.style.top = window.innerHeight/2 - dom.getHeight(this.domElement) / 2 + 'px';
   };
-  
+
   function lockScroll(e) {
     console.log(e);
   }

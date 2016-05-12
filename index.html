@@ -1,0 +1,47 @@
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Cyberball</title>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="menu.css">
+<link href='https://fonts.googleapis.com/css?family=Press+Start+2P' rel='stylesheet' type='text/css'>
+</head>
+<body>
+<div id="hideall">
+</div>
+<div id="page">
+<div id="loading">
+  <h1>Loading...</h1>
+</div>
+<div align="center" class="logo">
+  <img src="graphics/cyberball.png" alt="CyberBall">
+</div>
+  <div align="center" class="play">
+  <a href="game.html"><button class="btn btn-primary btn-lg"> Play game </button></a>
+  </div>
+<div align="center" class="container">
+  <button type="button" class="btn btn-info btn-lg" data-toggle="collapse" data-target="#demo">How to play</button>
+  <div id="demo" class="collapse">
+    <br>
+    <p>Holding a blue object in your hand, use your hand to deflect incoming balls!<p>
+    <br>
+  </div>
+</div>
+<div class="credits">
+  <br>
+  <p>Created by Martin Viidik @ 2016<p>
+  <p>Created for Web application user interfaces course<p>
+</div>
+<div class="rectangle"></div>
+</div>
+<script language="javascript" type="text/javascript">
+  $("#loading").show();
+  $(window).on('load', function() {
+  $("#hideall").hide();
+  $("#loading").hide();
+});
+</script>
+</body>
+</html>

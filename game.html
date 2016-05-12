@@ -4,35 +4,22 @@
 	<meta charset="UTF-8">
 	<title>CyberBall</title>
 	<script src="augmentedgesture.js"></script>
+	<link rel="stylesheet" type="text/css" href="game.css">
+	<link href='https://fonts.googleapis.com/css?family=Press+Start+2P' rel='stylesheet' type='text/css'>
 
 	<script src="game.js"></script>
-	<style>
-		body, html{
-			margin: 0;
-			padding: 0;
-		}
-
-		#canvas{
-			position:absolute;
-		}
-		#score{
-			position:absolute;
-		}
-		#time{
-			float:right;
-			font-size: 2em;
-		}
-
-	</style>
-
 </head>
 <body>
+	<div id="time"></div>
 	<div id="health"></div>
 	<div id="score"></div>
-	<div id="time"></div>
 	<div style="position: relative;">
 		<canvas id="canvas" width="1366" height="768"></canvas>
 		<canvas id="drawing" style="position: absolute; left: 0; top: 0;"  width="1366" height="768"></canvas>
+	</div>
+	<div class="End" style="display:none">
+		<h1>Game Over</h1>
+		<p>Your score was: <span id="score"></span></p>
 	</div>
 
 
@@ -60,8 +47,8 @@ var a	= document.getElementById('drawing');
 var c		= a.getContext('2d');
 
 aGesture.bind("mousemove."+pointerId, function(event){
-var x	= event.x * window.innerWidth;
-var y	= event.y * window.innerHeight;
+var x	= event.x * (window.innerWidth - 200);
+var y	= event.y * (window.innerHeight - 200);
 console.log(x + ' ' + y);
 
 var b = {};

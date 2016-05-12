@@ -4,6 +4,7 @@ var ctx,
 
 var startTime, ballCount = 1, hits = 0, score = 0;
 var clock;
+var audio = new Audio('sound/hit.wav');
 
 var bx = 0,  by = 0;
 
@@ -40,6 +41,7 @@ function increase(){
 
 	for(var i = 0; i < balls.length; i++){
 		if(balls[i].grow()){
+			audio.play();
 			health++;
 			//Multiplier läheb tagasi üheks
 			multiplier = 1;
@@ -61,9 +63,9 @@ function increase(){
 	if(health > 5){
 		window.clearInterval(clock);
 		var tulemus = Math.round((new Date() - startTime) / 1000);
-		var c = confirm("Try again ?");
 
-		if(!c) {window.location = "http://www.google.com/";}
+		var c = confirm("Try again ?");
+		if(!c) {window.location = "index.html";}
 		if(c) {location.reload();}
 	}
 
@@ -121,4 +123,10 @@ function Ring(x, y, r){
 
 function pythagoras(ux, uy, mx, my){
 	return Math.sqrt(Math.pow(ux - mx, 2) + Math.pow(uy - my, 2));
+}
+
+function PlaySound(path) {
+  var audioElement = document.createElement('sound');
+  audioElement.setAttribute('src', path);
+  audioElement.play();
 }
