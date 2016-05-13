@@ -45,6 +45,7 @@ img {
   font-size: 26px;
   text-align: center;
   animation: fadeInUp 3s;
+  text-shadow: 1px 2px black;
   font-family: 'Press Start 2P', cursive;
 }
 .container {
@@ -53,6 +54,7 @@ img {
   color: white;
   font-size: 26px;
   text-align: center;
+  text-shadow: 1px 2px black;
   animation: fadeInUp 3s;
   z-index: 5;
   font-family: 'Press Start 2P', cursive;

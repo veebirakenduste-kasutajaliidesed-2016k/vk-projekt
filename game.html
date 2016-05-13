@@ -3,6 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>CyberBall</title>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 	<script src="augmentedgesture.js"></script>
 	<link rel="stylesheet" type="text/css" href="game.css">
 	<link href='https://fonts.googleapis.com/css?family=Press+Start+2P' rel='stylesheet' type='text/css'>
@@ -10,16 +11,27 @@
 	<script src="game.js"></script>
 </head>
 <body>
+	</div>
+	<div id="game">
 	<div id="time"></div>
-	<div id="health"></div>
 	<div id="score"></div>
+	<div id="health"></div>
+	<div id="ui"><p>Press esc to return to main menu</p></div>
+	<div class="bg"></div>
+	<div class="hidden"></div>
 	<div style="position: relative;">
 		<canvas id="canvas" width="1366" height="768"></canvas>
 		<canvas id="drawing" style="position: absolute; left: 0; top: 0;"  width="1366" height="768"></canvas>
 	</div>
-	<div class="End" style="display:none">
-		<h1>Game Over</h1>
-		<p>Your score was: <span id="score"></span></p>
+	</div>
+	<div class="Black" id="Black"></div>
+	<div class="End" id="End">
+		<h1>Game Over!</h1>
+		<br></br>
+		<p>Press enter to retry</p>
+		<script>
+			$("#End").hide();
+		</script>
 	</div>
 
 

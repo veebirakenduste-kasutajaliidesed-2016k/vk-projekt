@@ -5,10 +5,14 @@ var ctx,
 var startTime, ballCount = 1, hits = 0, score = 0;
 var clock;
 var audio = new Audio('sound/hit.wav');
+var gameover = new Audio('sound/gameover.wav');
 
 var bx = 0,  by = 0;
 
 window.onload = function(){
+	$("#Black").fadeOut();
+	$('.bg').toggleClass('hidden');
+	$('.bg').css('background', newGradient());
 	canvas = document.getElementById("canvas");
 	ctx = canvas.getContext("2d");
 
@@ -20,6 +24,7 @@ window.onload = function(){
 
 	canvas.addEventListener("click", control);
 	clock = window.setInterval(increase, 40);
+
 };
 
 function drawBalls(amount){
@@ -41,7 +46,11 @@ function increase(){
 
 	for(var i = 0; i < balls.length; i++){
 		if(balls[i].grow()){
-			audio.play();
+			if (health < 5) {
+				$('.bg').toggleClass('hidden');
+				$('.bg').css('background', newGradient());
+				audio.play();
+			}
 			health++;
 			//Multiplier läheb tagasi üheks
 			multiplier = 1;
@@ -55,7 +64,7 @@ function increase(){
 		balls[i].draw();
 	}
 
-	document.getElementById("health").innerHTML = "";
+	document.getElementById("health").innerHTML = "Damage: ";
 	for(i = 0; i < health; i++){
 		document.getElementById("health").innerHTML += "x";
 	}
@@ -63,10 +72,18 @@ function increase(){
 	if(health > 5){
 		window.clearInterval(clock);
 		var tulemus = Math.round((new Date() - startTime) / 1000);
+		gameover.play();
 
-		var c = confirm("Try again ?");
-		if(!c) {window.location = "index.html";}
-		if(c) {location.reload();}
+		$(document).ready(function(){
+        $('#game').fadeOut();
+				$('#End').fadeIn();
+    });
+		document.onkeydown = function(evt) {
+		    evt = evt || window.event;
+		    if (evt.keyCode == 13) {
+		        location.reload();
+		    }
+		};
 	}
 
 }
@@ -80,7 +97,7 @@ function control(e){
 				// Iga 10 järjest löögi korral läheb skoori multiplier suuremaks
 				multiplier = multiplier + 10 - 1;
 			}
-			if(score === 0){document.getElementById("score").innerHTML = "";}
+			if(score === 0){document.getElementById("score").innerHTML = "1";}
 			score = hits * multiplier;
 			document.getElementById("score").innerHTML = (score);
 			drawBalls(ballCount);
@@ -129,4 +146,24 @@ function PlaySound(path) {
   var audioElement = document.createElement('sound');
   audioElement.setAttribute('src', path);
   audioElement.play();
+}
+
+function newGradient() {
+    var c1 = {
+        r: Math.floor(Math.random()*255),
+        g: Math.floor(Math.random()*255),
+        b: Math.floor(Math.random()*255)
+    };
+    var c2 = {
+        r: Math.floor(Math.random()*255),
+        g: Math.floor(Math.random()*255),
+        b: Math.floor(Math.random()*255)
+    };
+    c1.rgb = 'rgb('+c1.r+','+c1.g+','+c1.b+')';
+    c2.rgb = 'rgb('+c2.r+','+c2.g+','+c2.b+')';
+    return 'radial-gradient(at top left, '+c1.rgb+', '+c2.rgb+')';
+}
+
+function rollBg() {
+    $('.bg').css('background', newGradient());
 }

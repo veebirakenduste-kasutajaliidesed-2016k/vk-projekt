@@ -1,41 +1,160 @@
-body,
-html {
-    width: 100%;
-    height: 100%;
+html, body {
     margin: 0;
-    padding: 0;
+    height: 100%;
+    width:100%;
     position: fixed;
-    background-color:	#A0A0A0 ;
-    background-image: linear-gradient(white 2px, transparent 2px),
-    linear-gradient(90deg, white 2px, transparent 2px),
-    linear-gradient(rgba(255,255,255,.3) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,.3) 1px, transparent 1px);
-    background-size:100px 100px, 100px 100px, 20px 20px, 20px 20px;
-    background-position:-2px -2px, -2px -2px, -1px -1px, -1px -1px
-}
-main {
-	position: absolute;
-	top: 0;
-	bottom: 0;
 }
 
+.bg {
+    position: fixed;
+    width: 100%; height: 100%;
+    transition: opacity 5s;
+}
+.hidden {
+    opacity: 25;
+}
+
+
 #health {
-  font-size:26px;
+  font-size:18px;
   color: red;
+  background:black;
+  text-shadow: 1px 2px black;
   font-family: 'Press Start 2P', cursive;
 }
 
 #canvas{
-	position:absolute;
+	position:fixed;
 }
 #score{
-	position:absolute;
+  background: black;
+  font-size:20px;
   color: blue;
-  font-size:22px;
+  text-shadow: 1px 2px black;
   font-family: 'Press Start 2P', cursive;
 }
 #time{
+  bottom: 5px;
   float:right;
   font-size: 18px;
+  text-shadow: 1px 2px black;
+  color:white;
   font-family: 'Press Start 2P', cursive;
+}
+
+#ui p {
+  font-family: 'Press Start 2P', cursive;
+  text-shadow: 1px 2px black;
+  color:white;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width:100%;
+  height:5px;
+}
+
+#End {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: black;
+
+}
+
+#End p {
+  color: white;
+  font-family: 'Press Start 2P', cursive;
+  text-align: center;
+  animation: fadeInUp 2s;
+}
+
+#End h1 {
+  font-family: 'Press Start 2P', cursive;
+  margin-top: 300px;
+  text-align: center;
+  color:white;
+  animation: fadeInDown 2s;
+}
+
+#Black {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: black;
+
+}
+
+@keyframes fadein {
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+
+@-webkit-keyframes fadeInUp {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 100%, 0);
+    transform: translate3d(0, 100%, 0);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 100%, 0);
+    transform: translate3d(0, 100%, 0);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
+.fadeInUp {
+  -webkit-animation-name: fadeInUp;
+  animation-name: fadeInUp;
+}
+
+@-webkit-keyframes fadeInDown {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
+.fadeInDown {
+  -webkit-animation-name: fadeInDown;
+  animation-name: fadeInDown;
 }
