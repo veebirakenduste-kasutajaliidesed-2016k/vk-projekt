@@ -1,0 +1,30 @@
+.ui-counter-container,
+.ui-counter-button,
+.ui-counter-value {
+	display: inline-block;
+	margin: 0px;
+	padding: 0px;
+}
+
+.ui-counter-container {
+	border: 2px solid #ccc;
+	border-radius: 4px;
+	text-align: center;
+}
+
+.ui-counter-button {
+	background: #ccc;
+	width: 25px;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-khtml-user-select: none;
+}
+
+.ui-counter-value {
+	font-size: 12px;
+}
+
+.ui-counter-value-empty {
+	color: #ccc;
+}

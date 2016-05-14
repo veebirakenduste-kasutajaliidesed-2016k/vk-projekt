@@ -91,11 +91,14 @@
 
         // console.log(track.baskets[0].nr);
         for(var i = 0; i < track.baskets.length; i++){
+
           var basket_nr = track.baskets[i].nr;
           var par_nr = track.baskets[i].par;
           document.querySelector('#basket-nr').innerHTML = "Korv number "+basket_nr+" par = "+par_nr;
-          var result = prompt("Tulemus");
-          console.log(basket_nr, par_nr, result);
+          //var result = prompt("Tulemus");
+          var result =  document.querySelector('#counter').innerHTML ;
+          document.querySelector('.save-result').addEventListener('click', this.saveData.bind(this));
+
         }
 
 
@@ -132,6 +135,10 @@
       }
 
 
+    },
+
+    saveData: function(){
+      console.log(basket_nr, par_nr, result);
     },
 
     bindEvents: function(){

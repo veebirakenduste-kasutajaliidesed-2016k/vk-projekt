@@ -3,9 +3,12 @@
  <head>
    <meta charset="UTF-8">
    <title>Discgolf</title>
+   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+   <script src="./counter.jquery.js"></script>
+   <link rel="stylesheet" href="./counter.jquery.css">
+
    <script src="tracks.js" charset="utf-8"></script>
    <script src="app.js" charset="utf-8"></script>
-
    <link rel="stylesheet" href="style.css" title="styles" type="text/css" media="screen" charset="utf-8">
  </head>
  <body>
@@ -50,10 +53,20 @@
   <div id="game-view">
     <h1></h1>
     <div id="basket-nr"> </div>
-<!--
-    <input type="number" name="result" class="result"><br>
+    <input type="text" id="counter">
+    <script>
+    	$('document').ready( function () {
+    		$("#counter").counter({
+    			minVal: -10,
+    			maxVal: 10,
+    			singleName: 'PAR',
+    			defaultName: 'PARs'
+    		});
+    	});
+    </script>
+    <br>
     <button class="save-result">Edasi</button>
--->
+
   </div>
 
 </main>
