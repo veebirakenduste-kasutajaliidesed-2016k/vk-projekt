@@ -69,6 +69,7 @@
         var id = Discgolf.instance.currentGame.selected_track;
         var track = Discgolf.instance.tracks[id];
         console.log(track.name);
+        console.log(id);
         document.querySelector('#info-view h1').innerHTML = "Mine mängima "+track.name;
         //  var html = "";
         //  html += "<input type='text' name='name' class='name'>";
@@ -85,13 +86,18 @@
         console.log('>>>>mäng');
         var id = Discgolf.instance.currentGame.selected_track;
         var track = Discgolf.instance.tracks[id];
-        var basket_nr = track.baskets[0].nr;
-        var par_nr = track.baskets[0].par;
+
         document.querySelector('#game-view h1').innerHTML = track.name;
 
-        console.log(track.baskets[0].nr);
+        // console.log(track.baskets[0].nr);
+        for(var i = 0; i < track.baskets.length; i++){
+          var basket_nr = track.baskets[i].nr;
+          var par_nr = track.baskets[i].par;
+          document.querySelector('#basket-nr').innerHTML = "Korv number "+basket_nr+" par = "+par_nr;
+          var result = prompt("Tulemus");
+          console.log(basket_nr, par_nr, result);
+        }
 
-        document.querySelector('#basket-nr').innerHTML = "Korv number "+basket_nr+" par = "+par_nr;
 
       }
     }
