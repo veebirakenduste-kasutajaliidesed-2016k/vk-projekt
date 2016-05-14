@@ -83,6 +83,16 @@
     'game-view': {
       'render': function(){
         console.log('>>>>mäng');
+        var id = Discgolf.instance.currentGame.selected_track;
+        var track = Discgolf.instance.tracks[id];
+        var basket_nr = track.baskets[0].nr;
+        var par_nr = track.baskets[0].par;
+        document.querySelector('#game-view h1').innerHTML = track.name;
+
+        console.log(track.baskets[0].nr);
+
+        document.querySelector('#basket-nr').innerHTML = "Korv number "+basket_nr+" par = "+par_nr;
+
       }
     }
 
@@ -149,7 +159,7 @@
       var name = document.querySelector('.name').value;
       console.log("nimi on "+name);
       if(name === ""){
-    
+
         alert('nimi ei saa  olla tühi');
         return;
 
