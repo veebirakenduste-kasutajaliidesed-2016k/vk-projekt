@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>CyberBall</title>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+	<script src="augmentedgesture.js"></script>
+	<link rel="stylesheet" type="text/css" href="game.css">
+	<link href='https://fonts.googleapis.com/css?family=Press+Start+2P' rel='stylesheet' type='text/css'>
+
+	<script src="game.js"></script>
+</head>
+<body>
+	</div>
+	<div id="game">
+	<div id="time"></div>
+	<div id="score"></div>
+	<div id="health"></div>
+	<div id="ui"><p>Press esc to return to main menu</p></div>
+	<div class="bg"></div>
+	<div class="hidden"></div>
+	<div style="position: relative;">
+		<canvas id="canvas" width="1366" height="768"></canvas>
+		<canvas id="drawing" style="position: absolute; left: 0; top: 0;"  width="1366" height="768"></canvas>
+	</div>
+	</div>
+	<div class="Black" id="Black"></div>
+	<div class="End" id="End">
+		<h1>Game Over!</h1>
+		<br></br>
+		<p>Press enter to retry</p>
+		<script>
+			$("#End").hide();
+		</script>
+	</div>
+
+
+</body>
+<script>
+
+
+console.log('here');
+
+var aGesture	= new AugmentedGesture().start();
+
+//setTimeout(function(){
+//	aGesture.destroy();
+//}, 2000)
+var pointerId	= "Green ball";
+var pointerOpts	= new AugmentedGesture.OptionPointer();
+pointerOpts.pointer.crossColor	= {r:    0, g: 255, b:   0};
+pointerOpts.colorFilter.r	= {min:   0, max: 60};
+pointerOpts.colorFilter.g	= {min: 0, max: 255};
+pointerOpts.colorFilter.b	= {min: 45, max: 255};
+aGesture.addPointer(pointerId, pointerOpts);
+
+var a	= document.getElementById('drawing');
+//console.log(document.getElementById('drawing'));
+var c		= a.getContext('2d');
+
+aGesture.bind("mousemove."+pointerId, function(event){
+var x	= event.x * (window.innerWidth - 200);
+var y	= event.y * (window.innerHeight - 200);
+console.log(x + ' ' + y);
+
+var b = {};
+
+ b.clientX = x;
+ b.clientY = y;
+
+ bx = x;
+ by = y;
+
+control(b);
+
+//setInterval(clearScreen, 3000);
+
+/*function clearScreen( )
+{
+	c		= a.getContext('2d');
+	c.clearRect(0,0,window.innerWidth, window.innerHeight);
+}*/
+
+
+
+
+
+
+
+});
+
+
+	/*
+	var aGesture	= new AugmentedGesture().enableDatGui().start()
+			.domElementThumbnail();
+		// create a pointer
+		var pointerId	= "Green ball";
+		var pointerOpts	= new AugmentedGesture.OptionPointer();
+		aGesture.addPointer(pointerId, pointerOpts);
+		// setup marker color
+		pointerOpts.colorFilter.r	= {min:   0, max:  60};
+		pointerOpts.colorFilter.g	= {min:   0, max: 255};
+		pointerOpts.colorFilter.b	= {min:  45, max: 255};
+
+		// AUGMENTEDGESTURE + CANVAS
+		// bind augmented gesture "mousemove" event for this pointerId
+		aGesture.bind("mousemove."+pointerId, function(event){
+			var x	= event.x * window.innerWidth;
+			var y	= event.y * window.innerHeight;
+			console.log(x + ' ' + y);
+		});
+	*/
+</script>
+</html>

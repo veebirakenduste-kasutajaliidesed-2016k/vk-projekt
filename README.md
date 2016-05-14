@@ -1,39 +1,43 @@
-# Projekt
+# CyberBall (working title)
 
-## Tähtaeg 
+##Liikmed
+  * Martin Viidik;
+  * https://github.com/MartinViidik
 
-Rühma viimane tund esitletakse
+##Augmented Gesture
+  * http://jeromeetienne.github.io/augmentedgesture.js/
 
-## Liikmete arv
-Võib teha üksi või kahekesi
+##Eesmärk
+  * Teha väike mäng kasutades webcam trackingut, kus mängija peab käega kinni püüdma talle lendavaid palle;
+  * Mäng läheb üha rohkem raskemaks mida suurem skoor;
+  * Mängija kaotab mängu pärast 3 korda pihta saamist
 
-**Juhul kui tehakse kahekesi, peab olema näha githubis, kes ja mida on kirjutanud. Kui ei ole näha, kes midagi kirjutanud on, tööd ei arvesta! Kui ei tea kuidas seda teha, küsi!**
+##Funktsionaalsused
+  * v0.1 pallid lendavad vastu mängijat;
+  * v0.2 implementeerida webcami tracking;
+  * v0.3 punktide süsteem;
+  * v0.4 elude süsteem;
+  * v0.5 graafika loomine;
+  * v1.0 menüüde ja muude loomine (highscore ?);
 
-## Tööjuhend
-1. Üks fork'ib endale käesoleva repositooriumi ning annab vajadusele kirjutamisõiguse/ligipääsu
-1. Tee kohe Pull request
-1. Muuda repositooriumi `README.md faili` vastavalt nõutele
-1. Tee valmis korralik veebirakendus
+##Augmented gesture tööle saamine
+  * Veebikaamera funktsionaalsuse kättesaamiseks kasutab augmentedgesture.js faili. Selleks, et tööle saada pidi ka lisama scripti jupi game.htmli
+  * Koodinäited
+  var aGesture	= new AugmentedGesture().enableDatGui().start();
+  * Paneb augmentedgesture tööle + kuvab GUI sätete seadistamiseks
 
-### Nõuded
+  var pointerId	= "Green ball";
+  var pointerOpts	= new AugmentedGesture.OptionPointer();
+  pointerOpts.pointer.crossColor	= {r:    0, g: 255, b:   0};
+  pointerOpts.colorFilter.r	= {min:   0, max: 60};
+  pointerOpts.colorFilter.g	= {min: 0, max: 255};
+  pointerOpts.colorFilter.b	= {min: 45, max: 255};
+  aGesture.addPointer(pointerId, pointerOpts);
+  * Siin hardcoded tracking sinise värvi üle, muidu hakkaks trackima muid asju nagu kasutaja nägu jne
 
-1. **README.md sisaldab:**
-    * suurelt projekti nime;
-    * kes teeb;
-    * eesmärki (3-4 lauset, mis probleemi rakendus lahendab);
-    * funktsionaalsuse loetelu prioriteedi järjekorras, nt
-        * v0.1 Saab teha kasutaja ja sisselogida
-        * v0.2 Saab lisada ...
-        * ...
-    * andmete liikumise skeem loetava pildina (mis lehed ja mis andmeid mis lehel käideldakse);
-
-2. **Veebirakenduse nõuded:**
-    * rakendus töötab nii palju kui saab ka võrguta olekus, st kasutab `appcache`i;
-    * andmeid talletatakse lisaks kohalikule (localStorage) ka serveripool (soovitatavalt andmebaas või fail) – AJAX;
-    * Kasutatav ka mobiilselt seadmelt;
-    * muutujad/tabelid on inglise keeles;
-    * rakendus on piisava funktsionaalsusega ja turvaline – eelnev kokkulepe õppejõuga, mis saab valmis;
-    * kood on jaotatud vajadusel eri failidesse ja kood on kokkupakitud kujul;
-
-3. **Funktsionaalsus**
-    * juhul kui algoritmiline keerukus on piisav siis kõiki nõudeid ei ole vaja täita – ainult eelneval kokkuleppel õppjõuga!
+  c.fillStyle = 'blue';
+  c.arc(x, y, 10, 0, Math.PI*2, true);
+  c.closePath();
+  c.fill();
+  * Joonistab sihtmärgi kasutajale, ehk joonistab canvasele sinise ringi
+  * Tegelt htmli sissepandud kood on üsna kerge, oli selle tööle saamisega üsna tülikas ilma varase kogemuseta. 
