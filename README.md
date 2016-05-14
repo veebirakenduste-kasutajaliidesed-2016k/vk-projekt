@@ -22,11 +22,12 @@ Võib teha üksi või kahekesi
     * Üksi;
     * Mäng: Telefon ütleb mingi asendi, milles telefon olema peab. (nt left, right. telefon tuleb keerata vastavalt) Tiksub mingi aeg, mille jooksul tuleb telefon keerata. Aeg läheb teatud aja tagant kiiremaks. Kui 3 korda eksitakse, siis mäng läbi.;
     * funktsionaalsuse loetelu prioriteedi järjekorras, nt
-        * v0.1 Kuvab asendi ja kui telefon selles asendis, siis ütleb järgmise.
+        * v0.1 Kuvab asendi ja kui telefon selles asendis, siis ütleb järgmise.  TEHTUD!
         * v0.2 Punktide arvestus
         * v0.3 Ajalimiidi lisamine ühe külje keeramiseks.
         * v0.4 3 valega mängu lõpp
-        * v0.5 Aeg kiiremaks
+        * v0.5 Nime küsimine ja skoori salvestamine serverisse.
+        * v0.6 Aeg kiiremaks
         * 
         * v1.0.1 Heli lisamine (ütleb asendi)
         * ...
