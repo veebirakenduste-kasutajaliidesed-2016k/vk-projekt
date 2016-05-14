@@ -3,7 +3,7 @@
 
     var Sides = function(){
 
-        // SEE ON SINGLETON PATTERN
+        //SINGLETON
         if(Sides.instance){
             return Sides.instance;
         }
@@ -13,9 +13,12 @@
         this.cache = window.applicationCache;
         this.startCacheListeners();
 
-
         this.sides_list = sides_list;
         this.new = true;
+        this.guessed_sides = 0;
+
+        //this.counter = 10;
+
 
         this.init();
     };
@@ -25,17 +28,26 @@
     Sides.prototype = {
 
         init: function(){
+          var counter = 10;
+          var id;
 
-            console.log('Sides started');
 
-            Sides.instance.writeRandomSide();
-            window.addEventListener("devicemotion", this.handleMotionRight.bind(this));
-            window.addEventListener("devicemotion", this.handleMotionLeft.bind(this));
-            window.addEventListener("devicemotion", this.handleMotionFront.bind(this));
-            window.addEventListener("devicemotion", this.handleMotionBack.bind(this));
-            window.addEventListener("devicemotion", this.handleMotionUp.bind(this));
-            window.addEventListener("devicemotion", this.handleMotionDown.bind(this));
+          console.log('Sides started');
 
+          Sides.instance.writeRandomSide();
+          window.addEventListener("devicemotion", this.handleMotionRight.bind(this));
+          window.addEventListener("devicemotion", this.handleMotionLeft.bind(this));
+          window.addEventListener("devicemotion", this.handleMotionFront.bind(this));
+          window.addEventListener("devicemotion", this.handleMotionBack.bind(this));
+          window.addEventListener("devicemotion", this.handleMotionUp.bind(this));
+          window.addEventListener("devicemotion", this.handleMotionDown.bind(this));
+
+          id = setInterval(function() {
+            counter--;
+            if(counter < 0) {
+              document.querySelector("#content").innerHTML = "Game over";
+            }
+          }, 1000);
         },
 
 
@@ -45,12 +57,13 @@
           if (asd== 'Right'){
             var xr_acceleration = event.accelerationIncludingGravity.x;
             if (xr_acceleration < -9 && this.new){
+              this.guessed_sides +=1;
               Sides.instance.writeRandomSide();
               this.new = false;
               window.setTimeout(function(){
                 Sides.instance.new = true;
-              }, 1000);
-            }
+              }, 1000);}
+
           }
 
 
@@ -62,12 +75,13 @@
           if (asd== 'Left'){
             var xl_acceleration = event.accelerationIncludingGravity.x;
             if (xl_acceleration > 9 && this.new){
+              this.guessed_sides +=1;
               Sides.instance.writeRandomSide();
               this.new = false;
               window.setTimeout(function(){
                 Sides.instance.new = true;
-              }, 1000);
-            }
+              }, 1000);}
+
           }
 
 
@@ -79,12 +93,13 @@
           if (asd== 'Front'){
             var zf_acceleration = event.accelerationIncludingGravity.z;
             if (zf_acceleration < -9 && this.new){
+              this.guessed_sides +=1;
               Sides.instance.writeRandomSide();
               this.new = false;
               window.setTimeout(function(){
                 Sides.instance.new = true;
-              }, 1000);
-            }
+              }, 1000);}
+
           }
 
 
@@ -96,12 +111,13 @@
           if (asd== 'Back'){
             var zb_acceleration = event.accelerationIncludingGravity.z;
             if (zb_acceleration > 9 && this.new){
+              this.guessed_sides +=1;
               Sides.instance.writeRandomSide();
               this.new = false;
               window.setTimeout(function(){
                 Sides.instance.new = true;
-              }, 1000);
-            }
+              }, 1000);}
+
           }
 
 
@@ -113,12 +129,13 @@
           if (asd== 'Up'){
             var yu_acceleration = event.accelerationIncludingGravity.y;
             if (yu_acceleration > 9 && this.new){
+              this.guessed_sides +=1;
               Sides.instance.writeRandomSide();
               this.new = false;
               window.setTimeout(function(){
                 Sides.instance.new = true;
-              }, 1000);
-            }
+              }, 1000);}
+
           }
 
 
@@ -130,12 +147,13 @@
           if (asd== 'Down'){
             var yd_acceleration = event.accelerationIncludingGravity.y;
             if (yd_acceleration < -9 && this.new){
+              this.guessed_sides +=1;
               Sides.instance.writeRandomSide();
               this.new = false;
               window.setTimeout(function(){
                 Sides.instance.new = true;
-              }, 1000);
-            }
+              }, 1000);}
+
           }
 
 
@@ -163,7 +181,8 @@
 
     // kui leht laetud käivitan rakenduse
     window.onload = function(){
-        var app = new Sides();
+      var app = new Sides();
+
     };
 
 })();
