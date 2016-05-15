@@ -9,16 +9,20 @@
 <body>
   <main role="main">
     <div id="insert-view">
-      <div class="insert">
-        <p>SIIN SISESTATAKSE SÕNU</p>
-        <a href="#test-view">siit lingilt saab testi tegema minna</a>
-      </div>
+      <label for="estonian-word">eesti</label>
+      <br>
+      <input type="text" name="estonian-word" class="estonian-word">
+      <br>
+      <label for="english-word">inglise</label>
+      <br>
+      <input type="text" name="english-word" class="english-word">
+      <br>
+      <button class="add-new-word">lisa uus sõna</button>
+      <br>
+      <a href="#test-view">siit lingilt saab testi tegema minna</a>
     </div>
     <div id="test-view">
-      <div class="test">
-        <p>SIIN TEHAKSE TESTI</p>
-        <a href="#insert-view">siit lingilt saab sõnu sisestama minna</a>
-      </div>
+      <a href="#insert-view">siit lingilt saab sõnu sisestama minna</a>
     </div>
     <div id="home-view">
       <a href="#insert-view">SÕNADE SISESTAMINE</a>
