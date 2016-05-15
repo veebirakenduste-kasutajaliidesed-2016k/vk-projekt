@@ -54,17 +54,11 @@
     <h1></h1>
     <div id="player-name"></div>
     <div id="basket-nr"> </div>
-    <input type="text" id="counter">
-    <script>
-    	$('document').ready( function () {
-    		$("#counter").counter({
-    			minVal: 0,
-    			maxVal: 99,
-    			singleName: 'vise',
-    			defaultName: 'viset'
-    		});
-    	});
-    </script>
+    <form id='myform' method='POST' action='#'>
+        <input type='button' value='-' class='qtyminus' field='quantity' />
+        <input type='text' name='quantity' value='0' class='qty' />
+        <input type='button' value='+' class='qtyplus' field='quantity' />
+    </form>
     <br>
     <button class="save-result">Edasi</button>
 

@@ -1,30 +1,13 @@
-.ui-counter-container,
-.ui-counter-button,
-.ui-counter-value {
-	display: inline-block;
-	margin: 0px;
-	padding: 0px;
+#myform {
+    text-align: center;
+    padding: 5px;
+    border: 1px dotted #ccc;
+    margin: 2%;
 }
-
-.ui-counter-container {
-	border: 2px solid #ccc;
-	border-radius: 4px;
-	text-align: center;
+.qty {
+    width: 40px;
+    height: 25px;
+    text-align: center;
 }
-
-.ui-counter-button {
-	background: #ccc;
-	width: 25px;
-	cursor: pointer;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-khtml-user-select: none;
-}
-
-.ui-counter-value {
-	font-size: 12px;
-}
-
-.ui-counter-value-empty {
-	color: #ccc;
-}
+input.qtyplus { width:25px; height:25px;}
+input.qtyminus { width:25px; height:25px;}
