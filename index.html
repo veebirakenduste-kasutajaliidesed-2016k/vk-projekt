@@ -52,15 +52,16 @@
 
   <div id="game-view">
     <h1></h1>
+    <div id="player-name"></div>
     <div id="basket-nr"> </div>
     <input type="text" id="counter">
     <script>
     	$('document').ready( function () {
     		$("#counter").counter({
-    			minVal: -10,
-    			maxVal: 10,
-    			singleName: 'PAR',
-    			defaultName: 'PARs'
+    			minVal: 0,
+    			maxVal: 99,
+    			singleName: 'vise',
+    			defaultName: 'viset'
     		});
     	});
     </script>

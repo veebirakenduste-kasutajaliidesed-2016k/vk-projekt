@@ -86,6 +86,7 @@
         console.log('>>>>mäng');
         var id = Discgolf.instance.currentGame.selected_track;
         var track = Discgolf.instance.tracks[id];
+        var player = Discgolf.instance.currentGame.player;
 
         document.querySelector('#game-view h1').innerHTML = track.name;
 
@@ -95,6 +96,7 @@
           var basket_nr = track.baskets[i].nr;
           var par_nr = track.baskets[i].par;
           document.querySelector('#basket-nr').innerHTML = "Korv number "+basket_nr+" par = "+par_nr;
+          document.querySelector('#player-name').innerHTML = "Mängija "+player+" tulemuse sisestamine:";
           //var result = prompt("Tulemus");
           var result =  document.querySelector('#counter').innerHTML ;
           document.querySelector('.save-result').addEventListener('click', this.saveData.bind(this));
