@@ -12,9 +12,18 @@
     /* routes */
     this.routes = TeadmisteTest.routes;
     this.currentRoute = null;
+    /* queryselector */
+    this.estonian_word = document.querySelector('.estonian-word');
+    this.english_word = document.querySelector('.english-word');
+    this.add_new_word = document.querySelector('.add-new-word');
+    this.word_to_guess = document.querySelector('.word-to-guess');
+    this.submit_to_guess = document.querySelector('.submit-to-guess');
+    this.answer_to_guess = document.querySelector('.answer-to-guess');
+    this.result_to_guess = document.querySelector('.result-to-guess');
     /* other */
     this.words = [];
     this.word = null;
+    this.random_index = null;
     this.init();
   };
 
@@ -54,12 +63,12 @@
     },
 
     listenToMouse: function(){
-      document.querySelector('.add-new-word').addEventListener('click', this.addNewWord.bind(this));
+      this.add_new_word.addEventListener('click', this.addNewWord.bind(this));
     },
 
     addNewWord: function(event){
-      var estonian_word = document.querySelector('.estonian-word').value;
-      var english_word = document.querySelector('.english-word').value;
+      var estonian_word = this.estonian_word.value;
+      var english_word = this.english_word.value;
       var new_word = new Word(estonian_word, english_word);
       this.words.push(new_word);
       localStorage.setItem('words', JSON.stringify(this.words));
@@ -93,28 +102,29 @@
     },
 
     displayNewWord: function(){
-      var index = (Math.random()*(this.words.length-1)).toFixed();
-      console.log(index);
+      this.random_index = (Math.random()*(this.words.length-1)).toFixed();
+      console.log(this.random_index);
       this.word = new Word();
-      this.word = this.words[index];
-      document.querySelector('.word-to-guess').innerHTML = this.word.estonian_word;
-      document.querySelector('.submit-to-guess').addEventListener('click', this.submitAnswer.bind(this));
+      this.word = this.words[this.random_index];
+      console.log(this.word);
+      this.word_to_guess.innerHTML = this.word.estonian_word;
+      this.submit_to_guess.addEventListener('click', this.submitAnswer.bind(this));
     },
 
     submitAnswer: function(event){
-      if(this.word.english_word == document.querySelector('.answer-to-guess').value){
-        document.querySelector('.word-to-guess').innerHTML = "ÕIGE";
+      if(this.word.english_word == this.answer_to_guess.value){
+        this.result_to_guess.innerHTML = "ÕIGE";
       }else{
-        document.querySelector('.word-to-guess').innerHTML = "VALE";
+        this.result_to_guess.innerHTML = "VALE";
       }
       this.displayNewWord();
     },
 
     startCacheListeners: function(){
-      window.applicationCache.addEventListener('updateready',function(){
+      window.applicationCache.addEventListener('updateready', function(){
         window.applicationCache.swapCache();
         console.log('swap cache has been called');
-      },false);
+      }, false);
       setInterval(function(){
         TeadmisteTest.instance.cache.update();
       }, 10000);
