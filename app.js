@@ -62,23 +62,11 @@
     'info-view': {
       'render': function(){
         console.log('>>>>nime lisamine');
-
-
-        //this.currentGame.selected_track
-        //console.log(Discgolf.instance.currentGame.selected_track);
         var id = Discgolf.instance.currentGame.selected_track;
         var track = Discgolf.instance.tracks[id];
         console.log(track.name);
         console.log(id);
         document.querySelector('#info-view h1').innerHTML = "Mine mängima "+track.name;
-        //  var html = "";
-        //  html += "<input type='text' name='name' class='name'>";
-        //  html += "<button onclick='Discgolf.instance.startGame("+track.id+")'>Mine mängima</button>";
-
-
-
-
-
       }
     },
     'game-view': {
@@ -87,30 +75,21 @@
         var id = Discgolf.instance.currentGame.selected_track;
         var track = Discgolf.instance.tracks[id];
         var player = Discgolf.instance.currentGame.player;
+        var current_basket = track.baskets[0];
 
         document.querySelector('#game-view h1').innerHTML = track.name;
 
         // console.log(track.baskets[0].nr);
         for(var i = 0; i < track.baskets.length; i++){
-
-          var basket_nr = track.baskets[i].nr;
-          var par_nr = track.baskets[i].par;
-          document.querySelector('#basket-nr').innerHTML = "Korv number "+basket_nr+" par = "+par_nr;
-          document.querySelector('#player-name').innerHTML = "Mängija "+player+" tulemuse sisestamine:";
-          //var result = prompt("Tulemus");
-          var result =  document.querySelector('#counter').innerHTML ;
-          document.querySelector('.save-result').addEventListener('click', this.saveData.bind(this));
-
+            var basket_nr = track.baskets[i].nr;
+            var par_nr = track.baskets[i].par;
+            document.querySelector('#basket-nr').innerHTML = "Korv number "+basket_nr+" par = "+par_nr;
+            document.querySelector('#player-name').innerHTML = "Mängija "+player+" tulemuse sisestamine:";
+            document.querySelector('.qty').value = par_nr;
         }
-
-
       }
     }
-
-
   };
-
-
 
   Discgolf.prototype = {
     init: function(){
@@ -137,10 +116,6 @@
       }
 
 
-    },
-
-    saveData: function(){
-      console.log(basket_nr, par_nr, result);
     },
 
     bindEvents: function(){

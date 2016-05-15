@@ -20,26 +20,6 @@
   <div id="home-view">
     <h1>Rajad</h1>
     <table id="tracks" style="width:100%">
-      <!-- <tr>
-        <th>Raja nimi</th>
-        <th>Korvide arv</th>
-        <th>Mine mängima</th>
-      </tr>
-      <tr>
-        <td>Nõmme</td>
-        <td>5</td>
-        <td><button>Mängi</button></td>
-      </tr>
-      <tr>
-        <td>Männiku</td>
-        <td>5</td>
-        <td><button>Mängi</button></td>
-      </tr>
-      <tr>
-        <td>Keila</td>
-        <td>5</td>
-        <td><button>Mängi</button></td>
-      </tr> -->
     </table>
   </div>
   <div id="info-view">
@@ -56,11 +36,13 @@
     <div id="basket-nr"> </div>
     <form id='myform' method='POST' action='#'>
         <input type='button' value='-' class='qtyminus' field='quantity' />
-        <input type='text' name='quantity' value='0' class='qty' />
+        <input type='number' name='quantity' class='qty' />
         <input type='button' value='+' class='qtyplus' field='quantity' />
+        <br>
+        <button class="save-result">Edasi</button>
     </form>
-    <br>
-    <button class="save-result">Edasi</button>
+
+
 
   </div>
 
