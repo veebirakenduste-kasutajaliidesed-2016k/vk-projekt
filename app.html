@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" manifest="app.appcache">
 <head>
   <meta charset="UTF-8">
   <title>Teadmiste Test</title>
@@ -9,19 +9,18 @@
 <body>
   <main role="main">
     <div id="insert-view">
-      <label for="estonian-word">eesti</label>
-      <br>
-      <input type="text" name="estonian-word" class="estonian-word">
-      <br>
-      <label for="english-word">inglise</label>
-      <br>
-      <input type="text" name="english-word" class="english-word">
-      <br>
-      <button class="add-new-word">lisa uus sõna</button>
-      <br>
+      <label for="estonian-word">eesti</label><br>
+      <input type="text" name="estonian-word" class="estonian-word"><br>
+      <label for="english-word">inglise</label><br>
+      <input type="text" name="english-word" class="english-word"><br>
+      <button class="add-new-word">lisa uus sõna</button><br>
       <a href="#test-view">siit lingilt saab testi tegema minna</a>
     </div>
     <div id="test-view">
+      <div class="word-to-guess"></div>
+      <input type="text" class="answer-to-guess"><br>
+      <button class="submit-to-guess">ARVA</button><br>
+      <div class="result-to-guess"></div>
       <a href="#insert-view">siit lingilt saab sõnu sisestama minna</a>
     </div>
     <div id="home-view">

@@ -1,1 +1,1 @@
-[{"estonian_word":"asd","english_word":"asd"}]
+[{"estonian_word":"tere","english_word":"hello"},{"estonian_word":"kass","english_word":"cat"},{"estonian_word":"koer","english_word":"dog"},{"estonian_word":"arvuti","english_word":"computer"}]

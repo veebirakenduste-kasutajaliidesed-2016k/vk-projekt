@@ -6,9 +6,15 @@
       return TeadmisteTest.instance;
     }
     TeadmisteTest.instance = this;
+    /* cache */
+    this.cache = window.applicationCache;
+    this.startCacheListeners();
+    /* routes */
     this.routes = TeadmisteTest.routes;
     this.currentRoute = null;
+    /* other */
     this.words = [];
+    this.word = null;
     this.init();
   };
 
@@ -36,6 +42,7 @@
         this.routeChange();
       }
       this.listenToMouse();
+      this.loadWords();
     },
 
     routeChange: function(){
@@ -66,7 +73,52 @@
       xhttp.send();
     },
 
+    loadWords: function(){
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+        var TeadmisteTest_ref = TeadmisteTest.instance;
+        if(xhttp.readyState == 4 && xhttp.status == 200) {
+          var result = JSON.parse(xhttp.responseText);
+          TeadmisteTest_ref.words = result;
+          console.log(TeadmisteTest_ref.words);
+          TeadmisteTest_ref.start();
+        }
+      };
+      xhttp.open("GET", "saveWords.php", true);
+      xhttp.send();
+    },
 
+    start: function(){
+      this.displayNewWord();
+    },
+
+    displayNewWord: function(){
+      var index = (Math.random()*(this.words.length-1)).toFixed();
+      console.log(index);
+      this.word = new Word();
+      this.word = this.words[index];
+      document.querySelector('.word-to-guess').innerHTML = this.word.estonian_word;
+      document.querySelector('.submit-to-guess').addEventListener('click', this.submitAnswer.bind(this));
+    },
+
+    submitAnswer: function(event){
+      if(this.word.english_word == document.querySelector('.answer-to-guess').value){
+        document.querySelector('.word-to-guess').innerHTML = "ÕIGE";
+      }else{
+        document.querySelector('.word-to-guess').innerHTML = "VALE";
+      }
+      this.displayNewWord();
+    },
+
+    startCacheListeners: function(){
+      window.applicationCache.addEventListener('updateready',function(){
+        window.applicationCache.swapCache();
+        console.log('swap cache has been called');
+      },false);
+      setInterval(function(){
+        TeadmisteTest.instance.cache.update();
+      }, 10000);
+    }
 
   };
 
