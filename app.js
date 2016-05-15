@@ -86,6 +86,7 @@
             document.querySelector('#basket-nr').innerHTML = "Korv number "+basket_nr+" par = "+par_nr;
             document.querySelector('#player-name').innerHTML = "Mängija "+player+" tulemuse sisestamine:";
             document.querySelector('.qty').value = par_nr;
+
         }
       }
     }
