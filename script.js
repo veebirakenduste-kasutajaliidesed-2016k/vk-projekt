@@ -16,10 +16,10 @@
     this.estonian_word = document.querySelector('.estonian-word');
     this.english_word = document.querySelector('.english-word');
     this.add_new_word = document.querySelector('.add-new-word');
-    this.word_to_guess = document.querySelector('.word-to-guess');
-    this.submit_to_guess = document.querySelector('.submit-to-guess');
-    this.answer_to_guess = document.querySelector('.answer-to-guess');
-    this.result_to_guess = document.querySelector('.result-to-guess');
+    this.word_to_guess = document.querySelector('#word-to-guess');
+    this.submit_to_guess = document.querySelector('#submit-to-guess');
+    this.answer_to_guess = document.querySelector('#answer-to-guess');
+    this.result_to_guess = document.querySelector('#result-to-guess');
     /* other */
     this.words = [];
     this.word = null;
@@ -99,6 +99,7 @@
 
     start: function(){
       this.displayNewWord();
+      console.log(this.words);
     },
 
     displayNewWord: function(){
@@ -112,6 +113,7 @@
     },
 
     submitAnswer: function(event){
+      event.stopImmediatePropagation();
       if(this.word.english_word == this.answer_to_guess.value){
         this.result_to_guess.innerHTML = "ÕIGE";
       }else{
