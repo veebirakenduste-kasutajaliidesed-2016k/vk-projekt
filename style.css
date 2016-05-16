@@ -2,26 +2,24 @@
 
 main > * {
     display: none;
-    background-color: lightblue;
 }
 
 main > *:last-child {
     display: block;
-    background-color: lightblue;
-
 }
 
 main > *:target {
     display: block;
     animation: pulse 0.5s linear 1;
-    background-color: lightblue;
 }
 
 main > *:target ~ * {
     display: none;
-    background-color: lightblue;
 }
 
-body{
-  background-color: lightblue;
+body {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
