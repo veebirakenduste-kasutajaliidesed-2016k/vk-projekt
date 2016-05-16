@@ -22,4 +22,39 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  font-family: Courier New;
+  font-size: 16px;
+}
+
+input[type=button], input[type=text], button {
+  display: inline-block;
+  width: 100%;
+  padding: 10px 20px 10px 20px;
+  border-style: solid;
+  border-radius: 4px;
+}
+
+input[type=text] {
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  text-align:center;
+}
+
+label{
+  display: inline-block;
+  width: 200px;
+  padding: 10px 20px 10px 20px;
+  border: 1px solid #ccc;
+  border-style: solid;
+  background-color: #ccc;
+  border-radius: 4px;
+  text-align:center;
+}
+
+#word-to-guess{
+  padding: 10px 20px 10px 20px;
+  text-align:center;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }

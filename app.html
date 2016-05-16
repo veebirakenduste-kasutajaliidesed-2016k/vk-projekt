@@ -11,23 +11,23 @@
 <body>
   <main role="main">
     <div id="insert-view">
-      <label for="estonian-word">eesti</label><br>
+      <label for="estonian-word">EESTI:</label><br>
       <input type="text" name="estonian-word" class="estonian-word"><br>
-      <label for="english-word">inglise</label><br>
+      <label for="english-word">INGLISE:</label><br>
       <input type="text" name="english-word" class="english-word"><br>
-      <button class="add-new-word">lisa uus SÕNA</button><br>
-      <a href="#test-view">siit lingilt saab testi tegema minna</a>
+      <button class="add-new-word">LISA UUS SÕNA</button><br><br><br><br>
+      <input type="button" onclick="location.href='#test-view';" value="TESTI SOORITAMINE" />
     </div>
     <div id="test-view">
       <div id="word-to-guess"></div>
       <input type="text" id="answer-to-guess"><br>
-      <button id="submit-to-guess">ARVA</button><br>
-      <div id="result-to-guess"></div>
-      <a href="#insert-view">siit lingilt saab sõnu sisestama minna</a>
+      <button id="submit-to-guess">SISESTA / KONTROLLI</button><br><br>
+      <div id="result-to-guess"></div><br><br><br><br>
+      <input type="button" onclick="location.href='#insert-view';" value="SÕNADE SISESTAMINE" />
     </div>
     <div id="home-view">
-      <a href="#insert-view">SÕNADE SISESTAMINE</a>
-      <a href="#test-view">TESTI TEGEMINE</a>
+      <input type="button" onclick="location.href='#insert-view';" value="SÕNADE SISESTAMINE" /><br><br>
+      <input type="button" onclick="location.href='#test-view';" value="TESTI SOORITAMINE" />
     </div>
   </main>
 </body>

@@ -80,6 +80,8 @@
       };
       xhttp.open("GET", "saveWords.php?estonian_word=" + estonian_word +  "&english_word=" + english_word, true);
       xhttp.send();
+      this.estonian_word.value = "";
+      this.english_word.value = "";
     },
 
     loadWords: function(){
