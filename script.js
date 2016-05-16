@@ -116,9 +116,11 @@
       event.stopImmediatePropagation();
       if(this.word.english_word == this.answer_to_guess.value){
         this.result_to_guess.innerHTML = "ÕIGE";
+
       }else{
-        this.result_to_guess.innerHTML = "VALE";
+        this.result_to_guess.innerHTML = "VALE, õige on " + this.word.english_word;
       }
+      this.answer_to_guess.value = "";
       this.displayNewWord();
     },
 
