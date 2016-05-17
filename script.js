@@ -52,6 +52,14 @@
         this.routeChange();
       }
       window.addEventListener('keydown', this.wrongAnswerDisplay.bind(this));
+      window.addEventListener('keydown', function(){
+        if(window.location.hash === '#test-view' && event.keyCode === 13){
+          TeadmisteTest.instance.submitAnswer(event);
+        }
+        if(window.location.hash === '#insert-view' && event.keyCode === 13){
+          TeadmisteTest.instance.addNewWord(event);
+        }
+      });
       this.listenToMouse();
       this.loadWords();
     },
@@ -129,11 +137,11 @@
 
     wrongAnswer: function(estonian_word, english_word, user_guess){
       this.to_hide.style.display = "none";
-      this.result_to_guess.innerHTML = "<center>" + estonian_word + " != " + user_guess + "<br><br><font size='20'>" + estonian_word + " = " + english_word + "</font><br><br>(oota 10 sekundit või vajuta tühikut)</center>";
+      this.result_to_guess.innerHTML = "<center>" + estonian_word + " != " + user_guess + "<br><br><font size='20'>" + estonian_word + " = " + english_word + "</font><br><br>(oota 5 sekundit või vajuta tühikut)</center>";
       window.setTimeout(function(){
         TeadmisteTest.instance.to_hide.style.display = "block";
         TeadmisteTest.instance.result_to_guess.innerHTML = "";
-      }, 10000);
+      }, 5000);
     },
 
     wrongAnswerDisplay: function(event){
@@ -152,9 +160,7 @@
         TeadmisteTest.instance.submit_to_guess.style.border = "#DDDDDD";
         TeadmisteTest.instance.submit_to_guess.style.color = "black";
       }, 100);
-
     },
-
 
     startCacheListeners: function(){
       window.applicationCache.addEventListener('updateready', function(){
