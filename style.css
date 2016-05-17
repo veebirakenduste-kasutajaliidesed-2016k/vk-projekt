@@ -36,7 +36,7 @@ input[type=button], input[type=text], button {
 
 input[type=text] {
   margin: 8px 0;
-  border: 1px solid #ccc;
+  border: 1px solid #DDDDDD;
   box-sizing: border-box;
   text-align:center;
 }
@@ -45,9 +45,9 @@ label{
   display: inline-block;
   width: 200px;
   padding: 10px 20px 10px 20px;
-  border: 1px solid #ccc;
+  border: 1px solid #DDDDDD;
   border-style: solid;
-  background-color: #ccc;
+  background-color: #DDDDDD;
   border-radius: 4px;
   text-align:center;
 }
@@ -55,6 +55,6 @@ label{
 #word-to-guess{
   padding: 10px 20px 10px 20px;
   text-align:center;
-  border: 1px solid #ccc;
+  border: 1px solid #DDDDDD;
   border-radius: 4px;
 }

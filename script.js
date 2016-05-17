@@ -16,6 +16,7 @@
     this.estonian_word = document.querySelector('.estonian-word');
     this.english_word = document.querySelector('.english-word');
     this.add_new_word = document.querySelector('.add-new-word');
+    this.to_hide = document.querySelector('#to-hide');
     this.word_to_guess = document.querySelector('#word-to-guess');
     this.submit_to_guess = document.querySelector('#submit-to-guess');
     this.answer_to_guess = document.querySelector('#answer-to-guess');
@@ -50,6 +51,7 @@
       }else{
         this.routeChange();
       }
+      window.addEventListener('keydown', this.wrongAnswerDisplay.bind(this));
       this.listenToMouse();
       this.loadWords();
     },
@@ -117,14 +119,42 @@
     submitAnswer: function(event){
       event.stopImmediatePropagation();
       if(this.word.english_word == this.answer_to_guess.value){
-        this.result_to_guess.innerHTML = "ÕIGE";
-
+        this.rightAnswer();
       }else{
-        this.result_to_guess.innerHTML = "VALE, õige on " + this.word.english_word;
+        this.wrongAnswer(this.word.estonian_word, this.word.english_word, this.answer_to_guess.value);
       }
       this.answer_to_guess.value = "";
       this.displayNewWord();
     },
+
+    wrongAnswer: function(estonian_word, english_word, user_guess){
+      this.to_hide.style.display = "none";
+      this.result_to_guess.innerHTML = "<center>" + estonian_word + " != " + user_guess + "<br><br><font size='20'>" + estonian_word + " = " + english_word + "</font><br><br>(oota 10 sekundit või vajuta tühikut)</center>";
+      window.setTimeout(function(){
+        TeadmisteTest.instance.to_hide.style.display = "block";
+        TeadmisteTest.instance.result_to_guess.innerHTML = "";
+      }, 10000);
+    },
+
+    wrongAnswerDisplay: function(event){
+      if(event.keyCode === 32){
+        TeadmisteTest.instance.to_hide.style.display = "block";
+        TeadmisteTest.instance.result_to_guess.innerHTML = "";
+      }
+    },
+
+    rightAnswer: function(){
+      this.submit_to_guess.style.background = "green";
+      this.submit_to_guess.style.border = "green";
+      this.submit_to_guess.style.color = "white";
+      window.setTimeout(function(){
+        TeadmisteTest.instance.submit_to_guess.style.background = "#DDDDDD";
+        TeadmisteTest.instance.submit_to_guess.style.border = "#DDDDDD";
+        TeadmisteTest.instance.submit_to_guess.style.color = "black";
+      }, 100);
+
+    },
+
 
     startCacheListeners: function(){
       window.applicationCache.addEventListener('updateready', function(){
