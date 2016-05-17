@@ -25,6 +25,7 @@
     this.words = [];
     this.word = null;
     this.random_index = null;
+    this.permission = 1;
     this.init();
   };
 
@@ -53,7 +54,7 @@
       }
       window.addEventListener('keydown', this.wrongAnswerDisplay.bind(this));
       window.addEventListener('keydown', function(){
-        if(window.location.hash === '#test-view' && event.keyCode === 13){
+        if(window.location.hash === '#test-view' && event.keyCode === 13 && TeadmisteTest.instance.permission === 1){
           TeadmisteTest.instance.submitAnswer(event);
         }
         if(window.location.hash === '#insert-view' && event.keyCode === 13){
@@ -138,9 +139,11 @@
     wrongAnswer: function(estonian_word, english_word, user_guess){
       this.to_hide.style.display = "none";
       this.result_to_guess.innerHTML = "<center>" + estonian_word + " != " + user_guess + "<br><br><font size='20'>" + estonian_word + " = " + english_word + "</font><br><br>(oota 5 sekundit või vajuta tühikut)</center>";
+      this.permission = 0;
       window.setTimeout(function(){
         TeadmisteTest.instance.to_hide.style.display = "block";
         TeadmisteTest.instance.result_to_guess.innerHTML = "";
+        TeadmisteTest.instance.permission = 1;
       }, 5000);
     },
 
@@ -148,6 +151,7 @@
       if(event.keyCode === 32){
         TeadmisteTest.instance.to_hide.style.display = "block";
         TeadmisteTest.instance.result_to_guess.innerHTML = "";
+        this.permission = 1;
       }
     },
 
