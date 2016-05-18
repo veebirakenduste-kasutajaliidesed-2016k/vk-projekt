@@ -1,6 +1,6 @@
 # Projekti Nimi
 
-## Liikmed 
+## Liikmed
 Rimo Esko
 
 ## Eesmärk
@@ -12,7 +12,6 @@ Rakenduse eesmärgiks on jälgida kasutaja sportimist. Kui jooksmise ajal app t�
 1. v0.3 Kasutaja saab treeningu valida ja alustada treeningut
 1. v0.4 Läbitud teekond joonistatakse kaardile, saab teada treeningu kestvuse ja läbitud vahemaa
 1. v0.5 Andmed treeningu kohta salvestatakse andmebaasi ja kasutaja saab neid näha.
-1. v0.6 Cache töötab
 
 ## Andmete liikumine
 1.	**home page**

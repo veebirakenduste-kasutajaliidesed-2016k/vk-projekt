@@ -140,12 +140,12 @@
 	<label id="create_sex">Sex</label><span class="error" style="color:red;"> <?php echo $create_sex_error?></span>
 	<div class="radio">
 		<label>
-			<input type="radio" name="create_sex" value="M" <?php if($_POST["create_sex"] == "M"){checked;}?> /><span>Male</span>
+			<input type="radio" name="create_sex" value="M" <?php if($_POST["create_sex"] == "M"){checked;}?> /><span>Mees</span>
 		</label>
 	</div>
 	<div class="radio">
 		<label>
-			<input type="radio" name="create_sex" value="F" <?php if($_POST["create_sex"] == "F"){checked;}?> /><span>Female</span>
+			<input type="radio" name="create_sex" value="F" <?php if($_POST["create_sex"] == "F"){checked;}?> /><span>Naine</span>
 		</label>
 	</div>
 	<input type="submit" class="btn btn-success" name="create"/>
