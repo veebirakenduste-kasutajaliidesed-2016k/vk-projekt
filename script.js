@@ -18,6 +18,7 @@
     this.add_new_word = document.querySelector('.add-new-word');
     this.to_hide = document.querySelector('#to-hide');
     this.word_to_guess = document.querySelector('#word-to-guess');
+    this.change_language = document.querySelector('#change-language');
     this.submit_to_guess = document.querySelector('#submit-to-guess');
     this.answer_to_guess = document.querySelector('#answer-to-guess');
     this.result_to_guess = document.querySelector('#result-to-guess');
@@ -26,6 +27,8 @@
     this.word = null;
     this.random_index = null;
     this.permission = 1;
+    /* eesti keel = 0, inglise keel = 1 */
+    this.language_to_guess = 0;
     this.init();
   };
 
@@ -75,6 +78,7 @@
 
     listenToMouse: function(){
       this.add_new_word.addEventListener('click', this.addNewWord.bind(this));
+      this.change_language.addEventListener('click', this.changeGuessLanguage.bind(this));
     },
 
     addNewWord: function(event){
@@ -95,6 +99,15 @@
       this.english_word.value = "";
     },
 
+    changeGuessLanguage: function(event){
+      if(this.language_to_guess === 0){
+        this.language_to_guess = 1;
+      }else{
+        this.language_to_guess = 0;
+      }
+      this.displayNewWord();
+    },
+
     loadWords: function(){
       var xhttp = new XMLHttpRequest();
       xhttp.onreadystatechange = function() {
@@ -112,25 +125,35 @@
 
     start: function(){
       this.displayNewWord();
-      console.log(this.words);
     },
 
     displayNewWord: function(){
       this.random_index = (Math.random()*(this.words.length-1)).toFixed();
-      console.log(this.random_index);
       this.word = new Word();
       this.word = this.words[this.random_index];
       console.log(this.word);
-      this.word_to_guess.innerHTML = this.word.estonian_word;
+      if(this.language_to_guess === 0){
+        this.word_to_guess.innerHTML = this.word.estonian_word;
+      }else{
+        this.word_to_guess.innerHTML = this.word.english_word;
+      }
       this.submit_to_guess.addEventListener('click', this.submitAnswer.bind(this));
     },
 
     submitAnswer: function(event){
       event.stopImmediatePropagation();
-      if(this.word.english_word == this.answer_to_guess.value){
-        this.rightAnswer();
+      if(this.language_to_guess === 0){
+        if(this.word.english_word == this.answer_to_guess.value){
+          this.rightAnswer();
+        }else{
+          this.wrongAnswer(this.word.estonian_word, this.word.english_word, this.answer_to_guess.value);
+        }
       }else{
-        this.wrongAnswer(this.word.estonian_word, this.word.english_word, this.answer_to_guess.value);
+        if(this.word.estonian_word == this.answer_to_guess.value){
+          this.rightAnswer();
+        }else{
+          this.wrongAnswer(this.word.estonian_word, this.word.english_word, this.answer_to_guess.value);
+        }
       }
       this.answer_to_guess.value = "";
       this.displayNewWord();
@@ -138,7 +161,11 @@
 
     wrongAnswer: function(estonian_word, english_word, user_guess){
       this.to_hide.style.display = "none";
-      this.result_to_guess.innerHTML = "<center>" + estonian_word + " != " + user_guess + "<br><br><font size='20'>" + estonian_word + " = " + english_word + "</font><br><br>(oota 5 sekundit või vajuta tühikut)</center>";
+      if(this.language_to_guess === 0){
+        this.result_to_guess.innerHTML = "<center>" + estonian_word + " != " + user_guess + "<br><br><font size='20'>" + estonian_word + " = " + english_word + "</font><br><br>(oota 5 sekundit või vajuta tühikut)</center>";
+      }else{
+        this.result_to_guess.innerHTML = "<center>" + english_word + " != " + user_guess + "<br><br><font size='20'>" + english_word + " = " + estonian_word + "</font><br><br>(oota 5 sekundit või vajuta tühikut)</center>";
+      }
       this.permission = 0;
       window.setTimeout(function(){
         TeadmisteTest.instance.to_hide.style.display = "block";
