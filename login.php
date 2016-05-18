@@ -94,10 +94,15 @@
 <meta charset="utf-8">
 <title>Registreerumine</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
+<script src="login.js"></script>
+
 </head>
 <body>
+<main role="main">
 <div class="col-md-2 col-md-offset-5">
-<form method="post" id="login" <?php if(!isset($_GET["register"])){echo "style='display:block'";}else{echo "style='display:none'";}?>">
+<div id="login-view">
+<form method="post">
 	<h1>Logi sisse</h1>
 	
 	<?php if(isset($login_response->error)):?>
@@ -116,11 +121,12 @@
 	</fieldset>
 	<input type="submit" class="btn btn-success" name="login"/>
 	<br><br>
-	<center><a href="?register">Loo uus kasutaja</a></center>
+	<center><a href="#register-view">Loo uus kasutaja</a></center>
 </form>
+</div>
 
-
-<form method="post" id="register" <?php if(isset($_GET["register"])){echo "style='display:block'";}else{echo "style='display:none'";}?>">
+<div id="register-view">
+<form method="post">
 	<h1>Registreeru</h1>
 	
 	<?php if(isset($create_response->error)):?>
@@ -150,8 +156,10 @@
 	</div>
 	<input type="submit" class="btn btn-success" name="create"/>
 	<br><br>
-	<center><a href="?">Kasutaja juba olemas</a></center>
+	<center><a href="#login-view">Kasutaja juba olemas</a></center>
 </form>
 </div>
+</div>
+</main>
 </body>
 </html>
