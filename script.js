@@ -106,6 +106,7 @@
         this.language_to_guess = 0;
       }
       this.displayNewWord();
+      this.answer_to_guess.select();
     },
 
     loadWords: function(){
@@ -141,22 +142,37 @@
     },
 
     submitAnswer: function(event){
-      event.stopImmediatePropagation();
-      if(this.language_to_guess === 0){
-        if(this.word.english_word == this.answer_to_guess.value){
-          this.rightAnswer();
-        }else{
-          this.wrongAnswer(this.word.estonian_word, this.word.english_word, this.answer_to_guess.value);
-        }
+      if(this.answer_to_guess.value === "" || this.answer_to_guess.value === " "){
+        this.noUserInput();
       }else{
-        if(this.word.estonian_word == this.answer_to_guess.value){
-          this.rightAnswer();
+        event.stopImmediatePropagation();
+        if(this.language_to_guess === 0){
+          if(this.word.english_word == this.answer_to_guess.value){
+            this.rightAnswer();
+          }else{
+            this.wrongAnswer(this.word.estonian_word, this.word.english_word, this.answer_to_guess.value);
+          }
         }else{
-          this.wrongAnswer(this.word.estonian_word, this.word.english_word, this.answer_to_guess.value);
+          if(this.word.estonian_word == this.answer_to_guess.value){
+            this.rightAnswer();
+          }else{
+            this.wrongAnswer(this.word.estonian_word, this.word.english_word, this.answer_to_guess.value);
+          }
         }
+        this.answer_to_guess.value = "";
+        this.displayNewWord();
       }
-      this.answer_to_guess.value = "";
-      this.displayNewWord();
+    },
+
+    noUserInput: function(){
+      this.submit_to_guess.style.background = "yellow";
+      this.submit_to_guess.style.border = "yellow";
+      this.submit_to_guess.style.color = "white";
+      window.setTimeout(function(){
+        TeadmisteTest.instance.submit_to_guess.style.background = "#DDDDDD";
+        TeadmisteTest.instance.submit_to_guess.style.border = "#DDDDDD";
+        TeadmisteTest.instance.submit_to_guess.style.color = "black";
+      }, 100);
     },
 
     wrongAnswer: function(estonian_word, english_word, user_guess){
@@ -171,14 +187,16 @@
         TeadmisteTest.instance.to_hide.style.display = "block";
         TeadmisteTest.instance.result_to_guess.innerHTML = "";
         TeadmisteTest.instance.permission = 1;
+        TeadmisteTest.instance.answer_to_guess.select();
       }, 5000);
     },
 
     wrongAnswerDisplay: function(event){
       if(event.keyCode === 32){
-        TeadmisteTest.instance.to_hide.style.display = "block";
-        TeadmisteTest.instance.result_to_guess.innerHTML = "";
+        this.to_hide.style.display = "block";
+        this.result_to_guess.innerHTML = "";
         this.permission = 1;
+        this.answer_to_guess.select();
       }
     },
 
