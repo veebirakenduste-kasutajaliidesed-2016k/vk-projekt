@@ -1,40 +1,42 @@
+<?php
+	require_once("functions.php");
+	if(!isset($_SESSION["id_from_db"])){
+		header("Location: login.php");
+		exit();
+	}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
   <meta charset="UTF-8">
   <title>Moosipurk</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
+  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTGe4CiXTWPyJl9M9Vwl6v3strdz3JsII"></script>
   <script src="app.js"></script>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <nav class="menu">
+  <nav class="menu col-md-3 col-md-offset-5">
     <ul class="menu-list">
-      <li class="menu-item"><a href="#home-view" class="menu-link home-view active-menu">Avaleht</a></li>
-      <li class="menu-item"><a href="#list-view" class="menu-link list-view">Loend</a></li>
-      <li class="menu-item"><a href="logout.php" class="menu-link manage-view">Logi välja</a></li>
+      <li class="menu-item"><a href="#exercise-view" class="menu-link exercise-view active-menu">Exercise</a></li>
+      <li class="menu-item"><a href="#history-view" class="menu-link history-view">History</a></li>
+      <li class="menu-item"><a href="logout.php" class="menu-link">Logout</a></li>
     </ul>
   </nav>
-  <main role="main">
-    <div id="list-view">
+  <main role="main" class="col-md-3 col-md-offset-5">
+    <div id="history-view">
       <h1>Loend</h1>
       <input type="search" placeholder="Enter keyword" id="search"><br>
       <ul class="list-of-jars"></ul>
     </div>
-    <div id="manage-view">
-      <h1>Haldus</h1>
-      <div class="feedback-success" id="show-feedback"></div>
-
-      <label for="title">Nimi</label><br>
-      <input type="text" name="title" class="title"><br>
-
-      <label for="ingredients">Koostis: </label><br>
-      <input type="text" name="ingredients" class="ingredients"><br>
-
-      <button class="add-new-jar">Lisa purk</button>
-    </div>
-    <div id="home-view">
-      <h1>Avaleht</h1>
-      <div id="counter"></div>
+    <div id="exercise-view">
+      <div id="time"></div>
+	  <input type="image" id="playButton" src="http://localhost:5555/~rimoesk/veebirakendus/vk-projekt/images/play.jpg" width="80" height="80"/>
+	  <input type="image" id="pauseButton" src="http://localhost:5555/~rimoesk/veebirakendus/vk-projekt/images/pause.png" width="80" height="80"/>
+	  <input type="image" id="stopButton" src="http://localhost:5555/~rimoesk/veebirakendus/vk-projekt/images/stop.png" width="80" height="80"/>
+	  <div id="map_canvas" style="width:100%;height:380px;"></div>
     </div>
   </main>
 </body>
