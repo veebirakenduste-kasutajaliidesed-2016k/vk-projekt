@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" manifest="app.appcache">
+<head>
+  <meta charset="UTF-8">
+  <title>Teadmiste Test</title>
+  <script src="script.js"></script>
+  <link rel="stylesheet" href="style.css" title="style" type="text/css" media="screen" charset="utf-8">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1, inital-scale=1, user-scalable=no">
+</head>
+<body>
+  <main role="main">
+    <div id="insert-view">
+      <label for="estonian-word">EESTI:</label><br>
+      <input type="text" name="estonian-word" class="estonian-word"><br>
+      <label for="english-word">INGLISE:</label><br>
+      <input type="text" name="english-word" class="english-word"><br>
+      <button class="add-new-word">LISA UUS SÕNA</button><br><br><br><br>
+      <input type="button" onclick="location.href='#test-view';" value="TESTI SOORITAMINE" />
+    </div>
+    <div id="test-view">
+      <div id="to-hide">
+        <div id="word-to-guess"></div>
+        <div style="position: relative; width: 0; height: 0">
+          <button id="change-language">&#10227</button>
+        </div>
+        <input type="text" id="answer-to-guess"><br>
+        <button id="submit-to-guess">SISESTA / KONTROLLI</button><br><br><br><br>
+        <input type="button" onclick="location.href='#insert-view';" value="SÕNADE SISESTAMINE" />
+      </div>
+      <div id="result-to-guess"></div>
+    </div>
+    <div id="home-view">
+      <input type="button" onclick="location.href='#insert-view';" value="SÕNADE SISESTAMINE" /><br><br>
+      <input type="button" onclick="location.href='#test-view';" value="TESTI SOORITAMINE" />
+    </div>
+  </main>
+</body>
+</html>
