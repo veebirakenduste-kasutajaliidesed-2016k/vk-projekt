@@ -34,10 +34,10 @@
     this.bindEvents();
     console.log(this.upgrade.length);
     for(var s = 0; s < this.upgrade.length; s++){
-      console.log("outerloop activated for canvas "+s);
+      //console.log("outerloop activated for canvas "+s);
       if(this.upgrade[s]>0){
         for(var l = 0; l<this.upgrade[s]; l++){
-          console.log("innerloop "+l+" times");
+          //console.log("innerloop "+l+" times");
           this.drawCharacters(s);
         }
       }
