@@ -18,6 +18,8 @@
       selected_track: null
     };
 
+    this.results = [];
+
     this.init();
   };
 
@@ -63,6 +65,10 @@
     'info-view': {
       'render': function(){
         console.log('>>>>nime lisamine');
+        var unique_id = guid();
+        console.log('Unikaalne id on '+unique_id);
+
+
         var id = Discgolf.instance.currentGame.selected_track;
         var track = Discgolf.instance.tracks[id];
         console.log(track.name);
@@ -92,6 +98,13 @@
       }
     }
   };
+  var Results = function(new_unique_id, new_player, new_basket_nr, new_result){
+    this.unique_id = new_unique_id;
+    this.player = new_player;
+    this.basket_nr = new_basket_nr;
+    this.result = new_result;
+  };
+
 
   Discgolf.prototype = {
     init: function(){
@@ -139,7 +152,6 @@
     },
 
     nextBasket: function(e){
-
       //siis formi i submiti
       e.preventDefault();
 
@@ -150,6 +162,21 @@
       ]*/
       var id = this.currentGame.selected_track;
       var track = this.tracks[id];
+      var unique_id = guid();
+      var index = Discgolf.instance.current_basket;
+      var basket_nr = track.baskets[index].nr;
+      var player = Discgolf.instance.currentGame.player;
+      var result = document.querySelector('.qty').value;
+
+      var new_results = new Results(unique_id, player, basket_nr, result);
+
+
+      this.results.push(new_results);
+      console.log(JSON.stringify(this.results));
+      localStorage.setItem('results', JSON.stringify(this.results));
+
+
+
       if(this.current_basket == track.baskets.length-1){
         alert("viimane oli");
         return;
@@ -199,6 +226,18 @@
 
   };//appi l6pp
 
+ function guid(){
+   var d = new Date().getTime();
+   if(window.performance && typeof window.performance.now === "function"){
+     d += performance.now(); //use high-precision timer if available
+   }
+   var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+     var r = (d + Math.random()*16)%16 | 0;
+     d = Math.floor(d/16);
+     return (c=='x' ? r : (r&0x3|0x8)).toString(16);
+   });
+   return uuid;
+ }
 
   window.onload = function(){
     var app = new Discgolf();
