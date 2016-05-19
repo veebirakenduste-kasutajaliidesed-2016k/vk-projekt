@@ -106,25 +106,24 @@
           html += "<th>Vaata lähemalt</th>";
         html += "</tr>";
 
+        for (var i=0; i<this.localStorage.results; i++){
+          var track_name = this.localStorage.track_name;
+          
+          html += "<td>"+track_name+"</td>";
+        }
+
         table.innerHTML = html;
       }
     }
   };
-  var Results = function(new_unique_id, new_player, new_basket_nr, new_result){
-    this.unique_id = new_unique_id;
-    this.player = new_player;
-    this.basket_nr = new_basket_nr;
-    this.result = new_result;
-  };
-
 
   Discgolf.prototype = {
     init: function(){
       console.log('Rakendus läks tööle');
-      console.log(this.tracks);
-      console.log(this.tracks[0]);
-      console.log(this.tracks[0].name);
-      console.log(this.tracks[0].baskets.length);
+      // console.log(this.tracks);
+      // console.log(this.tracks[0]);
+      // console.log(this.tracks[0].name);
+      // console.log(this.tracks[0].baskets.length);
       for(var i = 0; i < this.tracks[0].baskets.length; i++){
          console.log(this.tracks[0].baskets[i].nr + " " + this.tracks[0].baskets[i].par);
       }
@@ -175,13 +174,14 @@
       ]*/
       var id = this.currentGame.selected_track;
       var track = this.tracks[id];
+      var track_name = track.name;
       var unique_id = this.currentGame.unique_id;
       var index = Discgolf.instance.current_basket;
       var basket_nr = track.baskets[index].nr;
       var player = Discgolf.instance.currentGame.player;
       var result = document.querySelector('.qty').value;
 
-      var new_results = new Results(unique_id, player, basket_nr, result);
+      var new_results = new Results(unique_id, track_name, player, basket_nr, result);
 
 
       this.results.push(new_results);
@@ -191,14 +191,14 @@
 
 
       if(this.current_basket == track.baskets.length-1){
-        alert("viimane oli");
+        window.location.hash = 'game-history';
         return;
       }
 
       this.current_basket++;
 
 
-      console.log('next baskte:'+this.current_basket);
+      console.log('next basket:'+this.current_basket);
       this.routes[this.currentRoute].render();
 
 
@@ -225,8 +225,6 @@
 
         alert('nimi ei saa  olla tühi');
         return;
-
-
       }
 
       this.currentGame.player = name;
@@ -240,6 +238,14 @@
 
 
   };//appi l6pp
+
+  var Results = function(new_unique_id, new_track_name, new_player, new_basket_nr, new_result){
+    this.unique_id = new_unique_id;
+    this.track_name = new_track_name;
+    this.player = new_player;
+    this.basket_nr = new_basket_nr;
+    this.result = new_result;
+  };
 
  function guid(){
    var d = new Date().getTime();
