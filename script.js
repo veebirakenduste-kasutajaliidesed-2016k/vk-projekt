@@ -55,7 +55,7 @@
       }else{
         this.routeChange();
       }
-      window.addEventListener('keydown', this.wrongAnswerDisplay.bind(this));
+
       window.addEventListener('keydown', function(){
         if(window.location.hash === '#test-view' && event.keyCode === 13 && TeadmisteTest.instance.permission === 1){
           TeadmisteTest.instance.submitAnswer(event);
@@ -79,6 +79,7 @@
     listenToMouse: function(){
       this.add_new_word.addEventListener('click', this.addNewWord.bind(this));
       this.change_language.addEventListener('click', this.changeGuessLanguage.bind(this));
+      this.result_to_guess.addEventListener('click', this.loseWrongAnswerDisplay.bind(this));
     },
 
     addNewWord: function(event){
@@ -178,9 +179,9 @@
     wrongAnswer: function(estonian_word, english_word, user_guess){
       this.to_hide.style.display = "none";
       if(this.language_to_guess === 0){
-        this.result_to_guess.innerHTML = "<center>" + estonian_word + " != " + user_guess + "<br><br><font size='20'>" + estonian_word + " = " + english_word + "</font><br><br>(oota 5 sekundit või vajuta tühikut)</center>";
+        this.result_to_guess.innerHTML = "<center>" + estonian_word + " != " + user_guess + "<br><br><font size='20'>" + estonian_word + " = " + english_word + "</font><br><br>(oota 5 sekundit või vajuta ekraanile)</center>";
       }else{
-        this.result_to_guess.innerHTML = "<center>" + english_word + " != " + user_guess + "<br><br><font size='20'>" + english_word + " = " + estonian_word + "</font><br><br>(oota 5 sekundit või vajuta tühikut)</center>";
+        this.result_to_guess.innerHTML = "<center>" + english_word + " != " + user_guess + "<br><br><font size='20'>" + english_word + " = " + estonian_word + "</font><br><br>(oota 5 sekundit või vajuta ekraanile)</center>";
       }
       this.permission = 0;
       window.setTimeout(function(){
@@ -191,13 +192,11 @@
       }, 5000);
     },
 
-    wrongAnswerDisplay: function(event){
-      if(event.keyCode === 32){
+    loseWrongAnswerDisplay: function(event){
         this.to_hide.style.display = "block";
         this.result_to_guess.innerHTML = "";
         this.permission = 1;
         this.answer_to_guess.select();
-      }
     },
 
     rightAnswer: function(){
