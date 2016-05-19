@@ -86,9 +86,23 @@
         document.querySelector('#basket-nr').innerHTML = "Korv number "+basket_nr+" par = "+par_nr;
         document.querySelector('#player-name').innerHTML = "Mängija "+player+" tulemuse sisestamine:";
         document.querySelector('.qty').value = par_nr;
+      }
+    },
+    'game-history': {
+      'render': function(){
+        var table = document.querySelector("#history");
+        table.innerHTML = "";
 
+        var html = "";
 
+        html += "<tr>";
+          html += "<th>Raja nimi</th>";
+          html += "<th>Total par</th>";
+          html += "<th>My result</th>";
+          html += "<th>Vaata lähemalt</th>";
+        html += "</tr>";
 
+        table.innerHTML = html;
       }
     }
   };
@@ -140,7 +154,7 @@
 
     nextBasket: function(e){
 
-      //siis formi i submiti
+      //siis formi ei submiti
       e.preventDefault();
 
       //tulemused
