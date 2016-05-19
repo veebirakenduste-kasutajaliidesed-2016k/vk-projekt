@@ -25,16 +25,18 @@
   <div id="info-view">
 
     <h1>Mine Mängima</h1>
-    <label for="name">Nimi: </label><br>
-    <input type="text" name="name" class="name"><br>
-    <button class="start-new-game">Mine mängima</button>
+    <form id="start-new-game-form">
+      <label for="name">Nimi: </label><br>
+      <input type="text" name="name" class="name"><br>
+      <button class="start-new-game">Mine mängima</button>
+    </form>
   </div>
 
   <div id="game-view">
     <h1></h1>
     <div id="player-name"></div>
     <div id="basket-nr"> </div>
-    <form id='myform' method='POST' action='#'>
+    <form>
         <input type='button' value='-' class='qtyminus' field='quantity' />
         <input type='number' name='quantity' class='qty' />
         <input type='button' value='+' class='qtyplus' field='quantity' />

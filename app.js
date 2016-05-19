@@ -11,6 +11,7 @@
     this.currentRoute = null;
     //Rajad tulevad failist tracks.js
     this.tracks = tracks;
+    this.current_basket = 0;
 
     this.currentGame = {
       player: null,
@@ -75,19 +76,19 @@
         var id = Discgolf.instance.currentGame.selected_track;
         var track = Discgolf.instance.tracks[id];
         var player = Discgolf.instance.currentGame.player;
-        var current_basket = track.baskets[0];
+
+        var index = Discgolf.instance.current_basket;
 
         document.querySelector('#game-view h1').innerHTML = track.name;
 
-        // console.log(track.baskets[0].nr);
-        for(var i = 0; i < track.baskets.length; i++){
-            var basket_nr = track.baskets[i].nr;
-            var par_nr = track.baskets[i].par;
-            document.querySelector('#basket-nr').innerHTML = "Korv number "+basket_nr+" par = "+par_nr;
-            document.querySelector('#player-name').innerHTML = "Mängija "+player+" tulemuse sisestamine:";
-            document.querySelector('.qty').value = par_nr;
+        var basket_nr = track.baskets[index].nr;
+        var par_nr = track.baskets[index].par;
+        document.querySelector('#basket-nr').innerHTML = "Korv number "+basket_nr+" par = "+par_nr;
+        document.querySelector('#player-name').innerHTML = "Mängija "+player+" tulemuse sisestamine:";
+        document.querySelector('.qty').value = par_nr;
 
-        }
+
+
       }
     }
   };
@@ -121,6 +122,8 @@
 
     bindEvents: function(){
       document.querySelector('.start-new-game').addEventListener('click', this.startGame.bind(this));
+      document.querySelector('#start-new-game-form').addEventListener('submit', this.startGame.bind(this));
+      document.querySelector('.save-result').addEventListener('click', this.nextBasket.bind(this));
     },
 
     routeChange: function(event){
@@ -135,6 +138,32 @@
       }
     },
 
+    nextBasket: function(e){
+
+      //siis formi i submiti
+      e.preventDefault();
+
+      //tulemused
+      /*[
+        {basket: 1, result: 4},
+        {basket: 1, result: 4},
+      ]*/
+      var id = this.currentGame.selected_track;
+      var track = this.tracks[id];
+      if(this.current_basket == track.baskets.length-1){
+        alert("viimane oli");
+        return;
+      }
+
+      this.current_basket++;
+
+
+      console.log('next baskte:'+this.current_basket);
+      this.routes[this.currentRoute].render();
+
+
+    },
+
     insertInfo: function(id){
       console.log("load info for id "+id);
 
@@ -146,7 +175,10 @@
       console.log(this.tracks[id]);
     },
 
-    startGame: function(){
+    startGame: function(e){
+
+      e.preventDefault();
+
       var name = document.querySelector('.name').value;
       console.log("nimi on "+name);
       if(name === ""){
