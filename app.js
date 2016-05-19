@@ -14,6 +14,7 @@
     this.current_basket = 0;
 
     this.currentGame = {
+      unique_id: null,
       player: null,
       selected_track: null
     };
@@ -65,15 +66,12 @@
     'info-view': {
       'render': function(){
         console.log('>>>>nime lisamine');
-        var unique_id = guid();
-        console.log('Unikaalne id on '+unique_id);
-
-
         var id = Discgolf.instance.currentGame.selected_track;
         var track = Discgolf.instance.tracks[id];
         console.log(track.name);
         console.log(id);
         document.querySelector('#info-view h1').innerHTML = "Mine mängima "+track.name;
+
       }
     },
     'game-view': {
@@ -177,7 +175,7 @@
       ]*/
       var id = this.currentGame.selected_track;
       var track = this.tracks[id];
-      var unique_id = guid();
+      var unique_id = this.currentGame.unique_id;
       var index = Discgolf.instance.current_basket;
       var basket_nr = track.baskets[index].nr;
       var player = Discgolf.instance.currentGame.player;
@@ -220,7 +218,7 @@
     startGame: function(e){
 
       e.preventDefault();
-
+      var unique_id = guid();
       var name = document.querySelector('.name').value;
       console.log("nimi on "+name);
       if(name === ""){
@@ -232,6 +230,8 @@
       }
 
       this.currentGame.player = name;
+      this.currentGame.unique_id = unique_id;
+      console.log('Unikaalne id on '+unique_id);
 
       window.location.hash = 'game-view';
     },
