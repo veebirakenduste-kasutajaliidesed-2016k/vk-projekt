@@ -38,7 +38,7 @@
       if(this.upgrade[s]>0){
         for(var l = 0; l<this.upgrade[s]; l++){
           console.log("innerloop "+l+" times");
-          this.drawCharacters(l);
+          this.drawCharacters(s);
         }
       }
     }
