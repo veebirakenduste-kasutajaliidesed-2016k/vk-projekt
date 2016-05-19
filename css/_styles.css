@@ -2,10 +2,17 @@ html, body{
 	height:100%;
 }
 body{
-	background-image:url("../vktaust.svg");
+	/*background-image:url("../vktaust.svg");
 	background-repeat:no-repeat;
 	background-size:cover;
-	background-position:center;
+	background-position:center;*/
+}
+.game{
+	width:100%;
+	height:100%;
+}
+.characterCanvas{
+	background-color:#3b3b3b;
 }
 .upgrade{
 
@@ -25,7 +32,7 @@ line-height: 50px;
 font-size: 15px;
 text-align: center;
 border: 1px solid #ddd;
-background-color: rgba(246, 36, 89, 0.7);
+background-color: #3b3b3b;
 cursor: pointer;
 }
 .btn--upgrade{
@@ -58,7 +65,7 @@ margin-bottom: 0;
 	bottom: 0;
 }
 .stats__cookieAmount{
-	color:#FFF;
+	color:#3b3b3b;
 	font-size:45px;
 }
 .stats__cps{

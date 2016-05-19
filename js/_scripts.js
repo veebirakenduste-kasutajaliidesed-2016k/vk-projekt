@@ -32,6 +32,16 @@
     }
     this.updateStats();
     this.bindEvents();
+    console.log(this.upgrade.length);
+    for(var s = 0; s < this.upgrade.length; s++){
+      console.log("outerloop activated for canvas "+s);
+      if(this.upgrade[s]>0){
+        for(var l = 0; l<this.upgrade[s]; l++){
+          console.log("innerloop "+l+" times");
+          this.drawCharacters(l);
+        }
+      }
+    }
     this.main();
     console.log(this.cookies);
     },
@@ -56,6 +66,9 @@
       });
       $('.btn--delete').click(function(){
         game.delete();
+      });
+      $('.btn--testing').click(function(){
+        game.cookies = 9999999;
       });
     },
     addCookie: function(amount){
@@ -100,10 +113,21 @@
         $('.upgrade .upgrade__amount').eq(index).html(this.upgrade[index]);
         cost = Math.floor(Math.pow(10,index+1) * Math.pow(1.1,this.upgrade[index]));
         $('.upgrade .upgrade__cost').eq(index).html(cost+"$");
+        this.drawCharacters(index);
       }else{
         console.log("Need mo money "+cost);
-      }        
+      }
     },
+    drawCharacters: function(index){
+        var canvas = document.querySelectorAll('.characterCanvas')[index];
+        var ctx = canvas.getContext('2d');
+        var i1 = new Image();
+        i1.onload = function(){
+        ctx.drawImage(i1, Math.floor(Math.random() * (795 - 5) + 5), Math.floor(Math.random() * (195 - 5) + 5));
+        };
+        i1.src = ''+index+'.png';
+        console.log("Drew a character on canvas "+index);
+      }
   }
     window.onload = function(){
     var app = new ClickerGame();
