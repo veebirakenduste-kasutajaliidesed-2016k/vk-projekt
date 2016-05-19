@@ -56,14 +56,14 @@ margin-bottom: 0;
 .gameArea{
 	height:100%;
 }
-.gameArea__buttons{
+/*.gameArea__buttons{
 	width: 300px;
 	margin: 0 auto;
 	position: absolute;
 	left: 50%;
 	transform: translateX(-50%);
 	bottom: 0;
-}
+}*/
 .stats__cookieAmount{
 	color:#3b3b3b;
 	font-size:45px;
