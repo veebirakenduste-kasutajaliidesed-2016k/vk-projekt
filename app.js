@@ -13,6 +13,7 @@
     this.tracks = tracks;
     this.current_basket = 0;
 
+
     this.games = [];
 
     if(localStorage.games){
@@ -117,24 +118,37 @@
           html += "<th>Raja nimi</th>";
           html += "<th>Total par</th>";
           html += "<th>My result</th>";
+          html += "<th>+/-</th>";
           html += "<th>Vaata lähemalt</th>";
         html += "</tr>";
 
         var games = Discgolf.instance.games;
-
+        //tsükkel mängitud mängude kuvamiseks
         for (var i=0; i<games.length; i++){
 
            var track_id = games[i].selected_track;
            console.log(games[i].results);
           html += "<tr>";
-          html += "<td>"+track_id+"</td>";
+          //kuvab raja nime
+          html += "<td>"+Discgolf.instance.tracks[track_id].name+"</td>";
+          //liidab kokku kõikide korvide par'id
           var par_sum = 0;
-
           for(var j = 0; j < games[i].results.length; j++){
             par_sum += games[i].results[j].par;
           }
-
           html += "<td>"+par_sum+"</td>";
+
+          //liidab kokku minu igale korvile kulunud visete arvu
+          var my_result = 0;
+          for(var k = 0; k < games[i].results.length; k++){
+            my_result += parseInt(games[i].results[k].result);
+          }
+          html += "<td>"+my_result+"</td>";
+          //leiab vahe
+          html += "<td>"+(par_sum-my_result)+"</td>";
+          //siit nupu pealt näeb detailsemalt
+          html += "<td><button onclick=''>Details</button></td>";
+
 
           html += "</tr>";
         }
@@ -163,10 +177,10 @@
 
       if(this.games.length > 0 && this.games[this.games.length-1].ended === null){
 
-        // kas m'ng l]petatud
+        // kas mäng lõpetatud
 
         this.currentGame = this.games[this.games.length-1];
-        this.current_basket = this.games[this.games.length-1].current_basket+1; // ]ige nr
+        this.current_basket = this.games[this.games.length-1].current_basket+1; // õige nr
         window.location.hash = 'game-view';
         this.routeChange();
         return;
@@ -208,11 +222,6 @@
 
       e.preventDefault();
 
-      //tulemused
-      /*[
-        {basket: 1, result: 4},
-        {basket: 1, result: 4},
-      ]*/
       var id = this.currentGame.selected_track;
       var track = this.tracks[id];
       //var track_name = track.name;
@@ -258,13 +267,13 @@
 
 
       if(this.current_basket == track.baskets.length-1){
-
+        // console.log(this.games[game_index]);
         this.games[game_index].ended = new Date();
+        localStorage.setItem('games', JSON.stringify(this.games));
 
         window.location.hash = 'game-history';
         return;
       }
-
       this.current_basket++;
 
 
