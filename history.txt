@@ -1,0 +1,1 @@
+[{"ExId":"71fab7e3-d455-4955-af9f-ff3b8dc1657b","ExTime":"00:01:03:793","ExDate":"20.05.2016","ExDistance":"306.08834895334286","Exercise":"Running"},{"ExId":"22a19920-4e1f-47dd-816c-e4e7bff7b282","ExTime":"00:00:04:718","ExDate":"20.05.2016","ExDistance":"0","Exercise":"Running"}]

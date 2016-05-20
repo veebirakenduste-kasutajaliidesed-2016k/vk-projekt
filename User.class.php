@@ -83,4 +83,65 @@ class User{
 		$stmt->close();
 		return $response;
 	}
+	function getExercises(){
+		$exercises = array();
+		$stmt = $this->connection->prepare("SELECT id, exercise FROM runner_exercises");
+		$stmt->bind_result($id, $exercise);
+		$stmt->execute();
+		while($stmt->fetch()){
+			array_push($exercises, $id, $exercise);
+		}
+		$stmt->close();
+		return $exercises;
+	}
+	function addPath($ExId, $lat, $lng){
+		$stmt = $this->connection->prepare("INSERT INTO runner_path (ExId, lat, lng) VALUES (?, ?, ?)");
+		$stmt->bind_param("sdd", $ExId, $lat, $lng);
+		$stmt->execute();
+		$stmt->close();
+	}
+	function addHistory($ExId, $UId, $time, $date, $length, $ExListId){
+		$stmt = $this->connection->prepare("INSERT INTO runner_history (ExId, user_id, time, date, length, exerciseId) VALUES (?, ?, ?, ?, ?, ?)");
+		$stmt->bind_param("sisssi", $ExId, $UId, $time, $date, $length, $ExListId);
+		$stmt->execute();
+		$stmt->close();
+	}
+	function getHistory($UId){
+		$array = '[';
+		$stmt = $this->connection->prepare("SELECT ExId, time, date, length, exercise FROM runner_history, runner_exercises WHERE exerciseId = runner_exercises.id and user_id = ?");
+		$stmt->bind_param("i", $UId);
+		$stmt->bind_result($ExId, $time, $date, $length, $exercise);
+		$stmt->execute();
+		while($stmt->fetch()){
+			$array.='{"id":"'.$ExId.'","time":"'.$time.'","date":"'.$date.'","length":"'.$length.'","exercise":"'.$exercise.'"},';
+		}
+		$stmt->close();
+		$array = substr($array,0, -1);
+		$array.=']';
+		return $array;
+	}
+	function getPath($ExId){
+		$array = '[';
+		
+		$stmt = $this->connection->prepare("SELECT ExId FROM runner_path WHERE ExId = ?");
+		$stmt->bind_param("s", $ExId);
+		$stmt->execute();
+		if(!$stmt->fetch()){
+			$array.=']';
+			return $array;
+		}
+		$stmt->close();
+		
+		$stmt = $this->connection->prepare("SELECT lat, lng FROM runner_path WHERE ExId = ?");
+		$stmt->bind_param("s", $ExId);
+		$stmt->bind_result($lat, $lng);
+		$stmt->execute();
+		while($stmt->fetch()){
+			$array.='{"lat":"'.$lat.'","lng":"'.$lng.'"},';
+		}
+		$stmt->close();
+		$array = substr($array,0, -1);
+		$array.=']';
+		return $array;
+	}
 }?>

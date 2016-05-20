@@ -23,7 +23,12 @@
 	//this.endMarker = null;
 	this.path = [];
 	this.curPos = null;
-
+	this.ExerciseId = null;
+	this.remember = false;
+	this.exercise = null;
+	
+	this.lat = null;
+	this.lng = null;
     //panen rakenduse tööle
     this.init();
   };
@@ -41,6 +46,7 @@
     "history-view" : {
       render: function(){
         console.log('history lehel');
+		Runner.instance.getHistory();
       }
     }
   };
@@ -54,30 +60,57 @@
         this.routeChange();
       }
 	  this.update();
+	  this.getExercise();
       this.bindEvents();
-	  
     },
     bindEvents: function(){
       //kuulan trükkimist otsi kastist
-      document.querySelector('#search').addEventListener('keyup', this.search.bind(this));
 	  document.querySelector('#playButton').addEventListener('click', this.start.bind(this));
 	  document.querySelector('#pauseButton').addEventListener('click', this.pause.bind(this));
 	  document.querySelector('#stopButton').addEventListener('click', this.stop.bind(this));
-    },
-    search: function(event){
-      //otsikasti väärtus
-      var needle = document.querySelector('#search').value.toLowerCase();
-      //console.log(needle);
 	  
+	  document.querySelector('#history_table').addEventListener('click', this.showMap.bind(this));
     },
+	showMap: function(event){
+		//console.log(event.target.id);
+		if(event.target.id !== "" && event.target.id !== "history_table"){
+			if(document.getElementById(event.target.id+"_map").style.getPropertyValue("display") !== "none"){
+				$('#'+event.target.id+'_map').hide();
+			}else{
+				this.getPath(event.target.id);
+				if(this.path.length !== 0){
+					console.log("ei ole tühi");
+					this.makeMap(event.target.id+"_map");
+					this.path = [];
+					$('#'+event.target.id+'_map').show();
+				}
+			}
+		}
+	},
 	start: function(event){
+		if(this.remember===false){
+			Runner.instance.ExerciseId = guid();
+			this.exercise = document.getElementById("selectExercise").value;
+		}
+		if(this.exercise==""){
+			alert("Please select exercise");
+			$('#selectExercise').show();
+			this.pause();
+			this.x.reset();
+			this.update();
+			//map
+			this.path = [];
+			this.remember = false;
+			return;
+		}
 		$('#playButton').hide();
 		$('#pauseButton').show();
 		$('#stopButton').show();
+		$('#selectExercise').hide();
 		this.clocktimer = setInterval(this.update.bind(this), 1);
 		this.x.start();
+		
 		//map
-		//this.initMap();
 		  var options = {
 			  enableHighAccuracy: true,
 			  timeout: 5000,
@@ -86,14 +119,31 @@
 
 			function success(pos) {
 			  var crd = pos.coords;
+			  console.log(crd.latitude);
 			  var position = new google.maps.LatLng(crd.latitude,crd.longitude);
+			  if(Runner.instance.lat !== crd.latitude || Runner.instance.lng !== crd.longitude){
 
-			  //console.log('Your current position is:');
-			  //console.log('Latitude : ' + crd.latitude);
-			  //console.log('Longitude: ' + crd.longitude);
-			  //console.log('More or less ' + crd.accuracy + ' meters.');
-			  //console.log(position);
-			  Runner.instance.path.push(position);
+				  //console.log('Your current position is:');
+				  //console.log('Latitude : ' + crd.latitude);
+				  //console.log('Longitude: ' + crd.longitude);
+				  //console.log('More or less ' + crd.accuracy + ' meters.');
+				  //console.log(position);
+				  Runner.instance.path.push(position);
+				  //AJAX
+					var xhttp = new XMLHttpRequest();
+					//mis juhtub kui päring lõppeb
+					xhttp.onreadystatechange = function() {
+						//console.log(xhttp.readyState);
+						if (xhttp.readyState == 4 && xhttp.status == 200) {
+							console.log(xhttp.responseText);
+						}
+					};
+					//teeb päringu
+					xhttp.open("GET", "save.php?id="+Runner.instance.ExerciseId+"&lat="+crd.latitude+"&lng="+crd.longitude, true);
+					xhttp.send();
+				}
+				Runner.instance.lat = crd.latitude;
+				Runner.instance.lng = crd.longitude;
 			};
 
 			function error(err) {
@@ -112,36 +162,134 @@
 		clearInterval(this.clocktimer);
 		//map
 		clearInterval(this.curPos);
-		console.log(this.path.length); //kui palju koordinaate listis on
+		//console.log(this.path.length); //kui palju koordinaate listis on
+		this.remember = true;
 	},
 	stop: function(event){
+		$('#selectExercise').show();
 		this.pause();
-		console.log(this.formatTime(this.x.time())); //mis aeg stopperil on
+		//console.log(this.formatTime(this.x.time())); //mis aeg stopperil on
+		this.saveExercise(); // salvesta andmebaasi
 		this.x.reset();
 		this.update();
 		//map
-		this.makeMap();
-		this.savePath();
+		//this.makeMap("map_canvas");
 		this.path = [];
-	},
-	savePath: function(){
+		this.remember = false;
 		
-		var PathToSave = JSON.stringify(this.path);
-		console.log(PathToSave);
+	},
+	saveExercise: function(){
+		console.log(Runner.instance.ExerciseId);
+		console.log(this.formatTime(this.x.time()));
+		console.log(this.writeDate());
+		console.log(this.getDistance());
+		console.log(this.exercise);
+		console.log("save.php?id="+Runner.instance.ExerciseId+"&time="+this.formatTime(this.x.time())+"&date="+this.writeDate()+"&distance="+this.getDistance()+"&exercise="+this.exercise);
+		
 		//AJAX
 		var xhttp = new XMLHttpRequest();
 		//mis juhtub kui päring lõppeb
 		xhttp.onreadystatechange = function() {
-			console.log(xhttp.readyState);
+			//console.log(xhttp.readyState);
 			if (xhttp.readyState == 4 && xhttp.status == 200) {
 				console.log(xhttp.responseText);
 			}
 		};
 		//teeb päringu
-		xhttp.open("GET", "save.php?path="+PathToSave, true);
+		xhttp.open("GET", "save.php?HistoryId="+Runner.instance.ExerciseId+"&time="+this.formatTime(this.x.time())+"&date="+this.writeDate()+"&distance="+this.getDistance()+"&exercise="+this.exercise, true);
 		xhttp.send();
 	},
-	makeMap: function(){
+	getExercise: function(){
+		//AJAX
+		var xhttp = new XMLHttpRequest();
+		//mis juhtub kui päring lõppeb
+		xhttp.onreadystatechange = function() {
+			//console.log(xhttp.readyState);
+			if (xhttp.readyState == 4 && xhttp.status == 200) {
+				//console.log(xhttp.responseText);
+				var options = JSON.parse(xhttp.responseText);
+				var dropdown = document.getElementById("selectExercise");
+				//console.log(options);
+				for(var i=1; i<options.length; i+=2){
+					var cur = options[i];
+					var curValue = options[i-1];
+					var el = document.createElement("option");
+					el.textContent = cur;
+					el.value = curValue;
+					dropdown.appendChild(el);
+				}
+			}
+		};
+		//teeb päringu
+		xhttp.open("GET", "save.php?exercises", true);
+		xhttp.send();
+	},
+	getHistory: function(){
+		//AJAX
+		var xhttp = new XMLHttpRequest();
+		//mis juhtub kui päring lõppeb
+		xhttp.onreadystatechange = function() {
+			//console.log(xhttp.readyState);
+			if (xhttp.readyState == 4 && xhttp.status == 200) {
+				//console.log(xhttp.responseText);
+				var exercises = JSON.parse(xhttp.responseText);
+				var history_table = document.getElementById("history_table");
+				//console.log(exercises[0]["id"]);
+				//console.log(exercises[0]);
+				for(var i=0; i<exercises.length; i++){
+					var id = exercises[i]["id"];
+					var time = exercises[i]["time"];
+					var date = exercises[i]["date"];
+					var length = exercises[i]["length"];
+					var exercise = exercises[i]["exercise"];
+					var tr = document.createElement("tr");
+					var div = document.createElement("div");
+					tr.textContent = exercise+" "+(length/1000)+"km in "+time+" Date: "+date;
+					tr.id = id;
+					div.id = id+"_map";
+					div.style = "display: none;width:100%;height:380px;";
+					tr.appendChild(div);
+					//console.log(tr);
+					history_table.appendChild(tr);
+					//console.log(id+"_map");
+					//Runner.instance.makeMap(id+"_map");
+				}
+			}
+		};
+		//teeb päringu
+		xhttp.open("GET", "save.php?history", true);
+		xhttp.send();
+	},
+	getPath: function(Ex_id){
+		//AJAX
+		var xhttp = new XMLHttpRequest();
+		//mis juhtub kui päring lõppeb
+		xhttp.onreadystatechange = function() {
+			//console.log(xhttp.readyState);
+			if (xhttp.readyState == 4 && xhttp.status == 200) {
+				//console.log(xhttp.responseText);
+				var path = JSON.parse(xhttp.responseText);
+				for(var i=0; i<path.length; i++){
+					console.log(parseFloat(path[i]["lat"])+" ja "+parseFloat(path[i]["lng"]));
+					var position = new google.maps.LatLng(parseFloat(path[i]["lat"]),parseFloat(path[i]["lng"]));
+					Runner.instance.path.push(position);
+					console.log("siin");
+				}
+			}
+		};
+		//teeb päringu
+		xhttp.open("GET", "save.php?ExId="+Ex_id, true);
+		xhttp.send();
+	},
+	getDistance: function(){
+		var length = 0;
+		var i;
+		for(i=0; i<(this.path.length-1); i++){
+			length += google.maps.geometry.spherical.computeDistanceBetween (this.path[i], this.path[i+1]);
+		}
+		return length;
+	},
+	makeMap: function(map_id){
 		var bounds = new google.maps.LatLngBounds();
 		var i;
 		for(i=0; i<this.path.length; i++){
@@ -156,7 +304,7 @@
 			mapTypeControl: false
 		}
 		
-		var map = new google.maps.Map(document.getElementById("map_canvas"),mapProp);
+		var map = new google.maps.Map(document.getElementById(map_id),mapProp);
 		//console.log(this.path.length);
 		
 		map.fitBounds(bounds);
@@ -277,6 +425,19 @@
 				return lapTime + (startAt ? now() - startAt : 0); 
 			};
 	};
+	
+	function guid(){
+		var d = new Date().getTime();
+		if(window.performance && typeof window.performance.now === "function"){
+			d += performance.now(); //use high-precision timer if available
+		}
+		var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+			var r = (d + Math.random()*16)%16 | 0;
+			d = Math.floor(d/16);
+			return (c=='x' ? r : (r&0x3|0x8)).toString(16);
+		});
+		return uuid;
+	}
   
   window.onload = function(){
     var app = new Runner();

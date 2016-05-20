@@ -13,7 +13,7 @@
   <title>Moosipurk</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
-  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTGe4CiXTWPyJl9M9Vwl6v3strdz3JsII"></script>
+  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTGe4CiXTWPyJl9M9Vwl6v3strdz3JsII&libraries=geometry"></script>
   <script src="app.js"></script>
   <link rel="stylesheet" href="style.css">
 </head>
@@ -27,11 +27,13 @@
   </nav>
   <main role="main" class="col-md-3 col-md-offset-5">
     <div id="history-view">
-      <h1>Loend</h1>
-      <input type="search" placeholder="Enter keyword" id="search"><br>
-      <ul class="list-of-jars"></ul>
+      <h1>History</h1>
+	  <table id="history_table"></table>
     </div>
     <div id="exercise-view">
+	  <select id="selectExercise">
+		<option value="">Choose a exercise</option>
+	  </select>
       <div id="time"></div>
 	  <input type="image" id="playButton" src="http://localhost:5555/~rimoesk/veebirakendus/vk-projekt/images/play.jpg" width="80" height="80"/>
 	  <input type="image" id="pauseButton" src="http://localhost:5555/~rimoesk/veebirakendus/vk-projekt/images/pause.png" width="80" height="80"/>
