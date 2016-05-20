@@ -108,6 +108,17 @@ class User{
 	}
 	function getHistory($UId){
 		$array = '[';
+		
+		$stmt = $this->connection->prepare("SELECT ExId FROM runner_history WHERE user_id = ?");
+		$stmt->bind_param("i", $UId);
+		$stmt->execute();
+		if(!$stmt->fetch()){
+			$array.=']';
+			return $array;
+		}
+		$stmt->close();
+		
+		
 		$stmt = $this->connection->prepare("SELECT ExId, time, date, length, exercise FROM runner_history, runner_exercises WHERE exerciseId = runner_exercises.id and user_id = ?");
 		$stmt->bind_param("i", $UId);
 		$stmt->bind_result($ExId, $time, $date, $length, $exercise);
