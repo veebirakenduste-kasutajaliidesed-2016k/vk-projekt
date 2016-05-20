@@ -37,15 +37,15 @@
   Runner.routes = {
     "exercise-view" : {
       render: function(){
-        console.log('exercise lehel');
+        //console.log('exercise lehel');
 		$('#pauseButton').hide();
 		$('#stopButton').hide();
-		
       }
     },
     "history-view" : {
       render: function(){
-        console.log('history lehel');
+        //console.log('history lehel');
+		document.getElementById("history_table").innerHTML = "";
 		Runner.instance.getHistory();
       }
     }
@@ -73,17 +73,13 @@
     },
 	showMap: function(event){
 		//console.log(event.target.id);
-		if(event.target.id !== "" && event.target.id !== "history_table"){
+		if(event.target.id !== "" && event.target.id !== "history_table" && event.target.id.substr(-4) !== "_map"){
 			if(document.getElementById(event.target.id+"_map").style.getPropertyValue("display") !== "none"){
 				$('#'+event.target.id+'_map').hide();
 			}else{
+				$('#'+event.target.id+'_map').show();
 				this.getPath(event.target.id);
-				if(this.path.length !== 0){
-					console.log("ei ole tühi");
-					this.makeMap(event.target.id+"_map");
-					this.path = [];
-					$('#'+event.target.id+'_map').show();
-				}
+				
 			}
 		}
 	},
@@ -119,7 +115,7 @@
 
 			function success(pos) {
 			  var crd = pos.coords;
-			  console.log(crd.latitude);
+			  //console.log(crd.latitude);
 			  var position = new google.maps.LatLng(crd.latitude,crd.longitude);
 			  if(Runner.instance.lat !== crd.latitude || Runner.instance.lng !== crd.longitude){
 
@@ -135,7 +131,7 @@
 					xhttp.onreadystatechange = function() {
 						//console.log(xhttp.readyState);
 						if (xhttp.readyState == 4 && xhttp.status == 200) {
-							console.log(xhttp.responseText);
+							//console.log(xhttp.responseText);
 						}
 					};
 					//teeb päringu
@@ -179,12 +175,12 @@
 		
 	},
 	saveExercise: function(){
-		console.log(Runner.instance.ExerciseId);
+		/*console.log(Runner.instance.ExerciseId);
 		console.log(this.formatTime(this.x.time()));
 		console.log(this.writeDate());
 		console.log(this.getDistance());
 		console.log(this.exercise);
-		console.log("save.php?id="+Runner.instance.ExerciseId+"&time="+this.formatTime(this.x.time())+"&date="+this.writeDate()+"&distance="+this.getDistance()+"&exercise="+this.exercise);
+		console.log("save.php?id="+Runner.instance.ExerciseId+"&time="+this.formatTime(this.x.time())+"&date="+this.writeDate()+"&distance="+this.getDistance()+"&exercise="+this.exercise);*/
 		
 		//AJAX
 		var xhttp = new XMLHttpRequest();
@@ -192,7 +188,7 @@
 		xhttp.onreadystatechange = function() {
 			//console.log(xhttp.readyState);
 			if (xhttp.readyState == 4 && xhttp.status == 200) {
-				console.log(xhttp.responseText);
+				//console.log(xhttp.responseText);
 			}
 		};
 		//teeb päringu
@@ -247,7 +243,7 @@
 					tr.textContent = exercise+" "+(length/1000)+"km in "+time+" Date: "+date;
 					tr.id = id;
 					div.id = id+"_map";
-					div.style = "display: none;width:100%;height:380px;";
+					div.style = "display:none;width:100%;height:0px;";
 					tr.appendChild(div);
 					//console.log(tr);
 					history_table.appendChild(tr);
@@ -261,25 +257,37 @@
 		xhttp.send();
 	},
 	getPath: function(Ex_id){
-		//AJAX
-		var xhttp = new XMLHttpRequest();
-		//mis juhtub kui päring lõppeb
-		xhttp.onreadystatechange = function() {
-			//console.log(xhttp.readyState);
-			if (xhttp.readyState == 4 && xhttp.status == 200) {
-				//console.log(xhttp.responseText);
-				var path = JSON.parse(xhttp.responseText);
-				for(var i=0; i<path.length; i++){
-					console.log(parseFloat(path[i]["lat"])+" ja "+parseFloat(path[i]["lng"]));
-					var position = new google.maps.LatLng(parseFloat(path[i]["lat"]),parseFloat(path[i]["lng"]));
-					Runner.instance.path.push(position);
-					console.log("siin");
+		var table = document.getElementById("history_table")
+		for(var i=0; i<table.rows.length; i++){
+			//this.makeMap(table.rows[i].id+"_map");
+			
+			//AJAX
+			var xhttp = new XMLHttpRequest();
+			//mis juhtub kui päring lõppeb
+			xhttp.onreadystatechange = function() {
+				//console.log(xhttp.readyState);
+				if (xhttp.readyState == 4 && xhttp.status == 200) {
+					//console.log(xhttp.responseText);
+					var path = JSON.parse(xhttp.responseText);
+					for(var i=0; i<path.length; i++){
+						//console.log(parseFloat(path[i]["lat"])+" ja "+parseFloat(path[i]["lng"]));
+						var position = new google.maps.LatLng(parseFloat(path[i]["lat"]),parseFloat(path[i]["lng"]));
+						Runner.instance.path.push(position);
+					}
+					//console.log(Runner.instance.path);
+					//console.log(Runner.instance.path.length);
+					if(Runner.instance.path.length !== 0){
+						document.getElementById(Ex_id+"_map").style.height = '380px';
+						Runner.instance.makeMap(Ex_id+"_map");
+					}
+					Runner.instance.path = [];
 				}
-			}
-		};
-		//teeb päringu
-		xhttp.open("GET", "save.php?ExId="+Ex_id, true);
-		xhttp.send();
+			};
+			//teeb päringu
+			xhttp.open("GET", "save.php?ExId="+Ex_id, true);
+			xhttp.send();
+			//console.log(this.path[0]);
+		}
 	},
 	getDistance: function(){
 		var length = 0;
@@ -299,7 +307,7 @@
 		
 		var mapProp = {
 			center: bounds.getCenter(),
-			zoom: 16,
+			zoom: 10,
 			streetViewControl: false,
 			mapTypeControl: false
 		}
