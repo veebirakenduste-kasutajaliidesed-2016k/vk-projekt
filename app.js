@@ -13,13 +13,27 @@
     this.tracks = tracks;
     this.current_basket = 0;
 
+    this.games = [];
+
+    if(localStorage.games){
+      this.games = JSON.parse(localStorage.games);
+
+
+
+
+    }else{
+      localStorage.setItem('games', '[]');
+    }
+
     this.currentGame = {
       unique_id: null,
       player: null,
-      selected_track: null
+      selected_track: null,
+      current_basket: null,
+      results: [],
+      ended: null
     };
 
-    this.results = [];
 
     this.init();
   };
@@ -106,10 +120,23 @@
           html += "<th>Vaata lähemalt</th>";
         html += "</tr>";
 
-        for (var i=0; i<this.localStorage.results; i++){
-          var track_name = this.localStorage.track_name;
-          
-          html += "<td>"+track_name+"</td>";
+        var games = Discgolf.instance.games;
+
+        for (var i=0; i<games.length; i++){
+
+           var track_id = games[i].selected_track;
+           console.log(games[i].results);
+          html += "<tr>";
+          html += "<td>"+track_id+"</td>";
+          var par_sum = 0;
+
+          for(var j = 0; j < games[i].results.length; j++){
+            par_sum += games[i].results[j].par;
+          }
+
+          html += "<td>"+par_sum+"</td>";
+
+          html += "</tr>";
         }
 
         table.innerHTML = html;
@@ -132,6 +159,20 @@
 
       //aadressirea vahetus
       window.addEventListener('hashchange', this.routeChange.bind(this));
+
+
+      if(this.games.length > 0 && this.games[this.games.length-1].ended === null){
+
+        // kas m'ng l]petatud
+
+        this.currentGame = this.games[this.games.length-1];
+        this.current_basket = this.games[this.games.length-1].current_basket+1; // ]ige nr
+        window.location.hash = 'game-view';
+        this.routeChange();
+        return;
+      }
+
+
       // kui aadressireal ei ole hashi siis lisan juurde
       if(!window.location.hash){
         window.location.hash = 'home-view';
@@ -174,23 +215,52 @@
       ]*/
       var id = this.currentGame.selected_track;
       var track = this.tracks[id];
-      var track_name = track.name;
-      var unique_id = this.currentGame.unique_id;
+      //var track_name = track.name;
+      //var unique_id = this.currentGame.unique_id;
       var index = Discgolf.instance.current_basket;
       var basket_nr = track.baskets[index].nr;
-      var player = Discgolf.instance.currentGame.player;
+      //var player = Discgolf.instance.currentGame.player;
       var result = document.querySelector('.qty').value;
 
-      var new_results = new Results(unique_id, track_name, player, basket_nr, result);
+      var new_results = {
+        basket_nr: basket_nr,
+        result: result,
+        par: track.baskets[index].par
+      };
 
+     // kas selline m2ng on olemas localStorage
+     var game_index = -1;
+     console.log(this.games);
+     for(var i = 0; i < this.games.length; i++){
+       console.log(this.games[i].unique_id +' '+this.currentGame.unique_id);
+       if(this.games[i].unique_id == this.currentGame.unique_id){
+         game_index = i;
+         //break;
+       }
+     }
 
-      this.results.push(new_results);
-      console.log(JSON.stringify(this.results));
-      localStorage.setItem('results', JSON.stringify(this.results));
+     console.log('uuendame mangu kohal ' + game_index);
+
+     if(game_index != -1){
+       this.games[game_index].results.push(new_results);
+       this.games[game_index].current_basket = this.current_basket;
+     }else{
+       console.log('uus mang, esimene korv');
+       this.currentGame.results.push(new_results);
+        this.currentGame.current_basket = this.current_basket;
+       this.games.push(this.currentGame);
+     }
+
+    //  this.currentGame.results.push(new_results);
+      //console.log(JSON.stringify(this.currentGame));
+      localStorage.setItem('games', JSON.stringify(this.games));
 
 
 
       if(this.current_basket == track.baskets.length-1){
+
+        this.games[game_index].ended = new Date();
+
         window.location.hash = 'game-history';
         return;
       }
@@ -199,6 +269,8 @@
 
 
       console.log('next basket:'+this.current_basket);
+
+
       this.routes[this.currentRoute].render();
 
 
@@ -239,13 +311,13 @@
 
   };//appi l6pp
 
-  var Results = function(new_unique_id, new_track_name, new_player, new_basket_nr, new_result){
-    this.unique_id = new_unique_id;
-    this.track_name = new_track_name;
-    this.player = new_player;
-    this.basket_nr = new_basket_nr;
-    this.result = new_result;
-  };
+  // var Results = function(new_unique_id, new_track_name, new_player, new_basket_nr, new_result){
+  //   this.unique_id = new_unique_id;
+  //   this.track_name = new_track_name;
+  //   this.player = new_player;
+  //   this.basket_nr = new_basket_nr;
+  //   this.result = new_result;
+  // };
 
  function guid(){
    var d = new Date().getTime();
