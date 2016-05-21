@@ -15,6 +15,19 @@
 
     window.averageFuel = averageFuel;
 
+    averageFuel.routes = {
+     'home-view': {
+       'render': function(){}
+     },
+     'history-view': {
+       'render': function(){}
+     },
+     'manage-view': {
+       'render': function(){
+        }
+     }
+   };
+
     averageFuel.prototype = {
 
       //siia funktsiionid
@@ -28,6 +41,7 @@
 
       */
 
+
       init:function(){
         this.serverData=[];
         console.log(this.serverData);
@@ -35,7 +49,33 @@
         this.getValuesListener();
         console.log(this.serverData);
 
+        window.addEventListener('hashchange', this.routeChange.bind(this));
+       if(!window.location.hash){
+         window.location.hash = 'home-view';
+         }else{
+       this.routeChange();
+       }
+
       },
+
+      routeChange: function(event){
+
+       this.currentRoute = location.hash.slice(1);
+       console.log(this.currentRoute);
+
+       if(this.routes[this.currentRoute]){
+
+         this.updateMenu();
+
+         this.routes[this.currentRoute].render();
+
+
+       }else{
+         /// 404 - ei olnud
+       }
+
+
+     },
 
       getValuesListener: function(){
         document.getElementById('button').addEventListener('click', this.getValues.bind(this));
@@ -47,7 +87,7 @@
         var fuelCost = document.getElementById('fuelCost').value;
         var trip = document.getElementById('trip').value;
         var fuelCostText = document.getElementById('output');
-        fuelCostText.innerHTML = fuelCost;
+        fuelCostText.innerHTML = "Tankisid "+ fuelQuantity + " liitrit kütust " + fuelCost + " euro eest ja sõitsid " + trip + " kilomeetrit.";
 
 
         console.log(fuelQuantity);
@@ -59,12 +99,12 @@
       },
       fuelWasted:function(trip, fuelQuantity){
         var average = fuelQuantity/(trip/100);
-        console.log(average);
+        console.log("Keskmine kütusekulu on ", average, "L/100KM");
       },
       moneyWasted:function(fuelCost, fuelQuantity, trip){
         var costPerKm = ((fuelQuantity/(trip/100)/100)*(fuelCost/fuelQuantity));
-        console.log(costPerKm);
-    },
+        console.log("Kilomeetri hind on ", costPerKm);
+      },
 
       toServer: function(fuelQuantity, fuelCost, trip){
       var xhttp = new XMLHttpRequest();
