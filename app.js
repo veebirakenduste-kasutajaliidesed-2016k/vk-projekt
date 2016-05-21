@@ -114,10 +114,14 @@
       fuelWasted:function(trip, fuelQuantity){
         var average = fuelQuantity/(trip/100);
         console.log("Keskmine kütusekulu on ", average, "L/100KM");
+        var avgConsumption = document.getElementById('averageConsumption');
+        avgConsumption.innerHTML = "Keskmine kütusekulu oli " + average.toFixed(2) + "L/100KM." ;
       },
       moneyWasted:function(fuelCost, fuelQuantity, trip){
         var costPerKm = ((fuelQuantity/(trip/100)/100)*(fuelCost/fuelQuantity));
         console.log("Kilomeetri hind on ", costPerKm);
+        var kmCost = document.getElementById('averageKmCost');
+        averageKmCost.innerHTML = "Raha kulus " + costPerKm.toFixed(2) + " eurot kilomeetri kohta.";
       },
 
       toServer: function(fuelQuantity, fuelCost, trip){
