@@ -11,5 +11,6 @@ salvestades vajaliku teabe faili, millele on võimalik ligi pääseda ka siis ku
         * Kuvatakse tänane kuupäev, päev ning kellaaeg
         * Nende andmete põhjal kuvatakse lähima väljumisajaga bussiliin ja kellaaeg, millal antud transport väljub
         * Internetiühenduse puudumisel näidatakse kogu tolle päeva antud peatusest läbi sõitvaid liine ja nende aegu kasutades appcache'i
-    * Andmete liikumise skeem loetava pildina (mis lehed ja mis andmeid mis lehel käideldakse);
-        ![alt text](https://puu.sh/oZkVN/b45ba092c1.png "Andmete liikumise ja failide siduvuse joonis")
+        
+        * Andmete liikumise skeem loetava pildina (mis lehed ja mis andmeid mis lehel käideldakse);
+        ![Andmete liikumise ja failide siduvue joonis](https://github.com/Enij/vk-projekt/blob/master/vkJoonis.png)
