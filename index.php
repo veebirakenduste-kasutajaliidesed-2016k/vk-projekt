@@ -27,17 +27,22 @@
   </nav>
   <main role="main" class="col-md-3 col-md-offset-5">
     <div id="history-view">
-      <h1>History</h1>
-	  <table id="history_table"></table>
+	    <h1>History</h1>
+			<center>
+		  	<table id="history_table"></table>
+			</center>
     </div>
     <div id="exercise-view">
-	  <select id="selectExercise">
-		<option value="">Choose a exercise</option>
-	  </select>
-      <div id="time"></div>
-	  <input type="image" id="playButton" src="http://localhost:5555/~rimoesk/veebirakendus/vk-projekt/images/play.jpg" width="80" height="80"/>
-	  <input type="image" id="pauseButton" src="http://localhost:5555/~rimoesk/veebirakendus/vk-projekt/images/pause.png" width="80" height="80"/>
-	  <input type="image" id="stopButton" src="http://localhost:5555/~rimoesk/veebirakendus/vk-projekt/images/stop.png" width="80" height="80"/>
+			<h1>Exercise</h1>
+			<center>
+			  <select id="selectExercise" class="dropdown">
+					<option value="">Choose a exercise</option>
+			  </select>
+      	<div id="time" class="timer"></div>
+	  		<input type="image" class="RunButton" id="playButton" src="http://localhost:5555/~rimoesk/veebirakendus/vk-projekt/images/play.jpg" width="80" height="80"/>
+	  		<input type="image" class="RunButton" id="pauseButton" src="http://localhost:5555/~rimoesk/veebirakendus/vk-projekt/images/pause.png" width="80" height="80"/>
+	  		<input type="image" class="RunButton" id="stopButton" src="http://localhost:5555/~rimoesk/veebirakendus/vk-projekt/images/stop.png" width="80" height="80"/>
+			</center>
     </div>
   </main>
 </body>

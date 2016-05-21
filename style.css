@@ -21,26 +21,15 @@ html {
     height: 100%;
     position: relative;
 }
-main {
-	position: absolute;
-	top: 0;
-	bottom: 0;
-
-	margin-top: 63px;
-    overflow-y: scroll;
-    -webkit-overflow-scrolling: touch;
-    margin-bottom: 10px;
-    width: 100%;
-}
 
 .menu {
     line-height: 1;
-    border-bottom: 1px solid rgb(146, 168, 209);
+    border-bottom: 1px solid rgb(0, 0, 0);
     margin-bottom: 0;
     color: black;
     padding-top: 10px;
     padding-left: 10px;
-    position: absolute;
+    position: relative;
     left: 0;
     right: 0;
 }
@@ -59,7 +48,7 @@ main {
     margin: 0 0 10px 0;
 }
 .menu-link {
-    color: rgb(146, 168, 209);
+    color: rgb(0, 0, 0);
     ;
     font-size: 16px;
     font-weight: bold;
@@ -85,83 +74,43 @@ main {
     ;
 }
 .menu-link.active-menu {
-    border: 2px solid rgb(146, 168, 209);
+    border: 2px solid rgb(179, 183, 191);
 }
-.pull-right {
-    float: right;
+.dropdown{
+  padding: 2px;
+  padding-right: 10px;
+  border-radius: 5px;
+  border: 2px solid #b3b7bf;
 }
-.title,
-.ingredients {
-    width: 100%;
-    margin-bottom: 10px;
-    margin-top: 4px;
-    padding: 4px;
-    border: 0;
-    border-bottom: 1px solid rgb(146, 168, 209);
+.timer{
+  letter-spacing:5px;
+  font-size:40px;
+  font-family:arial,sans-serif;
 }
-.add-new-jar {
-    background-color: #fff;
-    padding: 10px;
-    border: 2px solid rgb(146, 168, 209);
-    color: rgb(146, 168, 209);
+table {
+color: #333;
+font-family: Helvetica, Arial, sans-serif;
+width: 100%;
+border-collapse:
+collapse; border-spacing: 0;
 }
-.feedback-success{
-  color: green;
-  font-size: 18px;
-  font-weight: bold;
-  display: block;
-  padding: 10px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  -webkit-touch-callout: none;
-  -khtml-user-select: none;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-  text-decoration: none;
-  border: 2px solid rgba(0, 0, 0, 0);
-}
-.feedback-error{
-  color: red;
-  font-size: 18px;
-  font-weight: bold;
-  display: block;
-  padding: 10px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  -webkit-touch-callout: none;
-  -khtml-user-select: none;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-  text-decoration: none;
-  border: 2px solid rgba(0, 0, 0, 0);
-}
-label {
-    color: gray;
-}
-td {
-    padding: 2px;
-}
-.letter {
-    padding: 9px;
-    text-transform: uppercase;
-    margin-right: 9px;
-    width: 19px;
-    text-align: center;
-    display: inline-block;
-    color: rgb(146, 168, 209);
-    border: 1px solid rgb(146, 168, 209);
-}
-.list-of-jars {
-    list-style-type: none;
-    padding-left: 0;
-}
-.list-of-jars li {
-    margin-bottom: 10px;
 
+td, th {
+  border-radius: 5px;
+  border: 1px solid #b3b7bf;
+  height: 30px;
 }
-input {
-    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
-    -webkit-tap-highlight-color: transparent;
+
+th {
+  background: #DFDFDF;  /* Darken header a bit */
+  font-weight: bold;
 }
+
+td {
+  background: #FAFAFA;
+  text-align: center;
+}
+
+tr:nth-child(even) td { background: #F1F1F1; }
+
+tr:nth-child(odd) td { background: #FEFEFE; }

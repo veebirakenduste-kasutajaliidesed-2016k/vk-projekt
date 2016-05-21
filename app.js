@@ -60,7 +60,7 @@
 	  document.querySelector('#playButton').addEventListener('click', this.start.bind(this));
 	  document.querySelector('#pauseButton').addEventListener('click', this.pause.bind(this));
 	  document.querySelector('#stopButton').addEventListener('click', this.stop.bind(this));
-	  
+
 	  document.querySelector('#history_table').addEventListener('click', this.showMap.bind(this));
     },
 	showMap: function(event){
@@ -70,7 +70,7 @@
 				$('#'+event.target.id+'_map').hide();
 			}else{
 				$('#'+event.target.id+'_map').show();
-				if(document.getElementById(event.target.id+"_map").style.height === "0px"){this.getPath(event.target.id);}	
+				if(document.getElementById(event.target.id+"_map").style.height === "0px"){this.getPath(event.target.id);}
 			}
 		}
 	},
@@ -96,7 +96,7 @@
 		$('#selectExercise').hide();
 		this.clocktimer = setInterval(this.update.bind(this), 1);
 		this.x.start();
-		
+
 		//map
 		  var options = {
 			  enableHighAccuracy: true,
@@ -139,7 +139,7 @@
 		  //console.log(this.WatchID);
 		  if(navigator.geolocation){this.WatchID = navigator.geolocation.watchPosition(success, error, options);}
 		  //console.log(this.WatchID);
-		  
+
 	},
 	pause: function(event){
 		navigator.geolocation.clearWatch(this.WatchID);
@@ -162,7 +162,7 @@
 		//map
 		this.path = [];
 		this.remember = false;
-		
+
 	},
 	saveExercise: function(){
 		/*console.log(Runner.instance.ExerciseId);
@@ -171,7 +171,7 @@
 		console.log(this.getDistance());
 		console.log(this.exercise);
 		console.log("save.php?id="+Runner.instance.ExerciseId+"&time="+this.formatTime(this.x.time())+"&date="+this.writeDate()+"&distance="+this.getDistance()+"&exercise="+this.exercise);*/
-		
+
 		//AJAX
 		var xhttp = new XMLHttpRequest();
 		//mis juhtub kui päring lõppeb
@@ -229,12 +229,14 @@
 					var length = exercises[i]["length"];
 					var exercise = exercises[i]["exercise"];
 					var tr = document.createElement("tr");
+          var td = document.createElement("td");
 					var div = document.createElement("div");
-					tr.textContent = exercise+" "+Math.round((length/1000)*100)/100+"km in "+time+" Date: "+date;
-					tr.id = id;
+					td.textContent = exercise+" "+Math.round((length/1000)*100)/100+"km in "+time+" Date: "+date;
+					td.id = id;
 					div.id = id+"_map";
 					div.style = "display:none;width:100%;height:0px;";
-					tr.appendChild(div);
+					td.appendChild(div);
+          tr.appendChild(td);
 					//console.log(tr);
 					history_table.appendChild(tr);
 					//console.log(id+"_map");
@@ -247,10 +249,10 @@
 		xhttp.send();
 	},
 	getPath: function(Ex_id){
-		var table = document.getElementById("history_table")
+		var table = document.getElementById("history_table");
 		for(var i=0; i<table.rows.length; i++){
 			//this.makeMap(table.rows[i].id+"_map");
-			
+
 			//AJAX
 			var xhttp = new XMLHttpRequest();
 			//mis juhtub kui päring lõppeb
@@ -294,14 +296,14 @@
 			bounds.extend(this.path[i]);
 		}
 		//console.log(bounds.getCenter());
-		
+
 		var mapProp = {
 			center: bounds.getCenter(),
 			zoom: 10,
 			streetViewControl: false,
 			mapTypeControl: false
-		}
-		
+		};
+
 		var map = new google.maps.Map(document.getElementById(map_id),mapProp);
 		//console.log(this.path.length);
 		var StartMarker = new google.maps.Marker({
@@ -314,7 +316,7 @@
 			map:map,
 			icon: 'http://localhost:5555/~rimoesk/veebirakendus/vk-projekt/images/end.png'
 		});
-		
+
 		map.fitBounds(bounds);
 		var drawPath = new google.maps.Polyline({
 			path:this.path,
@@ -408,7 +410,7 @@
         } else {
           // Browser doesn't support Geolocation
           handleLocationError(false, infoWindow, map.getCenter());
-        }	
+        }
 	}
   };
   //helper
@@ -417,8 +419,8 @@
 		var	lapTime	= 0;
 
 		var	now	= function() {
-				return (new Date()).getTime(); 
-			}; 
+				return (new Date()).getTime();
+			};
 		this.start = function() {
 				startAt	= startAt ? startAt : now();
 			};
@@ -430,10 +432,10 @@
 				lapTime = startAt = 0;
 			};
 		this.time = function() {
-				return lapTime + (startAt ? now() - startAt : 0); 
+				return lapTime + (startAt ? now() - startAt : 0);
 			};
 	};
-	
+
 	function guid(){
 		var d = new Date().getTime();
 		if(window.performance && typeof window.performance.now === "function"){
@@ -446,7 +448,7 @@
 		});
 		return uuid;
 	}
-  
+
   window.onload = function(){
     var app = new Runner();
   };
