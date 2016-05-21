@@ -1,4 +1,4 @@
-# Projekti Nimi
+# Runner App
 
 ## Liikmed
 Rimo Esko
