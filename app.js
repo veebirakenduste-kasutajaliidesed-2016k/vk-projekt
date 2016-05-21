@@ -14,7 +14,6 @@
     this.fuelText = document.getElementById('output');
 
     this.currentRoute = null;
-    console.log(this);
 
     this.init();  //SIIA PANED ALGSE FUNKTSIOONI
 
@@ -144,9 +143,32 @@
       xhttp.onreadystatechange = function() {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
 
-
           var result =JSON.parse(xhttp.responseText);
+
+
+          var htmlToInsert = '<table>';
+          for (var i = 0; i < result.length; i++) {
+          htmlToInsert += '<tr>';
+          htmlToInsert += '<td>' + result[i].fuelQuantity + '</td>';
+          htmlToInsert += '<td>' + result[i].fuelCost + '</td>';
+          htmlToInsert += '<td>' + result[i].trip + '</td>';
+
+          htmlToInsert += '</tr>';
+          htmlToInsert += '</table>';
+        }
+
+
+
+
+          var resultsss = document.getElementById('resultss');
+          resultss.innerHTML = htmlToInsert ;
+
+          console.log(result);
+          console.log(htmlToInsert);
+          var resultsFromFile = document.getElementById('results');
+          results.innerHTML = result;
           return result;
+
         }
       };
       xhttp.open("GET", "saveData.php", true);

@@ -14,5 +14,5 @@
     }
   }
   //trykin v�lja stringi kujul massiivi
-  echo(json_encode($entries));
+  echo(json_encode($entries_from_file));
 ?>
