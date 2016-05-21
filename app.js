@@ -29,17 +29,11 @@
       */
 
       init:function(){
-        var serverData=[];
-        serverData = this.fromServer();
-
-        if(serverData !== null){
-          for(var i = 0; i<serverData.length; i++){
-            averageFuel.instance.fuelText.innerHTML += fromServer [i].fuelCost;
-            this.getValuesListener();
-        }
-      }else{
+        this.serverData=[];
+        console.log(this.serverData);
+        this.serverData = this.fromServer();
         this.getValuesListener();
-      }
+        console.log(this.serverData);
 
       },
 
@@ -61,12 +55,16 @@
         console.log(trip);
         this.toServer(fuelQuantity, fuelCost, trip);
         this.fuelWasted(trip, fuelQuantity);
+        this.moneyWasted(fuelCost, fuelQuantity, trip);
       },
       fuelWasted:function(trip, fuelQuantity){
         var average = fuelQuantity/(trip/100);
         console.log(average);
       },
-      //moneyWasted:function()
+      moneyWasted:function(fuelCost, fuelQuantity, trip){
+        var costPerKm = ((fuelQuantity/(trip/100)/100)*(fuelCost/fuelQuantity));
+        console.log(costPerKm);
+    },
 
       toServer: function(fuelQuantity, fuelCost, trip){
       var xhttp = new XMLHttpRequest();
