@@ -119,7 +119,7 @@ class User{
 		$stmt->close();
 		
 		
-		$stmt = $this->connection->prepare("SELECT ExId, time, date, length, exercise FROM runner_history, runner_exercises WHERE exerciseId = runner_exercises.id and user_id = ?");
+		$stmt = $this->connection->prepare("SELECT ExId, time, date, length, exercise FROM runner_history, runner_exercises WHERE exerciseId = runner_exercises.id and user_id = ? ORDER BY runner_history.id DESC");
 		$stmt->bind_param("i", $UId);
 		$stmt->bind_result($ExId, $time, $date, $length, $exercise);
 		$stmt->execute();

@@ -12,23 +12,15 @@
 
     //Kõik muutujad, mis on üldised ja muudetavad
     this.currentRoute = null; // hoiab meeles mis lehel hetkel on
-    this.jars = []; //kõik purgid tulevad siia sisse
 	//timer
 	this.x = new clsStopwatch();
 	this.time = document.getElementById('time');
 	this.clocktimer = null;
 	//map
-	//this.watchID = null;
-	//this.startMarker = null;
-	//this.endMarker = null;
 	this.path = [];
-	this.curPos = null;
-	this.ExerciseId = null;
 	this.remember = false;
 	this.exercise = null;
-	
-	this.lat = null;
-	this.lng = null;
+	this.WatchID = null;
     //panen rakenduse tööle
     this.init();
   };
@@ -78,8 +70,7 @@
 				$('#'+event.target.id+'_map').hide();
 			}else{
 				$('#'+event.target.id+'_map').show();
-				this.getPath(event.target.id);
-				
+				if(document.getElementById(event.target.id+"_map").style.height === "0px"){this.getPath(event.target.id);}	
 			}
 		}
 	},
@@ -89,7 +80,7 @@
 			this.exercise = document.getElementById("selectExercise").value;
 		}
 		if(this.exercise==""){
-			alert("Please select exercise");
+			alert("Please select a exercise");
 			$('#selectExercise').show();
 			this.pause();
 			this.x.reset();
@@ -109,8 +100,8 @@
 		//map
 		  var options = {
 			  enableHighAccuracy: true,
-			  timeout: 5000,
-			  maximumAge: 0
+			  //timeout: 5000,
+			  //maximumAge: 0
 			};
 
 			function success(pos) {
@@ -145,19 +136,19 @@
 			function error(err) {
 			  console.warn('ERROR(' + err.code + '): ' + err.message);
 			};
-		  
-		  //navigator.geolocation.getCurrentPosition(success, error, options);
-		  this.curPos = setInterval(function(){navigator.geolocation.getCurrentPosition(success, error, options);}, 1000);
+		  //console.log(this.WatchID);
+		  if(navigator.geolocation){this.WatchID = navigator.geolocation.watchPosition(success, error, options);}
+		  //console.log(this.WatchID);
 		  
 	},
 	pause: function(event){
+		navigator.geolocation.clearWatch(this.WatchID);
 		$('#playButton').show();
 		$('#pauseButton').hide();
 		$('#stopButton').hide();
 		this.x.stop();
 		clearInterval(this.clocktimer);
 		//map
-		clearInterval(this.curPos);
 		//console.log(this.path.length); //kui palju koordinaate listis on
 		this.remember = true;
 	},
@@ -169,7 +160,6 @@
 		this.x.reset();
 		this.update();
 		//map
-		//this.makeMap("map_canvas");
 		this.path = [];
 		this.remember = false;
 		
@@ -240,7 +230,7 @@
 					var exercise = exercises[i]["exercise"];
 					var tr = document.createElement("tr");
 					var div = document.createElement("div");
-					tr.textContent = exercise+" "+(length/1000)+"km in "+time+" Date: "+date;
+					tr.textContent = exercise+" "+Math.round((length/1000)*100)/100+"km in "+time+" Date: "+date;
 					tr.id = id;
 					div.id = id+"_map";
 					div.style = "display:none;width:100%;height:0px;";
@@ -314,6 +304,16 @@
 		
 		var map = new google.maps.Map(document.getElementById(map_id),mapProp);
 		//console.log(this.path.length);
+		var StartMarker = new google.maps.Marker({
+			position:this.path[0],
+			map:map,
+			icon: 'http://localhost:5555/~rimoesk/veebirakendus/vk-projekt/images/start.png'
+		});
+		var EndMarker = new google.maps.Marker({
+			position:this.path[this.path.length-1],
+			map:map,
+			icon: 'http://localhost:5555/~rimoesk/veebirakendus/vk-projekt/images/end.png'
+		});
 		
 		map.fitBounds(bounds);
 		var drawPath = new google.maps.Polyline({

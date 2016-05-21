@@ -10,7 +10,7 @@
 <head>
   <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
   <meta charset="UTF-8">
-  <title>Moosipurk</title>
+  <title>Runner</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
   <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTGe4CiXTWPyJl9M9Vwl6v3strdz3JsII&libraries=geometry"></script>
@@ -38,7 +38,6 @@
 	  <input type="image" id="playButton" src="http://localhost:5555/~rimoesk/veebirakendus/vk-projekt/images/play.jpg" width="80" height="80"/>
 	  <input type="image" id="pauseButton" src="http://localhost:5555/~rimoesk/veebirakendus/vk-projekt/images/pause.png" width="80" height="80"/>
 	  <input type="image" id="stopButton" src="http://localhost:5555/~rimoesk/veebirakendus/vk-projekt/images/stop.png" width="80" height="80"/>
-	  <div id="map_canvas" style="width:100%;height:380px;"></div>
     </div>
   </main>
 </body>
