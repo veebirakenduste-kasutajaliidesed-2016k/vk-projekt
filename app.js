@@ -1,13 +1,20 @@
 (function(){
     "use strict";
 
+
+
+
     var averageFuel = function(){
         if(averageFuel.instance){
             return averageFuel.instance;
         }
 
     averageFuel.instance = this;
+    this.routes = averageFuel.routes;
     this.fuelText = document.getElementById('output');
+
+    this.currentRoute = null;
+    console.log(this);
 
     this.init();  //SIIA PANED ALGSE FUNKTSIOONI
 
@@ -74,6 +81,13 @@
          /// 404 - ei olnud
        }
 
+
+     },
+
+     updateMenu: function() {
+       document.querySelector('.active-menu').className = document.querySelector('.active-menu').className.replace('active-menu', '');
+
+       document.querySelector('.'+this.currentRoute).className += ' active-menu';
 
      },
 
