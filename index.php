@@ -18,14 +18,14 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <nav class="menu col-md-3 col-md-offset-5">
+  <nav class="menu">
     <ul class="menu-list">
       <li class="menu-item"><a href="#exercise-view" class="menu-link exercise-view active-menu">Exercise</a></li>
       <li class="menu-item"><a href="#history-view" class="menu-link history-view">History</a></li>
       <li class="menu-item"><a href="logout.php" class="menu-link">Logout</a></li>
     </ul>
   </nav>
-  <main role="main" class="col-md-3 col-md-offset-5">
+  <main role="main">
     <div id="history-view">
 	    <h1>History</h1>
 			<center>
