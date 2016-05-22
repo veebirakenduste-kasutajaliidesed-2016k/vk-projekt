@@ -97,13 +97,15 @@
         var player = Discgolf.instance.currentGame.player;
 
         var index = Discgolf.instance.current_basket;
-
-        document.querySelector('#game-view h1').innerHTML = track.name;
-
         var basket_nr = track.baskets[index].nr;
         var par_nr = track.baskets[index].par;
-        document.querySelector('#basket-nr').innerHTML = "Korv number "+basket_nr+" par = "+par_nr;
-        document.querySelector('#player-name').innerHTML = "Mängija "+player+" tulemuse sisestamine:";
+
+        document.querySelector('#game-view h1').innerHTML = track.name+' '+basket_nr+'. korv'+' par = '+par_nr;
+        document.querySelector('#game-view h2').innerHTML = "Mängija "+player+" tulemuse sisestamine:";
+
+
+        // document.querySelector('#basket-nr').innerHTML = "Korv number "+basket_nr+" par = "+par_nr;
+        // document.querySelector('#player-name').innerHTML = "Mängija "+player+" tulemuse sisestamine:";
         document.querySelector('.qty').value = par_nr;
       }
     },
@@ -129,26 +131,32 @@
            var track_id = games[i].selected_track;
            console.log(games[i].results);
           html += "<tr>";
-          //kuvab raja nime
-          html += "<td>"+Discgolf.instance.tracks[track_id].name+"</td>";
-          //liidab kokku kõikide korvide par'id
-          var par_sum = 0;
-          for(var j = 0; j < games[i].results.length; j++){
-            par_sum += games[i].results[j].par;
-          }
-          html += "<td>"+par_sum+"</td>";
+            //kuvab raja nime
+            html += "<td>"+Discgolf.instance.tracks[track_id].name+"</td>";
+            //liidab kokku kõikide korvide par'id
+            var par_sum = 0;
+            for(var j = 0; j < games[i].results.length; j++){
+              par_sum += games[i].results[j].par;
+            }
+            html += "<td>"+par_sum+"</td>";
 
-          //liidab kokku minu igale korvile kulunud visete arvu
-          var my_result = 0;
-          for(var k = 0; k < games[i].results.length; k++){
-            my_result += parseInt(games[i].results[k].result);
-          }
-          html += "<td>"+my_result+"</td>";
-          //leiab vahe
-          html += "<td>"+(par_sum-my_result)+"</td>";
-          //siit nupu pealt näeb detailsemalt
-          html += "<td><button onclick=''>Details</button></td>";
+            //liidab kokku minu igale korvile kulunud visete arvu
+            var my_result = 0;
+            for(var k = 0; k < games[i].results.length; k++){
+              my_result += parseInt(games[i].results[k].result);
+            }
+            html += "<td>"+my_result+"</td>";
+            //leiab vahe
+            html += "<td>"+(my_result-par_sum)+"</td>";
+            // var unique = "";
+            // for(var l = 0; l<games[i].length; l++){
+            //   unique = games[i].unique_id;
+            // }
+            //siit nupu pealt näeb detailsemalt
+            // html += "<td><button class='details'>Details</button></td>";
 
+            // var unique_id = games[i].unique_id; //ma ei saa aru, mis siin valesti on ja miks ma seda id-d k2tte ei saa?
+            html += "<td><button onclick=Discgolf.instance.gameDetails("+Discgolf.instance.games[i].unique_id+")>Details</button></td>";
 
           html += "</tr>";
         }
@@ -203,6 +211,7 @@
       document.querySelector('.start-new-game').addEventListener('click', this.startGame.bind(this));
       document.querySelector('#start-new-game-form').addEventListener('submit', this.startGame.bind(this));
       document.querySelector('.save-result').addEventListener('click', this.nextBasket.bind(this));
+      // document.querySelector('#game-history').addEventListener('click', this.gameDetails.bind(this));
     },
 
     routeChange: function(event){
@@ -294,6 +303,11 @@
       window.location.hash = 'info-view';
 
       console.log(this.tracks[id]);
+    },
+
+    gameDetails: function(unique_id){
+      console.log("laeme selle m2ngu info: "+unique_id);
+      //idee poolest tahaks siin for tsükliga unikaalse id järgi mängu üles otsida ja siis saaks kuskil kuvada mängu detailsemaid andmeid
     },
 
     startGame: function(e){
