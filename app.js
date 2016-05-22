@@ -14,6 +14,7 @@
 	
 	this.online = null;
 	this.status = null;
+	this.grids = [];
 	
     this.init();
    };
@@ -27,7 +28,8 @@
 			$("#mein").show();
 			this.checkDeviceStatus();
 			this.bindEvents();
-			this.loadJSON();			
+			this.checkForOfflineGrids();
+			this.loadJSON();
 		},
 		
 		startCacheListeners: function(){
@@ -74,16 +76,38 @@
 			});
 		},
 		
-		loadJSON: function(){			
-			$.ajax({
-				url: "getFiles.php",
-				success: function(result){					
-					onlinepad.instance.printGrids(JSON.parse(result));
-				},
-				error: function(xhr, status, error){
-					console.log(error);
-				}
-			});
+		loadJSON: function(){
+			if(this.online=="online"){				
+				$.ajax({
+					url: "getFiles.php",
+					success: function(result){					
+						onlinepad.instance.printGrids(JSON.parse(result));
+					},
+					error: function(xhr, status, error){
+						console.log(error);
+					}
+				});
+			}else{
+				var vabandust = $("<p>Olete hetkel offline ja saate ainult luua märkmeid, mis laetakse serverisse niipea kui olete uuesti online.</p>")
+				$('#mein').html(vabandust);
+			}
+		},
+		
+		checkForOfflineGrids: function(){
+			if(localStorage.pendingFiles){
+				//console.log("korras");
+				/*$.each(localStorage.pendingFiles, function(index, grid){
+					
+					//onlinepad.instance.saveDiv("#####", inputAreaVal, textAreaVal);
+				})*/
+				var variables = $.parseJSON(localStorage.getItem('pendingFiles'));
+				//console.log(variables.fname);
+				//console.log(variables.ftext);
+				console.log(variables);
+				console.log(variables["fname"]);
+				console.log(variables.ftext);
+				//pm siia tuleb veel see saveDiv() kus oleksid need jsoni variabled jms ja siis peaks valmis olema
+			}
 		},
 		
 		createFile: function(){
@@ -108,7 +132,15 @@
 				var textAreaVal = $('#FileText').val();
 				//console.log(inputAreaVal);
 				//console.log(textAreaVal);
-				onlinepad.instance.saveDiv("#####", inputAreaVal, textAreaVal);
+				//onlinepad.instance.online = "offline";
+				if(onlinepad.instance.online=="online"){
+					onlinepad.instance.saveDiv("#####", inputAreaVal, textAreaVal);
+				}else{
+					var oneFile = '{"fname":"'+inputAreaVal+'", "ftext":"'+textAreaVal+'"}';
+					//onlinepad.instance.grids.push(oneFile);
+					//console.log(onlinepad.instance.grids);
+					localStorage.setItem('pendingFiles',JSON.stringify(oneFile));
+				}
 				location.reload();
 			});
 			
