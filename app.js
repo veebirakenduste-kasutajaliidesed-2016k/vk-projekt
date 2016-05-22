@@ -7,6 +7,14 @@
 		return onlinepad.instance;
     }
     onlinepad.instance = this;
+	
+	this.cacheStatusValues = ['uncached','idle','checking','downloading','updateready','obsolete'];
+    this.cache = window.applicationCache;
+    this.startCacheListeners();
+	
+	this.online = null;
+	this.status = null;
+	
     this.init();
    };
    
@@ -17,8 +25,43 @@
 		init: function(){
 		
 			$("#mein").show();
+			this.checkDeviceStatus();
 			this.bindEvents();
 			this.loadJSON();			
+		},
+		
+		startCacheListeners: function(){
+			this.cache.addEventListener('cached', this.logEvent.bind(this), false);
+			this.cache.addEventListener('checking', this.logEvent.bind(this), false);
+			this.cache.addEventListener('downloading', this.logEvent.bind(this), false);
+			this.cache.addEventListener('error', this.logEvent.bind(this), false);
+			this.cache.addEventListener('noupdate', this.logEvent.bind(this), false);
+			this.cache.addEventListener('obsolete', this.logEvent.bind(this), false);
+			this.cache.addEventListener('progress', this.logEvent.bind(this), false);
+			this.cache.addEventListener('updateready', this.logEvent.bind(this), false);
+
+			window.applicationCache.addEventListener('updateready',function(){
+				window.applicationCache.swapCache();
+				console.log('swap cache has been called');
+			},false);
+
+			setInterval(function(){
+				onlinepad.instance.cache.update();
+			}, 10000);
+
+			setInterval(function(){
+				onlinepad.instance.checkDeviceStatus();
+			}, 100);
+		},
+		
+		logEvent: function(event){
+
+			this.status = this.cacheStatusValues[this.cache.status];
+			var message = 'online: '+this.online+', event: '+ event.type+', status: ' + this.status;
+
+			if (event.type == 'error' && navigator.onLine) {
+				message+= ' (prolly a syntax error in manifest)';
+			}
 		},
 
 		bindEvents: function(){
@@ -166,7 +209,7 @@
 				}
 			});
 			
-			location.reload();
+			setTimeout(function(){location.reload();}, 500);			
 		},
 		
 		delDiv: function(fname){
@@ -181,8 +224,19 @@
 				}
 			});
 			
-			location.reload();
+			setTimeout(function(){location.reload();}, 500);	
 		},
+		
+		checkDeviceStatus: function(){
+         this.online = (navigator.onLine) ? "online" : "offline";
+		 
+         if(this.online == "online"){
+           console.log("bar online");
+         }else{
+           console.log("bar offline");
+         }
+
+     },
    }
    
    window.onload = function(){

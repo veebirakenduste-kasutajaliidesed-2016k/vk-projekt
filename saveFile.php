@@ -8,6 +8,7 @@
 		echo "No such file.";
 	}
 	$file = fopen("texts/".$fname.".txt","w");
+	echo "Created ".$fname.".txt\n";
 	fwrite($file, $ftext);
 	fclose($file);
 	var_dump($_POST);
