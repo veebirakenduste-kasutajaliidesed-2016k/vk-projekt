@@ -28,7 +28,9 @@
 			$("#mein").show();
 			this.checkDeviceStatus();
 			this.bindEvents();
-			this.checkForOfflineGrids();
+			if(this.online=="online"){
+				this.checkForOfflineGrids();
+			}
 			this.loadJSON();
 		},
 		
@@ -94,19 +96,10 @@
 		},
 		
 		checkForOfflineGrids: function(){
-			if(localStorage.pendingFiles){
-				//console.log("korras");
-				/*$.each(localStorage.pendingFiles, function(index, grid){
-					
-					//onlinepad.instance.saveDiv("#####", inputAreaVal, textAreaVal);
-				})*/
+			if(localStorage.pendingFiles){				
 				var variables = $.parseJSON(localStorage.getItem('pendingFiles'));
-				//console.log(variables.fname);
-				//console.log(variables.ftext);
-				console.log(variables);
-				console.log(variables["fname"]);
-				console.log(variables.ftext);
-				//pm siia tuleb veel see saveDiv() kus oleksid need jsoni variabled jms ja siis peaks valmis olema
+				localStorage.removeItem('pendingFiles');
+				onlinepad.instance.saveDiv("#####", variables.fname, variables.ftext);
 			}
 		},
 		
@@ -131,15 +124,13 @@
 				var inputAreaVal = $('#newHead').val();
 				var textAreaVal = $('#FileText').val();
 				//console.log(inputAreaVal);
-				//console.log(textAreaVal);
-				//onlinepad.instance.online = "offline";
+				console.log(onlinepad.instance.online);
+				onlinepad.instance.online = "offline";
 				if(onlinepad.instance.online=="online"){
 					onlinepad.instance.saveDiv("#####", inputAreaVal, textAreaVal);
 				}else{
 					var oneFile = '{"fname":"'+inputAreaVal+'", "ftext":"'+textAreaVal+'"}';
-					//onlinepad.instance.grids.push(oneFile);
-					//console.log(onlinepad.instance.grids);
-					localStorage.setItem('pendingFiles',JSON.stringify(oneFile));
+					localStorage.setItem('pendingFiles', oneFile);
 				}
 				location.reload();
 			});
