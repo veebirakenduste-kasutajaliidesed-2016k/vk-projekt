@@ -19,16 +19,22 @@ body{
 }
 .characterCanvas{
 	background-color:#3b3b3b;
+	display:none;
+	margin:0 auto;
 }
-.upgrade{
-
+.upgrades{
+	margin:0;
+	height:80%;
+	overflow-y:scroll;
+	min-width:205px;
 }
-.container{
-	height:100%;
+.upgrades::-webkit-scrollbar { 
+    display: none; 
 }
 .stats, .upgrades{
-	width:200px;
-	height:100%;
+	width:25%;
+	float:left;
+	margin: 0;
 	/**background-color:grey; **/
 }
 .btn{
@@ -47,20 +53,60 @@ height: 90px;
 line-height: 20px;
 margin-bottom: 0;
 }
-.upgrade__amount{
+.upgrade{
+	display:none;
+}
+.upgrade img{
+	float:left;
+	margin-left:20px;
+	margin-top:10px;
+}
+.upgrade__amount, .upgrade__name, .upgrade__cost{
 margin-bottom: 0;
+display:inline-block;
+width:66%;
+float:right;
+height:33%;
 }
 .btn--delete{
 	font-size: 10px;
-  height: 20px;
-  text-align: center;
-  width: 75px;
-  line-height: 2;
-  float: right;
-
+	height: 20px;
+	text-align: center;
+	width: 75px;
+	line-height: 2;
+	float: right;
+}
+.btn--testing{
+	font-size:10px;
+	height:20px;
+	text-align:center;
+	width:75px;
+	line-height:2;
 }
 .gameArea{
-	height:100%;
+	height:80%;
+	margin:0;
+	overflow-y:scroll;
+	width:50%;
+}
+.gameArea::-webkit-scrollbar { 
+    display: none; 
+}
+.upgrade.notAvailable img{
+	-webkit-filter: brightness(0%); /* Chrome, Safari, Opera */
+    filter: brightness(0%);
+}
+.cheapOutsource.characterCanvas{
+	background-image:url("../taust-1.png");
+	background-position:center center;
+}
+.freelance.characterCanvas{
+	background-image:url("../taust-2.png");
+	background-position:center center;
+}
+.characterCanvas::before{
+	content:'kalakalakala';
+	background-color:red;
 }
 /*.gameArea__buttons{
 	width: 300px;
@@ -70,11 +116,3 @@ margin-bottom: 0;
 	transform: translateX(-50%);
 	bottom: 0;
 }*/
-.stats__cookieAmount{
-	color:#3b3b3b;
-	font-size:45px;
-}
-.stats__cps{
-	color:#DDD;
-	font-size:30px;
-}

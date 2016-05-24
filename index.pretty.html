@@ -34,60 +34,49 @@
     <!-- Primary Page Layout
 –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <div class="game">
-    <div class="row">
-      <div class="header twelve columns">
-          <h1 style="display:inline-block">DevClicker</h1>
-          <div class="btn btn--delete u-pull-right">DELETE SAVE</div>
-          <div class="btn btn--testing u-pull-right">GIVE CASH</div>
-          <p style="display:inline-block" class="u-pull-right">dev tools:</p>
-      </div>
-    </div>
-        <div class="stats column">
-            <div class="stats__linesOfCode"></div>
-            <div class="stats__cps"></div>
+        <div class="stats two columns u-pull-left">
             <div class="stats__cookieAmount"></div>
-            <div class="stats__codeQuality"></div>
+            <div class="stats__cps"></div>
             <div class="gameArea__buttons">
-                <div class="btn btn--write">Write code</div>
-                <div class="btn btn--sell">Sell code</div>
+                <div class="btn btn--cookie">Work, Work, Work</div>
             </div>
         </div>
-        <div class="gameArea column">
-            <canvas class="cheapOutsource characterCanvas" width=1000 height=200></canvas>
-            <canvas class="freelance characterCanvas" width=1000 height=200></canvas>
-            <canvas class="smallFirm characterCanvas" width=1000 height=200></canvas>
-            <canvas class="bigFirm characterCanvas" width=1000 height=200></canvas>
-            <canvas class="agency characterCanvas" width=1000 height=200></canvas>
+        <div class="gameArea eight columns">
+            <canvas class="characterCanvas" width=800 height=200></canvas>
+            <canvas class="characterCanvas" width=800 height=200></canvas>
+            <canvas class="characterCanvas" width=800 height=200></canvas>
+            <canvas class="characterCanvas" width=800 height=200></canvas>
+            <canvas class="characterCanvas" width=800 height=200></canvas>
         </div>
-        <div class="upgrades column">
-            <div class="upgrade btn btn--upgrade notAvailable">
-                <img src="0.png" alt="Cheap Outsource">
+        <div class="upgrades two columns u-pull-right">
+            <div class="upgrade btn btn--upgrade">
+
                 <div class="upgrade__name">Cheap Outsource</div>
                 <div class="upgrade__amount">0</div>
-                <div class="upgrade__cost">$15</div>
+                <div class="upgrade__cost">15</div>
             </div>
-            <div class="upgrade btn btn--upgrade notAvailable">
-                <img src="1.png" alt="Cheap Outsource">
+            <div class="upgrade btn btn--upgrade">
                 <div class="upgrade__name">Freelancer</div>
                 <div class="upgrade__amount">0</div>
-                <div class="upgrade__cost">$100</div>
+                <div class="upgrade__cost">100</div>
             </div>
-            <div class="upgrade btn btn--upgrade notAvailable">
-                <img src="2.png" alt="Cheap Outsource">
+            <div class="upgrade btn btn--upgrade">
                 <div class="upgrade__name">Small IT Firm</div>
                 <div class="upgrade__amount">0</div>
-                <div class="upgrade__cost">$500</div>
+                <div class="upgrade__cost">500</div>
             </div>
-            <div class="upgrade btn btn--upgrade notAvailable">
+            <div class="upgrade btn btn--upgrade">
                 <div class="upgrade__name">Big IT Firm</div>
                 <div class="upgrade__amount">0</div>
-                <div class="upgrade__cost">$3500</div>
+                <div class="upgrade__cost">3500</div>
             </div>
-            <div class="upgrade btn btn--upgrade notAvailable">
+            <div class="upgrade btn btn--upgrade">
                 <div class="upgrade__name">International Agency</div>
                 <div class="upgrade__amount">0</div>
-                <div class="upgrade__cost">$14000</div>
+                <div class="upgrade__cost">14000</div>
             </div>
+            <div class="btn btn--delete">DELETE SAVE</div>
+            <div class="btn btn--testing">GIVE CASH</div>
         </div>
     </div>
 
