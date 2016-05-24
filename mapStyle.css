@@ -4,7 +4,12 @@ html, body {
   padding: 0;
 }
 #map {
-  height: 75%;
+  height: 45%;
   width: 75%;
   margin-left:12.5%;
+  margin-top:1%;
+}
+#subMaps {
+	margin-left:6.5%;
+	margin-top: 1%;
 }

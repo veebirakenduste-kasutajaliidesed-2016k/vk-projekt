@@ -1,87 +1,37 @@
+  
 var map;
-//TODO: set image size to mapSize, generate marker location and image locations randomly
-//Get geocoder status
-//https://maps.googleapis.com/maps/api/geocode/json?latlng=40.714224,-73.961452&location_type=ROOFTOP&result_type=street_address&key=AIzaSyCl5QWc_dxpap3_ITxjyq0s3MyB_V-xplI
 function initMap() {
   var latitude;
   var longitude;
   var latlng;
-  var mapSize = Math.round(screen.width/3).toString() + "x" + Math.round(screen.width/1.42).toString();
+  //var mapSize = Math.round(screen.width/3).toString() + "x" + Math.round(screen.width/1.42).toString();
   var firstImage = document.getElementById('firstImage');
   var secondImage = document.getElementById('secondImage');
   var thirdImage = document.getElementById('thirdImage');
-  function randomInt(min,max){
-    return Math.floor(Math.random()*(max-min+1)+min);
+  var markerLat;
+  var markerLong;
+  function getRandom(min, max) {
+    return Math.random() * (max - min) + min;
   }
   function getLatLong(){
-    latitude =  randomInt(40, 70);
-    longitude = randomInt(-10, 30);
+    latitude =  getRandom(57.725, 59.52);
+    longitude = getRandom(21.25, 28.5);
     latlng = latitude.toString() + "," + longitude.toString();
   }
-  //var latlng = lat.toStringUI + "," + long.toString();
-  //var latlng = new google.maps.LatLng(latitude,longitude);
-  //console.log("lat: "+ latitude.toString());
-  //console.log("long: "+ longitude.toString());
-  console.log(mapSize);
-  checkAddress(latlng);
-  //var geocoder = new google.maps.Geocoder;
-  function streetView(maxDistance){
-    /*Kind of works, but google causes issues
-    var streetViewService = new google.maps.StreetViewService();
-    streetViewService.getPanoramaByLocation(google_latlng, maxDistance, function (streetViewPanoramaData, status) {
-      if (status === google.maps.StreetViewStatus.OK) {
-          console.log(status);
-          console.log("http://maps.googleapis.com/maps/api/streetview?size="+mapSize.toString()+"&location="+latlng.toString()+"&fov=120&heading=235&pitch=10&sensor=false");
-          firstImage.src = "http://maps.googleapis.com/maps/api/streetview?size="+mapSize.toString()+"&location="+latlng.toString()+"&fov=120&heading=235&pitch=10&sensor=false";
-      } 
-      else {
-        console.log("Streetview not available, increasing max distance");
-        streetView(maxDistance + 1000);
-      }
-    });
-*/
-  }
-  function checkAddress() {
+  for(i=1;i<=3;i++){
     getLatLong();
-    google_latlng = new google.maps.LatLng(latitude,longitude);
-    var geocoder = new google.maps.Geocoder();
-    geocoder.geocode({'latLng': google_latlng}, function(results, status) {
-      //console.log(results);
-      console.log(status);
-      if(status != google.maps.GeocoderStatus.OK) {
-        //checkAddress(latlng);
-        setTimeout(function() {checkAddress();}, 200);
-      }
-      else if(status == google.maps.GeocoderStatus.OK) {
-        console.log("lat: "+ latitude.toString());
-        console.log("long: "+ longitude.toString());
-        //console.log("http://maps.googleapis.com/maps/api/streetview?size="+mapSize.toString()+"&location="+latlng.toString()+"&fov=120&heading=235&pitch=10&sensor=false");
-        var marker = new google.maps.Marker({
-          position: {lat: latitude, lng: longitude},
-          map: map
-        });
-        streetView(1000);
-
-      }
-    });
+    google_latLng = new google.maps.LatLng(latitude,longitude);
+    if(i==1){
+      markerLat = latitude;
+      markerLong = longitude;
+    }
+    if(subMap(google_latLng, i)==0){
+      console.log("Search failed");
+    }        
   }
-  /*geocoder.geocode({'latLng': latlng}, function(results, status) {
-      if (status == google.maps.GeocoderStatus.OK) {
-          var locationStatus = true;         
-      }else {
-          var latitude = randomInt(-90, 90);
-          var longitude = randomInt(-180, 180);
-          var latlng = new google.maps.LatLng(latitude,longitude);
-          console.log("Geocode failed");
-          var geocoder = new google.maps.Geocoder;
-          geocoder.geocode(latlng);
-      }
-  });*/
-  map = new google.maps.Map(document.getElementById('map'), {
-    //center: {lat: -34.397, lng: 150.644},
-    //center: {lat: latitude, lng:longitude},
-    center: {lat: 0, lng:0},
-    zoom: 2,
+map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: latitude, lng:longitude},
+    zoom: 7,
     disableDefaultUI: true,
     mapTypeControl: false,
     zoomControl: false,
@@ -93,8 +43,62 @@ function initMap() {
     panControl: false
 
   });
-
-  //Check that the first number in your latitude coordinate is between -90 and 90
-  //and the first number in your longitude coordinate is between -180 and 180.
-  
+  console.log(markerLat + ";" + markerLong);
+  var marker = new google.maps.Marker({
+    position: {lat: markerLat, lng: markerLong},
+    map: map
+  });
+}
+function subMap(google_latLng, count){
+  function getRandom(min, max) {
+    return Math.random() * (max - min) + min;
+  }
+  function getLatLong(){
+    latitude =  getRandom(57.725, 59.52);
+    longitude = getRandom(21.25, 28.5);
+    latlng = latitude.toString() + "," + longitude.toString();
+  }
+  var radius = 10;
+  var loopCount = 0;
+  var streetViewService = new google.maps.StreetViewService();
+  var mapSize = Math.round(screen.width/3.5).toString() + "x" + Math.round(screen.width/4).toString();
+  var state = "";
+  streetViewService.getPanoramaByLocation(google_latLng, radius, handler)
+  function handler(data, status) {
+    console.log(loopCount);
+      if(loopCount == 300){
+        loopCount = 0;
+        getLatLong();
+        google_latLng = new google.maps.LatLng(latitude,longitude);
+        subMap(google_latLng, count);
+      }
+      if (status == google.maps.StreetViewStatus.OK) {
+          console.log("Found");
+          loopCount = 0;
+          var nearStreetViewLocation = data.location.latLng;
+          var coords = data.location.latLng.toString();
+          coords = (coords.replace("(", "").replace(")", "")).split(", ");
+          var url = "http://maps.googleapis.com/maps/api/streetview?size="+mapSize.toString()+"&location="+coords[0] + "," +coords[1]+"&fov=120&heading=235&pitch=10&sensor=false";
+          if(count == 1){
+            firstImage.src=url;
+                    
+          }
+          else if(count == 2){
+            secondImage.src=url;
+          }
+          else if(count == 3){
+            thirdImage.src=url;
+          }
+          count++;
+          
+        } 
+        else{
+          loopCount++;
+          radius += 50;
+          streetViewService.getPanoramaByLocation(google_latLng, radius, handler);
+          //console.log("Trying again...");
+        }
+      };
+      console.log("State: " + state);
+      return(state);
 }
