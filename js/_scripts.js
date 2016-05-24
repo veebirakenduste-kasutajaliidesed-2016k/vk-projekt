@@ -20,6 +20,7 @@
         this.codeQuality = 0.1;
         this.writePower = 1;
         this.sellPower = 1;
+        this.upKeep = 0;
         console.log(this);
         this.init();
     };
@@ -60,6 +61,9 @@
                 game.updateStats();
                 game.save();
             }, 1000);
+            setInterval(function(){
+                game.cash -= game.upKeep;
+            }, 10000)
         },
         bindEvents: function() {
             var game = this;
@@ -87,27 +91,41 @@
             this.linesOfCode += amount;
         },
         updateStats: function() {
-            $('.stats__linesOfCode').html("Lines of code: "+this.linesOfCode.toFixed(1));
-            $('.stats__cookieAmount').html("Cash: $"+this.cash.toFixed(2));
-            $('.stats__cps').html("Lines of code per second: "+this.cps.toFixed(1));
+            this.linesOfCode = parseFloat(this.linesOfCode.toFixed(1));
+            this.cash = parseFloat(this.cash.toFixed(2));
+            this.cps = parseFloat(this.cps.toFixed(1));
+            $('.stats__linesOfCode').html("Lines of code: "+this.linesOfCode);
+            $('.stats__cookieAmount').html("Cash: $"+this.cash);
+            $('.stats__cps').html("Lines of code per second: "+this.cps);
             $('.stats__codeQuality').html("Code quality: "+this.codeQuality);
+            $('.stats__upKeep').html("Salaries: $"+this.upKeep);
         },
         save: function() {
             localStorage.setItem("cash", JSON.stringify(this.cash));
             localStorage.setItem("cps", JSON.stringify(this.cps));
             localStorage.setItem("upgradeAmount", JSON.stringify(this.upgradeAmount));
             localStorage.setItem("upgradeCPS", JSON.stringify(this.upgradeCPS));
+            localStorage.setItem("linesOfCode", JSON.stringify(this.linesOfCode));
+            localStorage.setItem("totalLinesOfCode", JSON.stringify(this.totalLinesOfCode));
+            localStorage.setItem("codeQuality", JSON.stringify(this.codeQuality));
         },
         delete: function() {
             localStorage.removeItem("cash");
             localStorage.removeItem("cps");
             localStorage.removeItem("upgradeAmount");
             localStorage.removeItem("upgradeCPS");
+            localStorage.removeItem("linesOfCode");
+            localStorage.removeItem("totalLinesOfCode");
             this.cash = 0;
+            this.linesOfCode = 0;
+            this.totalLinesOfCode = 0;
             this.cps = 0;
             this.upgradeAmount = [0, 0, 0, 0, 0];
             this.upgradeBaseCost = [15, 100, 500, 3500, 14000];
-            this.upgradeCPS = [0.1, 0, 5, 4, 13, 127];
+            this.upgradeCPS = [0.1, 1, 5, 4, 13, 127];
+            this.codeQuality = 0.1;
+            this.writePower = 1;
+            this.sellPower = 1;
             console.log("Save Deleted");
         },
         load: function() {
@@ -120,6 +138,9 @@
                 var cost = Math.floor(this.upgradeBaseCost[i] * Math.pow(1.15, this.upgradeAmount[i]));
                 $('.upgrade .upgrade__cost').eq(i).html("$"+cost);
             }
+            this.linesOfCode = JSON.parse(localStorage.getItem("linesOfCode"));
+            this.totalLinesOfCode = JSON.parse(localStorage.getItem("totalLinesOfCode"));
+            this.codeQuality = JSON.parse(localStorage.getItem("codeQuality"));
         },
         upgradeSkills: function(index) {
             //var cost = Math.floor(Math.pow(10,index+1) * Math.pow(1.1,this.upgrade[index]));
@@ -135,6 +156,7 @@
                 $('.upgrade .upgrade__cost').eq(index).html("$"+cost);
                 this.drawCharacters(index);
                 this.checkAvailable();
+                this.upkeep += this.upgradeBaseCost[index]/10;
             } else {
                 console.log("Need mo money " + cost);
             }
@@ -159,11 +181,12 @@
                 }
             }
         },
-        checkCodeQuality: function(){
+        //SEE TULEB VÄLJA MÕELDA VEEL PLS
+        /*checkCodeQuality: function(){
             if(this.totalLinesOfCode > this.qualityTier.indexOf(this.totalLinesOfCode)){
                 this.codeQuality += 0.1;
             }
-        },
+        },*/
         sellCode: function(amount){
             if(this.linesOfCode - amount >0){
                 this.linesOfCode -= amount;
