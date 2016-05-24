@@ -38,20 +38,39 @@ body{
 	/**background-color:grey; **/
 }
 .btn{
-color: white;
-height: 50px;
-line-height: 50px;
-font-size: 15px;
-text-align: center;
-border: 1px solid #ddd;
-background-color: #3b3b3b;
-cursor: pointer;
+	color: white;
+	height: 50px;
+	line-height: 50px;
+	font-size: 15px;
+	text-align: center;
+	border: 1px solid #ddd;
+	background-color: #3b3b3b;
+	cursor: pointer;
 }
 .btn--upgrade{
-height: 90px;
-
-line-height: 20px;
-margin-bottom: 0;
+	height: 90px;
+	background-image:url("../button-tile.png");
+	line-height: 20px;
+	border-right:5px solid #bbb;
+	border-bottom:5px solid #bbb;
+	border-top:5px solid #eee;
+	border-left:5px solid #eee;
+	margin-bottom: 0;
+}
+.btn--upgrade:active{
+	border-right:5px solid #eee;
+	border-bottom:5px solid #eee;
+	border-top:5px solid #bbb;
+	border-left:5px solid #bbb;
+}
+.btn--upgrade:hover, .btn--write:hover, .btn--sell:hover{
+	-webkit-filter:brightness(110%);
+}
+.btn--write{
+	background-image:url("../work-button-tile.png");
+}
+.btn--sell{
+	background-image:url("../sell-button-tile.png");
 }
 .upgrade{
 	display:none;
@@ -62,11 +81,11 @@ margin-bottom: 0;
 	margin-top:10px;
 }
 .upgrade__amount, .upgrade__name, .upgrade__cost{
-margin-bottom: 0;
-display:inline-block;
-width:66%;
-float:right;
-height:33%;
+	margin-bottom: 0;
+	display:inline-block;
+	width:66%;
+	float:right;
+	height:33%;
 }
 .btn--delete{
 	font-size: 10px;
@@ -104,15 +123,28 @@ height:33%;
 	background-image:url("../taust-2.png");
 	background-position:center center;
 }
-.characterCanvas::before{
-	content:'kalakalakala';
-	background-color:red;
+.characterCanvas{
+
 }
-/*.gameArea__buttons{
-	width: 300px;
-	margin: 0 auto;
-	position: absolute;
-	left: 50%;
-	transform: translateX(-50%);
-	bottom: 0;
-}*/
+.header{
+	background-image:url("../button-tile.png");
+	color:#fff;
+}
+.codeUpgradeTab{
+	display:none;
+}
+.moneyUpgradeTab{
+	display:none;
+}
+.codeUpgradeTab.is-visible{
+	display:block;
+}
+.moneyUpgradeTab.is-visible{
+	display:block;
+}
+.btn--codeUpgrades, .btn--moneyUpgrades{
+	background-image:url("../button-tile.png");
+	width:50%;
+	display:inline-block;
+	box-sizing: border-box;
+}
