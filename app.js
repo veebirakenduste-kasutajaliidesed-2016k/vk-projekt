@@ -14,7 +14,7 @@
     this.fuelText = document.getElementById('output');
 
     this.currentRoute = null;
-
+    this.alle = [];
     this.init();  //SIIA PANED ALGSE FUNKTSIOONI
 
     };
@@ -95,6 +95,8 @@
 
       },
 
+
+
       getValues: function(){
         var fuelQuantity = document.getElementById('fuelQuantity').value;
         var fuelCost = document.getElementById('fuelCost').value;
@@ -123,6 +125,8 @@
         averageKmCost.innerHTML = "Raha kulus " + costPerKm.toFixed(2) + " eurot kilomeetri kohta.";
       },
 
+
+
       toServer: function(fuelQuantity, fuelCost, trip){
       var xhttp = new XMLHttpRequest();
       xhttp.onreadystatechange = function() {
@@ -142,33 +146,29 @@
 
       xhttp.onreadystatechange = function() {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
+          console.log("readystate");
 
           var result =JSON.parse(xhttp.responseText);
-
-
-          var htmlToInsert = '<table>';
-          for (var i = 0; i < result.length; i++) {
-          htmlToInsert += '<tr>';
-          htmlToInsert += '<td>' + result[i].fuelQuantity + '</td>';
-          htmlToInsert += '<td>' + result[i].fuelCost + '</td>';
-          htmlToInsert += '<td>' + result[i].trip + '</td>';
-
-          htmlToInsert += '</tr>';
-          htmlToInsert += '</table>';
-        }
-
-
-
-
-          var resultsss = document.getElementById('resultss');
-          resultss.innerHTML = htmlToInsert ;
-
+          this.all = result;
           console.log(result);
-          console.log(htmlToInsert);
-          var resultsFromFile = document.getElementById('results');
-          results.innerHTML = result;
-          return result;
-
+          console.log("parsetud");
+          averageFuel.instance.alle.forEach(function(element){
+            var new_element = new all(element.fuelQuantity,element.fuelCost, element.trip);
+            var li = document.createElement('li');
+            var node = document.createTextNode(new_element.fuelQuantity);
+            var li2 = document.createElement('li');
+            console.log("mde");
+            var node2 = document.createTextNode(new_element.fuelCost);
+            var li3 = document.createElement('li');
+            var node3 = document.createTextNode(new_element.trip);
+            var result5 = document.getElementById('result5');
+            li.appendChild(node);
+            li2.appendChild(node2);
+            li3.appendChild(node3);
+            result5.appendChild(li);
+            result5.appendChild(li2);
+            result5.appendChild(li3);
+          });
         }
       };
       xhttp.open("GET", "saveData.php", true);
@@ -179,5 +179,11 @@
    window.onload = function() {
      var app = new averageFuel();
    };
+   var all = function(new_fuelQuantity, new_fuelCost, new_trip){
+        this.fuelQuantity = new_fuelQuantity;
+        this.fuelCost = new_fuelCost;
+        this.trip = new_trip;
+      };
+
 
 })();
