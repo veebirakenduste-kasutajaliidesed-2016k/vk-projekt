@@ -1,7 +1,9 @@
-//TODO: LocalStorage'ile lisaks online storage
-//TODO: Kogu programm viisakamale kujule viia
-//TODO: AppCache
-
+//Todo: loopCounter ei nulli ennast õigesti, pildid kuvada suvalises järjekorras, valiku tegemine ja skoori lugemine
+//Skoori lugemine(Localstorage: DONE, AJAX: WIP)
+//Valiku tegemine: DONE, Suvaline järjekord: DONE
+//Map markeri vees oleku vältimiseks kas kontroll või kaardi koomale võtmine, load'imis aja lühendamine?
+//Vees oleku vältimine: DONE, Load aegade lühendamine: DONE
+//"Playing field" ära katta kuni kõik pildid on laetud. Kontrollida, kas funktsioon on lõppenud? DONE
 var map;
 var found = 0;
 var correctImage;
@@ -24,19 +26,8 @@ function getLatLong(){
     longitude = getRandom(23.675537, 27.388916);
     latlng = latitude.toString() + "," + longitude.toString();
 }
-function getSQL(){
-  xmlhttp = new XMLHttpRequest();
-  xmlhttp.onreadystatechange = function() {
-        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-          console.log(xmlhttp.responseText);
-        }
-        };
-        xmlhttp.open("GET","getuser.php?q="+str,true);
-        xmlhttp.send();
-}
 function initMap() {
   //var mapSize = Math.round(screen.width/3).toString() + "x" + Math.round(screen.width/1.42).toString();
-  getSQL();
   var firstImage = document.getElementById('firstImage');
   var secondImage = document.getElementById('secondImage');
   var thirdImage = document.getElementById('thirdImage');
