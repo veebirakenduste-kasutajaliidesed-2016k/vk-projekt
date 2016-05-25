@@ -80,12 +80,18 @@ body{
 	margin-left:20px;
 	margin-top:10px;
 }
-.upgrade__amount, .upgrade__name, .upgrade__cost{
+.upgrade__amount, .upgrade__name, .upgrade__stats{
 	margin-bottom: 0;
 	display:inline-block;
 	width:66%;
 	float:right;
 	height:33%;
+}
+.upgrade--cost{
+	color:#F22613;
+}
+.upgrade--salary{
+	color:#F22613;
 }
 .btn--delete{
 	font-size: 10px;

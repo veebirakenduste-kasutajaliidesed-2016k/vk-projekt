@@ -20,11 +20,15 @@
         this.codeUpgradeCPS = [0.1, 1, 5, 4, 13, 127];
         this.codeUpgradeQuality = [-0.05, 1, 8, 15, 23];
         this.codeUpgradeSalaries = [5, 33, 150, 1100, 4500]
+        this.marketingUpgradeAmount = [0, 0, 0, 0, 0];
+        this.marketingUpgradeBaseCost = [1, 10, 600, 2000, 4500, 24000];
+        this.marketingUpgradeSalaries = [0, 0, 200, 450, 1500, 6000];
+        this.marketingUpgradePower = [0.1, 0.3, 0, 5, 0, 200];
         this.codeQuality = 1;
         this.writePower = 1;
         this.sellPower = 1;
         this.upKeep = 0;
-        console.log(this);
+        //console.log(this);
         this.init();
     };
 
@@ -42,7 +46,7 @@
             }
             this.updateStats();
             this.bindEvents();
-            console.log(this.codeUpgradeAmount.length);
+            //console.log(this.codeUpgradeAmount.length);
             for (var s = 0; s < this.codeUpgradeAmount.length; s++) {
                 //console.log("outerloop activated for canvas "+s);
                 if (this.codeUpgradeAmount[s] > 0) {
@@ -52,10 +56,25 @@
                     }
                 }
             }
-            $('.upgrade').eq(0).css('display', 'block');
+            $('.upgrade--money').eq(0).css('display', 'block');
+            $('.upgrade--code').eq(0).css('display', 'block');
             this.checkAvailable();
             this.main();
-            console.log(this.cash);
+            //console.log(this.cash);
+            //TEST
+            /*var xmlhttp = new XMLHttpRequest();
+            var url = "js/text.json";
+
+            xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                var myArr = JSON.parse(xmlhttp.responseText);
+                console.log(myArr[0]);
+                console.log(myArr[0].achievements.ach0.desc);
+                }
+            };
+
+            xmlhttp.open("GET", url, true);
+            xmlhttp.send();*/
         },
         main: function() {
             var game = this;
@@ -153,10 +172,10 @@
             this.cps = JSON.parse(localStorage.getItem("cps"));
             for (var i = 0; i < this.codeUpgradeAmount.length; i++) {
                 this.codeUpgradeAmount = JSON.parse(localStorage.getItem("codeUpgradeAmount"));
-                $('.upgrade--code .upgrade__amount').eq(i).html(this.codeUpgradeAmount[i]);
+                $('.upgrade--code .upgrade__amount').eq(i).html("amount: "+this.codeUpgradeAmount[i]);
                 //var cost = Math.floor(Math.pow(10,i+1) * Math.pow(1.1,this.upgrade[i]));
                 var cost = Math.floor(this.codeUpgradeBaseCost[i] * Math.pow(1.15, this.codeUpgradeAmount[i]));
-                $('.upgrade--code .upgrade__cost').eq(i).html("$"+cost);
+                $('.upgrade--code .upgrade__stats').eq(i).html("<span class='upgrade--cost'>cost: -$"+cost+"</span> | <span class='upgrade--salary'>salary: -$"+this.codeUpgradeSalaries[i]+"</span>");
             }
             this.linesOfCode = JSON.parse(localStorage.getItem("linesOfCode"));
             this.totalLinesOfCodeClicked = JSON.parse(localStorage.getItem("totalLinesOfCodeClicked"));
@@ -172,9 +191,9 @@
                 this.codeUpgradeAmount[index] += 1;
                 this.cps += this.codeUpgradeCPS[index];
                 this.updateStats();
-                $('.upgrade--code .upgrade__amount').eq(index).html(this.codeUpgradeAmount[index]);
+                $('.upgrade--code .upgrade__amount').eq(index).html("amount: "+this.codeUpgradeAmount[index]);
                 cost = Math.floor(this.codeUpgradeBaseCost[index] * Math.pow(1.15, this.codeUpgradeAmount[index]));
-                $('.upgrade--code .upgrade__cost').eq(index).html("$"+cost);
+                $('.upgrade--code .upgrade__stats').eq(index).html("<span class='upgrade--cost'>cost: -$"+cost+"</span> | <span class='upgrade--salary'>salary: -$"+this.codeUpgradeSalaries[index]+"</span>");
                 this.drawCharacters(index);
                 this.checkAvailable();
                 this.addUpKeep(index);
@@ -185,19 +204,17 @@
         },
         upgradeMoneySkills: function(index) {
             //var cost = Math.floor(Math.pow(10,index+1) * Math.pow(1.1,this.upgrade[index]));
-            var cost = Math.floor(this.codeUpgradeBaseCost[index] * Math.pow(1.15, this.codeUpgradeAmount[index]));
-            if (this.cash >= cost && this.cash - cost >= 0) {
+            var cost = Math.floor(this.marketingUpgradeBaseCost[index] * Math.pow(1.3, this.marketingUpgradeAmount[index]));
+            if (this.cash - cost >= 0) {
                 this.cash -= cost;
                 //console.log(this.codeUpgradeAmount[index]);
-                this.codeUpgradeAmount[index] += 1;
-                this.cps += this.codeUpgradeCPS[index];
+                this.marketingUpgradeAmount[index] += 1;
                 this.updateStats();
-                $('.upgrade .upgrade__amount').eq(index).html(this.codeUpgradeAmount[index]);
-                cost = Math.floor(this.codeUpgradeBaseCost[index] * Math.pow(1.15, this.codeUpgradeAmount[index]));
-                $('.upgrade .upgrade__cost').eq(index).html("$"+cost);
-                this.drawCharacters(index);
+                $('.upgrade--money .upgrade__amount').eq(index).html(this.marketingUpgradeAmount[index]);
+                cost = Math.floor(this.marketingUpgradeBaseCost[index] * Math.pow(1.3, this.marketingUpgradeAmount[index]));
+                $('.upgrade--money .upgrade__stats').eq(index).html("$"+cost);
+                this.sellPower += this.marketingUpgradePower[index];
                 this.checkAvailable();
-                this.upkeep += this.codeUpgradeBaseCost[index]/10;
             } else {
                 console.log("Need mo money " + cost);
             }
@@ -210,15 +227,23 @@
                 ctx.drawImage(i1, Math.floor(Math.random() * (795 - 5) + 5), Math.floor(Math.random() * (128 - 64) + 64));
             };
             i1.src = '' + index + '.png';
-            console.log("Drew a character on canvas " + index);
+            //console.log("Drew a character on canvas " + index);
         },
         checkAvailable: function(){
             for(var i = 0;i<this.codeUpgradeAmount.length;i++){
                 if(this.codeUpgradeAmount[i]>0){
                     var game = this;
-                    $('.upgrade').eq(i).removeClass('notAvailable');
-                    $('.upgrade').eq(i+1).css('display', 'block');
+                    $('.upgrade--code').eq(i).removeClass('notAvailable');
+                    $('.upgrade--code').eq(i+1).css('display', 'block');
                     $('.characterCanvas').eq(i).css('display', 'block');
+                }
+            }
+            for(var i = 0;i<this.marketingUpgradeAmount.length;i++){
+                //console.log(this.marketingUpgradeAmount[i]);
+                if(this.marketingUpgradeAmount[i]>0){
+                    var game = this;
+                    $('.upgrade--money').eq(i).removeClass('notAvailable');
+                    $('.upgrade--money').eq(i+1).css('display', 'block');
                 }
             }
         },
