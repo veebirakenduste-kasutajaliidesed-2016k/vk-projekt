@@ -1,6 +1,7 @@
 //Todo: loopCounter ei nulli ennast õigesti, pildid kuvada suvalises järjekorras, valiku tegemine ja skoori lugemine
 //Valiku tegemine: DONE, Suvaline järjekord: DONE, Skoori lugemine: WIP
 //Map markeri vees oleku vältimiseks kas kontroll või kaardi koomale võtmine
+//Vees oleku vältimine: DONE, Load aegade lühendamine: DONE
 //"Playing field" ära katta kuni kõik pildid on laetud. Kontrollida, kas funktsioon on lõppenud? DONE
 var map;
 var found = 0;
@@ -8,30 +9,53 @@ var correctImage;
 var firstUrl;
 var secondUrl;
 var thirdUrl;
+var latitude;
+var longitude;
+var latlng;
+var correctGuesses = localStorage.correct;
+var falseGuesses = localStorage.false;
 function randomInt(min,max){
     return Math.floor(Math.random()*(max-min+1)+min);
 }
 function getRandom(min, max) {
     return Math.random() * (max - min) + min;
-  }
-function initMap() {
-  var latitude;
-  var longitude;
-  var latlng;
-  //var mapSize = Math.round(screen.width/3).toString() + "x" + Math.round(screen.width/1.42).toString();
-  var firstImage = document.getElementById('firstImage');
-  var secondImage = document.getElementById('secondImage');
-  var thirdImage = document.getElementById('thirdImage');
-
-  var markerLat;
-  var markerLong;
-
-  function getLatLong(){
+}
+function getLatLong(){
     //latitude =  getRandom(57.725, 59.52);
     //longitude = getRandom(21.25, 28.5);
     latitude =  getRandom(57.946565, 59.497743);
     longitude = getRandom(23.675537, 27.388916);
     latlng = latitude.toString() + "," + longitude.toString();
+}
+function initMap() {
+  //var mapSize = Math.round(screen.width/3).toString() + "x" + Math.round(screen.width/1.42).toString();
+  var firstImage = document.getElementById('firstImage');
+  var secondImage = document.getElementById('secondImage');
+  var thirdImage = document.getElementById('thirdImage');
+  var scoreCounter = document.getElementById("Score");
+  Score.innerHTML= (localStorage.correctGuesses).toString() + ":" + (localStorage.falseGuesses).toString()
+  var markerLat;
+  var markerLong;
+  function checkAnswer(imageNr){
+    if(imageNr == correctImage){
+      window.alert("Correct");
+      if (localStorage.correctGuesses) {
+        localStorage.correctGuesses = Number(localStorage.correctGuesses) + 1;
+      }
+      else{
+        localStorage.correctGuesses = 1;
+      }
+    }
+    else{
+      window.alert("False");
+      if (localStorage.falseGuesses) {
+        localStorage.falseGuesses = Number(localStorage.falseGuesses) + 1;
+      }
+      else{
+        localStorage.falseGuesses = 1;
+      }
+    }
+    location.reload();
   }
   function checkAddress(google_latLng) {
     var geocoder = new google.maps.Geocoder();
@@ -81,29 +105,13 @@ map = new google.maps.Map(document.getElementById('map'), {
   });
   console.log(correctImage);
   firstImage.onclick = function() {
-    console.log("Clicked");
-         if(correctImage == firstImage){
-          window.alert("Correct");
-         }
-         else{
-          window.alert("False");
-         }
+    checkAnswer(firstImage);
   };
   secondImage.onclick = function() {
-         if(correctImage == secondImage){
-          window.alert("Correct");
-         }
-         else{
-          window.alert("False");
-         }
+    checkAnswer(secondImage);    
   };
   thirdImage.onclick = function() {
-         if(correctImage == thirdImage){
-          window.alert("Correct");
-         }
-         else{
-          window.alert("False");
-         }
+    checkAnswer(thirdImage);
   };
 }
   var loopCount = 0;
@@ -123,18 +131,7 @@ function subMap(google_latLng, count){
   var loadingScreen = document.getElementById('loadingScreen');
   var markerLat;
   var markerLong;
-  function getRandom(min, max) {
-    return Math.random() * (max - min) + min;
-  }
-  function getLatLong(){
-    //latitude =  getRandom(57.725, 59.52);
-    //longitude = getRandom(21.25, 28.5);
-    latitude =  getRandom(57.946565, 59.497743);
-    longitude = getRandom(23.675537, 27.388916);
-    latlng = latitude.toString() + "," + longitude.toString();
-  }
   var radius = 10;
-
   var streetViewService = new google.maps.StreetViewService();
   var mapSize = Math.round(screen.width/3.5).toString() + "x" + Math.round(screen.width/4).toString();
   var state = "";
@@ -174,7 +171,6 @@ function subMap(google_latLng, count){
             images[0].src=firstUrl;
             images[1].src=secondUrl;
             images[2].src=thirdUrl;
-            //loadingScreen.src="";
             loadingScreen.parentNode.removeChild(loadingScreen);
           }
         } 

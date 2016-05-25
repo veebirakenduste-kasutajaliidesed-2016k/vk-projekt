@@ -11,21 +11,28 @@ html, body {
   margin-top:1%;
   position: static;
   border-radius: 30px;
+  border:3px solid #404040;
 }
 #subMaps {
-	margin-left:6.5%;
+	margin-left:5.5%;
 	margin-top: 1%;
-	position: fixed;
+	position: absolute;
+	display:inline-block; 
+}
+#Score{
+	float:left;
+	position:fixed;
+	margin-left:5%;
 }
 
 div>img {
     border-radius: 30px;
-	border:3px solid black;
+	border:3px solid #404040;
 	background: #73AD21;	
 }
 div>img:hover{
 	transition:all 1s ease;
-	opacity:50;
+	opacity:90;
 	background: white;
 }
 #loadingScreen{
