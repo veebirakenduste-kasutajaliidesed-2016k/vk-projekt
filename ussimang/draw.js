@@ -60,6 +60,10 @@ var drawModule = (function () {
         if(snakeX == food.x && snakeY == food.y) {
           var tail = {x: snakeX, y: snakeY}; //Create a new head instead of moving the tail
           score ++;
+          //10
+          SavehighScore(score);
+
+
 
           createFood(); //Create new food
         } else {
@@ -76,6 +80,7 @@ var drawModule = (function () {
 
         pizza(food.x, food.y);
         scoreText();
+
   };
 
   var createFood = function() {
@@ -99,13 +104,24 @@ var drawModule = (function () {
       for(var i = 0; i < array.length; i++) {
         if(array[i].x === x && array[i].y === y)
         return true;
+
       }
       return false;
   };
+  var SavehighScore= function(score){
 
+    console.log('score:' + score);
+    console.log('highscore:' + highScore);
+
+    if (score > highScore) {
+      highScore = parseInt(score);
+      localStorage.setItem('highScore', highScore);
+    }
+  };
   var init = function(){
       direction = 'down';
       score=0;
+
       drawSnake();
       createFood();
       gameloop = setInterval(paint, 80);

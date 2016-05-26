@@ -1,13 +1,11 @@
 <html manifest="bounce.appcache">
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <div id="game">
 <div id="square0"></div>
 <div id="square1"></div>
 <div id="notepad"></div>
 <div id="pad"></div>
 </div>
-<style>
-</style>
+
 <script type="text/javascript">
 <!-- BounceGame Â© 2012 Scott Connell -->
 <!-- Source: http://scottconnell.orgfree.com -->
@@ -37,7 +35,7 @@ var count = 0
 var collisionOne = 0
 var collisionTwo = 0
 var collisionThree = 0
-
+var highScore1 = localStorage.getItem("highScore1") || 0;
 
 document.body.style.margin = "0px"
 document.body.style.padding = "0px"
@@ -47,8 +45,6 @@ function setupGame()
 document.getElementById("game").style.borderRight = "1px solid #aaa"
 document.getElementById("game").style.borderRight = "1px solid #aaa"
 document.getElementById("game").style.borderBottom = "1px solid #aaa"
-document.getElementById("game").style.borderTop = "1px solid #aaa"
-document.getElementById("game").style.borderLeft = "1px solid #aaa"
 document.getElementById("game").style.width = gameWidth+"px"
 document.getElementById("game").style.height = gameHeight+"px"
 document.getElementById("square0").style.position = "absolute"
@@ -310,8 +306,8 @@ function assignAngle(aa)
     nextScore = 100
     }
 
-    score += nextScore
-
+    score += nextScore;
+    SavehighScore(score);
 document.getElementById("pad").innerHTML = nextScore
 }
 
@@ -451,57 +447,7 @@ var actualLeft = getPad-30
 
 function getMouseXY(e)
 {
-
-    /*if(e.changedTouches) {
-    tempX=e.changedTouches[0].pageX;
-    tempY=e.changedTouches[0].pageY;
-    console.log(e.changedTouches[0].pageX);
-    speed= 50
-  }
-
     if(navigator.appName=="Netscape")
-    {
-    tempX = e.pageX
-    tempY = e.pageY
-    }
-    else
-    {
-      //if() mobiil
-      //e.changedTouches[0]
-      //event.changedTouches[0].pageX
-      console.log(e);
-      if(e.changedTouches[0] ) {
-      tempX=e.changedTouches[0].pageX;
-      tempY=e.changedTouches[0].pageY;
-      console.log(event.changedTouches[0].pageX);
-      speed= 50
-        }else{
-        tempX = event.clientX + document.body.scrollLeft
-        tempY = event.clientY + document.body.scrollTop
-        }
-    }
-    if(tempX < 0)
-    {
-    tempX = 0
-    }
-
-    getPad = tempX
-
-    if(getPad <= 30)
-    {
-    getPad = 30
-    }
-
-    if((getPad-30) > Math.floor(gameWidth-60))
-    {
-    getPad = Math.floor(gameWidth-60)+30
-    }
-
-    if(!block)
-    {
-    document.getElementById("pad").style.left = (getPad-30)+"px"
-  }*/
-  if(navigator.appName=="Netscape")
     {
     tempX = e.pageX
     tempY = e.pageY
@@ -511,27 +457,33 @@ function getMouseXY(e)
     tempX = event.clientX + document.body.scrollLeft
     tempY = event.clientY + document.body.scrollTop
     }
+
     if(tempX < 0)
     {
     tempX = 0
     }
+
     getPad = tempX
+
     if(getPad <= 30)
     {
     getPad = 30
     }
+
     if((getPad-30) > Math.floor(gameWidth-60))
     {
     getPad = Math.floor(gameWidth-60)+30
     }
+
     if(!block)
     {
     document.getElementById("pad").style.left = (getPad-30)+"px"
     }
+
 }
 
 document.onmousemove = getMouseXY
-/*document.ontouchmove = getMouseXY*/
+
 setupGame()
 var appCache = window.applicationCache;
 
@@ -588,5 +540,15 @@ appCache.addEventListener('progress', handleCacheEvent, false);
 // Fired when the manifest resources have been newly redownloaded.
 appCache.addEventListener('updateready', handleCacheEvent, false);
 
+var SavehighScore= function(score){
+
+  console.log('score:' + score);
+  console.log('highscore1:' + highScore1);
+
+  if (score > highScore1) {
+    highScore1 = parseInt(score);
+    localStorage.setItem('highScore1', highScore1);
+  }
+};
 </script>
 </html>

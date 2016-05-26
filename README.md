@@ -13,6 +13,5 @@ Funktsioonalsuse loetelu:
 	* v0.3 ussimängu töötamine ilma võrguta(appcache)
 	* v0.4 põrkemäng koos väikeste muudadustega
 	* v0.5 põrkemängu töötamine ilma võrguta(appcache)
-	...(lisandub veel)
-	
-
+	* v0.6 localStorage mõlemal
+	* v0.7 navigatsioon pealehel olemas
