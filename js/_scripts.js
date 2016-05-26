@@ -10,6 +10,7 @@
         ClickerGame.instance = this;
 
         // KÕIK muuutujad, mida muudetakse ja on rakendusega seotud defineeritakse siin
+        this.userName = "Priit";
         this.cash = 0;
         this.linesOfCode = 0;
         this.totalLinesOfCode = 0;
@@ -60,21 +61,6 @@
             $('.upgrade--code').eq(0).css('display', 'block');
             this.checkAvailable();
             this.main();
-            //console.log(this.cash);
-            //TEST
-            /*var xmlhttp = new XMLHttpRequest();
-            var url = "js/text.json";
-
-            xmlhttp.onreadystatechange = function() {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                var myArr = JSON.parse(xmlhttp.responseText);
-                console.log(myArr[0]);
-                console.log(myArr[0].achievements.ach0.desc);
-                }
-            };
-
-            xmlhttp.open("GET", url, true);
-            xmlhttp.send();*/
         },
         main: function() {
             var game = this;
@@ -146,6 +132,7 @@
             localStorage.setItem("totalLinesOfCodeClicked", JSON.stringify(this.totalLinesOfCodeClicked));
             localStorage.setItem("codeQuality", JSON.stringify(this.codeQuality));
             localStorage.setItem("upKeep", JSON.stringify(this.upKeep));
+            this.saveToServer();
         },
         delete: function() {
             localStorage.removeItem("cash");
@@ -168,6 +155,7 @@
             console.log("Save Deleted");
         },
         load: function() {
+            this.loadFromServer();
             this.cash = JSON.parse(localStorage.getItem("cash"));
             this.cps = JSON.parse(localStorage.getItem("cps"));
             for (var i = 0; i < this.codeUpgradeAmount.length; i++) {
@@ -265,6 +253,13 @@
                 this.linesOfCode -= amount;
                 this.cash += amount*this.codeQuality;
             }
+        },
+        saveToServer: function(){
+            $.post("save.php", {user: this.userName, cps:this.cps});
+        },
+        loadFromServer: function(){
+            var game = this;
+            $.getJSON("accounts/"+game.userName+".json").done(function(result){console.log(result[0].cps)}).fail(function(){console.log("doesn't exist")});
         }
     }
     window.onload = function() {
