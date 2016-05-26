@@ -36,6 +36,19 @@ div>img:hover{
 	background: white;
 }
 #loadingScreen{
-	z-index: 10;
+	z-index: 1;
 	position:fixed; TOP:0px; LEFT:0px; WIDTH:100%; HEIGHT:100%
+}
+#solidBackGround{
+	z-index: 2;
+	position:fixed; TOP:0px; LEFT:0px; WIDTH:100%; HEIGHT:100%
+}
+#login{
+	z-index: 3;
+	position:fixed;
+	margin-left:42%;
+	margin-top:23%;
+}
+label {
+color: white;
 }

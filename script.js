@@ -11,8 +11,8 @@ var thirdUrl;
 var latitude;
 var longitude;
 var latlng;
-var correctGuesses = localStorage.correct;
-var falseGuesses = localStorage.false;
+
+
 function randomInt(min,max){
     return Math.floor(Math.random()*(max-min+1)+min);
 }
@@ -24,26 +24,108 @@ function getLatLong(){
     longitude = getRandom(23.675537, 27.388916);
     latlng = latitude.toString() + "," + longitude.toString();
 }
-function getSQL(){
-  xmlhttp = new XMLHttpRequest();
-  xmlhttp.onreadystatechange = function() {
-        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-          console.log(xmlhttp.responseText);
-        }
-        };
-        xmlhttp.open("GET","getuser.php?q="+str,true);
-        xmlhttp.send();
-}
 function initMap() {
-  //var mapSize = Math.round(screen.width/3).toString() + "x" + Math.round(screen.width/1.42).toString();
-  getSQL();
   var firstImage = document.getElementById('firstImage');
   var secondImage = document.getElementById('secondImage');
   var thirdImage = document.getElementById('thirdImage');
   var scoreCounter = document.getElementById("Score");
-  Score.innerHTML= (localStorage.correctGuesses).toString() + ":" + (localStorage.falseGuesses).toString()
+  var fillerImage = document.getElementById("solidBackGround");
   var markerLat;
   var markerLong;
+  checkUser();
+  //console.log(userName);
+
+
+  function checkUser(){
+    userName = document.cookie;
+    if (userName!=""){
+      //console.log("User cookie exists");
+      document.getElementById('userInput').parentNode.removeChild(document.getElementById('userInput'));
+      document.getElementById('inputLabel').parentNode.removeChild(document.getElementById('inputLabel'));
+      fillerImage.parentNode.removeChild(fillerImage);
+    }
+    else{
+      localStorage.clear();
+      window.addEventListener('keypress', function(event){
+       if(event.charCode == 13 && document.cookie == ""){
+         var User = document.getElementById('userInput').value;
+         document.cookie = User;
+         document.getElementById('userInput').parentNode.removeChild(document.getElementById('userInput'));
+         document.getElementById('inputLabel').parentNode.removeChild(document.getElementById('inputLabel'));
+         fillerImage.parentNode.removeChild(fillerImage);
+         userName = document.cookie;
+
+       }
+
+     });
+    }
+    console.log("Current user: " + (document.cookie).toString());
+    getData(userName);
+  }
+  function getData(userName){
+        console.log("getData started");
+         var xhttp = new XMLHttpRequest();
+         var result;
+         xhttp.onreadystatechange = function() {
+
+           if (xhttp.readyState == 4 && xhttp.status == 200) {
+            console.log("xhttp.status ==200");
+             result =JSON.parse(xhttp.responseText);
+             var contains = false;
+             for(i = 0; i<result.length; i++){
+              if(result[i].user == userName){
+                contains = true;
+                console.log("Kasutaja listis");
+                var correctFromServer = result[i].correct;
+                var wrongFromServer = result[i].wrong;
+                var userFromServer = result[i].user;
+                console.log(wrongFromServer);
+                if(localStorage.correctGuesses > correctFromServer){
+                  console.log("localStorage suurem");
+                  var correct = localStorage.correctGuesses;
+                }
+                else{
+                  var correct = correctFromServer;
+                  localStorage.correctGuesses = correctFromServer;
+                } 
+                if(localStorage.falseGuesses > wrongFromServer){
+                  var wrong = localStorage.falseGuesses;
+                  console.log("localStorage suurem");
+                }
+                else{
+                  var wrong = wrongFromServer;
+                  localStorage.falseGuesses = wrongFromServer;
+                }
+                console.log("User: " + userName);
+                console.log("Correct: " + correct);
+                console.log("False: " + wrong);
+                Score.innerHTML= (correct).toString() + ":" + (wrong).toString();
+                sendData(userFromServer, correct, wrong);
+              }
+            }
+            if(contains===false){
+              sendData(userName, 1, 1);
+            }
+
+            }
+          };
+         xhttp.open("GET", "saveData.php", true);
+         xhttp.send();
+         
+
+}
+function sendData(user, correct, wrong){
+  var xhttp = new XMLHttpRequest();
+       xhttp.onreadystatechange = function() {
+         if (xhttp.readyState == 4 && xhttp.status == 200) {
+
+           //console.log("Uued andmed liigutatud serverisse");
+
+         }
+       };
+       xhttp.open("GET", "saveData.php?user="+user+"&correct=" +correct+"&wrong=" +wrong, true);
+       xhttp.send();
+}
   function checkAnswer(imageNr){
     if(imageNr == correctImage){
       window.alert("Correct");
@@ -137,7 +219,7 @@ function subMap(google_latLng, count){
   var radius = 10;
   var streetViewService = new google.maps.StreetViewService();
   var mapSize = Math.round(screen.width/3.5).toString() + "x" + Math.round(screen.width/4).toString();
-  streetViewService.getPanoramaByLocation(google_latLng, radius, handler)
+  streetViewService.getPanoramaByLocation(google_latLng, radius, handler);
   function handler(data, status) {
     console.log(loopCount);
       if(loopCount == 50){
