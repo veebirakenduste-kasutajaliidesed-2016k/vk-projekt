@@ -156,7 +156,7 @@
             // html += "<td><button class='details'>Details</button></td>";
 
             // var unique_id = games[i].unique_id; //ma ei saa aru, mis siin valesti on ja miks ma seda id-d k2tte ei saa?
-            html += "<td><button onclick=Discgolf.instance.gameDetails("+Discgolf.instance.games[i].unique_id+")>Details</button></td>";
+            html += "<td><button onclick=Discgolf.instance.gameDetails("+'Discgolf.instance.games[i].unique_id'+")>Details</button></td>";
 
           html += "</tr>";
         }
@@ -305,8 +305,8 @@
       console.log(this.tracks[id]);
     },
 
-    gameDetails: function(unique_id){
-      console.log("laeme selle m2ngu info: "+unique_id);
+    gameDetails: function(id){
+      console.log("laeme selle m2ngu info: "+id);
       //idee poolest tahaks siin for tsükliga unikaalse id järgi mängu üles otsida ja siis saaks kuskil kuvada mängu detailsemaid andmeid
     },
 
