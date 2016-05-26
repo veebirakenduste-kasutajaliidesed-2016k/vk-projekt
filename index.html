@@ -99,6 +99,20 @@
                   alert(lopp);
                     var latitude = event.latLng.lat();
                     var longitude = event.latLng.lng();
+					
+					
+					
+					
+			var line = new google.maps.Polyline({
+				path: [
+					new google.maps.LatLng(asukoht.lat, asukoht.lng), 
+					new google.maps.LatLng(latitude, longitude)
+				],
+				strokeColor: "#FF0000",
+				strokeOpacity: 1.0,
+				strokeWeight: 5,
+				map: map
+			});
                 //    var vahe = latitude - asukoht.lat + longitude - asukoht.lng;
                 //    console.log(vahe);
                 });
