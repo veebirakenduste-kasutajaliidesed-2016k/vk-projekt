@@ -47,6 +47,9 @@ function initMap() {
       
     }
     else{
+         document.getElementById("solidBackGround").style.display = "initial";
+         document.getElementById('userInput').style.display = "initial";
+         document.getElementById('inputLabel').style.display = "initial";
       localStorage.clear();
       window.addEventListener('keypress', function(event){
        if(event.charCode == 13 && document.cookie == ""){
