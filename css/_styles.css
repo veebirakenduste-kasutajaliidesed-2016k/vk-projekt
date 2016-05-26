@@ -165,10 +165,21 @@ body{
 }
 .overlay__content{
 	background-color:#FFF;
-	width:600px;
-	height:600px;
+	width:300px;
+	height:300px;
 	position:relative;
 	top:50%;
 	left:50%;
 	transform:translate(-50%,-50%);
+}
+.overlay__content input{
+	width:100%;
+	font-size:26px;
+	text-align:center;
+}
+.overlay__content .btn{
+	position:relative;
+}
+.overlay__content .overlay__inner{
+	padding:10px 20px 10px 20px;
 }

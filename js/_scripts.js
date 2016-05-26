@@ -29,6 +29,7 @@
         this.writePower = 1;
         this.sellPower = 1;
         this.upKeep = 0;
+        this.loggedIn = 0;
         //console.log(this);
         this.init();
     };
@@ -108,6 +109,18 @@
                 $('.moneyUpgradeTab').addClass('is-visible');
                 $('.codeUpgradeTab').removeClass('is-visible');
             });
+            $('.btn--overlay').click(function(){
+            	$('.overlay').show("fast");
+            });
+            $('.overlay').click(function(){
+            	if(event.target.matches('.overlay')){
+            		$('.overlay').hide("fast");
+            	}
+            });
+            $('.btn--login').click(function(){
+            	game.userName = $('.username').val();
+            	game.loadFromServer();
+            });
         },
         addLinesOfCode: function(amount) {
             this.linesOfCode += amount;
@@ -132,7 +145,9 @@
             localStorage.setItem("totalLinesOfCodeClicked", JSON.stringify(this.totalLinesOfCodeClicked));
             localStorage.setItem("codeQuality", JSON.stringify(this.codeQuality));
             localStorage.setItem("upKeep", JSON.stringify(this.upKeep));
-            this.saveToServer();
+            if(this.userName!="local"){
+            	this.saveToServer();
+            }
         },
         delete: function() {
             localStorage.removeItem("cash");
@@ -155,7 +170,6 @@
             console.log("Save Deleted");
         },
         load: function() {
-            this.loadFromServer();
             this.cash = JSON.parse(localStorage.getItem("cash"));
             this.cps = JSON.parse(localStorage.getItem("cps"));
             for (var i = 0; i < this.codeUpgradeAmount.length; i++) {
@@ -255,11 +269,26 @@
             }
         },
         saveToServer: function(){
-            $.post("save.php", {user: this.userName, cps:this.cps});
+            $.post("save.php", {
+            	user: this.userName,
+            	cps:this.cps,
+            	cash:this.cash,
+            	codeQuality:this.codeQuality,
+            	codeUpgradeAmount:this.codeUpgradeAmount,
+            	codeUpgradeCPS:this.codeUpgradeCPS,
+            	linesOfCode:this.linesOfCode,
+            	totalLinesOfCodeClicked:this.totalLinesOfCodeClicked,
+            	upKeep:this.upKeep
+            });
         },
         loadFromServer: function(){
             var game = this;
-            $.getJSON("accounts/"+game.userName+".json").done(function(result){console.log(result[0].cps)}).fail(function(){console.log("doesn't exist")});
+            $.getJSON("accounts/"+game.userName+".json")
+            .done(function(result){
+            	this.loggedIn = 1;
+            	console.log(result[0])})
+            .fail(function(){
+            	console.log("doesn't exist")});
         }
     }
     window.onload = function() {
