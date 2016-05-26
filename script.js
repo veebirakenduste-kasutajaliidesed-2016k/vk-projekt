@@ -1,16 +1,9 @@
-//TODO: LocalStorage'ile lisaks online storage
-//TODO: Kogu programm viisakamale kujule viia
-//TODO: AppCache
+//TODO: Kogu programm viisakamale kujule viia (OOP)
 
-var map;
 var found = 0;
 var correctImage;
-var firstUrl;
-var secondUrl;
-var thirdUrl;
-var latitude;
-var longitude;
-var latlng;
+
+
 
 
 function randomInt(min,max){
@@ -33,13 +26,11 @@ function initMap() {
   var markerLat;
   var markerLong;
   checkUser();
-  //console.log(userName);
 
 
   function checkUser(){
     userName = document.cookie;
     if (userName!=""){
-      //console.log("User cookie exists");
          document.getElementById("solidBackGround").style.display = "none";
          document.getElementById('userInput').style.display = "none";
          document.getElementById('inputLabel').style.display = "none";
@@ -125,8 +116,6 @@ function sendData(user, correct, wrong){
        xhttp.onreadystatechange = function() {
          if (xhttp.readyState == 4 && xhttp.status == 200) {
 
-           //console.log("Uued andmed liigutatud serverisse");
-
          }
        };
        console.log("saveData.php?user="+user+"&correct=" +correct+"&wrong=" +wrong);
@@ -208,8 +197,9 @@ map = new google.maps.Map(document.getElementById('map'), {
     checkAnswer(thirdImage);
   };
 }
-var loopCount = 0;
+
 function subMap(google_latLng, count){
+  var loopCount = 0;
   var images = [firstImage, secondImage, thirdImage];
   function shuffleArray(array) {
     for (var i = array.length - 1; i > 0; i--) {
