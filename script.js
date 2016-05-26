@@ -40,9 +40,11 @@ function initMap() {
     userName = document.cookie;
     if (userName!=""){
       //console.log("User cookie exists");
-      document.getElementById('userInput').parentNode.removeChild(document.getElementById('userInput'));
-      document.getElementById('inputLabel').parentNode.removeChild(document.getElementById('inputLabel'));
-      fillerImage.parentNode.removeChild(fillerImage);
+         document.getElementById("solidBackGround").style.display = "none";
+         document.getElementById('userInput').style.display = "none";
+         document.getElementById('inputLabel').style.display = "none";
+
+      
     }
     else{
       localStorage.clear();
@@ -50,9 +52,10 @@ function initMap() {
        if(event.charCode == 13 && document.cookie == ""){
          var User = document.getElementById('userInput').value;
          document.cookie = User;
-         document.getElementById('userInput').parentNode.removeChild(document.getElementById('userInput'));
-         document.getElementById('inputLabel').parentNode.removeChild(document.getElementById('inputLabel'));
-         fillerImage.parentNode.removeChild(fillerImage);
+         document.getElementById("solidBackGround").style.display = "none";
+         document.getElementById('userInput').style.display = "none";
+         document.getElementById('inputLabel').style.display = "none";
+
          userName = document.cookie;
 
        }
@@ -123,6 +126,7 @@ function sendData(user, correct, wrong){
 
          }
        };
+       console.log("saveData.php?user="+user+"&correct=" +correct+"&wrong=" +wrong);
        xhttp.open("GET", "saveData.php?user="+user+"&correct=" +correct+"&wrong=" +wrong, true);
        xhttp.send();
 }
