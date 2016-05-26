@@ -308,7 +308,7 @@
 
     gameDetails: function(id){
       console.log("laeme selle m2ngu info: "+id);
-      var table = document.querySelector("#game-history");
+      var table = document.querySelector("#game-details");
       table.innerHTML = "";
 
       var html = "";
@@ -326,9 +326,9 @@
         if(games[i].unique_id == id){
           console.log("leidsin m'ngu, mille unique on"+games[i].unique_id);
           for(var j = 0; j < games[i].results.length; j++){
-              par += games[i].results[j].par;
-              my_result += games[i].results[j].result;
-              basket_nr += games[i].results[j].basket_nr;
+              par = games[i].results[j].par;
+              my_result = games[i].results[j].result;
+              basket_nr = games[i].results[j].basket_nr;
               html += "<tr>";
                 html += "<td>"+basket_nr+"</td>";
                 html += "<td>"+par+"</td>";
