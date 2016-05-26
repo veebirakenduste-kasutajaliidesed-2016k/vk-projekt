@@ -155,8 +155,9 @@
             //siit nupu pealt näeb detailsemalt
             // html += "<td><button class='details'>Details</button></td>";
 
-            // var unique_id = games[i].unique_id; //ma ei saa aru, mis siin valesti on ja miks ma seda id-d k2tte ei saa?
-            html += "<td><button onclick=Discgolf.instance.gameDetails("+'Discgolf.instance.games[i].unique_id'+")>Details</button></td>";
+            //var aaa = games[i].unique_id; //ma ei saa aru, mis siin valesti on ja miks ma seda id-d k2tte ei saa?
+            //html += "<td><button onclick=Discgolf.instance.gameDetails("+'Discgolf.instance.aaa'+")>Details</button></td>";
+            html += "<td><button onclick=Discgolf.instance.gameDetails('"+Discgolf.instance.games[i].unique_id+"')>Details</button></td>";
 
           html += "</tr>";
         }
@@ -307,7 +308,37 @@
 
     gameDetails: function(id){
       console.log("laeme selle m2ngu info: "+id);
-      //idee poolest tahaks siin for tsükliga unikaalse id järgi mängu üles otsida ja siis saaks kuskil kuvada mängu detailsemaid andmeid
+      var table = document.querySelector("#game-history");
+      table.innerHTML = "";
+
+      var html = "";
+
+      html += "<tr>";
+        html += "<th>Korvi number</th>";
+        html += "<th>Par</th>";
+        html += "<th>My result</th>";
+      html += "</tr>";
+      var games = Discgolf.instance.games;
+      var par = 0;
+      var my_result = 0;
+      var basket_nr = 0;
+      for (var i=0; i<games.length; i++){
+        if(games[i].unique_id == id){
+          console.log("leidsin m'ngu, mille unique on"+games[i].unique_id);
+          for(var j = 0; j < games[i].results.length; j++){
+              par += games[i].results[j].par;
+              my_result += games[i].results[j].result;
+              basket_nr += games[i].results[j].basket_nr;
+              html += "<tr>";
+                html += "<td>"+basket_nr+"</td>";
+                html += "<td>"+par+"</td>";
+                html += "<td>"+parseInt(my_result)+"</td>";
+              html += "</tr>";
+          }
+        }
+      }
+      table.innerHTML = html;
+
     },
 
     startGame: function(e){
