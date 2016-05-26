@@ -10,7 +10,7 @@
         ClickerGame.instance = this;
 
         // KÕIK muuutujad, mida muudetakse ja on rakendusega seotud defineeritakse siin
-        this.userName = "Priit";
+        this.userName = "local";
         this.cash = 0;
         this.linesOfCode = 0;
         this.totalLinesOfCode = 0;
