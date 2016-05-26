@@ -1,14 +1,15 @@
 <!-- api key:  AIzaSyCKYLHdWZSYqmvUyybJYV1iB2FOaJsaOxY -->
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Street View liikumismäng</title>
-    <style>
+    <head>
+        <meta charset="utf-8">
+            <title>Street View liikumismäng</title>
+            <style>
       html, body {
         height: 100%;
         margin: 1%;
         padding: 0;
+        min-width: 50%;
       }
 
       #map {
@@ -33,31 +34,27 @@
       #menu{
       	position: absolute;
         right: 5%;
-        bottom: 40%;
-        width: 20%;
-
+        top: 10%;
+        width: 23%;
       }
 
 
     </style>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-  </head>
-  <body>
-  <h2>Google Streeview orienteerumis mäng </h2>
-    <div id="menu">
-    <p>Tegemist on orienteerumis mänguga kus on võimalik streetview abil Tallinna tänavatel liikuda. Vasakul aknas on näha tänavapilti ning all paremal on kaart kus saab märkida kaardil oleva tänava asukohta. </p>
-
-    <p>Mängu eesmärgiks on võimalikult väikese arvu liigutustega arvata ära võimalikult täpne asukoht.</p>
-    <br>
-    <br>
-    <br>
-    <p id="skoor">Liigutusi tänaval</p>
-    <button onClick="getPanorama()" >LOOSI UUS ASUKOHT</button>
-  </div>
-    <div id="map" style="height:200px"></div>
-    <div id="pano"></div>
-
-    <script>
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+            </head>
+            <body>
+                <h2>Google Streeview orienteerumis mäng </h2>
+                <div id="menu">
+                    <p>Tegemist on orienteerumis mänguga kus on võimalik streetview abil Tallinna tänavatel liikuda. Vasakul aknas on näha tänavapilti ning all paremal on kaart kus saab märkida kaardil oleva tänava asukohta. </p>
+                    <p>Mängu eesmärgiks on võimalikult väikese puntide arvuga ära arvata võimalikult palju asukohti.</p>
+                    <br>
+                        <br>
+                            <p id="skoor">Liigutusi tänaval</p>
+                            <button onClick="getPanorama()" >LOOSI UUS ASUKOHT</button>
+                        </div>
+                        <div id="map" style="height:250px"></div>
+                        <div id="pano"></div>
+                        <script>
 		var left =  59.453145;
 		var top_c = 24.692039;
 		var right = 59.427036;
@@ -83,18 +80,26 @@
 		  disableDefaultUI: true
         });
 
+
         // võtab kliki peale mapi koordinaadid
                 map.addListener("click", function (event) {
 
                   correct = new google.maps.LatLng({lat: asukoht.lat, lng: asukoht.lng});
 
                   var distance = google.maps.geometry.spherical.computeDistanceBetween (correct, event.latLng);
+
+
                   var km = Math.round(distance/1000.5);
                   var lopp;
-                  if(km < 10){
+                  if(km < 3){
                     lopp = "\n ÕIGE:" + km + "km mõõda";
+                    getPanorama();
+
                   }else{
                     lopp = "\n Vale:" + km + "km mõõda";
+                    score=score+(km*3);
+                    getPanorama();
+
                   }
                   alert(lopp);
                     var latitude = event.latLng.lat();
@@ -115,8 +120,27 @@
 			});
                 //    var vahe = latitude - asukoht.lat + longitude - asukoht.lng;
                 //    console.log(vahe);
-                });
 
+
+                var line = new google.maps.Polyline({
+        				path: [
+        					new google.maps.LatLng(asukoht.lat, asukoht.lng),
+        					new google.maps.LatLng(latitude, longitude)
+        				],
+        				strokeColor: "#FF0000",
+        				strokeOpacity: 1.0,
+        				strokeWeight: 2,
+        				map: map
+        			});
+                        //    var vahe = latitude - asukoht.lat + longitude - asukoht.lng;
+                        //    console.log(vahe);
+                        function removeLine() {
+                          line.setMap(null);
+                        }
+                        setTimeout(removeLine(), 200000);
+
+
+                        });
 
 		getPanorama();
 
@@ -125,9 +149,11 @@
 
 
 
+
+
 	  function getPanorama(){
-		//console.log(bottom - Math.random()*(bottom-top_c));
-		asukoht = {lat: left - Math.random()*(left-right), lng: bottom - Math.random()*(bottom-top_c)};
+    //console.log(bottom - Math.random()*(bottom-top_c));
+  	asukoht = {lat: left - Math.random()*(left-right), lng: bottom - Math.random()*(bottom-top_c)};
 	    //console.log(asukoht);
 
 		var streetviewService = new google.maps.StreetViewService;
@@ -135,6 +161,7 @@
 		streetviewService.getPanorama(
 
 			{location: asukoht, preference: google.maps.StreetViewPreference.NEAREST, radius: 500},
+
 
 			function(data, status){
 				if(!data){
@@ -156,6 +183,7 @@
 
 		//1 kord ainult
 	  function loadPano(coordinates){
+
 		pano = new google.maps.StreetViewPanorama(
             document.getElementById('pano'), {
               position: coordinates,
@@ -173,7 +201,7 @@
 
         pano.addListener('position_changed', function() {
           score = score + 1;
-            document.getElementById("skoor").innerHTML ="Liigutusi: " +  score;
+            document.getElementById("skoor").innerHTML ="Punkte: " +  score;
         });
 	  }
 
@@ -181,10 +209,10 @@
 
 
 
-    </script>
 
-    <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCKYLHdWZSYqmvUyybJYV1iB2FOaJsaOxY&callback=initialize&libraries=geometry">
-    </script>
-  </body>
-</html>
+
+                        </script>
+                        <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCZaXw0WSztA7VozBDfo9S5om4aWd1S84Y&callback=initialize&libraries=geometry"></script>
+                    </body>
+                </html>
