@@ -2,8 +2,11 @@
 <!DOCTYPE html>
 <html>
     <head>
+      <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+      <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+      <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
         <meta charset="utf-8">
-            <title>Street View liikumismäng</title>
+            <title>Street View liikumism�ng</title>
             <style>
       html, body {
         height: 100%;
@@ -38,7 +41,6 @@
         width: 23%;
       }
 
-
     </style>
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
             </head>
@@ -46,7 +48,7 @@
                 <h2>Google Streeview orienteerumis mäng </h2>
                 <div id="menu">
                     <p>Tegemist on orienteerumis mänguga kus on võimalik streetview abil Tallinna tänavatel liikuda. Vasakul aknas on näha tänavapilti ning all paremal on kaart kus saab märkida kaardil oleva tänava asukohta. </p>
-                    <p>Mängu eesmärgiks on võimalikult väikese puntide arvuga ära arvata võimalikult palju asukohti.</p>
+                    <p>Mängu eesmärgiks on võimalikult suure puntide arvuga ära arvata võimalikult palju asukohti.<b> Kokku saab arvata 10 korda</b></p>
                     <br>
                         <br>
                             <p id="skoor">Liigutusi tänaval</p>
@@ -54,22 +56,29 @@
                         </div>
                         <div id="map" style="height:250px"></div>
                         <div id="pano"></div>
+
+                        <div id="dialog" title="Basic dialog">
+  <p id="popup">Mang labi, et uuesti alustada, vajuta ristist kinni.</p>
+</div>
                         <script>
 		var left =  59.453145;
 		var top_c = 24.692039;
 		var right = 59.427036;
 		var bottom = 24.823728;
 		var asukoht;
-		var score = 0;
+		var score = 1;
+    var line;
+    var arvamisi = 0;
 
 	  var pano;
+	  
+	  $( "#popup" ).hide();
 
       function initialize() {
 
 		//console.log(asukoht);
 
     //Add listener
-
 
 
 
@@ -81,63 +90,69 @@
         });
 
 
-        // võtab kliki peale mapi koordinaadid
+        // v�tab kliki peale mapi koordinaadid
                 map.addListener("click", function (event) {
 
                   correct = new google.maps.LatLng({lat: asukoht.lat, lng: asukoht.lng});
 
                   var distance = google.maps.geometry.spherical.computeDistanceBetween (correct, event.latLng);
 
+                //  line.setMap(null);
+
+
+
 
                   var km = Math.round(distance/1000.5);
                   var lopp;
                   if(km < 3){
                     lopp = "\n ÕIGE:" + km + "km mõõda";
+                    score=score+((km+5)*3);
                     getPanorama();
+                    arvamisi ++;
+                    console.log(arvamisi);
 
                   }else{
                     lopp = "\n Vale:" + km + "km mõõda";
-                    score=score+(km*3);
+                    score=score-(km*3);
                     getPanorama();
-
+                    arvamisi ++;
+                    console.log(arvamisi);
                   }
                   alert(lopp);
                     var latitude = event.latLng.lat();
                     var longitude = event.latLng.lng();
-					
-					
-					
-					
+                    if(arvamisi > 9){
+					$( "#popup" ).show();
+                      $(function() {
+                          $( "#dialog" ).dialog({
+                            title: "GAME OVER",
+                            resizable: false,
+                            width: 700,
+                            height: 700,
+                            close: function( event, ui ) {location.reload()}
+                          });
+                        });
+                    }
+                  //  setTimeout(removeLine(),5000);
+
+
+
+
 			var line = new google.maps.Polyline({
 				path: [
-					new google.maps.LatLng(asukoht.lat, asukoht.lng), 
+					new google.maps.LatLng(asukoht.lat, asukoht.lng),
 					new google.maps.LatLng(latitude, longitude)
 				],
 				strokeColor: "#FF0000",
 				strokeOpacity: 1.0,
-				strokeWeight: 5,
+				strokeWeight: 2.5,
 				map: map
 			});
-                //    var vahe = latitude - asukoht.lat + longitude - asukoht.lng;
-                //    console.log(vahe);
 
+  //    function removeLine() {
+    //    line.setMap(null);
+  //    }
 
-                var line = new google.maps.Polyline({
-        				path: [
-        					new google.maps.LatLng(asukoht.lat, asukoht.lng),
-        					new google.maps.LatLng(latitude, longitude)
-        				],
-        				strokeColor: "#FF0000",
-        				strokeOpacity: 1.0,
-        				strokeWeight: 2,
-        				map: map
-        			});
-                        //    var vahe = latitude - asukoht.lat + longitude - asukoht.lng;
-                        //    console.log(vahe);
-                        function removeLine() {
-                          line.setMap(null);
-                        }
-                        setTimeout(removeLine(), 200000);
 
 
                         });
@@ -146,6 +161,12 @@
 
 
       }
+
+    function removeLine() {
+      line.setMap(null);
+    }
+
+
 
 
 
@@ -200,7 +221,7 @@
 
 
         pano.addListener('position_changed', function() {
-          score = score + 1;
+          score = score - 1;
             document.getElementById("skoor").innerHTML ="Punkte: " +  score;
         });
 	  }
@@ -213,6 +234,6 @@
 
                         </script>
                         <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCZaXw0WSztA7VozBDfo9S5om4aWd1S84Y&callback=initialize&libraries=geometry"></script>
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCKYLHdWZSYqmvUyybJYV1iB2FOaJsaOxY&callback=initialize&libraries=geometry"></script>
                     </body>
                 </html>
