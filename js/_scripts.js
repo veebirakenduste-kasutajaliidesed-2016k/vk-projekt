@@ -31,7 +31,7 @@
         this.upKeep = 0;
         this.loggedIn = 0;
         this.pw = "";
-        //console.log(this);
+        ////console.log(this);
         this.init();
     };
 
@@ -40,21 +40,23 @@
     ClickerGame.prototype = {
 
         init: function() {
-            console.log('###NEW GAME###');
+            //console.log('###NEW GAME###');
             if (JSON.parse(localStorage.getItem("cash"))) {
                 this.load();
-                console.log("###SAVE LOADED###");
+                //console.log("###SAVE LOADED###");
+                this.notify("Game loaded!")
             } else {
-                console.log("###NO SAVE FOUND###");
+                //console.log("###NO SAVE FOUND###");
+                this.notify("No save found!")
             }
             this.updateStats();
             this.bindEvents();
-            //console.log(this.codeUpgradeAmount.length);
+            ////console.log(this.codeUpgradeAmount.length);
             for (var s = 0; s < this.codeUpgradeAmount.length; s++) {
-                //console.log("outerloop activated for canvas "+s);
+                ////console.log("outerloop activated for canvas "+s);
                 if (this.codeUpgradeAmount[s] > 0) {
                     for (var l = 0; l < this.codeUpgradeAmount[s]; l++) {
-                        //console.log("innerloop "+l+" times");
+                        ////console.log("innerloop "+l+" times");
                         this.drawCharacters(s);
                     }
                 }
@@ -69,7 +71,7 @@
             setInterval(function() {
                 game.addLinesOfCode(game.cps);
                 game.updateStats();
-                //console.log(game.linesOfCode);
+                ////console.log(game.linesOfCode);
                 game.save();
             }, 1000);
             setInterval(function(){
@@ -85,12 +87,12 @@
             });
             $('.upgrade--code').click(function() {
                 this.Index = $(".upgrade--code").index(this);
-                //console.log("upgrade" + this.Index);
+                ////console.log("upgrade" + this.Index);
                 game.upgradeCodeSkills(this.Index);
             });
             $('.upgrade--money').click(function() {
                 this.Index = $(".upgrade--money").index(this);
-                //console.log("upgrade" + this.Index);
+                ////console.log("upgrade" + this.Index);
                 game.upgradeMoneySkills(this.Index);
             });
             $('.btn--delete').click(function() {
@@ -122,7 +124,7 @@
             $('.btn--login').click(function(){
             	game.userName = $('.username').val();
             	game.pw = $('.password').val();
-            	//console.log(game.userName);
+            	////console.log(game.userName);
             	game.loadFromServer();
             });
         },
@@ -175,7 +177,8 @@
             this.deleteFromServer();
             this.userName = "local";
             this.loggedIn = 0;
-            console.log("Save Deleted");
+            //console.log("Save Deleted");
+            this.notify("Save deleted!")
         },
         load: function() {
             this.cash = JSON.parse(localStorage.getItem("cash"));
@@ -198,7 +201,7 @@
             var cost = Math.floor(this.codeUpgradeBaseCost[index] * Math.pow(1.15, this.codeUpgradeAmount[index]));
             if (this.cash - cost >= 0) {
                 this.cash -= cost;
-                //console.log(this.codeUpgradeAmount[index]);
+                ////console.log(this.codeUpgradeAmount[index]);
                 this.codeUpgradeAmount[index] += 1;
                 this.cps += this.codeUpgradeCPS[index];
                 this.updateStats();
@@ -210,7 +213,7 @@
                 this.addUpKeep(index);
                 this.checkCodeQuality(index);
             } else {
-                console.log("Need more money " + cost);
+                //console.log("Need more money " + cost);
             }
         },
         upgradeMoneySkills: function(index) {
@@ -218,7 +221,7 @@
             var cost = Math.floor(this.marketingUpgradeBaseCost[index] * Math.pow(1.3, this.marketingUpgradeAmount[index]));
             if (this.cash - cost >= 0) {
                 this.cash -= cost;
-                //console.log(this.codeUpgradeAmount[index]);
+                ////console.log(this.codeUpgradeAmount[index]);
                 this.marketingUpgradeAmount[index] += 1;
                 this.updateStats();
                 $('.upgrade--money .upgrade__amount').eq(index).html(this.marketingUpgradeAmount[index]);
@@ -227,7 +230,7 @@
                 this.sellPower += this.marketingUpgradePower[index];
                 this.checkAvailable();
             } else {
-                console.log("Need more money " + cost);
+                //console.log("Need more money " + cost);
             }
         },
         drawCharacters: function(index) {
@@ -235,10 +238,14 @@
             var ctx = canvas.getContext('2d');
             var i1 = new Image();
             i1.onload = function() {
-                ctx.drawImage(i1, Math.floor(Math.random() * (795 - 5) + 5), Math.floor(Math.random() * (128 - 64) + 64));
+            	if(index = 3){
+            		ctx.drawImage(i1, Math.floor(Math.random() * (995 - 5) + 5), Math.floor(Math.random() * (80 - 65) + 65));
+            	}else{
+            		ctx.drawImage(i1, Math.floor(Math.random() * (995 - 5) + 5), Math.floor(Math.random() * (128 - 64) + 64));
+            	}
             };
             i1.src = '' + index + '.png';
-            //console.log("Drew a character on canvas " + index);
+            ////console.log("Drew a character on canvas " + index);
         },
         checkAvailable: function(){
             for(var i = 0;i<this.codeUpgradeAmount.length;i++){
@@ -250,7 +257,7 @@
                 }
             }
             for(var i = 0;i<this.marketingUpgradeAmount.length;i++){
-                //console.log(this.marketingUpgradeAmount[i]);
+                ////console.log(this.marketingUpgradeAmount[i]);
                 if(this.marketingUpgradeAmount[i]>0){
                     var game = this;
                     $('.upgrade--money').eq(i).removeClass('notAvailable');
@@ -295,14 +302,15 @@
         },
         loadFromServer: function(){
             var game = this;
-            console.log("accounts/"+game.userName+".json");
+            //console.log("accounts/"+game.userName+".json");
             $.getJSON("accounts/"+game.userName+".json").done(function(result){
-            	console.log("got the data");
-            	console.log(game.userName);
+            	//console.log("got the data");
+            	//console.log(game.userName);
             	if(game.pw == result[0].pw){
             		var d = result[0];
             		game.loggedIn = 1;
-            		console.log("###LOGGED IN###");
+            		//console.log("###LOGGED IN###");
+            		game.notify("Logged in!")
             		game.cash = JSON.parse(d.cash);
             		game.cps = JSON.parse(d.cps);
             		game.codeUpgradeAmount = JSON.parse(d.codeUpgradeAmount);
@@ -314,15 +322,11 @@
             		game.upKeep = JSON.parse(d.upKeep);
             		$('.overlay').fadeOut("fast");
             	}else{
-            		$('.notifications').slideDown();
-		            $('.notifications').html("The password doesn't match! Try again.");
-		            setTimeout(function(){
-		            	$('.notifications').slideUp();
-		            },2000);
+            		game.notify("The password doesn't match! Try again.")
             	}
+            	game.checkAvailable();
+            	$('.btn--overlay').hide();
             }).fail(function(){
-            	console.log("didnt get the data");
-            	console.log(game.userName);
 	            $.post("create.php", {
 	            	user: game.userName,
 	            	pw: game.pw,
@@ -336,11 +340,7 @@
 	            	totalLinesOfCodeClicked:game.totalLinesOfCodeClicked,
 	            	upKeep:game.upKeep
 	            });
-	            $('.notifications').slideDown();
-	            $('.notifications').html("Account created! Log in again!");
-	            setTimeout(function(){
-	            	$('.notifications').slideUp();
-	            },2000);
+				game.notify("Account created! Log in again!")
             });
         },
         deleteFromServer: function(){
@@ -348,6 +348,13 @@
             	user: this.userName,
             });
         },
+        notify:function(notification){
+	        $('.notifications').slideDown();
+	        $('.notifications').html(notification);
+	        setTimeout(function(){
+	        	$('.notifications').slideUp();
+	        },2000);
+        }
     }
     window.onload = function() {
         var app = new ClickerGame();

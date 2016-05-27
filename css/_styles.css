@@ -1,5 +1,6 @@
 html, body{
 	height:100%;
+	font-family:monospace;
 }
 body{
 	/*background-image:url("../vktaust.svg");
@@ -38,9 +39,8 @@ body{
 	/**background-color:grey; **/
 }
 .btn{
+	background-image:url("../button-tile.png");
 	color: white;
-	height: 50px;
-	line-height: 50px;
 	font-size: 15px;
 	text-align: center;
 	border: 1px solid #ddd;
@@ -68,9 +68,15 @@ body{
 }
 .btn--write{
 	background-image:url("../work-button-tile.png");
+	height: 50px;
+	line-height: 50px;
+		font-size:25px;
 }
 .btn--sell{
 	background-image:url("../sell-button-tile.png");
+	height: 50px;
+	line-height: 50px;
+	font-size:25px;
 }
 .upgrade{
 	display:none;
@@ -139,6 +145,7 @@ body{
 .header{
 	background-image:url("../button-tile.png");
 	color:#fff;
+	height:52px;
 }
 .codeUpgradeTab{
 	display:none;
@@ -183,6 +190,11 @@ body{
 }
 .overlay__content .btn{
 	position:relative;
+}
+.btn--overlay{
+	padding-left:2px;
+	padding-right:2px;
+	display:inline;
 }
 .overlay__content .overlay__inner{
 	padding:10px 20px 10px 20px;
