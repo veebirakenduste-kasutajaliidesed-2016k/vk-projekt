@@ -28,8 +28,8 @@ body{
 	overflow-y:scroll;
 	min-width:205px;
 }
-.upgrades::-webkit-scrollbar { 
-    display: none; 
+.upgrades::-webkit-scrollbar {
+    display: none;
 }
 .stats, .upgrades{
 	width:25%;
@@ -114,8 +114,8 @@ body{
 	overflow-y:scroll;
 	width:50%;
 }
-.gameArea::-webkit-scrollbar { 
-    display: none; 
+.gameArea::-webkit-scrollbar {
+    display: none;
 }
 .upgrade.notAvailable img{
 	-webkit-filter: brightness(0%); /* Chrome, Safari, Opera */
@@ -127,6 +127,10 @@ body{
 }
 .freelance.characterCanvas{
 	background-image:url("../taust-2.png");
+	background-position:center center;
+}
+.smallFirm.characterCanvas{
+	background-image:url("../taust-3.png");
 	background-position:center center;
 }
 .characterCanvas{
