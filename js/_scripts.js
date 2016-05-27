@@ -30,6 +30,7 @@
         this.sellPower = 1;
         this.upKeep = 0;
         this.loggedIn = 0;
+        this.pw = "";
         //console.log(this);
         this.init();
     };
@@ -110,15 +111,17 @@
                 $('.codeUpgradeTab').removeClass('is-visible');
             });
             $('.btn--overlay').click(function(){
-            	$('.overlay').show("fast");
+            	$('.overlay').fadeIn("fast");
             });
             $('.overlay').click(function(){
             	if(event.target.matches('.overlay')){
-            		$('.overlay').hide("fast");
+            		$('.overlay').fadeOut("fast");
             	}
             });
             $('.btn--login').click(function(){
             	game.userName = $('.username').val();
+            	game.pw = $('.password').val();
+            	console.log(game.userName);
             	game.loadFromServer();
             });
         },
@@ -145,7 +148,7 @@
             localStorage.setItem("totalLinesOfCodeClicked", JSON.stringify(this.totalLinesOfCodeClicked));
             localStorage.setItem("codeQuality", JSON.stringify(this.codeQuality));
             localStorage.setItem("upKeep", JSON.stringify(this.upKeep));
-            if(this.userName!="local"){
+            if(this.loggedIn==1){
             	this.saveToServer();
             }
         },
@@ -167,6 +170,9 @@
             this.codeQuality = 0.1;
             this.writePower = 1;
             this.sellPower = 1;
+            this.deleteFromServer();
+            this.userName = "local";
+            this.loggedIn = 0;
             console.log("Save Deleted");
         },
         load: function() {
@@ -285,11 +291,34 @@
             var game = this;
             $.getJSON("accounts/"+game.userName+".json")
             .done(function(result){
-            	this.loggedIn = 1;
-            	console.log(result[0])})
-            .fail(function(){
-            	console.log("doesn't exist")});
-        }
+            	if(game.pw == result[0].pw){
+            		game.loggedIn = 1;
+            		console.log("###LOGGED IN###");
+            		$('.overlay').fadeOut("fast");
+            	}else{
+            		$('.notifications').slideDown();
+		            $('.notifications').html("The password doesn't match! Try again.");
+		            setTimeout(function(){
+		            	$('.notifications').slideUp();
+		            },2000);
+            	}
+            }).fail(function(){
+	            $.post("create.php", {
+	            	user: game.userName,
+	            	pw: game.pw
+	            });
+	            $('.notifications').slideDown();
+	            $('.notifications').html("Account created! Log in again!");
+	            setTimeout(function(){
+	            	$('.notifications').slideUp();
+	            },2000);
+            });
+        },
+        deleteFromServer: function(){
+        	$.post("delete.php", {
+            	user: this.userName,
+            });
+        },
     }
     window.onload = function() {
         var app = new ClickerGame();
