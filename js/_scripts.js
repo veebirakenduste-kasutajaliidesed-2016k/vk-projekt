@@ -69,6 +69,7 @@
             setInterval(function() {
                 game.addLinesOfCode(game.cps);
                 game.updateStats();
+                //console.log(game.linesOfCode);
                 game.save();
             }, 1000);
             setInterval(function(){
@@ -121,7 +122,7 @@
             $('.btn--login').click(function(){
             	game.userName = $('.username').val();
             	game.pw = $('.password').val();
-            	console.log(game.userName);
+            	//console.log(game.userName);
             	game.loadFromServer();
             });
         },
@@ -145,6 +146,7 @@
             localStorage.setItem("codeUpgradeAmount", JSON.stringify(this.codeUpgradeAmount));
             localStorage.setItem("codeUpgradeCPS", JSON.stringify(this.codeUpgradeCPS));
             localStorage.setItem("linesOfCode", JSON.stringify(this.linesOfCode));
+            localStorage.setItem("totalLinesOfCode", JSON.stringify(this.totalLinesOfCode));
             localStorage.setItem("totalLinesOfCodeClicked", JSON.stringify(this.totalLinesOfCodeClicked));
             localStorage.setItem("codeQuality", JSON.stringify(this.codeQuality));
             localStorage.setItem("upKeep", JSON.stringify(this.upKeep));
@@ -189,6 +191,7 @@
             this.totalLinesOfCodeClicked = JSON.parse(localStorage.getItem("totalLinesOfCodeClicked"));
             this.codeQuality = JSON.parse(localStorage.getItem("codeQuality"));
             this.upKeep = JSON.parse(localStorage.getItem("upKeep"));
+            this.totalLinesOfCode = JSON.parse(localStorage.getItem("totalLinesOfCode"));
         },
         upgradeCodeSkills: function(index) {
             //var cost = Math.floor(Math.pow(10,index+1) * Math.pow(1.1,this.upgrade[index]));
@@ -275,25 +278,40 @@
             }
         },
         saveToServer: function(){
+        	var game = this;
             $.post("save.php", {
-            	user: this.userName,
-            	cps:this.cps,
-            	cash:this.cash,
-            	codeQuality:this.codeQuality,
-            	codeUpgradeAmount:this.codeUpgradeAmount,
-            	codeUpgradeCPS:this.codeUpgradeCPS,
-            	linesOfCode:this.linesOfCode,
-            	totalLinesOfCodeClicked:this.totalLinesOfCodeClicked,
-            	upKeep:this.upKeep
+            	user: JSON.stringify(game.userName),
+            	cps:JSON.stringify(game.cps),
+            	cash:JSON.stringify(game.cash),
+            	codeQuality:JSON.stringify(game.codeQuality),
+            	codeUpgradeAmount:JSON.stringify(game.codeUpgradeAmount),
+            	codeUpgradeCPS:JSON.stringify(game.codeUpgradeCPS),
+            	linesOfCode:JSON.stringify(game.linesOfCode),
+            	totalLinesOfCode:JSON.stringify(game.totalLinesOfCode),
+            	totalLinesOfCodeClicked:JSON.stringify(game.totalLinesOfCodeClicked),
+            	upKeep:JSON.stringify(game.upKeep),
+            	pw:JSON.stringify(game.pw)
             });
         },
         loadFromServer: function(){
             var game = this;
-            $.getJSON("accounts/"+game.userName+".json")
-            .done(function(result){
+            console.log("accounts/"+game.userName+".json");
+            $.getJSON("accounts/"+game.userName+".json").done(function(result){
+            	console.log("got the data");
+            	console.log(game.userName);
             	if(game.pw == result[0].pw){
+            		var d = result[0];
             		game.loggedIn = 1;
             		console.log("###LOGGED IN###");
+            		game.cash = JSON.parse(d.cash);
+            		game.cps = JSON.parse(d.cps);
+            		game.codeUpgradeAmount = JSON.parse(d.codeUpgradeAmount);
+            		game.codeQuality = JSON.parse(d.codeQuality);
+            		game.codeUpgradeCPS = JSON.parse(d.codeUpgradeCPS);
+            		game.linesOfCode = JSON.parse(d.linesOfCode);
+            		game.totalLinesOfCode = JSON.parse(d.totalLinesOfCode);
+            		game.totalLinesOfCodeClicked = JSON.parse(d.totalLinesOfCodeClicked);
+            		game.upKeep = JSON.parse(d.upKeep);
             		$('.overlay').fadeOut("fast");
             	}else{
             		$('.notifications').slideDown();
@@ -303,9 +321,20 @@
 		            },2000);
             	}
             }).fail(function(){
+            	console.log("didnt get the data");
+            	console.log(game.userName);
 	            $.post("create.php", {
 	            	user: game.userName,
-	            	pw: game.pw
+	            	pw: game.pw,
+	            	cps:game.cps,
+	            	cash:game.cash,
+	            	codeQuality:game.codeQuality,
+	            	codeUpgradeAmount:JSON.stringify(game.codeUpgradeAmount),
+	            	codeUpgradeCPS:JSON.stringify(game.codeUpgradeCPS),
+	            	linesOfCode:game.linesOfCode,
+	            	totalLinesOfCode:game.totalLinesOfCode,
+	            	totalLinesOfCodeClicked:game.totalLinesOfCodeClicked,
+	            	upKeep:game.upKeep
 	            });
 	            $('.notifications').slideDown();
 	            $('.notifications').html("Account created! Log in again!");
