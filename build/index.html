@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+
+<head>
+	<title>Soundcloud thing</title>
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+	<link rel="icon" href="favicon.ico" type="image/x-icon">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/meyer-reset/2.0/reset.min.css">
+	<link rel="stylesheet" href="css/main.css">
+</head>
+
+<body oncontextmenu="return false;">
+	<div class="details">
+		<div>
+			<input id="search" type="search" id="search" placeholder="Search playlists" />
+			<span class="icon"><i class="fa fa-search"></i></span>
+			<br>
+			<span id="playing" style="padding-top: 15px; display: inline-block"></span>
+		</div>
+		<div id="playlists">
+		</div>
+		<div id="info" class="invisible">
+			<div id="artwork"></div>
+			<div>
+				<span id="title"></span>&nbsp&nbsp-&nbsp&nbsp<span id="user"></span>
+				<br>
+				<br>
+				<span id="genre"></span>&nbsp&nbsp
+				<button id="buy" disabled>Buy</button>
+				<button id="download" disabled>Download</button>
+				<br>
+				<br>
+				<audio controls id="player"></audio>
+			</div>
+			<div>
+				Playbacks: <span id="playback"></span>
+				<br> Favourites: <span id="favourite"></span>
+				<br> Song license: <span id="license"></span>
+				<br>
+			</div>
+		</div>
+		<img src="img/soundcloud.png" alt="powered by soundcloud" style="float:right">
+	</div>
+	<!-- onclick wont work here, need to add event listener in actual js -->
+	<button id="nav" class="hide">Hide</button>
+	<script   src="https://code.jquery.com/jquery-2.2.4.min.js"   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="   crossorigin="anonymous"></script>
+	<script src="https://connect.soundcloud.com/sdk/sdk-3.0.0.js"></script>
+	<script src="./config.js"></script>
+	<script src="./main.js"></script>
+</body>
+
+</html>
