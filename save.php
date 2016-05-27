@@ -9,8 +9,8 @@ $linesOfCode = $_REQUEST['linesOfCode'];
 $totalLinesOfCodeClicked = $_REQUEST['totalLinesOfCodeClicked'];
 $upKeep = $_REQUEST['upKeep'];
 $file = fopen('accounts/'.$user.'.json', "w+") or die("Unable to open file!");
-if(file_exists($handle)){
-	fwrite($handle, '[{"user":"'.$user.'","cps":"'.$cps.'","cash":"'.$cash.'","codeQuality":"'.$codeQuality.'","codeUpgradeAmount":"'.$codeUpgradeAmount.'","codeUpgradeCPS":"'.$codeUpgradeCPS.'","linesOfCode":"'.$linesOfCode.'","totalLinesOfCodeClicked":"'.$totalLinesOfCodeClicked.'","upKeep":"'.$upKeep.'"}]');
+if(file_exists($file)){
+	fwrite($file, '[{"user":"'.$user.'","cps":"'.$cps.'","cash":"'.$cash.'","codeQuality":"'.$codeQuality.'","codeUpgradeAmount":"'.$codeUpgradeAmount.'","codeUpgradeCPS":"'.$codeUpgradeCPS.'","linesOfCode":"'.$linesOfCode.'","totalLinesOfCodeClicked":"'.$totalLinesOfCodeClicked.'","upKeep":"'.$upKeep.'"}]');
 	fclose($file);
 	echo file_get_contents("accounts/".$user.".json");
 }

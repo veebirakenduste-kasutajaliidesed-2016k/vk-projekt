@@ -291,9 +291,9 @@
             var game = this;
             $.getJSON("accounts/"+game.userName+".json")
             .done(function(result){
-            	game.loggedIn = 1;
-            	console.log("###LOGGED IN###");
             	if(game.pw == result[0].pw){
+            		game.loggedIn = 1;
+            		console.log("###LOGGED IN###");
             		console.log(result[0]);
             	}
             }).fail(function(){
