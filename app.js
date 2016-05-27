@@ -149,15 +149,35 @@
           console.log("readystate");
 
           var result =JSON.parse(xhttp.responseText);
-          this.all = result;
+          averageFuel.instance.alle = result;
           console.log(result);
           console.log("parsetud");
-          averageFuel.instance.alle.forEach(function(element){
+
+          // averageFuel.instance.alle.forEach(function(element){
+          //   var new_element = new all(element.fuelQuantity,element.fuelCost, element.trip);
+          //   var li = document.createElement('li');
+          //   console.log("TEST");
+          //   var node = document.createTextNode(new_element.fuelQuantity);
+          //   var li2 = document.createElement('li');
+          //   console.log("mde");
+          //   var node2 = document.createTextNode(new_element.fuelCost);
+          //   var li3 = document.createElement('li');
+          //   var node3 = document.createTextNode(new_element.trip);
+          //   var result5 = document.getElementById('result5');
+          //   li.appendChild(node);
+          //   li2.appendChild(node2);
+          //   li3.appendChild(node3);
+          //   result5.appendChild(li);
+          //   result5.appendChild(li2);
+          //   result5.appendChild(li3);
+          // });
+          for(var element in averageFuel.instance.alle){
             var new_element = new all(element.fuelQuantity,element.fuelCost, element.trip);
             var li = document.createElement('li');
+            console.log(averageFuel.instance.alle[element]);
             var node = document.createTextNode(new_element.fuelQuantity);
             var li2 = document.createElement('li');
-            console.log("mde");
+
             var node2 = document.createTextNode(new_element.fuelCost);
             var li3 = document.createElement('li');
             var node3 = document.createTextNode(new_element.trip);
@@ -168,7 +188,8 @@
             result5.appendChild(li);
             result5.appendChild(li2);
             result5.appendChild(li3);
-          });
+
+          }
         }
       };
       xhttp.open("GET", "saveData.php", true);
