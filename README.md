@@ -1,39 +1,42 @@
-# Projekt
+Projekti nimi: Sahver
 
-## Tähtaeg 
+Arendaja: Patrick Mägi
 
-Rühma viimane tund esitletakse
+Probleem: Hetkel puudub lihtne võimalus oma sahvri üle arvet pidada. Sahvrirakenduses saab arvet pidada oma hoidiste üle.
+Rakenduses saab hoidiseid lisada, vaadata hetkeseisu ja neid kustutada.
 
-## Liikmete arv
-Võib teha üksi või kahekesi
+Funktsionaalsused (tähtsuse järgi kahanevas järjekorras, esimene kõige tähtsam):
+-Tutvustav/esileht
+-Kasutaja loomine
+-Sisselogimine
+-Parooli taastamine
+-Väljalogimine
+-Sahvri seisu kuvamine
+-Hoidise lisamine
+-Hoidise kustutamine
+-Hoidiste filtreerimine koostise järgi
+-Hoidiste filtreerimine valmistamise kuupäeva järgi
+-Hoidiste filtreerimine asukoha järgi
+-Rakenduse info kuvamine
 
-**Juhul kui tehakse kahekesi, peab olema näha githubis, kes ja mida on kirjutanud. Kui ei ole näha, kes midagi kirjutanud on, tööd ei arvesta! Kui ei tea kuidas seda teha, küsi!**
+Andmete liikumine:
 
-## Tööjuhend
-1. Üks fork'ib endale käesoleva repositooriumi ning annab vajadusele kirjutamisõiguse/ligipääsu
-1. Tee kohe Pull request
-1. Muuda repositooriumi `README.md faili` vastavalt nõutele
-1. Tee valmis korralik veebirakendus
+Hoidiste info kuvamine             -user.html
+Loodud hoidiste kuvamine
+Hoidiste filtreerimine
+Hoidiste lisamine
+Parooli muutmine
 
-### Nõuded
+Sisselogimine                     -index.html
 
-1. **README.md sisaldab:**
-    * suurelt projekti nime;
-    * kes teeb;
-    * eesmärki (3-4 lauset, mis probleemi rakendus lahendab);
-    * funktsionaalsuse loetelu prioriteedi järjekorras, nt
-        * v0.1 Saab teha kasutaja ja sisselogida
-        * v0.2 Saab lisada ...
-        * ...
-    * andmete liikumise skeem loetava pildina (mis lehed ja mis andmeid mis lehel käideldakse);
+Kasutaja loomine                  -createuser.html
 
-2. **Veebirakenduse nõuded:**
-    * rakendus töötab nii palju kui saab ka võrguta olekus, st kasutab `appcache`i;
-    * andmeid talletatakse lisaks kohalikule (localStorage) ka serveripool (soovitatavalt andmebaas või fail) – AJAX;
-    * Kasutatav ka mobiilselt seadmelt;
-    * muutujad/tabelid on inglise keeles;
-    * rakendus on piisava funktsionaalsusega ja turvaline – eelnev kokkulepe õppejõuga, mis saab valmis;
-    * kood on jaotatud vajadusel eri failidesse ja kood on kokkupakitud kujul;
+Parooli taastamine                -resetpassword.html
 
-3. **Funktsionaalsus**
-    * juhul kui algoritmiline keerukus on piisav siis kõiki nõudeid ei ole vaja täita – ainult eelneval kokkuleppel õppjõuga!
+Andmebaasi tabelid:
+
+Session - Hoiab endas kasutajate sisselogimisel tekkinud sessioone, mis kustutatakse kui kasutaja rakendusest välja logib.
+
+User - Hoiab endas kõikide kasutajate kohta infot.
+
+Hoidised - Hoiab endas kõikide kasutajate poolt loodud kõikide hoidiste infot.

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Sahver</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type=text/css href="css/bootstrap.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script type="text/javascript" src="http://www.parsecdn.com/js/parse-latest.js"></script>
+    <script src="functions.js"></script>
+  </head>
+<body>
+    </br>
+    <div class="header">
+      <div class="container">
+        <div class="col-xs-1">
+          <img class="img" src="images/Sahver.jpg" width="200" height="80">
+        </div>
+        <div class="col-xs-8">
+        </div>
+        <div class="col-xs-1">
+          <div class="btn-group">
+            <button type="button" class="btn btn-default">
+              <a href="index.html" id="logout"><div class="glyphicon glyphicon-log-out"></div></a>
+            </button>
+        </div>
+      </div>
+      <div class="col-xs-3">
+      </div>
+    </br>
+    </div>
+    <div class="container">
+      <ul class="nav nav-tabs" style="margin-top:20px;">
+        <li class="active"><a data-toggle="tab" href="#home">Avaleht</a></li>
+        <li><a data-toggle="tab" href="#menu1">Loend</a></li>
+        <li><a data-toggle="tab" href="#menu2">Haldus</a></li>
+        <li><a data-toggle="tab" href="#menu3">Seaded</a></li>
+      </ul>
+      <div class="tab-content" style="margin-top:75px;">
+        <div id="home" class="tab-pane fade in active">
+          <h4 class="avaleht"></h4>
+          <p>Sahvri sisu on võimalik kuvada Loendi vahelehel.</p>
+          <p>Hoidiseid saate lisada Halduse vahelehel.</p>
+          <p>Oma kasutaja seadeid saate muuta Seadete vahelehel.</p>
+        </div>
+        <div id="menu1" class="tab-pane fade loend">
+          <div class="row" style="margin-top:20px;">
+            <div class="col-xs-7" style="margin-top:15px;">
+              <h3>Loend</h3>
+            </div>
+            <div class="col-xs-4">
+              <div class="btn-group" style="margin-bottom:27px;">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <div class="glyphicon glyphicon-filter"></div>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-right">
+                  <li id="koostis"><a href="#">Koostis</a></li>
+                  <li id="asukoht"><a href="#">Asukoht</a></li>
+                  <li id="kuupaev"><a href="#">Valmistamise kuupäev</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-xs-1">
+            </div>
+          </div>
+          <div class="col-xs-12" id="item_list">
+
+          </div>
+        </div>
+        <div id="menu2" class="tab-pane fade">
+          <div class="row">
+            <div class="col-xs-8">
+              <h3>Haldus</h3>
+            </div>
+            <div class="col-xs-4">
+            </div>
+          </div>
+          <div class="row add" id="add">
+            <div class="col-xs-10">
+              <form role="form">
+                <div class="form-group">
+                  <label>Nimi:</label>
+                  <input type="text" class="form-control name" id="name" placeholder="Sisestage hoidise nimetus">
+                </div>
+              </form>
+            </div>
+            <div class="col-xs-2">
+            </div>
+          </div>
+          <div class="row add" id="add">
+            <div class="col-xs-10">
+              <form role="form">
+                <div class="form-group">
+                  <label>Koostis:</label>
+                  <input type="text" class="form-control content" id="content" placeholder="Sisestage hoidise koostis">
+                </div>
+              </form>
+            </div>
+            <div class="col-xs-2">
+            </div>
+          </div>
+          <div class="row add" id="add">
+            <div class="col-xs-10">
+              <form role="form">
+                <div class="form-group">
+                  <label>Asukoht:</label>
+                  <input type="text" class="form-control location" id="location" placeholder="Sisestage hoidise asukoht">
+                </div>
+              </form>
+            </div>
+            <div class="col-xs-2">
+            </div>
+          </div>
+          <div class="row add" id="add">
+            <div class="col-xs-10">
+              <form role="form">
+                <div class="form-group">
+                  <label>Valmistamise kuupäev:</label>
+                  <input type="date" class="form-control makeDate" id="makeDate" placeholder="Sisestage hoidise valmistamise kuupäev">
+                </div>
+              </form>
+            </div>
+            <div class="col-xs-2">
+            </div>
+          </div>
+          <div class="row add">
+            <div class="col-xs-10">
+              <button type="submit" id="lisaHoidis" class="btn btn-default" style="margin-top:15px;">Sisesta</button>
+            </div>
+            <div class="col-xs-2">
+            </div>
+          </div>
+        </div>
+        <div id="menu3" class="tab-pane fade">
+          <div class="row">
+            <div class="col-xs-10">
+              <h3>Seaded</h3>
+            </div>
+            <div class="col-xs-2">
+            </div>
+          </div>
+          <div class="row changePw" >
+            <div class="col-xs-10">
+              <form role="form">
+                <div class="form-group">
+                  <label for="password">Muuda parooli:</label>
+                  <input type="password" class="form-control" id="password" placeholder="Sisestage uus parool">
+                </div>
+              </form>
+            </div>
+            <div class="col-xs-2">
+            </div>
+          </div>
+          <div class="row changePw" >
+            <div class="col-xs-10">
+              <form role="form">
+                <div class="form-group">
+                  <input type="password" class="form-control" id="passwordAgain" placeholder="Sisestage uuesti uus parool">
+                </div>
+              </form>
+            </div>
+            <div class="col-xs-2">
+            </div>
+          </div>
+          <div class="row changePw">
+            <div class="col-xs-10">
+              <button type="submit" id ="changePw" class="btn btn-default" style="margin-top:15px;">Muuda</button>
+            </div>
+            <div class="col-xs-2">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-10">
+              <label for="share" style="margin-top:30px;">Jaga kasutajaga:</label>
+            </div>
+            <div class="col-xs-2">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-10">
+              <form role="form">
+                <div class="form-group">
+                  <input type="name" class="form-control" id="name" placeholder="Sisestage kasutajanimi" style="margin-top:20px;">
+                </div>
+              </form>
+            </div>
+            <div class="col-xs-2">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-10">
+              <button type="submit" class="btn btn-default" style="margin-top:15px;">Jaga</button>
+            </div>
+            <div class="col-xs-2">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-10">
+              <label for="share" style="margin-top:30px;">Jagatud sahvrid:</label>
+            </div>
+            <div class="col-xs-2">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-10">
+              <p>Sahver 1 Patrick Mägi X</p>
+            </div>
+            <div class="col-xs-2">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </br>
+    <div class='footer'>
+        <div class='container-fluid bg-4 text-center'>
+          <div class="varv">
+              <p>Rakendus on prototüübi faasis </br> Versioon 0.16 </br> Arendaja: Patrick Mägi </p>
+          </div>
+        </div>
+      </div>
+    <script src="js/bootstrap.js"></script>
+  </body>
+</html>
