@@ -506,9 +506,9 @@
     		timer = setTimeout(callback, ms);
   	};
     })();
-    document.getElementById('search').addEventListener('onkeyup', function() {
+    $("#search").addEventListener('onkeyup', function() {
         delay(function(){
-      		var result = document.getElementById('search').value;
+      		var result = $("#search").value;
 	        if (result) {
 	            generate(result);
 	        }
