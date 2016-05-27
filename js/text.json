@@ -1,0 +1,28 @@
+[
+	{
+		"achievements":{
+			"ach0":{
+				"title": "Baby coder",
+				"desc" : "Your first line of code!"
+
+			},
+			"ach1":{
+				"title": "Getting better!",
+				"desc" : "A hundred lines of code!"
+			},
+			"ach2":{
+				"title": "Code Monkey",
+				"desc" : "THOUSAND LINES OF CODE!"
+			},
+			"ach3":{
+				"title": "A sick, sick man",
+			    "desc"  : "Ten thousand lines of code, seriously?"
+			},
+			"ach4":{
+				"desc" : "You have a problem",
+			    "title"  : "Why?"
+			}
+		}
+	}
+		
+]

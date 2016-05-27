@@ -1,0 +1,215 @@
+html, body{
+	height:100%;
+	font-family:monospace;
+}
+body{
+	/*background-image:url("../vktaust.svg");
+	background-repeat:no-repeat;
+	background-size:cover;
+	background-position:center;*/
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none;   /* Chrome/Safari/Opera */
+  -khtml-user-select: none;    /* Konqueror */
+  -moz-user-select: none;      /* Firefox */
+  -ms-user-select: none;       /* Internet Explorer/Edge */
+  user-select: none;
+}
+.game{
+	width:100%;
+	height:100%;
+}
+.characterCanvas{
+	background-color:#3b3b3b;
+	display:none;
+	margin:0 auto;
+}
+.upgrades{
+	margin:0;
+	height:80%;
+	overflow-y:scroll;
+	min-width:205px;
+}
+.upgrades::-webkit-scrollbar {
+    display: none;
+}
+.stats, .upgrades{
+	width:25%;
+	float:left;
+	margin: 0;
+	/**background-color:grey; **/
+}
+.btn{
+	background-image:url("../button-tile.png");
+	color: white;
+	font-size: 15px;
+	text-align: center;
+	border: 1px solid #ddd;
+	background-color: #3b3b3b;
+	cursor: pointer;
+}
+.btn--upgrade{
+	height: 90px;
+	background-image:url("../button-tile.png");
+	line-height: 20px;
+	border-right:5px solid #bbb;
+	border-bottom:5px solid #bbb;
+	border-top:5px solid #eee;
+	border-left:5px solid #eee;
+	margin-bottom: 0;
+}
+.btn--upgrade:active{
+	border-right:5px solid #eee;
+	border-bottom:5px solid #eee;
+	border-top:5px solid #bbb;
+	border-left:5px solid #bbb;
+}
+.btn--upgrade:hover, .btn--write:hover, .btn--sell:hover{
+	-webkit-filter:brightness(110%);
+}
+.btn--write{
+	background-image:url("../work-button-tile.png");
+	height: 50px;
+	line-height: 50px;
+		font-size:25px;
+}
+.btn--sell{
+	background-image:url("../sell-button-tile.png");
+	height: 50px;
+	line-height: 50px;
+	font-size:25px;
+}
+.upgrade{
+	display:none;
+}
+.upgrade img{
+	float:left;
+	margin-left:20px;
+	margin-top:10px;
+}
+.upgrade__amount, .upgrade__name, .upgrade__stats{
+	margin-bottom: 0;
+	display:inline-block;
+	width:66%;
+	float:right;
+	height:33%;
+}
+.upgrade--cost{
+	color:#F22613;
+}
+.upgrade--salary{
+	color:#F22613;
+}
+.btn--delete{
+	font-size: 10px;
+	height: 20px;
+	text-align: center;
+	width: 75px;
+	line-height: 2;
+	float: right;
+}
+.btn--testing{
+	font-size:10px;
+	height:20px;
+	text-align:center;
+	width:75px;
+	line-height:2;
+}
+.gameArea{
+	height:80%;
+	margin:0;
+	overflow-y:scroll;
+	width:50%;
+}
+.gameArea::-webkit-scrollbar {
+    display: none;
+}
+.upgrade.notAvailable img{
+	-webkit-filter: brightness(0%); /* Chrome, Safari, Opera */
+    filter: brightness(0%);
+}
+.cheapOutsource.characterCanvas{
+	background-image:url("../taust-1.png");
+	background-position:center center;
+}
+.freelance.characterCanvas{
+	background-image:url("../taust-2.png");
+	background-position:center center;
+}
+.smallFirm.characterCanvas{
+	background-image:url("../taust-3.png");
+	background-position:center center;
+}
+.characterCanvas{
+
+}
+.header{
+	background-image:url("../button-tile.png");
+	color:#fff;
+	height:52px;
+}
+.codeUpgradeTab{
+	display:none;
+}
+.moneyUpgradeTab{
+	display:none;
+}
+.codeUpgradeTab.is-visible{
+	display:block;
+}
+.moneyUpgradeTab.is-visible{
+	display:block;
+}
+.btn--codeUpgrades, .btn--moneyUpgrades{
+	background-image:url("../button-tile.png");
+	width:50%;
+	display:inline-block;
+	box-sizing: border-box;
+}
+.overlay{
+	display:none;
+	background-color:rgba(0,0,0,.5);
+	position:absolute;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+}
+.overlay__content{
+	background-color:#FFF;
+	width:300px;
+	height:300px;
+	position:relative;
+	top:50%;
+	left:50%;
+	transform:translate(-50%,-50%);
+}
+.overlay__content input{
+	width:100%;
+	font-size:26px;
+	text-align:center;
+}
+.overlay__content .btn{
+	position:relative;
+}
+.btn--overlay{
+	padding-left:2px;
+	padding-right:2px;
+	display:inline;
+}
+.overlay__content .overlay__inner{
+	padding:10px 20px 10px 20px;
+}
+.notifications{
+	position:absolute;
+	left:0;
+	top:0;
+	left:50%;
+	transform:translateX(-50%);
+	line-height:50px;
+	font-size:25px;
+	height:50px;
+	background-color:#FFF;
+	display:none;
+	text-align:center;
+	width:80%;
+}
