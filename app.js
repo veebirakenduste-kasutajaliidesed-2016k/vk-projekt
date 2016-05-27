@@ -14,7 +14,7 @@
     this.fuelText = document.getElementById('output');
 
     this.currentRoute = null;
-    this.alle = [];
+    this.alle = [{}];
     this.init();  //SIIA PANED ALGSE FUNKTSIOONI
 
     };
@@ -148,13 +148,16 @@
         if (xhttp.readyState == 4 && xhttp.status == 200) {
           console.log("readystate");
 
-          var result =JSON.parse(xhttp.responseText);
-          averageFuel.instance.alle = new Array(result);
+          var result =JSON.parse(JSON.parse(xhttp.responseText));
+          console.log(result);
+          averageFuel.instance.alle = result;
           console.log(result);
           console.log("parsetud");
 
           // averageFuel.instance.alle.forEach(function(element){
+          //   console.log(element);
           //   var new_element = new all(element.fuelQuantity,element.fuelCost, element.trip);
+          //   console.log(new_element);
           //   var li = document.createElement('li');
           //   console.log("TEST");
           //   var node = document.createTextNode(new_element.fuelQuantity);
@@ -171,7 +174,10 @@
           //   result5.appendChild(li2);
           //   result5.appendChild(li3);
           // });
-          for(var element in averageFuel.instance.alle){
+          for(var i in averageFuel.instance.alle){
+
+            var element =  averageFuel.instance.alle[i];
+            console.log(element);
             var new_element = new all(element.fuelQuantity,element.fuelCost, element.trip);
             var li = document.createElement('li');
             console.log(averageFuel.instance.alle[element]);
