@@ -111,11 +111,11 @@
                 $('.codeUpgradeTab').removeClass('is-visible');
             });
             $('.btn--overlay').click(function(){
-            	$('.overlay').show("fast");
+            	$('.overlay').fadeIn("fast");
             });
             $('.overlay').click(function(){
             	if(event.target.matches('.overlay')){
-            		$('.overlay').hide("fast");
+            		$('.overlay').fadeOut("fast");
             	}
             });
             $('.btn--login').click(function(){
@@ -294,13 +294,24 @@
             	if(game.pw == result[0].pw){
             		game.loggedIn = 1;
             		console.log("###LOGGED IN###");
-            		console.log(result[0]);
+            		$('.overlay').fadeOut("fast");
+            	}else{
+            		$('.notifications').slideDown();
+		            $('.notifications').html("The password doesn't match! Try again.");
+		            setTimeout(function(){
+		            	$('.notifications').slideUp();
+		            },2000);
             	}
             }).fail(function(){
 	            $.post("create.php", {
 	            	user: game.userName,
 	            	pw: game.pw
 	            });
+	            $('.notifications').slideDown();
+	            $('.notifications').html("Account created! Log in again!");
+	            setTimeout(function(){
+	            	$('.notifications').slideUp();
+	            },2000);
             });
         },
         deleteFromServer: function(){
