@@ -9,7 +9,7 @@
 */
 (function() {
     'use strict';
-    var audioElement = document.getElementById("player");
+    var audioElement = $("#player");
     audioElement.crossOrigin = "anonymous";
 
     // Assigned on init()
