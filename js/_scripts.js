@@ -40,10 +40,10 @@
     ClickerGame.prototype = {
 
         init: function() {
-            console.log('###GAME STARTED###');
+            console.log('###NEW GAME###');
             if (JSON.parse(localStorage.getItem("cash"))) {
                 this.load();
-                console.log("###GAME LOADED###");
+                console.log("###SAVE LOADED###");
             } else {
                 console.log("###NO SAVE FOUND###");
             }
@@ -165,7 +165,7 @@
             this.totalLinesOfCodeClicked = 0;
             this.cps = 0;
             this.codeUpgradeAmount = [0, 0, 0, 0, 0];
-            this.codeUpgradeBaseCost = [15, 100, 500, 3500, 14000];
+            this.codeUpgradeBaseCost = [20, 150, 750, 5000, 20000];
             this.codeUpgradeCPS = [0.1, 1, 5, 4, 13, 127];
             this.codeQuality = 0.1;
             this.writePower = 1;
@@ -207,7 +207,7 @@
                 this.addUpKeep(index);
                 this.checkCodeQuality(index);
             } else {
-                console.log("Need mo money " + cost);
+                console.log("Need more money " + cost);
             }
         },
         upgradeMoneySkills: function(index) {
@@ -224,7 +224,7 @@
                 this.sellPower += this.marketingUpgradePower[index];
                 this.checkAvailable();
             } else {
-                console.log("Need mo money " + cost);
+                console.log("Need more money " + cost);
             }
         },
         drawCharacters: function(index) {
