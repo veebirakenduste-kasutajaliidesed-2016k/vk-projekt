@@ -149,7 +149,7 @@
           console.log("readystate");
 
           var result =JSON.parse(xhttp.responseText);
-          averageFuel.instance.alle = result;
+          averageFuel.instance.alle = new Array(result);
           console.log(result);
           console.log("parsetud");
 
