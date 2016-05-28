@@ -1,0 +1,10 @@
+CACHE MANIFEST
+#Version 0.1.8
+CACHE:
+offline.html
+
+FALLBACK:
+/vk-projekt offline.html
+
+NETWORK:
+*

@@ -1,0 +1,55 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: gray;
+}
+#map {
+  height: 45%;
+  width: 75%;
+  margin-left:12.5%;
+  margin-top:1%;
+  position: static;
+  border-radius: 30px;
+  border:3px solid #404040;
+}
+#subMaps {
+	margin-left:5.5%;
+	margin-top: 1%;
+	position: absolute;
+	display:inline-block; 
+}
+#Score{
+	float:left;
+	position:fixed;
+	margin-left:5%;
+}
+
+div>img {
+    border-radius: 30px;
+	border:3px solid #404040;
+	background: #73AD21;
+}
+div>img:hover{
+	transition:all 1s ease;
+	opacity:90;
+	background: white;
+}
+#loadingScreen{
+	z-index: 1;
+	position:fixed; TOP:0px; LEFT:0px; WIDTH:100%; HEIGHT:100%;
+
+}
+#solidBackGround{
+	z-index: 2;
+	position:fixed; TOP:0px; LEFT:0px; WIDTH:100%; HEIGHT:100%;
+}
+#login{
+	z-index: 3;
+	position:fixed;
+	margin-left:42%;
+	margin-top:23%;
+}
+label {
+color: white;
+}
