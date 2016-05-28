@@ -1,174 +1,129 @@
-//TODO: Kogu programm viisakamale kujule viia (OOP)
-
 var found = 0;
 var correctImage;
 
-
-
-
-function randomInt(min,max){
-    return Math.floor(Math.random()*(max-min+1)+min);
-}
-function getRandom(min, max) {
-    return Math.random() * (max - min) + min;
-}
-function getLatLong(){
-    latitude =  getRandom(57.946565, 59.497743);
-    longitude = getRandom(23.675537, 27.388916);
-    latlng = latitude.toString() + "," + longitude.toString();
-}
 function initMap() {
   var firstImage = document.getElementById('firstImage');
   var secondImage = document.getElementById('secondImage');
   var thirdImage = document.getElementById('thirdImage');
   var scoreCounter = document.getElementById("Score");
-  var fillerImage = document.getElementById("solidBackGround");
+  LatLng = new getLatLong();
   var markerLat;
   var markerLong;
-  checkUser();
+  getData();
 
-
-  function checkUser(){
-    userName = document.cookie;
-    if (userName!=""){
-         document.getElementById("solidBackGround").style.display = "none";
-         document.getElementById('userInput').style.display = "none";
-         document.getElementById('inputLabel').style.display = "none";
-
-      
-    }
-    else{
-         document.getElementById("solidBackGround").style.display = "initial";
-         document.getElementById('userInput').style.display = "initial";
-         document.getElementById('inputLabel').style.display = "initial";
-      localStorage.clear();
-      window.addEventListener('keypress', function(event){
-       if(event.charCode == 13 && document.cookie == ""){
-         var User = document.getElementById('userInput').value;
-         document.cookie = User;
-         document.getElementById("solidBackGround").style.display = "none";
-         document.getElementById('userInput').style.display = "none";
-         document.getElementById('inputLabel').style.display = "none";
-
-         userName = document.cookie;
-
-       }
-
-     });
-    }
-    console.log("Current user: " + (document.cookie).toString());
-    getData(userName);
-  }
-  function getData(userName){
-        console.log("getData started");
+  function getData(){
+         function data(user, correct, wrong){
+            this.user = user;
+            this.correct = correct;
+            this.wrong = wrong;
+         }
+         localData = new data(localStorage.user, localStorage.correct, localStorage.wrong);
+         var cookieUser = document.cookie.split("=")[1];
+         if(cookieUser != localData.user){
+          alert("New user");
+          localStorage.clear();
+          localStorage.user = cookieUser;
+          localData.user = localStorage.user;
+         }
          var xhttp = new XMLHttpRequest();
          var result;
          xhttp.onreadystatechange = function() {
-
+            console.log("XHTTP: " +localData.user);
            if (xhttp.readyState == 4 && xhttp.status == 200) {
             console.log("xhttp.status ==200");
              result =JSON.parse(xhttp.responseText);
              var contains = false;
-             for(i = 0; i<result.length; i++){
-              if(result[i].user == userName){
-                contains = true;
-                console.log("Kasutaja listis");
-                var correctFromServer = result[i].correct;
-                var wrongFromServer = result[i].wrong;
-                var userFromServer = result[i].user;
-                console.log(wrongFromServer);
-                if(localStorage.correctGuesses > correctFromServer){
-                  console.log("localStorage suurem");
-                  var correct = localStorage.correctGuesses;
+             try{
+                
+               for(i = 0; i<result.length; i++){
+                if(result[i].user == localData.user){
+                  contains = true;
+                  console.log("Kasutaja listis");
+                  serverData = new data(result[i].user, result[i].correct, result[i].wrong);
+                  if(serverData.correct > localData.correct){
+                    localData.correct = serverData.correct;
+                  }
+                  else if(serverData.wrong > localData.wrong){
+                    console.log("Serverdata larger: " +serverData.wrong);
+                    localData.wrong = serverData.wrong;
+                  }
+                  console.log("Score: " + localData.wrong);
+                  Score.innerHTML= (localData.correct).toString() + ":" + (localData.wrong).toString();
+                  sendData(localData);
                 }
-                else{
-                  var correct = correctFromServer;
-                  localStorage.correctGuesses = correctFromServer;
-                } 
-                if(localStorage.falseGuesses > wrongFromServer){
-                  var wrong = localStorage.falseGuesses;
-                  console.log("localStorage suurem");
-                }
-                else{
-                  var wrong = wrongFromServer;
-                  localStorage.falseGuesses = wrongFromServer;
-                }
-                console.log("User: " + userName);
-                console.log("Correct: " + correct);
-                console.log("False: " + wrong);
-                Score.innerHTML= (correct).toString() + ":" + (wrong).toString();
-                sendData(userFromServer, correct, wrong);
+              }
+              if(contains===false){
+                console.log("Kasutaja " + localData.user + " pole veel nimekirjas");
+                localData.correct = 1;
+                localData.wrong = 1;
+                sendData(localData);
               }
             }
-            if(contains===false){
-              sendData(userName, 1, 1);
+            catch(err){
+              console.log("Error with list");
             }
+          }
+        };
+        xhttp.open("GET", "saveData.php", true);
+        xhttp.send();
+      
+    
 
-            }
-          };
-         xhttp.open("GET", "saveData.php", true);
-         xhttp.send();
-         
+  }
 
-}
-function sendData(user, correct, wrong){
+  function sendData(localData){
+  console.log("sendData: " + localData.user);
   var xhttp = new XMLHttpRequest();
        xhttp.onreadystatechange = function() {
          if (xhttp.readyState == 4 && xhttp.status == 200) {
 
          }
        };
-       console.log("saveData.php?user="+user+"&correct=" +correct+"&wrong=" +wrong);
-       xhttp.open("GET", "saveData.php?user="+user+"&correct=" +correct+"&wrong=" +wrong, true);
+       if(localData.user != "empty"){
+        console.log("saveData.php?user="+localData.user+"&correct=" +localData.correct+"&wrong=" +localData.wrong);
+        xhttp.open("GET", "saveData.php?user="+localData.user+"&correct=" +localData.correct+"&wrong=" +localData.wrong, true);
+        }
+        else{
+          console.log("saveData.php?user=empty");
+          xhttp.open("GET", "saveData.php?user=empty", true);
+        }
+       
        xhttp.send();
-}
-  function checkAnswer(imageNr){
+  }
+
+  function checkAnswer(imageNr){  
     if(imageNr == correctImage){
       window.alert("Correct");
-      if (localStorage.correctGuesses) {
-        localStorage.correctGuesses = Number(localStorage.correctGuesses) + 1;
+      if (localStorage.correct) {
+        localStorage.correct = Number(localStorage.correct) + 1;
       }
       else{
-        localStorage.correctGuesses = 1;
+        localStorage.correct = 1;
       }
     }
     else{
       window.alert("False");
-      if (localStorage.falseGuesses) {
-        localStorage.falseGuesses = Number(localStorage.falseGuesses) + 1;
+      if (localStorage.wrong) {
+        localStorage.wrong = Number(localStorage.wrong) + 1;
       }
       else{
-        localStorage.falseGuesses = 1;
+        localStorage.wrong = 1;
       }
     }
     location.reload();
   }
-  function checkAddress(google_latLng) {
-    var geocoder = new google.maps.Geocoder();
-    geocoder.geocode({'latLng': google_latLng}, function(results, status) {
-      if(status == google.maps.GeocoderStatus.OK) {
-        return 1;
-      }
-      else{
-        return 0;
-      }
-    });
-  }
+
   for(i=1;i<=3;i++){
-    getLatLong();
-    google_latLng = new google.maps.LatLng(latitude,longitude);
+     LatLng = new getLatLong();
     if(i==1){
-      if(checkAddress(google_latLng)==0){
-        console.log("Meres?");
-        }
-      markerLat = latitude;
-      markerLong = longitude;
+      markerLat = LatLng.latitude;
+      markerLong = LatLng.longitude;
     }
-    subMap(google_latLng, i)          
+    subMap(LatLng, i)          
   }
-  
-map = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: latitude, lng:longitude},
+
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: LatLng.latitude, lng:LatLng.longitude},
     zoom: 6,
     disableDefaultUI: true,
     mapTypeControl: false,
@@ -197,8 +152,15 @@ map = new google.maps.Map(document.getElementById('map'), {
     checkAnswer(thirdImage);
   };
 }
-
-function subMap(google_latLng, count){
+function getLatLong(){
+  function getRandom(min, max) {
+    return Math.random() * (max - min) + min;
+  }
+    this.latitude  = getRandom(57.946565, 59.497743);
+    this.longitude = getRandom(23.675537, 27.388916);
+    this.google = new google.maps.LatLng(this.latitude,this.longitude);
+}
+function subMap(LatLng, count){
   var loopCount = 0;
   var images = [firstImage, secondImage, thirdImage];
   function shuffleArray(array) {
@@ -216,14 +178,13 @@ function subMap(google_latLng, count){
   var radius = 10;
   var streetViewService = new google.maps.StreetViewService();
   var mapSize = Math.round(screen.width/3.5).toString() + "x" + Math.round(screen.width/4).toString();
-  streetViewService.getPanoramaByLocation(google_latLng, radius, handler);
+  streetViewService.getPanoramaByLocation(LatLng.google, radius, handler);
   function handler(data, status) {
     console.log(loopCount);
       if(loopCount == 50){
         loopCount = 0;
-        getLatLong();
-        google_latLng = new google.maps.LatLng(latitude,longitude);
-        subMap(google_latLng, count);
+        LatLng = new getLatLong();
+        subMap(LatLng, count);
       }
       else if (status == google.maps.StreetViewStatus.OK) {
           console.log("Image found");
@@ -249,13 +210,13 @@ function subMap(google_latLng, count){
             images[0].src=firstUrl;
             images[1].src=secondUrl;
             images[2].src=thirdUrl;
-            loadingScreen.parentNode.removeChild(loadingScreen);
+            loadingScreen.style.display = "none";
           }
         } 
         else{
           loopCount++;
           radius += 50;
-          streetViewService.getPanoramaByLocation(google_latLng, radius, handler);
+          streetViewService.getPanoramaByLocation(LatLng.google, radius, handler);
         }
       };
 }

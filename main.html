@@ -25,7 +25,21 @@
     <meta name="viewport" content="initial-scale=1.0">
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="mapStyle.css">
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script type="text/javascript" src="script.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script>
+    $(document).ready(function(){
+    $("subMaps").mouseenter(function(){
+        $("subMaps").fadeTo("fast", 0.5);
+    
+        $("subMaps").mouseleave(function(){
+            $("subMaps").fadeTo("fast", 1);
+        });
+    
+    });
+    });
+    </script>
   </head>
 
 
@@ -33,15 +47,11 @@
   <body>
     <a href="test.html">test</a>
     <img src = "loading.jpg" id="loadingScreen"/>
-    <img src = "Solid.jpg" id="solidBackGround"/>
-    <div id="login">
-    <label id="inputLabel" for="userInput">User:</label>
-    <input type="text" name="User" id="userInput">
-    </div>
     <h1 id="Score"> </h1> 
     <div id="map"></div>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCl5QWc_dxpap3_ITxjyq0s3MyB_V-xplI&callback=initMap"
     async defer></script>
+
     </div>
     <div id="subMaps">
     <img id="firstImage" />

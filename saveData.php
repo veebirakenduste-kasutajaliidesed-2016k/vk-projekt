@@ -2,7 +2,10 @@
   $file_user = "data.txt";
   $entries_from_file = file_get_contents($file_user);
   $entries = json_decode($entries_from_file);
-  if(isset($_GET["user"]) && isset($_GET["correct"])&& isset($_GET["wrong"])){
+  if($_GET["user"] == "empty"){
+    file_put_contents($file_user, "[]");
+  }
+  else if(isset($_GET["user"]) && isset($_GET["correct"])&& isset($_GET["wrong"])){
     if(!empty($_GET["user"]) && !empty($_GET["correct"])&& !empty($_GET["wrong"])){
         $object = new StdClass();
         $object->user = $_GET["user"];

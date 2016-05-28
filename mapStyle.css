@@ -28,7 +28,7 @@ html, body {
 div>img {
     border-radius: 30px;
 	border:3px solid #404040;
-	background: #73AD21;	
+	background: #73AD21;
 }
 div>img:hover{
 	transition:all 1s ease;
@@ -37,19 +37,18 @@ div>img:hover{
 }
 #loadingScreen{
 	z-index: 1;
-	position:fixed; TOP:0px; LEFT:0px; WIDTH:100%; HEIGHT:100%
+	position:fixed; TOP:0px; LEFT:0px; WIDTH:100%; HEIGHT:100%;
+
 }
 #solidBackGround{
 	z-index: 2;
 	position:fixed; TOP:0px; LEFT:0px; WIDTH:100%; HEIGHT:100%;
-	display: initial;
 }
 #login{
 	z-index: 3;
 	position:fixed;
 	margin-left:42%;
 	margin-top:23%;
-	display: initial;
 }
 label {
 color: white;
