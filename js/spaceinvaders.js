@@ -66,7 +66,7 @@ function Game() {
     this.pressedKeys = {};
     this.gameCanvas =  null;
     this.mobileX = 90;
-
+    this.mobileShoot = 0;
     //  All sounds.
     this.sounds = null;
 }
@@ -254,7 +254,7 @@ WelcomeState.prototype.draw = function(game, dt, ctx) {
         game.scores = result;
         console.log(game.scores);
         game.scores.sort(dynamicSort("-score"));
-        var halp = 0;
+        console.log(game.scores);
         var scoreUl = document.getElementById('scoreUl');
         for(var i = 0; i < 9; i++){
           var li = document.createElement('li');
@@ -362,11 +362,11 @@ PlayState.prototype.enter = function(game) {
     var levelMultiplier = this.level * this.config.levelDifficultyMultiplier;
     this.shipSpeed = this.config.shipSpeed;
     this.invaderInitialVelocity = this.config.invaderInitialVelocity + (levelMultiplier * this.config.invaderInitialVelocity);
+    //  Create the invaders.
     this.bombRate = this.config.bombRate + (levelMultiplier * this.config.bombRate);
     this.bombMinVelocity = this.config.bombMinVelocity + (levelMultiplier * this.config.bombMinVelocity);
     this.bombMaxVelocity = this.config.bombMaxVelocity + (levelMultiplier * this.config.bombMaxVelocity);
 
-    //  Create the invaders.
     var ranks = this.config.invaderRanks;
     var files = this.config.invaderFiles;
     var invaders = [];
@@ -386,15 +386,22 @@ PlayState.prototype.enter = function(game) {
 };
 
 PlayState.prototype.update = function(game, dt) {
+
   //https://developer.mozilla.org/en-US/docs/Web/API/Detecting_device_orientation
   //  If the left or right arrow keys are pressed, move
   //  the ship. Check this on ticks rather than via a keydown
   //  event for smooth movement, otherwise the ship would move
   //  more like a text editor caret.
-
-    game.gameCanvas.addEventListener("touchstart", this.fireRocket, false);
-    game.gameCanvas.addEventListener("touchmove", this.fireRocket, true);
-    game.gameCanvas.addEventListener("touchend", this.fireRocket, false);
+    var canvas = document.getElementById('gameCanvas');
+    window.addEventListener("touchstart", function(event){
+      game.mobileShoot = 1;
+      event.preventDefault();
+    }, false);
+    window.addEventListener("touchend", function(){
+      game.mobileShoot = 0;
+    }, false);
+    //canvas.addEventListener("touchmove", this.fireRocket, false);
+    //canvas.addEventListener("touchend", this.fireRocket, false);
     if(game.mobileX<85){
       this.ship.x -= this.shipSpeed * dt;
     } else if (game.mobileX>95){
@@ -407,7 +414,7 @@ PlayState.prototype.update = function(game, dt) {
     if(game.pressedKeys[39]) {
         this.ship.x += this.shipSpeed * dt;
     }
-    if(game.pressedKeys[32]) {
+    if(game.pressedKeys[32] || game.mobileShoot == 1) {
         this.fireRocket();
     }
 
@@ -633,7 +640,7 @@ PlayState.prototype.draw = function(game, dt, ctx) {
 PlayState.prototype.keyDown = function(game, keyCode) {
 
 
-    if(keyCode == 32 || touchstart()) {
+    if(keyCode == 32) {
         //  Fire!
         this.fireRocket();
     }
@@ -646,10 +653,17 @@ PlayState.prototype.keyDown = function(game, keyCode) {
 PlayState.prototype.keyUp = function(game, keyCode) {
 
 };
+PlayState.prototype.touchDown = function(){
 
-PlayState.prototype.fireRocket = function() {
+};
+PlayState.prototype.touchUp = function(){
+
+};
+
+PlayState.prototype.fireRocket = function(event) {
     //  If we have no last rocket time, or the last rocket time
     //  is older than the max rocket rate, we can fire.
+    //event.preventDefault();
     if(this.lastRocketTime === null || ((new Date()).valueOf() - this.lastRocketTime) > (1000 / this.config.rocketMaxFireRate))
     {
         //  Add a rocket.
@@ -659,6 +673,7 @@ PlayState.prototype.fireRocket = function() {
         //  Play the 'shoot' sound.
         game.sounds.playSound('shoot');
     }
+    
 };
 
 function PauseState() {
@@ -896,17 +911,19 @@ function handleOrientation(event) {
   // x and y to [0,180]
   x += 90;
   y += 90;
-  output.innerHTML = "beta : " + x + "\n";
-  output.innerHTML += "gamma: " + y + "\n";
-  output.innerHTML += "alpha: " + z + "\n";
+  output.innerHTML = "x: " + x + "\n";
+  output.innerHTML += "y: " + y + "\n";
+  output.innerHTML += "z: " + z + "\n";
   // Because we don't want to have the device upside down
   // We constrain the x value to the range [-90,90]
   game.mobileX = x;
-  if(((y <= 20  || y >= 70)||(y <= 120 || y >= 170)) && game.started == 0){
-    game.level = 1;
-    game.score = 0;
-    game.lives = 3;
-    game.started = 1;
-    game.moveToState(new LevelIntroState(game.level));
+  if(x!=90 && y!=90){
+    if(((y <= 20  || y >= 70)||(y <= 120 || y >= 170)) && game.started == 0){
+      game.level = 1;
+      game.score = 0;
+      game.lives = 3;
+      game.started = 1;
+      game.moveToState(new LevelIntroState(game.level));
+    }
   }
 }

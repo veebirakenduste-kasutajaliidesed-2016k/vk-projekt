@@ -9,7 +9,7 @@ Joosep Jõeleht
 
 ##Eesmärk
 
-Ehitada juurde [GAME.md](https://github.com/jissepo/vk-projekt/blob/master/GAME.md) lingil asuvale mängule offline skoori salvestus, toimib appcache põhjal, mobiilil oleks liikumine kallutamisega ja laskmine vajutusega, paus kui mobiilne seade on püstises asendis.
+Ehitada juurde [Space invader](https://github.com/jissepo/vk-projekt/blob/master/GAME.md) lingil asuvale mängule offline skoori salvestus, toimib appcache põhjal, mobiilil oleks liikumine kallutamisega ja laskmine vajutusega, paus kui mobiilne seade on püstises asendis.
 
 ## Funktsionaalsuse loetelu
 
