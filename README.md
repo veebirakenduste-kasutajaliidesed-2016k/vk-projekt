@@ -1,39 +1,16 @@
-# Projekt
+# Veebirakendus bussiplaanide tarvis, tähtaeg päev enne eksamit - mai lõpp
+## Projekt IFI6093.DT Veebirakenduste kasutajaliidesed aine raames
+### Rakendus on tehtud Tallinna Ülikooli Informaatika eriala üliõpilase Markus Suurekivi poolt.
+#### Rakenduse sisu
+Rakendus on mõeldud eelkõige just isiklikuks kasutuseks, sest pidevalt tekib probleem, et õigel ajal ei saa Internetile ligipääsu
+ning selle tõttu jääb kätte saamata ka vajalik informatsioon bussiaegade kohta ning elades kohas, kus bussid ei sõida igal võimalikul ajal -
+on see väga tähtis informatsioon. Loodan antud rakenduse abil vähendada selle probleemi mõju ning planeerida oma aega vastavalt,
+salvestades vajaliku teabe faili, millele on võimalik ligi pääseda ka siis kui puudub ühendus Internetiga.
 
-## Tähtaeg 
-
-Rühma viimane tund esitletakse
-
-## Liikmete arv
-Võib teha üksi või kahekesi
-
-**Juhul kui tehakse kahekesi, peab olema näha githubis, kes ja mida on kirjutanud. Kui ei ole näha, kes midagi kirjutanud on, tööd ei arvesta! Kui ei tea kuidas seda teha, küsi!**
-
-## Tööjuhend
-1. Üks fork'ib endale käesoleva repositooriumi ning annab vajadusele kirjutamisõiguse/ligipääsu
-1. Tee kohe Pull request
-1. Muuda repositooriumi `README.md faili` vastavalt nõutele
-1. Tee valmis korralik veebirakendus
-
-### Nõuded
-
-1. **README.md sisaldab:**
-    * suurelt projekti nime;
-    * kes teeb;
-    * eesmärki (3-4 lauset, mis probleemi rakendus lahendab);
-    * funktsionaalsuse loetelu prioriteedi järjekorras, nt
-        * v0.1 Saab teha kasutaja ja sisselogida
-        * v0.2 Saab lisada ...
-        * ...
-    * andmete liikumise skeem loetava pildina (mis lehed ja mis andmeid mis lehel käideldakse);
-
-2. **Veebirakenduse nõuded:**
-    * rakendus töötab nii palju kui saab ka võrguta olekus, st kasutab `appcache`i;
-    * andmeid talletatakse lisaks kohalikule (localStorage) ka serveripool (soovitatavalt andmebaas või fail) – AJAX;
-    * Kasutatav ka mobiilselt seadmelt;
-    * muutujad/tabelid on inglise keeles;
-    * rakendus on piisava funktsionaalsusega ja turvaline – eelnev kokkulepe õppejõuga, mis saab valmis;
-    * kood on jaotatud vajadusel eri failidesse ja kood on kokkupakitud kujul;
-
-3. **Funktsionaalsus**
-    * juhul kui algoritmiline keerukus on piisav siis kõiki nõudeid ei ole vaja täita – ainult eelneval kokkuleppel õppjõuga!
+### Funktsionaalsus
+        * Kuvatakse tänane kuupäev, päev ning kellaaeg
+        * Nende andmete põhjal kuvatakse lähima väljumisajaga bussiliin ja kellaaeg, millal antud transport väljub
+        * Internetiühenduse puudumisel näidatakse kogu tolle päeva antud peatusest läbi sõitvaid liine ja nende aegu kasutades appcache'i
+        
+        * Andmete liikumise skeem loetava pildina (mis lehed ja mis andmeid mis lehel käideldakse);
+        ![Andmete liikumise ja failide siduvue joonis](https://github.com/Enij/vk-projekt/blob/master/vkJoonis.png)
