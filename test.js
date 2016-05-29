@@ -4,7 +4,9 @@ var source = document.createElement('source');
 
 window.onload = function(){
   document.getElementById('submitSource').addEventListener('click', getSource);
-
+  document.getElementById('setbrightness').addEventListener('change', setFilter);
+  document.getElementById('setcontrast').addEventListener('change', setFilter);
+  document.getElementById('setsaturate').addEventListener('change', setFilter);
 };
 
 jQuery(document).ready(function() {
@@ -20,5 +22,16 @@ function getSource(){
   //source.setAttribute('src', document.getElementById('vid').value);
   //player1.appendChild(source);
 
+
+}
+
+function setFilter(){
+	brightness = document.getElementById('setbrightness').value;
+	contrast = document.getElementById('setcontrast').value;
+	saturation = document.getElementById('setsaturate').value;
+
+
+	player1.style.filter = 'brightness(' + brightness + '%) contrast(' + contrast + '%) saturate(' + saturation + '%)';
+	player1.style.WebkitFilter = 'brightness(' + brightness + '%) contrast(' + contrast + '%) saturate(' + saturation + '%)';
 
 }
