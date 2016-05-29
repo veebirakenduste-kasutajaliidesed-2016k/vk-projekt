@@ -1,12 +1,12 @@
 var users = [
-	{
-		username: "user1",
+	{	username: "user1",
 		password: "user1"
 	},
 	{
 		username: "user2",
 		password: "user2"
-	},
+	}
+
 ]
 
 function getInfo() {
@@ -16,6 +16,7 @@ function getInfo() {
 	for(var i = 0; i < users.length; i++) {
 		if(username == users[i].username && password == users[i].password) {
 			console.log(username + " is logged in!!!")
+			location=("project.html");
 			return
 		}
 	}
