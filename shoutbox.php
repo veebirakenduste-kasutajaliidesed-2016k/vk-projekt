@@ -27,7 +27,7 @@ function getContent($link, $num){
 function insertMessage($user, $message){
 	//http://www.php.su/sprintf()
 	//http://www.php.su/mysql_real_escape_string
-	
+
 	$query = sprintf("INSERT INTO shoutbox(user, message) VALUES('%s', '%s');", mysql_real_escape_string(strip_tags($user)), mysql_real_escape_string(strip_tags($message)));
 	$res = mysql_query($query);
 	if(!$res)
@@ -39,7 +39,7 @@ function insertMessage($user, $message){
 
 if(!$_POST['action']){
 
-	header ("Location: index.html"); 
+	header ("Location: index.html");
 }
 else{
 	$link = connect(HOST, USER, PASSWORD);

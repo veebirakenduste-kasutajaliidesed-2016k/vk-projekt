@@ -27,7 +27,8 @@ html,body{
 }
 
 .content {
-    height: 350px;
+    height: 250px;
+    width: 600px;
     overflow: auto;
 }
 .clear{
@@ -59,7 +60,7 @@ strong{
 #form label{
 	font-weight: 700;
 	color: black;
-	
+
 }
 #form input{
 	border: 1px solid #d0ccc9;
@@ -83,8 +84,8 @@ strong{
 
 #container{
 	margin: 1em auto;
-	width: 400px;
-	border: 2px solid green;
+	width: 605px;
+	border: 3px solid green;
 }
 
 /******* CONTENT *******/
