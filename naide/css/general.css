@@ -32,14 +32,6 @@ html,body{
     height:500px;
 }
 
-
-
-
-@livechat-mobile {
-	.operators-bar img {
-    		border-radius: 3rem !important;
-}}
-
 .clear{
 	clear: both;
 	height: 0;
