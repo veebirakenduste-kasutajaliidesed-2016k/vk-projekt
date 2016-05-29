@@ -26,10 +26,17 @@ html,body{
 	text-align: center;
 }
 
+<<<<<<< HEAD
 #container {
  overflow-x:hidden;
     overflow-y:visible;
     height:500px;
+=======
+.content {
+    height: 250px;
+    width: 600px;
+    overflow: auto;
+>>>>>>> 167d209548648f5e697c4a964de8a81ed11fb9be
 }
 
 
@@ -69,7 +76,7 @@ strong{
 #form label{
 	font-weight: 700;
 	color: black;
-	
+
 }
 #form input{
 	border: 1px solid #d0ccc9;
@@ -93,8 +100,8 @@ strong{
 
 #container{
 	margin: 1em auto;
-	width: 400px;
-	border: 2px solid green;
+	width: 605px;
+	border: 3px solid green;
 }
 
 /******* CONTENT *******/
