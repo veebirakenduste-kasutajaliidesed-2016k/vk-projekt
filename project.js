@@ -87,18 +87,20 @@
       this.messages.forEach(function(message){
         var new_message = new Message(message.team, message.message);
         var li = new_message.createHtmlElement();
-        document.querySelector('list-of-messages').appendChild(li);
+        document.querySelector('.list-of-messages').appendChild(li);
       });
 
       this.bindEvents();
     },
 
     bindEvents: function(){
-      document.querySelector('add-new-message').addEventListener('click',this.addNewClick.bind(this));
+      document.querySelector('.add-new-message').addEventListener('click',this.addNewClick.bind(this));
+
+      document.querySelector('.login').addEventListener('click',this.login.bind(this));
     },
 
     addNewClick: function(event){
-      var team = document.querySelector('team').value; //siin peab midagi muutma, peab sobitama ta users.txt failiga, sealt võtab team välja
+      var team = document.querySelector('.team').value; //siin peab midagi muutma, peab sobitama ta users.txt failiga, sealt võtab team välja
       var message = document.querySelector('.message').value;
 
       var new_message = new Message(team, message);
@@ -119,7 +121,7 @@
       var li = new_message.createHtmlElement();
       document.querySelector('.list-of-messages').appendChild(li);
     },
-    routechange: function(event){
+    routeChange: function(event){
       this.currentRoute = location.hash.slice(1);
       console.log(location.currentRoute);
 
@@ -134,6 +136,18 @@
       document.querySelector('.active-menu').className = document.querySelector('.active-menu').className.replace('.active-menu', '');
 
       document.querySelector('.'+this.currentRoute).className += ' active-menu';
+    },
+    login: function(event){
+      var username = document.getElementById("name").value;
+      var password = document.getElementById("password").value;
+      console.log('jou');
+
+      if( username == "name" && password == "password"){
+        console.log('logisid sisse');
+        window.location = 'list-view';
+      }else{
+        console.log('vale nimi või parool');
+      }
     }
   };
 
@@ -145,16 +159,16 @@
 
   Message.prototype = {
     createHtmlElement: function(){
-      var li = document.createHtmlElement('li');
-      var span = document.createHtmlElement('span');
+      var li = document.createElement('li');
+      var span = document.createElement('span');
       span.className = 'letter';
 
-      var letter = document.createTextNode(this.team.charAt(0));
-      span.appendChild(letter);
+      //var letter = document.createTextNode(this.team.charAt(0));
+      //span.appendChild(letter);
 
       li.appendChild(span);
 
-      var span_with_content = document.createHtmlElement('span');
+      var span_with_content = document.createElement('span');
       span_with_content.className = 'content';
 
       var content = document.createTextNode(this.team + ' | ' + this.message);

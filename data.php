@@ -1,5 +1,5 @@
 <?php
-  $file_name = "messages.txt";
+  $file_name = "data.txt";
 
   $entries_from_file = file_get_contents($file_name);
 
