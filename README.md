@@ -1,39 +1,41 @@
-# Projekt
+# Metsamäng
 
-## Tähtaeg 
+## Ken Aonurm
 
-Rühma viimane tund esitletakse
+Projekti eesmärk on luua üks huvitav brauseripõhine tekstimäng, milles oleks palju juhuslikke sündmuseid ja hoiaks huvi üleval.
 
-## Liikmete arv
-Võib teha üksi või kahekesi
+## Funktsionaalsuse loetelu
 
-**Juhul kui tehakse kahekesi, peab olema näha githubis, kes ja mida on kirjutanud. Kui ei ole näha, kes midagi kirjutanud on, tööd ei arvesta! Kui ei tea kuidas seda teha, küsi!**
+1. v0.0.1 
+ * Bootstrap ja algne kujundus
+ * Saab teha puitu ja suurendada kuuri
+ * Juhuslik sündmus
+1. v0.0.2
+ * Muutuvad teadaanded
+ * Menüü
+ * Töökoja ehitamine
+ * veidi CSS
+1. v0.0.3
+  * Toa kütmine
+  * Saab ehitada lauta
+  * Mõned parandused seoses nuppudega
+1. v0.0.4
+ * Registreerimise ja sisselogimise süsteem
+1. v0.0.5
+ * Logimise süsteemi parandamine
+ * Failinimede ümbermuutmine
+ * Lisasin pilte
+1. v0.0.6
+ * Lisatud kaevandus
+ * Saab korjata kive
+ * Saab otsida rauda
+1. v0.0.7
+ * Saab kirvest täiustada ühe korra
+ * Parandasin teateid
+ * Peamisel teatel uus tekst
 
-## Tööjuhend
-1. Üks fork'ib endale käesoleva repositooriumi ning annab vajadusele kirjutamisõiguse/ligipääsu
-1. Tee kohe Pull request
-1. Muuda repositooriumi `README.md faili` vastavalt nõutele
-1. Tee valmis korralik veebirakendus
+### Info
+Configglobali olen ka kaasa pannud, et alla laadides kergelt andmebaasile ligi pääseda.
+või võib kasutada Username: test@test.test
+				  Password: testtest
 
-### Nõuded
-
-1. **README.md sisaldab:**
-    * suurelt projekti nime;
-    * kes teeb;
-    * eesmärki (3-4 lauset, mis probleemi rakendus lahendab);
-    * funktsionaalsuse loetelu prioriteedi järjekorras, nt
-        * v0.1 Saab teha kasutaja ja sisselogida
-        * v0.2 Saab lisada ...
-        * ...
-    * andmete liikumise skeem loetava pildina (mis lehed ja mis andmeid mis lehel käideldakse);
-
-2. **Veebirakenduse nõuded:**
-    * rakendus töötab nii palju kui saab ka võrguta olekus, st kasutab `appcache`i;
-    * andmeid talletatakse lisaks kohalikule (localStorage) ka serveripool (soovitatavalt andmebaas või fail) – AJAX;
-    * Kasutatav ka mobiilselt seadmelt;
-    * muutujad/tabelid on inglise keeles;
-    * rakendus on piisava funktsionaalsusega ja turvaline – eelnev kokkulepe õppejõuga, mis saab valmis;
-    * kood on jaotatud vajadusel eri failidesse ja kood on kokkupakitud kujul;
-
-3. **Funktsionaalsus**
-    * juhul kui algoritmiline keerukus on piisav siis kõiki nõudeid ei ole vaja täita – ainult eelneval kokkuleppel õppjõuga!
