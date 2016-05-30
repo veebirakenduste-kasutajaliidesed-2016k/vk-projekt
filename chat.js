@@ -38,7 +38,7 @@ var ChatEngine=function(){
           catch(err){
                alert(err);
           }
-          xhr.open('GET','chatproces.php?msg='+msg+'&name='+name,false);
+          xhr.open('GET','chatprocess.php?msg='+msg+'&name='+name,false);
           xhr.onreadystatechange = function(){
                if(xhr.readyState == 4) {
                     if(xhr.status == 200) {
