@@ -1,9 +1,17 @@
 
 var $grid;
-
+  var done = 0;
 $(function() {
+//välja kuvamine
+
+
+
+//
+
+
 
   //laetud
+
 
   //getTweets();
 
@@ -35,6 +43,9 @@ function getSoov(param){
 			//var array = JSON.parse(data).statuses;
       var array = JSON.parse(data);
 			console.log(array);
+
+      done++;
+      doneRequest();
 			//printTweets(array);
 
 		},
@@ -51,6 +62,7 @@ function getOki(param){
   console.log("loading...");
 
 	$.ajax({
+		//url: "okidoki.php?search="+param,
 		url: "okidoki.php?search="+param,
 		success: function(data){
       console.log("loaded");
@@ -59,6 +71,8 @@ function getOki(param){
       var array = JSON.parse(data);
 			console.log(array);
 			//printTweets(array);
+      done++;
+      doneRequest();
 
 		},
 		error: function(error){
@@ -66,6 +80,13 @@ function getOki(param){
 		}
 	});
 
+}
+
+function  doneRequest(){
+  console.log("tehtud", done);
+  if(done==2){
+    console.log("Mõlemad päringud tehtud");
+  }
 }
 
 function printSoov(newPosts){
