@@ -36,6 +36,8 @@ $(document).ready(function(){
 });
 
 
+
+
 gamelength=30;
 timerID=null
 var playing=false;
@@ -123,6 +125,3 @@ function hithead(id) {
 function random() {
 	return(Math.floor(Math.random()*100%numholes));
 }
-
-
-
