@@ -16,3 +16,13 @@ input[type=radio]:checked + label::before {
     width: 3em;
     height: 3em;
 }
+#messagewindow {
+	height: 250px;
+
+	padding: 5px;
+	overflow: auto;
+}
+#wrapper {
+	margin: auto;
+	width: 438px;
+}

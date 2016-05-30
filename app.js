@@ -1,3 +1,39 @@
+$(document).ready(function(){
+	timestamp = 0;
+	updateMsg();
+	$("form#chatform").submit(function(){
+		$.post("backend.php",{
+					message: $("#msg").val(),
+					action: "postmsg",
+					time: timestamp
+				}, function(xml) {
+			$("#msg").empty();
+			addMessages(xml);
+		});
+		return false;
+	});
+});
+function addMessages(xml) {
+	if($("status",xml).text() == "2") return;
+	timestamp = $("time",xml).text();
+	$("message",xml).each(function(id) {
+		message = $("message",xml).get(id);
+		$("#messagewindow").prepend("</b><h3><center> "+$("text",message).text()+"</center></h3><br />");
+	});
+}
+function updateMsg() {
+	$.post("backend.php",{ time: timestamp }, function(xml) {
+		$("#loading").remove();
+		addMessages(xml);
+	});
+	setTimeout('updateMsg()', 4000);
+}
+$(document).ready(function(){
+    $("button").click(function(){
+
+        $("#wrapper").fadeIn(3000);
+    });
+});
 
 
 gamelength=30;
@@ -33,6 +69,7 @@ function stopgame() {
 	clrholes();
 	display("Game Over");
 	alert('Game Over.\nYour score is:  '+totalhits);
+
 }
 
 function play() {
@@ -86,3 +123,6 @@ function hithead(id) {
 function random() {
 	return(Math.floor(Math.random()*100%numholes));
 }
+
+
+
