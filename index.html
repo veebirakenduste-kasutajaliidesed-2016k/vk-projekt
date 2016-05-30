@@ -6,30 +6,26 @@
       <script src="https://connect.soundcloud.com/sdk/sdk-3.1.1.js"></script>
       <script src="http://connect.soundcloud.com/sdk.js"></script>
       <script src="script.js"></script>
-
-      <script
-      >SC.connect().then(function() {
-        return SC.get('/me');
-      }).then(function(me) {
-        alert('Hello, ' + me.username);
-      });
-      </script>
-
     </head>
 
     <body>
-        <a href="#" class="connect">A little SoundCloud connection App</a>
-        <p>Hello, your name is <span id="username"></span></p>
 
-        <div id="searchbox">
-          <input type="search" placeholder="Enter keyword" id="search"><br>
-        </div>
+      <a>A little SoundCloud app</a>
+      <div class="logged-in" style="display: one;">
+        <p>
+          Logged in as: <span id="username"></span>
+        </p>
+      </div>
 
-        <div id="player">
-        </div>
+      <div id="searchbox">
+        <input type="search" placeholder="Enter keyword" id="search"><br>
+      </div>
 
-        <ul id="results">
-        </ul>
+      <div id="player"></div>
+
+      <ul id="results">
+
+      </ul>
 
     </body>
 </html>
