@@ -38,10 +38,6 @@
       });
     });
 
-    soundcloud.addEventListener('onPlayerReady', function(player, data) {
-      player.api_play();
-    });
-
     window.App = App;
 
     App.routes = {
@@ -90,7 +86,7 @@
               $('#results').empty();
                   console.log($('#results').value);
                   $(tracks).each(function(index, track) {
-                    $('#results').append($('<li></li>').html(track.title + ' - ' + track.genre));
+                    $('#results').append($('<li id="list"></li>').html(track.title + ' - ' + track.genre));
                   });
           });
         }

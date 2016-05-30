@@ -22,15 +22,20 @@ html {
     position: relative;
 }
 main {
+  background-color: rgb(38, 38, 38);
 	position: absolute;
 	top: 0;
 	bottom: 0;
-
 	margin-top: 63px;
-    overflow-y: scroll;
-    -webkit-overflow-scrolling: touch;
-    margin-bottom: 10px;
-    width: 100%;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+  margin-bottom: 10px;
+  width: 100%;
+  background: darkgray; /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(bottom, rgb(0, 0, 0), rgb(30, 30, 30)); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(bottom, rgb(0, 0, 0), rgb(30, 30, 30)); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(bottom, rgb(0, 0, 0), rgb(30, 30, 30)); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(bottom, rgb(0, 0, 0), rgb(30, 30, 30)); /* Standard syntax */
 }
 
 .menu {
@@ -43,6 +48,8 @@ main {
     position: absolute;
     left: 0;
     right: 0;
+    background-image: url('navbar.jpg');
+    background-size: cover;
 }
 .menu-list {
     position: relative;
@@ -59,11 +66,13 @@ main {
     margin: 0 0 10px 0;
 }
 .menu-link {
-    color: rgb(146, 168, 209);
+    color: white;
     font-size: 18px;
     font-weight: bold;
     display: block;
     padding: 10px;
+    margin: 2px;
+    border-radius: 10px;
     cursor: pointer;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -74,24 +83,30 @@ main {
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     text-decoration: none;
     border: 2px solid rgba(0, 0, 0, 0);
+    background: rgba(0, 0, 0, 0.6);
 }
 .menu-link:hover,
 .menu-link:focus {
-    color: rgb(0, 77, 153);
+    color: rgb(146, 168, 209);
 }
 .menu-link:active {
-    color: rgb(146, 168, 209);
+    color: white;
 }
 .menu-link.active-menu {
     border: 2px solid rgb(146, 168, 209);
 }
 
 #search {
-    margin-top: 1em;
+  padding: 4px;
+  margin-top: 1em;
+  width: 99%;
+  text-align: center;
+  border-radius: 6px;
+  border: 2px solid rgb(146, 168, 209);
 }
 
 .logged-in{
-  color: rgb(146, 168, 209);
+  color: white;
   font-size: 18px;
   font-weight: bold;
   text-align: right !important;
@@ -104,23 +119,65 @@ main {
 }
 
 img{
- position: absolute;
+  position: absolute;
+  right: 9em;
+  width: 20%;
 }
 
 #account-info{
   text-align: left;
   margin-left: 10em;
+  margin-right: 10em;
   color: rgb(146, 168, 209);
   font-size: 16px;
   font-weight: bold;
+  color: white;
+  padding: 2em;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.6);
 }
 
 h1{
-  color: rgb(146, 168, 209);
+  color: white;
   font-size: 25px;
   font-weight: bold;
 }
 
 #widget{
   align-items: center;
+}
+
+#login{
+  display: initial;
+  padding: 10px;
+  text-align: right;
+  margin: 2px;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+#landing {
+    color: white;
+    padding: 2em;
+    margin: 2em;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+#results{
+  padding: 15px;
+  color: white;
+  font-size: 16px;
+}
+
+#results > li {
+  background-color: gray;
+  align-items: center;
+  margin: 5px;
+  padding: 1%;
+  list-style-type: none;
+}
+
+li:hover {
+    color: rgb(146, 168, 209);
 }
