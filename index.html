@@ -5,6 +5,7 @@
       <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/2.2.2/isotope.pkgd.min.js"></script>
       <script src="https://connect.soundcloud.com/sdk/sdk-3.1.1.js"></script>
       <script src="http://connect.soundcloud.com/sdk.js"></script>
+      <script src="https://w.soundcloud.com/player/api.js"></script>
       <script src="script.js"></script>
       <link rel="stylesheet" href="style.css">
     </head>
@@ -19,7 +20,7 @@
         </ul>
 
         <div class="logged-in">
-          <p>
+          <p href="#account-view">
             Logged in as: <span id="username"></span>
           </p>
         </div>
@@ -29,7 +30,13 @@
 
       <div id="listen-view">
         <h1>Listen</h1>
-        <div id="player"></div>
+
+        <object height="81" width="100%" id="myPlayer" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000">
+          <param name="movie" value="http://player.soundcloud.com/player.swf?url=http%3A%2F%2Fsoundcloud.com%2Fmatas%2Fhobnotropic&enable_api=true&object_id=myPlayer"></param>
+          <param name="allowscriptaccess" value="always"></param>
+          <embed allowscriptaccess="always" height="81" src="http://player.soundcloud.com/player.swf?url=http%3A%2F%2Fsoundcloud.com%2Fmatas%2Fhobnotropic&enable_api=true&object_id=myPlayer" type="application/x-shockwave-flash" width="100%" name="myPlayer"></embed>
+        </object>
+
         <div id="searchbox">
           <input type="search" placeholder="Enter keyword" id="search"><br>
         </div>
@@ -37,7 +44,22 @@
       </div>
 
       <div id="account-view">
-        <h1>Account</h1>
+          <h1>Your Account</h1>
+
+          <img id="avatar_url">
+
+        <div id="account-info">
+
+            <p id="">
+              First name: <span id="first_name"></span><br><br>
+              Last name: <span id="last_name"></span><br><br>
+              Country: <span id="country"></span><br><br>
+              Description: <span id="description"></span><br><br>
+              <a id="permalink_url">Visit your Soundcloud profile</a><br><br>
+              Followers: <span id="followers_count"></span>
+            </p>
+
+        </div>
       </div>
 
       <div id="home-view">

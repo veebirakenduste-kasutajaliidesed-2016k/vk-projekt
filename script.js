@@ -10,7 +10,6 @@
     App.instance = this;
 
     this.routes = App.routes;
-    console.log(this);
 
     this.currentRoute = null;
 
@@ -29,7 +28,18 @@
     SC.connect(function(){
       SC.get("/me", function(me){
         $("#username").text(me.username);
+        $("#first_name").text(me.first_name);
+        $("#last_name").text(me.last_name);
+        $("#country").text(me.country);
+        $("#description").text(me.description);
+        $("#followers_count").text(me.followers_count);
+        document.getElementById('permalink_url').href = me.permalink_url;
+        document.getElementById("avatar_url").src = me.avatar_url;
       });
+    });
+
+    soundcloud.addEventListener('onPlayerReady', function(player, data) {
+      player.api_play();
     });
 
     window.App = App;
@@ -58,12 +68,7 @@
         }else{
             this.routeChange();
         }
-            if(localStorage.memoArray){
-                this.createList(JSON.parse(localStorage.memoArray));
-                console.log('Laadisin localstoragest');
-            }else{
-                console.log('tühi localstorage');
-            }
+
         this.bindEvents();
     },
 
@@ -92,11 +97,16 @@
     },
 
     player: function() {
-      var track_url = 'https://soundcloud.com/wearegalantis/no-money-ultra-edit-126-bpm-1';
-      SC.oEmbed(track_url, { auto_play: true }).then(function(oEmbed) {
-        console.log('oEmbed response: ', oEmbed);
-      });
-    },
+      window.onload = function(){
+            var iframe = document.querySelector('#widget');
+            iframe.src = 'http://w.soundcloud.com/player/?url=http://api.soundcloud.com/tracks/43315398&auto_play=true';
+
+            var widget = SC.Widget(iframe);
+
+            widget.bind(SC.Widget.Events.PLAY, function(eventData) {
+                alert('Playing...');
+            });
+    };},
 
     routeChange: function(event){
         this.currentRoute = location.hash.slice(1);
