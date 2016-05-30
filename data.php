@@ -5,12 +5,12 @@
 
   $entries = json_decode($entries_from_file);
 
-  if(isset($_GET["team"]) && isset($_GET["messages"])){
+  if(isset($_GET["title"]) && isset($_GET["messages"])){
 
-    if(!empty($_GET["team"]) && !empty($_GET["messages"])){
+    if(!empty($_GET["title"]) && !empty($_GET["messages"])){
 
       $object = new StdClass();
-      $object->team = $_GET["team"];
+      $object->title = $_GET["title"];
       $object->messages = $_GET["messages"];
 
       array_push($entries, $object);

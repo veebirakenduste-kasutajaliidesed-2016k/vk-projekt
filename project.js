@@ -85,7 +85,7 @@
       this.messages = arrayOfObjects;
 
       this.messages.forEach(function(message){
-        var new_message = new Message(message.team, message.message);
+        var new_message = new Message(message.title, message.message);
         var li = new_message.createHtmlElement();
         document.querySelector('.list-of-messages').appendChild(li);
       });
@@ -96,14 +96,13 @@
     bindEvents: function(){
       document.querySelector('.add-new-message').addEventListener('click',this.addNewClick.bind(this));
 
-      document.querySelector('.login').addEventListener('click',this.login.bind(this));
     },
 
     addNewClick: function(event){
-      var team = document.querySelector('.team').value; //siin peab midagi muutma, peab sobitama ta users.txt failiga, sealt võtab team välja
+      var title = document.querySelector('.title').value; //siin peab midagi muutma, peab sobitama ta users.txt failiga, sealt võtab team välja
       var message = document.querySelector('.message').value;
 
-      var new_message = new Message(team, message);
+      var new_message = new Message(title, message);
 
       this.messages.push(new_message);
       console.log(JSON.stringify(this.messages));
@@ -114,8 +113,8 @@
           console.log('salvestas serverisse');
         }
       };
-      console.log("data.php?team="+team+"&message="+message);
-      xhttp.open("GET","data.php?team="+team+"&message="+message,true);
+      console.log("data.php?title="+title+"&message="+message);
+      xhttp.open("GET","data.php?title="+title+"&message="+message,true);
       xhttp.send();
 
       var li = new_message.createHtmlElement();
@@ -137,22 +136,10 @@
 
       document.querySelector('.'+this.currentRoute).className += ' active-menu';
     },
-    login: function(event){
-      var username = document.getElementById("name").value;
-      var password = document.getElementById("password").value;
-      console.log('jou');
-
-      if( username == "name" && password == "password"){
-        console.log('logisid sisse');
-        window.location = 'list-view';
-      }else{
-        console.log('vale nimi või parool');
-      }
-    }
   };
 
-  var Message = function(new_team, new_message){
-    this.team = new_team;
+  var Message = function(new_title, new_message){
+    this.title = new_title;
     this.message = new_message;
     console.log('created new message');
   };
@@ -171,7 +158,7 @@
       var span_with_content = document.createElement('span');
       span_with_content.className = 'content';
 
-      var content = document.createTextNode(this.team + ' | ' + this.message);
+      var content = document.createTextNode(this.title + ' | ' + this.message);
       span_with_content.appendChild(content);
 
       li.appendChild(span_with_content);
