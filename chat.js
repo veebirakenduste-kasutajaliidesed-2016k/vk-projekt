@@ -30,6 +30,33 @@ var ChatEngine=function(){
           this.ajaxSent();  
           return false;
      };
+	 //Sonumite saatmine serverisse
+     this.ajaxSent=function(){
+          try{
+               xhr=new XMLHttpRequest();
+          }
+          catch(err){
+               alert(err);
+          }
+          xhr.open('GET','chatproces.php?msg='+msg+'&name='+name,false);
+          xhr.onreadystatechange = function(){
+               if(xhr.readyState == 4) {
+                    if(xhr.status == 200) {
+                         msg.value="";
+                    }
+               }     
+          };
+          xhr.send();
+     };
+     this.initSevr=function(){
+          sevr = new EventSource('chatprocess.php');
+          sevr.onmessage = function(e){ 
+          if(oldata!=e.data){
+               chatZone.innerHTML+=e.data;
+               oldata = e.data;
+          }
+          };     
+     };
 };
 // Teeb objektid ChatEngine jaoks
 var chat= new ChatEngine();
