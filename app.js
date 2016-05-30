@@ -238,11 +238,23 @@
           //  result5.appendCHild();
 
           }
+          //Kokku kulude HTML'i saatmine
           var totalCosts = document.getElementById('totalCosts');
           var totalFuels = document.getElementById('totalFuels');
           var totalTrips = document.getElementById('totalTrips');
           totalTrips.innerHTML = "Kokku oled sõitnud "+totaltrip+" kilomeetrit";
           totalFuelCosts.innerHTML = "Kokku oled kulutanud "+totalLiters+" liitrit kütust " + totalMoneys + " € eest.";
+
+          //kokku keskmised
+          var avgTotalCost = document.getElementById('');
+          var avgTotalMoneys = (totalLiters/(totaltrip/100)/100*(totalMoneys/totalLiters));
+          console.log("Total kilomeetri hind",avgTotalMoneys);
+          var avgTotalFuel = document.getElementById('');
+          var avgTotalFuels = totalLiters/(totaltrip/100);
+          console.log("Total kütusekulu saja km kohta",avgTotalFuels);
+          var Averages = document.getElementById('Averages');
+          Averages.innerHTML ="Keskmine kütusekulu on "+avgTotalFuels.toFixed(2)+" L/100KM, mis teeb "+avgTotalMoneys.toFixed(2)+" € kilomeetri hinnaks." ;
+
 
           // var htmlToInsert = '<table>';
           // for (var i = 0; i < result.length; i++) {
