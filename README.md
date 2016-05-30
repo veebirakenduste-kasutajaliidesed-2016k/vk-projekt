@@ -1,39 +1,23 @@
-# Projekt
+#PROJECT NAME
 
-## Tähtaeg 
+##Gruppi liikmed:
+* Toomas Lõõnik
+* Ruslan Jegorov
 
-Rühma viimane tund esitletakse
+##Eesmärk:
 
-## Liikmete arv
-Võib teha üksi või kahekesi
+Selle veebilehe/app'i abil saab jagada oma sõpradega jagada League of Legends'i
+strateegiaid(?). Ilma võrguta saab oma telefoni salvestada mõtteid/ideid ja hiljem 
+võrgus olles need üles laadida ja teistega jagada. Teoorias peaks see aitama kaasa 
+tiimipõhisele mängule.
 
-**Juhul kui tehakse kahekesi, peab olema näha githubis, kes ja mida on kirjutanud. Kui ei ole näha, kes midagi kirjutanud on, tööd ei arvesta! Kui ei tea kuidas seda teha, küsi!**
+1. v0.1 Saab teha...
+1. v0.2 Saab lisada...
 
-## Tööjuhend
-1. Üks fork'ib endale käesoleva repositooriumi ning annab vajadusele kirjutamisõiguse/ligipääsu
-1. Tee kohe Pull request
-1. Muuda repositooriumi `README.md faili` vastavalt nõutele
-1. Tee valmis korralik veebirakendus
+##Andmete liikumise skeem:
 
-### Nõuded
-
-1. **README.md sisaldab:**
-    * suurelt projekti nime;
-    * kes teeb;
-    * eesmärki (3-4 lauset, mis probleemi rakendus lahendab);
-    * funktsionaalsuse loetelu prioriteedi järjekorras, nt
-        * v0.1 Saab teha kasutaja ja sisselogida
-        * v0.2 Saab lisada ...
-        * ...
-    * andmete liikumise skeem loetava pildina (mis lehed ja mis andmeid mis lehel käideldakse);
-
-2. **Veebirakenduse nõuded:**
-    * rakendus töötab nii palju kui saab ka võrguta olekus, st kasutab `appcache`i;
-    * andmeid talletatakse lisaks kohalikule (localStorage) ka serveripool (soovitatavalt andmebaas või fail) – AJAX;
-    * Kasutatav ka mobiilselt seadmelt;
-    * muutujad/tabelid on inglise keeles;
-    * rakendus on piisava funktsionaalsusega ja turvaline – eelnev kokkulepe õppejõuga, mis saab valmis;
-    * kood on jaotatud vajadusel eri failidesse ja kood on kokkupakitud kujul;
-
-3. **Funktsionaalsus**
-    * juhul kui algoritmiline keerukus on piisav siis kõiki nõudeid ei ole vaja täita – ainult eelneval kokkuleppel õppjõuga!
+1. Salvestad oma telefoni strateegiad mille peale mõtled
+1. Võrgus olles laed andmed andmebaasi või kuskile üles automaatselt
+1. Kui andmed on võrgus saad neid teistega jagada(saad teiste andmeid ja
+mõtteid/ideid enda telefoni tõmmata ja hiljem vaadata)
+1. Teised jagavad oma andmeid sinuga ja kõik on õnnelikud
