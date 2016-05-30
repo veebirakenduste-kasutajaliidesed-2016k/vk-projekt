@@ -18,7 +18,7 @@ body{
   background-size: cover;
   background-position: bottom
 	line-height:14px;
-	font-size: 12px;
+	font-size: 15px;
 	font-family: Arial,  Verdana, Helvetica, sans-serif;
 	margin:0pt;
 	cursor:default;
@@ -26,17 +26,23 @@ body{
 }
 html,body{
 	height:100%;
-	text-align: center;
+	text-align: left;
+
 }
 
 
 .content {
-      overflow:scroll;
+
       overflow-y:auto;
-      height: 350px;
+      height: 300px;
       width: 600px;
+      -moz-box-shadow: 12px 10px 24px #000000;
+-webkit-box-shadow: 12px 10px 24px #000000;
+box-shadow: 12px 10px 24px #000000;
+
 
 }
+
 
 
 .clear{
@@ -74,7 +80,7 @@ strong{
 	border: 1px solid #d0ccc9;
 	background: #fff;
 	color: #5f95ef;
-	font-size: 11px;
+	font-size: 15px;
 	font-weight: 700;
 }
 #form input.text{
@@ -104,13 +110,16 @@ border-radius: 75px;
 	margin: 0pt auto;
 	background: #fff;
 	border: 1px solid #d0ccc9;
-	text-align: left;
+	text-align: 40pt;
 	padding: 10px;
 	padding-bottom: 20px;
 	font-size: 11px;
-  -moz-border-radius: 75px;
-  -webkit-border-radius: 75px;
-  border-radius: 75px;
+  -border:inherit 15px #000000;
+-moz-border-radius: 75px;
+-webkit-border-radius: 75px;
+border-radius: 75px;
+
+
 }
 .content h1{
 	line-height: 1em;
