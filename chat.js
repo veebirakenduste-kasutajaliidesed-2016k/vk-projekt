@@ -14,11 +14,11 @@ var ChatEngine=function(){
           alert("Use latest Chrome or FireFox");
         }
      };
-     //Kasutajanime tegemiseks
+     //Kasutajanime loomiseks
      this.setName=function(){
-          name = prompt("Enter your name:","");
+          name = prompt("Enter your name:","Chater");
           if (!name || name ==="") {
-             name = "";  
+             name = "Chater";  
           }
           name = name.replace(/(<([^>]+)>)/ig,"");
      };
@@ -30,7 +30,7 @@ var ChatEngine=function(){
           this.ajaxSent();  
           return false;
      };
-	 //Sonumite saatmine serverisse
+     //Sonumite saatmiseks serverisse
      this.ajaxSent=function(){
           try{
                xhr=new XMLHttpRequest();
@@ -58,6 +58,6 @@ var ChatEngine=function(){
           };     
      };
 };
-// Teeb objektid ChatEngine jaoks
+//Teeb objekte ChatEngine jaoks
 var chat= new ChatEngine();
 chat.init();
