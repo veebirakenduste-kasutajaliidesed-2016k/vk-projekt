@@ -1,17 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta charset="UTF-8">
-		<title>Login System</title>
+		<title>Project</title>
 		<script src="project.js" charset="utf-8"></script>
 		<link rel="stylesheet" href="project.css">
+		<link = type="text/css" rel="stylesheet" href="style.css"> <!-- for the chat-->
 	</head>
 	<body>
 		<nav class = "menu">
 			<ul class = "menu-list">
-				<li class = "menu-item"><a href="#home-view" class = "menu-link home-view active-menu">Avaleht</a></li>
-				<li class = "menu-item"><a href="#list-view" class = "menu-link list-view">Loend</a></li>
-				<li class = "menu-item"><a href="#manage-view" class = "menu-link manage-view">Haldus</a></li>
+				<li class = "menu-item"><a href="#home-view" class = "menu-link home-view active-menu">Homepage</a></li>
+				<li class = "menu-item"><a href="#list-view" class = "menu-link list-view">Message</a></li>
+				<li class = "menu-item"><a href="#manage-view" class = "menu-link manage-view">New message</a></li>
+				<li class = "menu-item"><a href="#chat-view" class = "menu-link chat-view">Chat</a></li>
 			</ul>
 		</nav>
 		<main role = "main">
@@ -32,12 +34,34 @@
 			</div>
 			<div id = "home-view">
 				<h1>Homepage</h1>
-		<form>
-			<label>Username: </label>
-			<input type="text" name="username" id="username" placeholder="Username"><br>
-			<label>Password: </label>
-			<input type="password" name="password "id="password" placeholder="Password"><br>
-			<button type="button" onclick="getInfo()">Sign in</button>
-		</form>
+				
+				<label for="username">Username: </label><br>
+				<input type="text" name="username" id="username" placeholder="Username"><br>
+				<label for = "password">Password: </label><br>
+				<input type="password" name="password "id="password" placeholder="Password"><br>
+				<button type="button" onclick="getInfo()">Sign in</button>
+			</div>
+			<!-- CHAT -->
+			<div id = "chat-view">
+				<div id="chat-menu">
+					<h1>Chat</h1>
+					<p class="welcome">Welcome, <b></b></p>
+					<p class="logout"><a id="exit" href="#">Exit Chat</a></p>
+					<div style="clear:both"></div>
+				</div>
+				<div id="chatbox"></div>
+				
+				<form name="message" action="">
+					<input name="usermsg" type="text" id="usermsg" size="63">
+					<input name="submitmsg" type="submit"  id="submitmsg" value="Send">
+				</form>
+				</div>
+				<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js"></script>
+				<script type="text/javascript">
+				// jQuery
+				$(document).ready(function(){
+ 
+				});
+				</script>	
 	</body>
 </html>

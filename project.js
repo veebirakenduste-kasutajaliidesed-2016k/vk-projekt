@@ -160,7 +160,7 @@
     createHtmlElement: function(){
       var li = document.createElement('li');
       var span = document.createElement('span');
-      span.className = 'letter';
+      //span.className = 'letter';
 
       //var letter = document.createTextNode(this.team.charAt(0));
       //span.appendChild(letter);
@@ -203,7 +203,7 @@ function getInfo() {
 	for(var i = 0; i < users.length; i++) {
 		if(username == users[i].username && password == users[i].password) {
 			console.log(username + " is logged in!!!")
-			location=("project.html");
+			//location=("project.html");
 			return
 		}
 	}
