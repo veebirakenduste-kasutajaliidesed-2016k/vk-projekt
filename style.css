@@ -3,12 +3,12 @@ table, th, td {
     border-collapse: collapse;
 }
 th, td {
-    padding: 5px;
+    padding: 2px;
     text-align: center;
 }
 main > * {
     display: none;
-    padding: 10px;
+    padding: 1px;
 }
 main > *:last-child {
     display: block;
@@ -18,4 +18,86 @@ main > *:target {
 }
 main > *:target ~ * {
     display: none;
+}
+
+h1 {
+  text-align: center;
+  font-variant: small-caps;
+}
+
+button {
+    background-color: grey;
+    border: none;
+    color: white;
+    padding: 10px 24px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 12px;
+}
+
+.start-new-game {
+  margin-top: 12px;
+}
+
+#home-view, #info-view, #game-view, #game-history {
+  text-align: center;
+}
+
+input[type=text]:focus {
+  width: 50%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+
+.save-result {
+  margin-top: 36px;
+}
+
+.qtyminus{
+  background-color: green;
+  border: none;
+  color: white;
+  padding: 34px 34px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border-radius: 50%;
+  margin-right: 20px;
+}
+
+.qtyminus:hover {
+  opacity: 0.50;
+}
+
+.qtyplus {
+  background-color: red;
+  border: none;
+  color: white;
+  padding: 34px 34px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border-radius: 50%;
+  margin-left: 20px;
+}
+.qtyplus:hover {
+  opacity: 0.50;
+}
+
+button:hover {
+  opacity: 0.75;
 }
