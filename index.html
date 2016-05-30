@@ -1,15 +1,19 @@
 <!DOCTYPE html>
-<html>
-	<head>	
-		<title>Login System</title>
-	</head>
-	<body>
-		<form>
-			<input type="text" id="username" placeholder="Choose Username">
-			<input type="password" id="password" placeholder="Choose Password">
-			<button type="button" onclick="getInfo()">Sign in</button>
-		</form>
-
-		<script src="main.js"></script>
-	</body>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Chat</title>	
+</head>
+<body>
+	<div class="container">
+		<div class="chat">
+			<div id="chatZone" name="chatZone"></div>
+				<form onsubmit="chat.sendMsg(); return false;">
+					<label for="msg" style="float:left">Message:</label>
+					<input type="text" id="msg" name="msg" autofocus="true" placeholder="Type Your Meassage Here" />
+					<input type="submit" />
+				</form>
+			</div>
+	</div>
+</body>
 </html>
