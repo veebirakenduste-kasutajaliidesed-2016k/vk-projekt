@@ -13,7 +13,14 @@ jQuery(document).ready(function() {
 
     // declare object for video
     var player = new MediaElementPlayer('#player1');
-
+    $('audio,video').mediaelementplayer({
+       // automatically create these translations on load
+       translations:['es','ar','yi','zh-cn'],
+       // allow the user to add additional translations
+       translationSelector: true,
+       // start with English automatically turned on
+       startLanguage: 'en'
+   });
 });
 
 function getSource(){

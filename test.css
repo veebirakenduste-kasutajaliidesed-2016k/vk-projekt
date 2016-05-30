@@ -1,0 +1,44 @@
+
+
+html *
+{
+   font-size: 1em !important;
+   color: #000 !important;
+   font-family: Arial !important;
+
+}
+
+#gradient
+{
+  position: absolute;
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#videoDiv, #bottomDiv, #upperDiv
+{
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+#bottomDiv, #upperDiv
+{
+  padding: 50px;
+}
+
+#setbrightness, #setcontrast, #setsaturate, #vid, #submitSource
+{
+
+  border: 2px solid #0099ff;
+  border-radius: 7px;
+}
+#submitSource
+{
+  padding-left: 2px;
+  background-color: white;
+}

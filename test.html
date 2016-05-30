@@ -8,16 +8,24 @@
     <script src="http://mediaelementjs.com/js/mejs-2.9.2/mediaelement-and-player.min.js"></script>
     <script src="test.js" type="text/javascript"></script>
     <link rel="stylesheet" href="http://mediaelementjs.com/js/mejs-2.9.2/mediaelementplayer.min.css" />
+    <link rel="stylesheet" type="text/css" href="test.css">
     </head>
     <body>
+      <div id="upperDiv">
       <input type="text" id="vid"><button id="submitSource">Kinnita</button>
+      </div>
       <div id="videoDiv">
+        <!--<img src="gradient.png" alt="gradient" id="gradient">-->
         <video width="640" height="360" id="player1" preload="none">
-            <source id="source" type="video/youtube" src="https://www.youtube.com/watch?v=cdvN0xi3U7Q" />
+            <source id="source" type="video/youtube" src="https://www.youtube.com/watch?v=C0DPdy98e4c" />
+            <track kind="subtitles" src="subtitles.srt" srclang="en" />
         </video>
       </div>
+      <div id="bottomDiv">
       <label>Brightness: <input id="setbrightness" type="number" value="100" min="0" max="1000" step="2"></label>
       <label>Contrast: <input id="setcontrast" type="number" value="100" min="0" max="1000" step="2"></label>
       <label>Saturate: <input id="setsaturate" type="number" value="100" min="0" max="1000" step="2"></label>
+      <br>
+      </div>
     </body>
 </html>
