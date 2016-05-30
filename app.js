@@ -289,7 +289,14 @@
           }
         }
       }
+      html += "<button onclick=Discgolf.instance.closeHistory()>Sulge</button>";
       table.innerHTML = html;
+      document.getElementById("game-details").style.visibility = "visible";
+    },
+
+    closeHistory: function(){
+      //console.log('sulgme');
+      document.getElementById("game-details").style.visibility = "hidden";
     },
 
     startGame: function(e){
