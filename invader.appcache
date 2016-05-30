@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 CACHE MANIFEST
 #Version 1.0.46
 index.html
@@ -14,3 +15,21 @@ js/scripts.js
 
 NETWORK:
 *
+=======
+CACHE MANIFEST
+#Version 1.0.60
+index.html
+saveData.php
+css/core.css
+css/typeography.css
+sounds/bang.wav
+sounds/explosion.wav
+sounds/invaderkilled.wav
+sounds/shoot.wav
+js/starfield.js
+js/spaceinvaders.js
+js/scripts.js
+
+NETWORK:
+*
+>>>>>>> refs/remotes/origin/pr/3
