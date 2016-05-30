@@ -2,31 +2,30 @@
   "use strict";
 
   var AutoAed = function(){
-    // SINGLETON PATTERN (4 rida)
+
     if(AutoAed.instance){
       return AutoAed.instance;
     }
-    AutoAed.instance = this; //this viitab carspurgile
+    AutoAed.instance = this;
 
     this.routes = AutoAed.routes;
 
-    //console.log(this);
-    //console.log('moosipurgi sees');
-
-    //Kõik muutujad, mis on üldised ja muudetavad
-    this.currentRoute = null; // hoiab meeles mis lehel hetkel on
+    this.currentRoute = null; 
     this.interval = null;
-    this.cars = []; //kõik purgid tulevad siia sisse
-
-    //panen rakenduse tööle
+    this.cars = [];
+	this.adrs=[];
+	this.container = null;
+	this.map = null;
+	
+	
     this.init();
   };
 
-  //kirjeldatud kõik lehed
+ 
   AutoAed.routes = {
     "home-view" : {
       render: function(){
-        // käivitan siis kui jõuan lehele
+      
         console.log('JS avalehel');
         if(this.interval){clearInterval(this.interval);}
         var seconds = 0;
@@ -43,14 +42,17 @@
     },
     "manage-view" : {
       render: function(){
-        //console.log('JS haldus lehel');
+      // console.log('JS haldus lehel');
       }
+
     }
   };
 
   
   AutoAed.prototype = {
     init: function(){
+		
+			
       //console.log('rakendus käivitus');
       //Esialgne loogika tuleb siia
       window.addEventListener('hashchange', this.routeChange.bind(this));
@@ -62,6 +64,22 @@
         //hash oli olemas
         this.routeChange();
       }
+	  
+	  
+	 if(localStorage.adrs){
+        //string tagasi objektiks
+        this.adrs = JSON.parse(localStorage.adrs);
+        //tekitan loendi htmli
+        this.adrs.forEach(function(adrs){
+            var new_address = new Address(car.address);
+            var li = new_address.createHtmlElement();
+            document.querySelector('.list-of-cars').appendChild(li);
+        });
+      }
+	  
+	  
+	  
+	
       //saan kätte purgid localStorage kui on
       if(localStorage.cars){
         //string tagasi objektiks
@@ -92,53 +110,71 @@
 		
 	   }
 	  
-
-     
-      this.bindEvents();
+	
+	this.MakeMap();
+	this.addMarker();
+    this.bindEvents();
     },
-	Map : function (){
+	MakeMap: function(){
 		
-			this.container = document.querySelector('#map');
-
-            var options = {
-              center: {lat: 59.439252, lng: 24.7721997},
-              zoom: 10,
-              //styles: [ { "elementType": "labels.text", "stylers": [ { "visibility": "off" } ] },{ "featureType": "water", "stylers": [ { "hue": "#ff5e00" } ] },{ "featureType": "road.highway", "stylers": [ { "hue": "#ff001a" } ] } ],
-				      streetViewControl: false,
-				      mapTypeControl: false
-            };
-            var watchID = navigator.geolocation.watchPosition(function(position) {
-              do_something(position.coords.latitude, position.coords.longitude);
-            });
-
-            this.map = new google.maps.Map(this.container, options);
+            
+            this.container = document.querySelector('#map-container');
+			
+			
+			var options = {
+				center: {
+					lat: 59.439252, 
+					lng: 24.7721997
+				},
+				zoom:11,
+				//styles: [ { "elementType": "labels", "stylers": [ { "visibility": "off" } ] },{ "featureType": "water", "stylers": [ { "color": "#8080ed" } ] },{ "featureType": "road.highway", "stylers": [ { "hue": "#ff0022" } ] } ],
+				streetViewControl: false,
+				mapTypeControl: false
+							
+			};
+			
+			this.map = new google.maps.Map(this.container, options);
+		
+			this.map.addListener('click', function(e){
+				console.log(e.latLng.lat());
+				AutoAed.instance.addMarker(e.latLng.lat(), e.latLng.lng());
+			});
 	},
+	addMarker: function(newLat, newLng){
+	
+			var geocoder;
+			geocoder = new google.maps.Geocoder();
+			
+  if (geocoder) {
+    geocoder.geocode({
+      'address': address
+    }, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+        if (status != google.maps.GeocoderStatus.ZERO_RESULTS) {
+          map.setCenter(results[0].geometry.location);
 
+          var infowindow = new google.maps.InfoWindow({
+            content: '<b>' + address + '</b>',
+            size: new google.maps.Size(150, 50)
+          });
 
-geocodeAddress: function (geocoder, resultsMap) {
-  var address = document.getElementById('address').value;
-  geocoder.geocode({'address': address}, function(results, status) {
-    if (status === google.maps.GeocoderStatus.OK) {
-      resultsMap.setCenter(results[0].geometry.location);
-      var marker = new google.maps.Marker({
-        map: resultsMap,
-        position: results[0].geometry.location
-      });
-    } else {
-      alert('Geocode was not successful for the following reason: ' + status);
-    }
-  });	initMap: function() {
-  var map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 8,
-    center: {lat: -34.397, lng: 150.644}
-  });
-  var geocoder = new google.maps.Geocoder();
+          var marker = new google.maps.Marker({
+            position: results[0].geometry.location,
+            map: map,
+            title: address
+          });
+          google.maps.event.addListener(marker, 'click', function() {
+            infowindow.open(map, marker);
+          });
 
-  document.getElementById('submit').addEventListener('click', function() {
-    geocodeAddress(geocoder, map);
-  });
-},
-},
+        }
+  
+	}
+	});
+  }
+
+					google.maps.event.addDomListener(window, 'load', addMarker);
+	},
     bindEvents: function(){
       document.querySelector('.add-new-car').addEventListener('click', this.addNewClick.bind(this));
       //kuulan trükkimist otsi kastist
@@ -165,6 +201,7 @@ geocodeAddress: function (geocoder, resultsMap) {
           }
       }
     },	
+
     edit: function(event){
       var selected_id = event.target.dataset.id;
       var clicked_li = event.target.parentNode;
@@ -237,11 +274,14 @@ geocodeAddress: function (geocoder, resultsMap) {
         }
         document.querySelector('#show-feedback').innerHTML='Salvestamine õnnestus';
   		  var new_car = new Car(id, title, color,seats,address, timeAdded);
+		  var new_address= new Address(address);
 
         this.cars.push(new_car);
+		this.adrs.push(new_address);
         console.log(JSON.stringify(this.cars.id));
         //JSON'i stringina salvestan local storagisse
         localStorage.setItem('cars', JSON.stringify(this.cars));
+		localStorage.setItem('address', JSON.stringify(this.adrs));
        
       }
 	  
@@ -314,14 +354,16 @@ geocodeAddress: function (geocoder, resultsMap) {
     return str;
 }
   };
-
+var Address = function(new_address){
+	this.address = new_address;
+};
   var Car = function(new_id,title, new_color, new_seats,new_address, timeAdded){
     this.id = new_id;
     this.title = title;
     this.color = new_color;
     this.seats = new_seats;
     this.address = new_address;
-	  this.timeAdded = timeAdded;
+	this.timeAdded = timeAdded;
   };
   Car.prototype = {
     createHtmlElement: function(){

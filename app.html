@@ -5,12 +5,15 @@
   <title>AutoAed</title>
   <script src="app.js"></script>
   <link rel="stylesheet" href="app.css">
-  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
   <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBiEljP0DD9HmLBZkKilPKh_5ExyNL2J0g"></script>
-
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script src="http://cdn.pubnub.com/pubnub-3.7.1.min.js"></script>
+<style type="text/css">
+		 #map-container { height: 300px; width;200px; margin: 0; padding: 0;}
+	    </style>
 
 </head>
 <body>
@@ -29,8 +32,13 @@
 
     <div id="list-view">
         <h1>Loend</h1>
+		
+		<div id="map-container"></div>
+		
+		
+		
         <input type="search" placeholder="Enter keyword" id="search"><br>
-		<div id="makeAmap"></div>
+		<h3>Mark | Värv | Istekohad</h2>
         <ul class="list-of-cars"></ul>
         <!-- Muutmine -->
       <!-- Modal -->
@@ -90,7 +98,7 @@
 
     <div id="manage-view">
         <h1>Haldus</h1>
-
+		
         <div class="feedback-success" id="show-feedback"></div>
 
 
@@ -104,14 +112,15 @@
         <label for="seats">Istekohtade arv: </label><br>
         <input type="text" name="seats" class="seats"><br>
 
-		<label for="address">Aadress: </label><br>
-        <input type="text" name="address" class="address"><br>
+		<label for="address">Aadress: tänav,korter/maja nr,  linn</label><br>
+        <input type="text" name="address" class="address" id="address"><br>
 		
 		<br>
 		
 
         <button class="add-new-car">Lisa auto</button>
-		<div id="map"></div>
+	
+		
 		
 		<br>
     </div>
@@ -119,6 +128,7 @@
     <div id="home-view">
         <h1>Avaleht</h1>
         <div id="counter"></div>
+		
     </div>
 
   </main>

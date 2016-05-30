@@ -110,11 +110,7 @@ main > *:target ~ * {
     border-left: 1px solid rgb(146, 168, 150);
     border-right: 1px solid rgb(146, 168, 209);
 }
-.makeAmap{
-	width: 500px;
-    height: 400px;
-    background-color: #CCC;
-}
+
 .add-new-car {
     background-color: #fff;
     padding: 15px;
@@ -155,6 +151,7 @@ main > *:target ~ * {
   text-decoration: none;
   border: 2px solid rgba(0, 0, 0, 0);
 }
+
 label {
     color: gray;
 }
@@ -180,6 +177,7 @@ td {
     margin-bottom: 10px;
 
 }
+
 input {
     -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
     -webkit-tap-highlight-color: transparent;
