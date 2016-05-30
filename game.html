@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <title>GAME</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <script type="text/javascript" src="jquery.js"></script>
+  <meta charset="utf-8" />
+</head>
+<body>
+
+  <script type="text/javascript" src="app.js"></script>
+
+<center><h2>DOT CATCH</h2></center>
+<center>Klick Start and have fun u have 30 sec-s after clicking first color</center>
+<form name="cpanel">
+<center>
+<table cellspacing=3>
+<tr>
+<td><input type="button" name="startstop" value=" Start Game | Stop Game " onClick="play()"></td>
+<td></td>
+<td align=right>Time:</td>
+<td><input type="text" name="timeleft" size="4" onFocus="this.blur()"></td>
+</tr>
+<tr>
+<td><input type="text" name="state" size="20" value="Push Start to Play" onFocus="this.blur()"></td>
+<td></td>
+<td align=right>Score:</td>
+<td><input type="text" name="score" size="4" onFocus="this.blur()"></td>
+</tr>
+</table>
+</center>
+</form>
+<form name="dmz">
+<center>
+<table cellspacing=3>
+<tr>
+<td colspan=10><hr size=1></td>
+</tr>
+<tr>
+<td align="center" valign="center"><input id="r1" type="radio" name="anim"  class="radio4" onClick="hithead(0)" />
+<label for="r1"></label>
+<td align="center" valign="center"><input id="r2" type="radio" name="anim"  class="radio4" onClick="hithead(1)" />
+<label for="r2"></label>
+<td align="center" valign="center"><input id="r3" type="radio" name="anim"  class="radio4" onClick="hithead(2)" />
+<label for="r3"></label>
+<td align="center" valign="center"><input id="r4" type="radio" name="anim"  class="radio4" onClick="hithead(3)" />
+<label for="r4"></label>
+<td align="center" valign="center"><input id="r5" type="radio" name="anim"  class="radio4" onClick="hithead(4)" />
+<label for="r5"></label>
+<td align="center" valign="center"><input id="r6" type="radio" name="anim"  class="radio4" onClick="hithead(5)" />
+<label for="r6"></label>
+<td align="center" valign="center"><input id="r7" type="radio" name="anim"  class="radio4" onClick="hithead(6)" />
+<label for="r7"></label>
+<td align="center" valign="center"><input id="r8" type="radio" name="anim"  class="radio4" onClick="hithead(7)" />
+<label for="r8"></label>
+<td align="center" valign="center"><input id="r9" type="radio" name="anim"  class="radio4" onClick="hithead(8)" />
+<label for="r9"></label>
+<td align="center" valign="center"><input id="r10" type="radio" name="anim"  class="radio4" onClick="hithead(9)" />
+<label for="r10"></label>
+</tr>
+<tr>
+<td align="center" valign="center"><input id="r11" type="radio" name="anim"  class="radio4" onClick="hithead(10)" />
+<label for="r11"></label>
+<td align="center" valign="center"><input id="r12" type="radio" name="anim"  class="radio4" onClick="hithead(11)" />
+<label for="r12"></label>
+<td align="center" valign="center"><input id="r13" type="radio" name="anim"  class="radio4" onClick="hithead(12)" />
+<label for="r13"></label>
+<td align="center" valign="center"><input id="r14" type="radio" name="anim"  class="radio4" onClick="hithead(13)" />
+<label for="r14"></label>
+<td align="center" valign="center"><input id="r15" type="radio" name="anim"  class="radio4" onClick="hithead(14)" />
+<label for="r15"></label>
+<td align="center" valign="center"><input id="r16" type="radio" name="anim"  class="radio4" onClick="hithead(15)" />
+<label for="r16"></label>
+<td align="center" valign="center"><input id="r17" type="radio" name="anim"  class="radio4" onClick="hithead(16)" />
+<label for="r17"></label>
+<td align="center" valign="center"><input id="r18" type="radio" name="anim"  class="radio4" onClick="hithead(17)" />
+<label for="r18"></label>
+<td align="center" valign="center"><input id="r19" type="radio" name="anim"  class="radio4" onClick="hithead(18)" />
+<label for="r19"></label>
+<td align="center" valign="center"><input id="r20" type="radio" name="anim"  class="radio4" onClick="hithead(19)" />
+<label for="r20"></label>
+</tr>
+<tr>
+<td align="center" valign="center"><input id="r21" type="radio" name="anim"  class="radio4" onClick="hithead(20)" />
+<label for="r21"></label>
+<td align="center" valign="center"><input id="r22" type="radio" name="anim"  class="radio4" onClick="hithead(21)" />
+<label for="r22"></label>
+<td align="center" valign="center"><input id="r23" type="radio" name="anim"  class="radio4" onClick="hithead(22)" />
+<label for="r23"></label>
+<td align="center" valign="center"><input id="r24" type="radio" name="anim"  class="radio4" onClick="hithead(23)" />
+<label for="r24"></label>
+<td align="center" valign="center"><input id="r25" type="radio" name="anim"  class="radio4" onClick="hithead(24)" />
+<label for="r25"></label>
+<td align="center" valign="center"><input id="r26" type="radio" name="anim"  class="radio4" onClick="hithead(25)" />
+<label for="r26"></label>
+<td align="center" valign="center"><input id="r27" type="radio" name="anim"  class="radio4" onClick="hithead(26)" />
+<label for="r27"></label>
+<td align="center" valign="center"><input id="r28" type="radio" name="anim"  class="radio4" onClick="hithead(27)" />
+<label for="r28"></label>
+<td align="center" valign="center"><input id="r29" type="radio" name="anim"  class="radio4" onClick="hithead(28)" />
+<label for="r29"></label>
+<td align="center" valign="center"><input id="r30" type="radio" name="anim"  class="radio4" onClick="hithead(29)" />
+<label for="r30"></label>
+</tr>
+<tr>
+<td align="center" valign="center"><input id="r31" type="radio" name="anim"  class="radio4" onClick="hithead(30)" />
+<label for="r31"></label>
+<td align="center" valign="center"><input id="r32" type="radio" name="anim"  class="radio4" onClick="hithead(31)" />
+<label for="r32"></label>
+<td align="center" valign="center"><input id="r33" type="radio" name="anim"  class="radio4" onClick="hithead(32)" />
+<label for="r33"></label>
+<td align="center" valign="center"><input id="r34" type="radio" name="anim"  class="radio4" onClick="hithead(33)" />
+<label for="r34"></label>
+<td align="center" valign="center"><input id="r35" type="radio" name="anim"  class="radio4" onClick="hithead(34)" />
+<label for="r35"></label>
+<td align="center" valign="center"><input id="r36" type="radio" name="anim"  class="radio4" onClick="hithead(35)" />
+<label for="r36"></label>
+<td align="center" valign="center"><input id="r37" type="radio" name="anim"  class="radio4" onClick="hithead(36)" />
+<label for="r37"></label>
+<td align="center" valign="center"><input id="r38" type="radio" name="anim"  class="radio4" onClick="hithead(37)" />
+<label for="r38"></label>
+<td align="center" valign="center"><input id="r39" type="radio" name="anim"  class="radio4" onClick="hithead(38)" />
+<label for="r39"></label>
+<td align="center" valign="center"><input id="r40" type="radio" name="anim"  class="radio4" onClick="hithead(39)" />
+<label for="r40"></label>
+</tr>
+<tr>
+<td align="center" valign="center"><input id="r41" type="radio" name="anim"  class="radio4" onClick="hithead(40)" />
+<label for="r41"></label>
+<td align="center" valign="center"><input id="r42" type="radio" name="anim"  class="radio4" onClick="hithead(41)" />
+<label for="r42"></label>
+<td align="center" valign="center"><input id="r43" type="radio" name="anim"  class="radio4" onClick="hithead(42)" />
+<label for="r43"></label>
+<td align="center" valign="center"><input id="r44" type="radio" name="anim"  class="radio4" onClick="hithead(43)" />
+<label for="r44"></label>
+<td align="center" valign="center"><input id="r45" type="radio" name="anim"  class="radio4" onClick="hithead(44)" />
+<label for="r45"></label>
+<td align="center" valign="center"><input id="r46" type="radio" name="anim"  class="radio4" onClick="hithead(45)" />
+<label for="r46"></label>
+<td align="center" valign="center"><input id="r47" type="radio" name="anim"  class="radio4" onClick="hithead(46)" />
+<label for="r47"></label>
+<td align="center" valign="center"><input id="r48" type="radio" name="anim"  class="radio4" onClick="hithead(47)" />
+<label for="r48"></label>
+<td align="center" valign="center"><input id="r49" type="radio" name="anim"  class="radio4" onClick="hithead(48)" />
+<label for="r49"></label>
+<td align="center" valign="center"><input id="50" type="radio" name="anim"  class="radio4" onClick="hithead(49)" />
+<label for="50"></label>
+</tr>
+<tr>
+<td align="center" valign="center"><input id="r51" type="radio" name="anim"  class="radio4" onClick="hithead(50)" />
+<label for="r51"></label>
+<td align="center" valign="center"><input id="r52" type="radio" name="anim"  class="radio4" onClick="hithead(51)" />
+<label for="r52"></label>
+<td align="center" valign="center"><input id="r53" type="radio" name="anim"  class="radio4" onClick="hithead(52)" />
+<label for="r53"></label>
+<td align="center" valign="center"><input id="r54" type="radio" name="anim"  class="radio4" onClick="hithead(53)" />
+<label for="r54"></label>
+<td align="center" valign="center"><input id="r55" type="radio" name="anim"  class="radio4" onClick="hithead(54)" />
+<label for="r55"></label>
+<td align="center" valign="center"><input id="r56" type="radio" name="anim"  class="radio4" onClick="hithead(55)" />
+<label for="r56"></label>
+<td align="center" valign="center"><input id="r57" type="radio" name="anim"  class="radio4" onClick="hithead(56)" />
+<label for="r57"></label>
+<td align="center" valign="center"><input id="r58" type="radio" name="anim"  class="radio4" onClick="hithead(57)" />
+<label for="r58"></label>
+<td align="center" valign="center"><input id="r59" type="radio" name="anim"  class="radio4" onClick="hithead(58)" />
+<label for="r59"></label>
+<td align="center" valign="center"><input id="r60" type="radio" name="anim"  class="radio4" onClick="hithead(59)" />
+<label for="r60"></label>
+</tr>
+<tr><td colspan=10><hr size=1></td>
+</tr></table></center></form>
+<div id="wrapper">
+  <CENTER><h2>Users who have been here</h2></CENTER>
+  <p id="messagewindow"><span id="loading">Laadimine...</span></p>
+  <form id="chatform">
+  </form>
+  </span> </div>
+  </CENTER>
+
+
+</body>
+</html>
