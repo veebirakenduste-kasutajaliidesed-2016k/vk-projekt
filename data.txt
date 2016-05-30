@@ -1,1 +1,0 @@
-[{"name":"user1","password":"user1"},{"name":"user2","password":"user2","team":"team1"},{"team":"team1","message":"tere"},{"team":"team1","message":"jou"}]
