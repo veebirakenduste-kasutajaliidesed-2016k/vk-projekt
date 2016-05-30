@@ -1,4 +1,18 @@
+.item{
+  width: 250px;
+  margin: 5px;
+  border: 1px solid grey;
+  border-radius: 5px;
+  padding: 5px;
+  float: left;
+}
 
+.profile-image{
+  width: 250px;
+  height: 250px;
+  background-size: cover;
+  border-radius: 5px;
+}
 
 html *
 {
@@ -11,7 +25,7 @@ html *
 #gradient
 {
   position: absolute;
-  
+
   display: flex;
   align-items: center;
   justify-content: center;
