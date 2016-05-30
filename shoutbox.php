@@ -16,6 +16,8 @@ function connect($db, $user, $password){
 			die("Could not select database: ".mysql_error());
 		else return $link;
 	}
+
+
 }
 function getContent($link, $num){
 	$res = mysql_query("SELECT date, user, message FROM shoutbox ORDER BY date DESC LIMIT ".$num, $link);
@@ -27,7 +29,7 @@ function getContent($link, $num){
 function insertMessage($user, $message){
 	//http://www.php.su/sprintf()
 	//http://www.php.su/mysql_real_escape_string
-	
+
 	$query = sprintf("INSERT INTO shoutbox(user, message) VALUES('%s', '%s');", mysql_real_escape_string(strip_tags($user)), mysql_real_escape_string(strip_tags($message)));
 	// %s, %d
 	$res = mysql_query($query);
@@ -40,7 +42,7 @@ function insertMessage($user, $message){
 
 if(!$_POST['action']){
 
-	header ("Location: index.html"); 
+	header ("Location: index.html");
 }
 else{
 	$link = connect(HOST, USER, PASSWORD);
@@ -49,23 +51,23 @@ else{
 			$res = getContent($link, 20);
 			$result = "";
 			$temparray = array();
-			
+
 			//http://www.php.su/mysql_fetch_array
 			while($row = mysql_fetch_array($res)){
-				
+
 				array_push($temparray, $row);
 				//$result .= "<p><strong>".$row['user']."</strong><img src=\"css/images/bullet.gif\" alt='-\' >".$row['message']." <span class=\"date\">".$row['date']."</span></p>";
 			}
-			
-			
+
+
 			//http://php.net/manual/en/function.array-reverse.php
 			$temparray = array_reverse($temparray);
-			
+
 			//result
 			foreach($temparray as $row){
 				$result .= "<p><strong>".$row['user']."</strong><img src=\"css/images/bullet.gif\" alt='-\' >".$row['message']." <span class=\"date\">".$row['date']."</span></p>";
 			}
-			
+
 			echo $result;
 			break;
 		case "insert":

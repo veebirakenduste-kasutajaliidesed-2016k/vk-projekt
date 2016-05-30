@@ -13,7 +13,10 @@ padding:0pt;
 vertical-align:baseline;
 }
 body{
-	background: #fff;
+
+  background: url(http://kriswhitewrites.com/wp-content/uploads/2013/06/landscape-mountains-snow-sky-1024x640.jpg);
+  background-size: cover;
+  background-position: bottom
 	line-height:14px;
 	font-size: 12px;
 	font-family: Arial,  Verdana, Helvetica, sans-serif;
@@ -26,26 +29,15 @@ html,body{
 	text-align: center;
 }
 
-<<<<<<< HEAD
-#container {
- overflow-x:hidden;
-    overflow-y:visible;
-    height:500px;
-=======
+
 .content {
-    height: 250px;
-    width: 600px;
-    overflow: auto;
->>>>>>> 167d209548648f5e697c4a964de8a81ed11fb9be
+      overflow:scroll;
+      overflow-y:auto;
+      height: 350px;
+      width: 600px;
+
 }
 
-
-
-
-@livechat-mobile {
-	.operators-bar img {
-    		border-radius: 3rem !important;
-}}
 
 .clear{
 	clear: both;
@@ -101,28 +93,25 @@ strong{
 #container{
 	margin: 1em auto;
 	width: 605px;
-	border: 3px solid green;
+  border:double 5px #ffffff;
+-moz-border-radius: 75px;
+-webkit-border-radius: 75px;
+border-radius: 75px;
 }
 
 /******* CONTENT *******/
 .content{
 	margin: 0pt auto;
-	background: #efefef;
 	background: #fff;
 	border: 1px solid #d0ccc9;
 	text-align: left;
 	padding: 10px;
 	padding-bottom: 20px;
-	font-size: 13px;
+	font-size: 11px;
+  -moz-border-radius: 75px;
+  -webkit-border-radius: 75px;
+  border-radius: 75px;
 }
-/*
-p{
-	letter-spacing: 0.8px;
-	font-style: italic;
-	font-family: Times New Roman;  font-weight
-}
-*/
-
 .content h1{
 	line-height: 1em;
 	vertical-align: middle;
