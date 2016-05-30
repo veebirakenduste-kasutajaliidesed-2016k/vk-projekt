@@ -74,10 +74,13 @@
     },
 
     search: function(event){
-      
         var search = document.querySelector('#search').value.toLowerCase();
 
-        if( search !== null && ' '){
+        if(search === null || search === ' ' || search === '' || typeof(search) === 'undefined'){
+          console.log('tühi otsing');
+          $('#results').empty();
+        }else{
+          console.log(search);
           SC.get('/tracks', { genres: search }, function(tracks) {
               $('#results').empty();
                   console.log($('#results').value);

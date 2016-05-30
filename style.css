@@ -60,7 +60,6 @@ main {
 }
 .menu-link {
     color: rgb(146, 168, 209);
-    ;
     font-size: 18px;
     font-weight: bold;
     display: block;
@@ -78,57 +77,24 @@ main {
 }
 .menu-link:hover,
 .menu-link:focus {
-    outline: none;
+    color: rgb(0, 77, 153);
 }
 .menu-link:active {
     color: rgb(146, 168, 209);
-    ;
 }
 .menu-link.active-menu {
     border: 2px solid rgb(146, 168, 209);
 }
 
-.name,
-.type,
-.origin{
-    width: 100%;
-    margin-bottom: 10px;
-    margin-top: 4px;
-    padding: 4px;
-    border: 0;
-    border-bottom: 1px solid rgb(146, 168, 209);
+#search {
+    margin-top: 1em;
 }
-.add-new-memo {
-    background-color: #fff;
-    padding: 10px;
-    border: 2px solid rgb(146, 168, 209);
-    color: rgb(146, 168, 209);
-}
-label {
-    color: gray;
-}
-td {
-    padding: 2px;
-}
-.letter {
-    padding: 9px;
-    text-transform: uppercase;
-    margin-right: 9px;
-    width: 19px;
-    text-align: center;
-    display: inline-block;
-    color: rgb(146, 168, 209);
-    border: 1px solid rgb(146, 168, 209);
-}
-.memo-list {
-    list-style-type: none;
-    padding-left: 0;
-}
-.memo-list li {
-    margin-bottom: 10px;
 
-}
-input {
-    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
-    -webkit-tap-highlight-color: transparent;
+.logged-in{
+  color: rgb(146, 168, 209);
+  font-size: 18px;
+  font-weight: bold;
+  text-align: right !important;
+  margin-right: 2.5em !important;
+  margin-top: -3em !important;
 }
