@@ -149,9 +149,9 @@
           console.log("readystate");
 
           var result =JSON.parse(JSON.parse(xhttp.responseText));
-          console.log(result);
+          //console.log(result);
           averageFuel.instance.alle = result;
-          console.log(result);
+          //console.log(result);
           console.log("parsetud");
 
           // averageFuel.instance.alle.forEach(function(element){
@@ -174,28 +174,86 @@
           //   result5.appendChild(li2);
           //   result5.appendChild(li3);
           // });
+          var totaltrip = 0;
+          var totalLiters = 0;
+          var totalMoneys = 0;
           for(var i in averageFuel.instance.alle){
 
             var element =  averageFuel.instance.alle[i];
-            console.log(element);
+            //console.log(element);
             var new_element = new all(element.fuelQuantity,element.fuelCost, element.trip);
+            //var tr = '<tr>';
             var li = document.createElement('li');
-            console.log(averageFuel.instance.alle[element]);
-            var node = document.createTextNode(new_element.fuelQuantity);
-            var li2 = document.createElement('li');
+            //console.log(averageFuel.instance.alle[element]);
+            var node = document.createTextNode( new_element.fuelQuantity +' liitrit ' + new_element.fuelCost +' € eest ja trip oli: '+ new_element.trip );
+            var floor = Math.floor;
+            //tripp kokku
+            var trip = floor(new_element.trip);
+            for (var f = 0; f<trip.length; f++){
+              trip.splice(3,trip);
+            }
+            totaltrip = totaltrip + trip;
+            console.log(totaltrip);
+            //kütuse liitrid kokku
+            var liters = floor(new_element.fuelQuantity);
+            for (var d = 0; d<liters.length; d++){
+              liters.splice(3,liters);
+            }
+            totalLiters = totalLiters + liters;
+            console.log(totalLiters);
+            //raha kulu kokku
+            var moneys = floor(new_element.fuelCost);
+            for (var r = 0; r<moneys.length; r++){
+              moneys.splice(3,moneys);
+            }
+            totalMoneys = totalMoneys + moneys;
+            console.log(totalMoneys);
 
-            var node2 = document.createTextNode(new_element.fuelCost);
-            var li3 = document.createElement('li');
-            var node3 = document.createTextNode(new_element.trip);
+            //trip.splice(3,0,trip);
+
+            //console.log(element.trip[0]);
+          //  console.log(element.trip[1]);
+          //  console.log(element.trip[2]);
+
+            //console.log(totaltrip);
+            // var li2 = document.createElement('li');
+            //
+            // var node2 = document.createTextNode( new_element.fuelCost);
+            // var li3 = document.createElement('li');
+            // var node3 = document.createTextNode(new_element.trip);
+            //var tr2 = '</tr>';
             var result5 = document.getElementById('result5');
-            li.appendChild(node);
-            li2.appendChild(node2);
-            li3.appendChild(node3);
+          //  console.log(result5);
+
+             li.appendChild(node);
+            // li2.appendChild(node2);
+            // li3.appendChild(node3);
+            //console.log(node);
+            //result5.appendChild(tr);
             result5.appendChild(li);
-            result5.appendChild(li2);
-            result5.appendChild(li3);
+            // result5.appendChild(li2);
+            // result5.appendChild(li3);
+            //result5.appendChild(tr2);
+            console.log(result5);
+          //  result5.appendCHild();
 
           }
+          var totalCosts = document.getElementById('totalCosts');
+          var totalFuels = document.getElementById('totalFuels');
+          var totalTrips = document.getElementById('totalTrips');
+          totalTrips.innerHTML = "Kokku oled sõitnud "+totaltrip+" kilomeetrit";
+          totalFuelCosts.innerHTML = "Kokku oled kulutanud "+totalLiters+" liitrit kütust " + totalMoneys + " € eest.";
+
+          // var htmlToInsert = '<table>';
+          // for (var i = 0; i < result.length; i++) {
+          //   htmlToInsert += '<tr>';
+          //   htmlToInsert += '<td>' + result[i].fuelCost + '</td>';
+          //   htmlToInsert += '<td>' + result[i].fuelQuantity + '</td>';
+          //   htmlToInsert += '<td>' + result[i].trip + '</td>';
+          //
+          //   htmlToInsert += '</tr>';
+          //   htmlToInsert += '</table>';
+          // }
         }
       };
       xhttp.open("GET", "saveData.php", true);
