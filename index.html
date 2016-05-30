@@ -1,35 +1,23 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Geolocation</title>
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-    <meta charset="utf-8">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-    <style>
-      html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-      #map {
-        height: 100%;
-      }
-    </style>
-  </head>
-  <body>
-    <button id="menutoggle">menu</button>
-    <div id="menu">
-      <input type="text" id="username">
-      <select name="mapselect" id="mapselect">
-        <option value="map1">map1</option>
-        <option value="map2">map2</option>
-      </select>
-      <button id="start">start</button><br>
-      <button id="stop">stop</button>
-    </div>
-    <div id="map"></div>
-    <script src="gps.js"></script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDuq0LX-zgHInF8_dyogcUqXkBdM1K0gfk&callback=initMap">
-    </script>
-  </body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Tracking app</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script src="script.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Quicksand">
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+  <h1>GPS Jälgimine</h1>
+  <div id="main">
+    <input type="hidden" id="lat" name="lat">
+    <input type="hidden" id="lng" name="lng">
+    <button id="start">start</button><br>
+    <button id="stop">stop</button><br>
+    <button id="delete">nulli andmed</button><br>
+    <div id="trackingtext" style="visibility: hidden"><h3>jälgimine käib</h3></div>
+    <a href="map.html">mine vaata oma teekonda</a>
+  </div>
+</body>
 </html>
