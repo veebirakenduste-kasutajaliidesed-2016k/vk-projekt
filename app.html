@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AutoAed</title>
+  <script src="app.js"></script>
+  <link rel="stylesheet" href="app.css">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
+  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBiEljP0DD9HmLBZkKilPKh_5ExyNL2J0g"></script>
+
+
+</head>
+<body>
+
+  <nav class="menu">
+    <ul class="menu-list">
+
+      <li class="menu-item"><a href="#home-view" class="menu-link home-view active-menu">Avaleht</a></li>
+      <li class="menu-item"><a href="#list-view" class="menu-link list-view">Loend</a></li>
+      <li class="menu-item"><a href="#manage-view" class="menu-link manage-view">Haldus</a></li>
+
+    </ul>
+  </nav>
+
+  <main role="main">
+
+    <div id="list-view">
+        <h1>Loend</h1>
+        <input type="search" placeholder="Enter keyword" id="search"><br>
+		<div id="makeAmap"></div>
+        <ul class="list-of-cars"></ul>
+        <!-- Muutmine -->
+      <!-- Modal -->
+      <div class="modal fade" id="ModalEdit" tabindex="-1" role="dialog"
+         aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <button type="button" class="close"
+                       data-dismiss="modal">
+                           <span aria-hidden="true">&times;</span>
+                           <span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">Muuda</h4>
+                </div>
+
+                <!-- Modal Body -->
+                <div class="modal-body">
+
+                    <form class="form-horizontal" role="form">
+                      <div class="form-group">
+                        <label  class="col-sm-2 control-label" for="EditTitle">Mark</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="EditTitle" class="EditTitle" placeholder="Mark">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label  class="col-sm-2 control-label" for="EditColor">Värv</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="EditColor" class="EditColor" placeholder="Värv">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-sm-2 control-label" for="EditSeats" >Istekohad</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="EditSeats" class="EditSeats" placeholder="Istekohad">
+                        </div>
+                      </div>
+					  <div class="form-group">
+                        <label class="col-sm-2 control-label" for="EditAddress" >Aadress</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="EditAddress" class="EditAddress" placeholder="Aadress">
+                        </div>
+                      </div>
+
+                    <button id="edit_close" type="button" class="btn btn-default" data-dismiss="modal">Sulge</button>
+                    <button id="save" type="button" class="btn btn-primary btn pull-right" data-dismiss="modal">Salvesta</button>
+                </div>
+            </div>
+        </div>
+      </div>
+				
+
+
+    </div>
+
+    <div id="manage-view">
+        <h1>Haldus</h1>
+
+        <div class="feedback-success" id="show-feedback"></div>
+
+
+
+        <label for="title">Mark: </label><br>
+        <input type="text" name="title" class="title"><br>
+
+        <label for="color">Värv: </label><br>
+        <input type="text" name="color" class="color"><br>
+
+        <label for="seats">Istekohtade arv: </label><br>
+        <input type="text" name="seats" class="seats"><br>
+
+		<label for="address">Aadress: </label><br>
+        <input type="text" name="address" class="address"><br>
+		
+		<br>
+		
+
+        <button class="add-new-car">Lisa auto</button>
+		<div id="map"></div>
+		
+		<br>
+    </div>
+
+    <div id="home-view">
+        <h1>Avaleht</h1>
+        <div id="counter"></div>
+    </div>
+
+  </main>
+
+</body>
+</html>

@@ -1,0 +1,1 @@
+[{"id":"2ae693cb-a42e-4401-9bd9-78623a715326","title":"mzda","color":"dasfaf","seats":"32","address":"\u00f5le 13"}]
