@@ -1,0 +1,32 @@
+.hidden {
+	display:none;
+}
+.show {
+	display:inline;
+}
+#data {
+	
+}
+.data {
+	width: 300px;
+	margin: 20px;
+	float: left;
+	overflow: hidden;
+	border: 1px solid rgba(0,0,0,0.2);
+}
+h1{
+	text-align: center;
+	margin: 0px 0px 0px 0px;
+	color: #fff;
+	font-size: 26px;
+	text-shadow: 1px 1px 0px rgba(0,0,0,0.3);
+	letter-spacing: -1px;
+}
+#alert{ 
+	color: #111;
+	font-family: 'Helvetica Neue', sans-serif;
+	font-size: 20px;
+	font-weight: bold;
+	letter-spacing: -1px;
+	line-height: 3;
+}
