@@ -2,19 +2,7 @@
 var $grid;
   var done = 0;
 $(function() {
-//välja kuvamine
-
-
-
-//
-
-
-
-  //laetud
-
-
-  //getTweets();
-
+	
   $('#searchbutton').on("click", function(){
       var param = $('#searchfield').val();
       console.log(param);
@@ -78,7 +66,7 @@ function getOki(param){
       var array = JSON.parse(data);
 			console.log(array);
 			for(var i = 0; i<array.length;i++){
-				$('body').append("<a href="+array[i].href+" class='item oki'><img src="+array[i].image+"/><h1>"+array[i].title+"</h1><p>"+array[i].desc+"</p></a>");
+				$('body').append("<a href="+array[i].href+" class='item oki'><img src="+array[i].image+"><h1>"+array[i].title+"</h1><p>"+array[i].desc+"</p></a>");
 			}
 			//printTweets(array);
       done++;
@@ -105,7 +93,7 @@ function printSoov(newPosts){
 
 	$(newPosts).each(function(i, post){
 
-		html += '<div class="item"><h1>'+post.title+'</h1><img src='+post.image+'/><p><a href=#>'+post.title+'</p><p>'+post.desc+'</p></div>';
+		html += '<div class="item"><h1>'+post.title+'</h1><img src='+post.image+'><p><a href=#>'+post.title+'</p><p>'+post.desc+'</p></div>';
 
 	});
 
