@@ -109,8 +109,19 @@
 
       document.querySelector('.'+this.currentRoute).className += ' active-menu';
 
-    }
+    },
 
+    startCacheListeners: function(){
+      window.addEventListener('load', function(e) {
+
+        window.applicationCache.addEventListener('updateready', function(e) {
+          if (window.applicationCache.status == window.applicationCache.UPDATEREADY) {
+              appCache.swapCache();
+            }
+        }, false);
+
+      }, false);
+    }
   };
 
   window.onload = function(){

@@ -1,0 +1,10 @@
+CACHE MANIFEST
+# 2016-05-30 v0.0.7
+http://sc-callback.azurewebsites.net/scripts.js
+http://sc-callback.azurewebsites.net/index.html
+http://sc-callback.azurewebsites.net/callback.html
+http://sc-callback.azurewebsites.net/style.css
+http://sc-callback.azurewebsites.net/navbar.jpg
+
+NETWORK:
+*
