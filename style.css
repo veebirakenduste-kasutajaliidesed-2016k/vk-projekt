@@ -1,0 +1,181 @@
+table, th, td {
+    border: 1px solid #ddd;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 2px;
+    text-align: center;
+}
+main > * {
+    display: none;
+    padding: 1px;
+}
+main > *:last-child {
+    display: block;
+}
+main > *:target {
+    display: block;
+}
+main > *:target ~ * {
+    display: none;
+}
+
+h1 {
+  text-align: center;
+  font-variant: small-caps;
+  margin-top: 100px;
+}
+
+button {
+    background-color: grey;
+    border: none;
+    color: #ddd;
+    padding: 10px 24px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 12px;
+}
+
+.start-new-game {
+  margin-top: 12px;
+}
+
+#home-view, #info-view, #game-view, #game-history {
+  text-align: center;
+}
+
+input[type=text]:focus {
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+
+.save-result {
+  margin-top: 36px;
+}
+
+.qtyminus{
+  background-color: green;
+  border: none;
+  color: white;
+  padding: 34px 34px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border-radius: 50%;
+  margin-right: 20px;
+}
+
+.qtyminus:hover {
+  opacity: 0.50;
+}
+
+.qtyplus {
+  background-color: red;
+  border: none;
+  color: white;
+  padding: 34px 34px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border-radius: 50%;
+  margin-left: 20px;
+}
+.qtyplus:hover {
+  opacity: 0.50;
+}
+
+button:hover {
+  opacity: 0.75;
+}
+
+.menu {
+    line-height: 1;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 0;
+    color: black;
+    padding-top: 10px;
+    padding-left: 10px;
+    position: absolute;
+    left: 0;
+    right: 0;
+}
+.menu-list {
+    position: relative;
+    display: -webkit-flex;
+    text-align: center;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.menu-item {
+    display: block;
+    margin: 0 0 10px 0;
+}
+.menu-link {
+    color: grey;
+    font-size: 18px;
+    font-weight: bold;
+    align-items: center;
+    display: block;
+    padding: 10px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+    -khtml-user-select: none;
+    -webkit-tap-highlight-color: black;
+    text-decoration: none;
+    border: 2px solid rgba(0, 0, 0, 0);
+}
+.menu-link:hover,
+.menu-link:focus {
+    outline: none;
+}
+
+html, body{
+  min-height: 100%;
+}
+body{
+  position: relative;
+}
+.modal{
+ visibility: hidden;
+ background-color: white;
+ border-radius: 5px;
+ box-shadow: 300px 300px 300px 300px rgba(0,0,0,0.5);
+ height:200px;
+ width:300px;
+ position: fixed;
+ top:50%;
+ left:50%;
+ margin-left: -150px;
+ margin-top:-100px;
+}
+
+.modal::backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: red;
+}
