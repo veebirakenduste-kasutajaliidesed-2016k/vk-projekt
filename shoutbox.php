@@ -1,9 +1,12 @@
+
 <?php
+include_once('online.php');
 
 define("HOST", "localhost");
 define("USER", "if15");
 define("PASSWORD", "ifikad15");
 define("DB", "if15_jekavor");
+
 
 //
 function connect($db, $user, $password){
@@ -76,6 +79,7 @@ else{
 	}
 	mysql_close($link);
 }
+echo "Praegu online: <b>".sizeof(file($base))."</b>";
 
 
 ?>
