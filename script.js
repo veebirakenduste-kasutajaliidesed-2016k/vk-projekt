@@ -84,9 +84,7 @@
               console.log(tracks);
               var listNr=0;
                   $(tracks).each(function(index, track) {
-                    //var reverse = [tracks.reverse()];
                     $('#results').each(function() {
-
                       var href = tracks.uri;
                       listNr ++;
                       $(this).append($('<a id="list'+listNr+'"></a>').attr('value', href).html(track.title));
