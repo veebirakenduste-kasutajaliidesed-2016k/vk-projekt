@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en" manifest="Cache.manifest">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>My Little SoundCloud App</title>
+      <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+      <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/2.2.2/isotope.pkgd.min.js"></script>
+      <script src="https://connect.soundcloud.com/sdk/sdk-3.1.1.js"></script>
+      <script src="http://connect.soundcloud.com/sdk.js"></script>
+      <script src="https://w.soundcloud.com/player/api.js"></script>
+      <script src="https://www.promisejs.org/polyfills/promise-done-7.0.4.min.js"></script>
+      <script src="script.js"></script>
+      <link rel="stylesheet" href="style.css">
+    </head>
+
+    <body>
+
+      <nav class="menu">
+        <ul class="menu-list">
+          <li class="menu-item"><a href="#home-view" class="menu-link home-view active-menu">Little SC App</a></li>
+          <li class="menu-item"><a href="#listen-view" class="menu-link listen-view">Listen</a></li>
+          <li class="menu-item"><a href="#account-view" class="menu-link account-view">Account</a></li>
+        </ul>
+
+        <div class="logged-in">
+          <p href="#account-view">
+            <p id="login">Logged in as: <span id="username"></span></p>
+          </p>
+        </div>
+      </nav>
+
+    <main role="main">
+
+      <div id="listen-view">
+        <h1>Listen</h1>
+
+        <iframe id="embed" width="100%" height="450" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/253784004&amp;auto_play=true&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true"></iframe>
+
+        <div id="searchbox">
+          <input type="search" placeholder="Enter keyword" id="search"><br>
+        </div>
+        <ul id="results"></ul>
+      </div>
+
+      <div id="account-view">
+          <h1>Your Account</h1>
+
+          <img id="avatar_url">
+
+        <div id="account-info">
+
+            <p id="">
+              First name: <span id="first_name"></span><br><br>
+              Last name: <span id="last_name"></span><br><br>
+              Country: <span id="country"></span><br><br>
+              Description: <span id="description"></span><br><br>
+              <a id="permalink_url">Visit your Soundcloud profile</a><br><br>
+              Followers: <span id="followers_count"></span>
+            </p>
+
+        </div>
+      </div>
+
+      <div id="home-view">
+        <div id="landing">
+            <h2>Welcome to my little SoundCloud App!</h2>
+            <p>On this page you can search and listen to music straight from SoundCloud!</p>
+        </div>
+      </div>
+
+    </main>
+
+    </body>
+</html>
