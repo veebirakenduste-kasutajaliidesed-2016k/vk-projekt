@@ -37,8 +37,6 @@
       });
     });
 
-    window.App = App;
-
     App.routes = {
         'home-view':{
             'render': function(){
@@ -83,11 +81,17 @@
           console.log(search);
           SC.get('/tracks', { genres: search }, function(tracks) {
               $('#results').empty();
-                  //console.log($('#results').value);
+              console.log(tracks);
+              var listNr=0;
                   $(tracks).each(function(index, track) {
-                    $('#results').append($('<li><a id="list"></a></li>').html(track.title + ' - ' + track.genre));
-                    //console.log(track.uri);
-                    //document.querySelector('#list').addEventListener("click", function() {document.getElementById('embed').src = "https://w.soundcloud.com/player/?url=" + track.uri + "&amp;auto_play=true&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true";});
+                    //var reverse = [tracks.reverse()];
+                    $('#results').each(function() {
+
+                      var href = tracks.uri;
+                      listNr ++;
+                      $(this).append($('<a id="list'+listNr+'"></a>').attr('value', href).html(track.title));
+                      document.querySelector('#list'+listNr).addEventListener("click", function() {document.getElementById('embed').src = "https://w.soundcloud.com/player/?url=" + track.uri + "&amp;auto_play=true&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true";});
+                    });
                   });
           });
         }
