@@ -37,7 +37,7 @@ function getSoov(param){
 					array[i].desc.substring(0, 175);
 					array[i].desc += "...";
 				}
-				$('body').append("<a class='item soov' href="+array[i].href+"><img src="+array[i].image+"/><h1>"+array[i].title+"</h1><p>"+array[i].desc+"</p></a>");
+				$('body').append("<a class='item soov' href="+array[i].href+"><img src="+array[i].image+"><h1>"+array[i].title+"</h1><p>"+array[i].desc+"</p></a>");
 			}
       done++;
       doneRequest();
@@ -120,7 +120,7 @@ function printOki(newPosts){
 
 	$(newPosts).each(function(i, post){
 
-    html += '<div class="item"><h1>'+post.title+'</h1><img src='+post.image+'/><p><a href=#>'+post.title+'</p><p>'+post.desc+'</p></div>';
+    html += '<div class="item"><h1>'+post.title+'</h1><img src='+post.image+'><p><a href=#>'+post.title+'</p><p>'+post.desc+'</p></div>';
 
 
 	});
