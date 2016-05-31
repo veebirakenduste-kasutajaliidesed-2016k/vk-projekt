@@ -24,13 +24,21 @@ Võib teha üksi või kahekesi
     * funktsionaalsuse loetelu prioriteedi järjekorras, nt
         * v0.1 Kuvab asendi ja kui telefon selles asendis, siis ütleb järgmise.  TEHTUD!
         * v0.2 Punktide arvestus
+        * v0.3 Mäng kestab 10 sec, kuvab skoori
+        * v0.4 Nupp uue mängu alustamiseks 
+        * v0.5 Nime küsimine, skoori salvestamine serverisse
+        * v0.6 Taust roheliseks õige vastuse korral, muidu punane, tekst suuremaks.
+        * v0.7 High skoori kuvamine (5 paremat)? + nupp high score nägemiseks
+        * 
+        * (v0.1 Kuvab asendi ja kui telefon selles asendis, siis ütleb järgmise.  TEHTUD!
+        * v0.2 Punktide arvestus
         * v0.3 Ajalimiidi lisamine ühe külje keeramiseks.
         * v0.4 3 valega mängu lõpp
         * v0.5 Nime küsimine ja skoori salvestamine serverisse.
         * v0.6 Aeg kiiremaks
         * 
         * v1.0.1 Heli lisamine (ütleb asendi)
-        * ...
+        * ...)
     * andmete liikumise skeem loetava pildina (mis lehed ja mis andmeid mis lehel käideldakse);
 
 2. **Veebirakenduse nõuded:**
