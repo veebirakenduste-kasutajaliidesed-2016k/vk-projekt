@@ -115,6 +115,7 @@
 	
     this.bindEvents();
 	this.addMarker();
+	
     },
 	MakeMap: function(){
 		
@@ -135,7 +136,7 @@
 			};
 			
 			this.map = new google.maps.Map(this.container, options);
-
+			var map2 = new google.maps.Map(document.getElementById("map_canvas2"), options);
 		
 	},
 	addMarker: function(geocoder, resultsMap){
@@ -166,16 +167,30 @@
 							var marker = new google.maps.Marker({
 							map: map,
 							position: results[0].geometry.location
+							
 							});
+							//console.log(address);
+							var cars = JSON.parse(localStorage.cars);
+														
+							for(var i=0; i<cars.length; i++){
+									if(cars[i].address==marker.position){
+										console.log(cars[i].title);
+										var infoOptions = {
+										content: cars[i].title
+										};
+									}
+									
+							}
+									var infoWindow = new google.maps.InfoWindow(infoOptions);
+									infoWindow.open(map, marker);
+							
+							
 					} else { alert('Geocode was not successful for the following reason: ' + status); }
 					});
 		 }
 	}
-	
-	
-
 	},
-	
+
 	countCars: function(){
 		var counter=0;
 		this.cars = JSON.parse(localStorage.cars);

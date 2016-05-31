@@ -195,8 +195,13 @@ td {
 	
 	text-align: center;
 
-	border: 0;
-    border-top: 1px solid rgb(146, 168, 209);
+
+}
+#map_canvas2{
+	position: absolute;
+    top: 8px;
+    right: 250px;
+    font-size: 18px;
 }
 
 input {
