@@ -145,11 +145,13 @@
 		console.log(geocoder+'siin');
 		var geocoder = new google.maps.Geocoder();
 		
-		
-		 
-	var address = document.getElementById('address').value;
-	console.log(address+'address');
-		geocoder.geocode({'address': address}, function(results, status) {
+	 this.cars = JSON.parse(localStorage.cars);
+	 console.log(this.cars);
+	 for(var i=0; i<this.cars.length; i++){
+		 if(this.cars[i].address != ""){
+			 var address = this.cars[i].address;
+			 console.log(address+' address');
+			 		geocoder.geocode({'address': address}, function(results, status) {
     if (status === google.maps.GeocoderStatus.OK) {
       resultsMap.setCenter(results[0].geometry.location);
       var marker = new google.maps.Marker({
@@ -160,6 +162,11 @@
       alert('Geocode was not successful for the following reason: ' + status);
     }
   });
+		 }
+	 }
+	
+	
+
 	},
 	
 	countCars: function(){
