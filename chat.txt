@@ -1,0 +1,8 @@
+ <div class="chatmsg"><b>Yasuo</b>: PENTAKILL<br/></div>
+<div class="chatmsg"><b>Yasuo</b>: Damn, I did it<br/></div>
+<div class="chatmsg"><b>Yasuo</b>: This is how we do<br/></div>
+<div class="chatmsg"><b>Xin Zhao</b>: Lucky lucky<br/></div>
+<div class="chatmsg"><b>Anonymous</b>: Noob detected<br/></div>
+<div class="chatmsg"><b>Anonymous</b>: Ready to hack<br/></div>
+<div class="chatmsg"><b>Anonymous</b>: Tere<br/></div>
+<div class="chatmsg"><b>toomas</b>: tere tere<br/></div>
