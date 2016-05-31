@@ -5,7 +5,7 @@ define("USER", "if15");
 define("PASSWORD", "ifikad15");
 define("DB", "if15_jekavor");
 
-
+//
 function connect($db, $user, $password){
 	$link = mysql_connect($db, $user, $password);
 	if (!$link)
