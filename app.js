@@ -110,10 +110,11 @@
 		
 	   }
 	  
-	
+	this.countCars();
 	this.MakeMap();
-	this.addMarker();
+	
     this.bindEvents();
+	this.addMarker();
     },
 	MakeMap: function(){
 		
@@ -134,46 +135,45 @@
 			};
 			
 			this.map = new google.maps.Map(this.container, options);
+			var geocoder = new google.maps.Geocoder();
+		document.querySelector('.add-new-car').addEventListener('click', function() {
+          geocodeAddress(geocoder, this.map);
+        });
 		
-			this.map.addListener('click', function(e){
-				console.log(e.latLng.lat());
-				AutoAed.instance.addMarker(e.latLng.lat(), e.latLng.lng());
-			});
 	},
-	addMarker: function(newLat, newLng){
+	addMarker: function(geocoder, resultsMap){
+		console.log(geocoder+'siin');
+		var geocoder = new google.maps.Geocoder();
+		
+		
+		 
+	var address = document.getElementById('address').value;
+	console.log(address+'address');
+		geocoder.geocode({'address': address}, function(results, status) {
+    if (status === google.maps.GeocoderStatus.OK) {
+      resultsMap.setCenter(results[0].geometry.location);
+      var marker = new google.maps.Marker({
+        map: resultsMap,
+        position: results[0].geometry.location
+      });
+    } else {
+      alert('Geocode was not successful for the following reason: ' + status);
+    }
+  });
+	},
 	
-			var geocoder;
-			geocoder = new google.maps.Geocoder();
-			
-  if (geocoder) {
-    geocoder.geocode({
-      'address': address
-    }, function(results, status) {
-      if (status == google.maps.GeocoderStatus.OK) {
-        if (status != google.maps.GeocoderStatus.ZERO_RESULTS) {
-          map.setCenter(results[0].geometry.location);
+	countCars: function(){
+		var counter=0;
+		this.cars = JSON.parse(localStorage.cars);
+		
+       for(var i=0; i<this.cars.length; i++){
+         if(this.cars[i].id != ""){
+			counter++;
+         }
+       }
 
-          var infowindow = new google.maps.InfoWindow({
-            content: '<b>' + address + '</b>',
-            size: new google.maps.Size(150, 50)
-          });
-
-          var marker = new google.maps.Marker({
-            position: results[0].geometry.location,
-            map: map,
-            title: address
-          });
-          google.maps.event.addListener(marker, 'click', function() {
-            infowindow.open(map, marker);
-          });
-
-        }
-  
-	}
-	});
-  }
-
-					google.maps.event.addDomListener(window, 'load', addMarker);
+	   document.getElementById("arv").innerHTML="Kuulutusi hetkel "+counter; 
+		console.log(counter);
 	},
     bindEvents: function(){
       document.querySelector('.add-new-car').addEventListener('click', this.addNewClick.bind(this));
