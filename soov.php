@@ -55,7 +55,10 @@
 
 	//file_put_contents($file_name, json_encode($searches));
 	//var_dump($searches);
-	echo json_encode($searches);
+	//$searches = preg_replace('/\s+/', '', $searches);
+	$searches = json_encode($searches);
+	$searches = preg_replace('[^\\S ]', '', $searches);
+	echo $searches;
 
 
 }

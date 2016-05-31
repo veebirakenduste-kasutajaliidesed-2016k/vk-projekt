@@ -41,9 +41,16 @@ function getSoov(param){
       console.log("loaded");
 			//stringi teen massiiviks
 			//var array = JSON.parse(data).statuses;
-      var array = JSON.parse(data);
+      		var array = JSON.parse(data);
 			console.log(array);
-
+			for(var i = 0; i<array.length;i++){
+				console.log(array[i].desc.length);
+				if(array[i].desc.length > 175){
+					array[i].desc.substring(0, 175);
+					array[i].desc += "...";
+				}
+				$('body').append("<a class='item soov' href="+array[i].href+"><img src="+array[i].image+"/><h1>"+array[i].title+"</h1><p>"+array[i].desc+"</p></a>");
+			}
       done++;
       doneRequest();
 			//printTweets(array);
@@ -70,6 +77,9 @@ function getOki(param){
 			//var array = JSON.parse(data).statuses;
       var array = JSON.parse(data);
 			console.log(array);
+			for(var i = 0; i<array.length;i++){
+				$('body').append("<a href="+array[i].href+" class='item oki'><img src="+array[i].image+"/><h1>"+array[i].title+"</h1><p>"+array[i].desc+"</p></a>");
+			}
 			//printTweets(array);
       done++;
       doneRequest();
