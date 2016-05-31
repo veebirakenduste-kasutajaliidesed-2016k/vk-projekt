@@ -19,7 +19,6 @@
 
     };
 
-
     SC.initialize({
       client_id: 'af8624e04e20f5c2f2112fa49cada87a',
       redirect_uri: 'http://sc-callback.azurewebsites.net/callback.html'
@@ -84,25 +83,15 @@
           console.log(search);
           SC.get('/tracks', { genres: search }, function(tracks) {
               $('#results').empty();
-                  console.log($('#results').value);
+                  //console.log($('#results').value);
                   $(tracks).each(function(index, track) {
-                    $('#results').append($('<li id="list"></li>').html(track.title + ' - ' + track.genre));
+                    $('#results').append($('<li><a id="list"></a></li>').html(track.title + ' - ' + track.genre));
+                    //console.log(track.uri);
+                    //document.querySelector('#list').addEventListener("click", function() {document.getElementById('embed').src = "https://w.soundcloud.com/player/?url=" + track.uri + "&amp;auto_play=true&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true";});
                   });
           });
         }
     },
-
-    player: function() {
-      window.onload = function(){
-            var iframe = document.querySelector('#widget');
-            iframe.src = 'http://w.soundcloud.com/player/?url=http://api.soundcloud.com/tracks/43315398&auto_play=true';
-
-            var widget = SC.Widget(iframe);
-
-            widget.bind(SC.Widget.Events.PLAY, function(eventData) {
-                alert('Playing...');
-            });
-    };},
 
     routeChange: function(event){
         this.currentRoute = location.hash.slice(1);
