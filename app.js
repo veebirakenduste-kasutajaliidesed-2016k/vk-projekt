@@ -109,7 +109,7 @@
 		xhttp.send();
 		
 	   }
-	  
+	this.lastUpdate();
 	this.countCars();
 	this.MakeMap();
 	
@@ -179,8 +179,15 @@
          }
        }
 
-	   document.getElementById("arv").innerHTML="Kuulutusi hetkel "+counter; 
+	   document.getElementById("count").innerHTML="Kuulutusi hetkel "+counter; 
 		console.log(counter);
+	},
+	lastUpdate: function(){
+	
+		
+			var timeAdded = this.writeDate2();
+			document.getElementById("clock").innerHTML="Viimati uuendatud "+timeAdded; 
+		
 	},
     bindEvents: function(){
       document.querySelector('.add-new-car').addEventListener('click', this.addNewClick.bind(this));
@@ -336,13 +343,28 @@
       document.querySelector('.'+this.currentRoute).className+=' active-menu';
     },
 	writeDate : function(){
-		  var d = new Date();
-		  var day = d.getDate();
-		  var month = d.getMonth();
-		  var year = d.getFullYear();
+		var d = new Date();
+		var day = d.getDate();
+		var month = d.getMonth();
+		var year = d.getFullYear();
+		var hours= d.getHours("H");
+		var minutes= d.getMinutes("Min");
+		var seconds = d.getSeconds("Sec");
 		  //#clock element htmli
-		  var curTime = this.addZeroBefore(day)+"."+this.addZeroBefore(month+1)+"."+year;
+		  var curTime = this.addZeroBefore(day)+"."+this.addZeroBefore(month+1)+"."+year+" ";
 		  return curTime;
+	},
+		writeDate2 : function(){
+		var d = new Date();
+		var day = d.getDate();
+		var month = d.getMonth();
+		var year = d.getFullYear();
+		var hours= d.getHours("H");
+		var minutes= d.getMinutes("Min");
+		var seconds = d.getSeconds("Sec");
+		  //#clock element htmli
+		  var curTime2 = this.addZeroBefore(day)+"."+this.addZeroBefore(month+1)+"."+year+" "+this.addZeroBefore(hours)+":"+this.addZeroBefore(minutes);
+		  return curTime2;
 	},
 	addZeroBefore : function(number){
 		  if(number<10){

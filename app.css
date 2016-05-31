@@ -177,7 +177,7 @@ td {
     margin-bottom: 10px;
 
 }
-#arv{
+#count{
 	
 	font-weight: bold;
     display: block;
@@ -190,6 +190,13 @@ td {
 	 width;200px;
 	 margin: 0;
 	 padding: 0;
+}
+#clock{
+	
+	text-align: center;
+
+	border: 0;
+    border-top: 1px solid rgb(146, 168, 209);
 }
 
 input {
