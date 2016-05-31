@@ -13,6 +13,11 @@
     this.tracks = tracks;
     this.current_basket = 0;
 
+    //CACHE
+    this.cache = window.applicationCache;
+    this.startCacheListeners();
+
+
     this.games = [];
 
     if(localStorage.games){
@@ -297,6 +302,19 @@
     closeHistory: function(){
       //console.log('sulgme');
       document.getElementById("game-details").style.visibility = "hidden";
+    },
+
+    startCacheListeners: function(){
+        window.applicationCache.addEventListener('updateready',function(){
+            window.applicationCache.swapCache();
+            console.log('swap cache has been called');
+        },false);
+
+
+        setInterval(function(){
+            Discgolf.instance.cache.update();
+            //kontrollib cache'i iga 10s tagant
+        }, 10000);
     },
 
     startGame: function(e){
