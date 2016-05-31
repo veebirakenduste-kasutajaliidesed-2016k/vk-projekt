@@ -237,7 +237,7 @@
 
       if(this.current_basket == track.baskets.length-1){
         // console.log(this.games[game_index]);
-        this.games[game_index].ended = new Date();
+        this.games[game_index].ended = new Date().toDateString();
         localStorage.setItem('games', JSON.stringify(this.games));
 
         window.location.hash = 'game-history';
