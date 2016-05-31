@@ -48,7 +48,7 @@ else{
 	$link = connect(HOST, USER, PASSWORD);
 	switch($_POST['action']){
 		case "update":
-			$res = getContent($link, 20);
+			$res = getContent($link, 30);
 			$result = "";
 			$temparray = array();
 
@@ -65,7 +65,7 @@ else{
 
 			//result
 			foreach($temparray as $row){
-				$result .= "<p><strong>".$row['user']."</strong><img src=\"css/images/bullet.gif\" alt='-\' >".$row['message']." <span class=\"date\">".$row['date']."</span></p>";
+				$result .= "<p><strong><font color='0066CC'>".$row['user']."</strong></font><img src=\"css/images/bullet.gif\" alt='-\' >".$row['message']." <span class=\"date\">".$row['date']."</span></p>";
 			}
 
 			echo $result;

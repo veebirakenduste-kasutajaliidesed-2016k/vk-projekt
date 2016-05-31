@@ -26,7 +26,7 @@ body {
 }
 
 
-#form {
+.speech{
   position: absolute;
   bottom: 0;
   width: calc(100% - 8px);
@@ -69,14 +69,14 @@ body {
   color: #fff
 }
 
-.content, p {
+.content {
   padding: 10px;
   margin: 13px 17px;
   width: 200px;
   font-size: 14px
 }
 
-.chat_bubble-1 {
+p {
   border: 1px solid teal;
   border-radius: 12px 12px 12px 0
 }
@@ -87,8 +87,8 @@ body {
   margin-left: 160px
 }
 
-.speech {
-  max-height: calc(75vh - 86px - 29px);
+.content {
+ /* max-height: calc(75vh - 106px - 9px);*/
   overflow-y: scroll;
   padding: 15px 0 0
 }

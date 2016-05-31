@@ -35,10 +35,10 @@
 	//Load for the first time the shoutbox data
 	updateShoutbox();
 	//INTERVAL
-	window.setInterval(function(){
+/*	window.setInterval(function(){
 		//loading.fadeOut();
 		updateShoutbox();
-	},3000);
+	},3000);*/
 	
 	
 	function getMessages(letter) {

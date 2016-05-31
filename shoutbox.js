@@ -31,28 +31,28 @@
 		else
 			return false;
 	}
-
+	
 	//Load for the first time the shoutbox data
 	updateShoutbox();
-	//INTERVAL
-/*	window.setInterval(function(){
+	
+	//INTERVAL	
+	window.setInterval(function(){
 		//loading.fadeOut();
 		updateShoutbox();
-	},3000);*/
+	},3000);
 	
 	
 	function getMessages(letter) {
 		var div = $("#messages");
 		$.get('shoutbox.php', function(data) {
-			div.html(data);   
+			div.html(data); 		
 		});
 	}
 	
 	window.setInterval(function(){
 		//loading.fadeOut();
 		getMessages();
-	},100);
-	
+	},1000);
 	
 /*	function tryYourself(){
 		$('div p').each(function(i, value){
@@ -63,8 +63,6 @@
 		//$('div p'').animate({scrollTop: height});
 
 	}*/
-	
-	
 	
 	//on submit event
 	$("#form").submit(function(){
@@ -86,10 +84,11 @@
 					updateShoutbox();
 					//reactivate the send button
 					$("#send").attr({ disabled:false, value:"Send" });
-				}
+                }
+				
 			 });
 		}
-		else alert("Please, write your name and message");
+		else alert("Please, write your name or message");
 		//we prevent the refresh of the page after submitting the form
 		return false;
 	});

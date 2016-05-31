@@ -16,7 +16,7 @@ body{
 
   background: url(http://kriswhitewrites.com/wp-content/uploads/2013/06/landscape-mountains-snow-sky-1024x640.jpg);
   background-size: cover;
-  background-position: bottom
+  background-position: bottom;
 	line-height:14px;
 	font-size: 15px;
 	font-family: Arial,  Verdana, Helvetica, sans-serif;
@@ -138,6 +138,12 @@ border-radius: 75px;
 /******* LOADING *******/
 #loading{
 	text-align: center;
-	height:20px; margin-bottom:10px
+	height:20px;
+	margin-bottom:10px;
 }
 /******* /LOADING *******/
+
+p{
+	margin: 5px;
+	padding: 5px;
+}
