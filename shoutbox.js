@@ -62,6 +62,14 @@ $(document).ready(function(){
 	
 });
 
+ /* function cacheListener(){
+        window.applicationCache.addEventListener('cached',function(){
+            window.applicationCache.swapCache();
+            console.log('swap cache has been called');
+            },false);
+    }
+	*/
+
 
 
 	//on submit event
