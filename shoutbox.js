@@ -1,4 +1,4 @@
-﻿$(document).ready(function(){
+$(document).ready(function(){
 	//global variables
 	var inputUser = $("#nick");
 	var inputMessage = $("#message");
@@ -28,6 +28,7 @@
 			return false;
 	}
 	
+	
 	//Load for the first time the shoutbox data
 	updateShoutbox();
 	
@@ -39,8 +40,7 @@
 	
 	//Get messages from shoutbox.php
 	function getMessages(letter) {
-		var div = $("#messages");
-		
+		var div = $("#message");		
 		$.get('shoutbox.php', function(data) {
 			div.html(data); 		
 		});
@@ -50,8 +50,20 @@
 		//loading.fadeOut();
 		getMessages();
 	},1000);
-
 	
+
+// Check the internet connection	
+	window.onload(function connection(){
+		if (navigator.onLine == true) { 
+        console.log("You have the internet connection");
+    } else {
+        console.log("You aren't connected to the internet.");
+    }
+	
+});
+
+
+
 	//on submit event
 	$("#form").submit(function(){
 		if(checkForm()){
