@@ -6,6 +6,7 @@
 
 ##Eesmärk:
 
+
 Veebilehele on loodud tavaline chat süsteem. Alguses küsitakse nime, mida tahad kasutada,
 kui nime ei vali pannakse nimeks Anonymous. Kõik sõnumid salvestatakse txt faili.
 

@@ -5,29 +5,36 @@ var ChatEngine=function(){
      var oldata ="";
      var sevr=" ";
      var xhr=" ";
-	 
+
+     var gotInternet = navigator.online; //tee sellele appcache juurde
+
      this.init=function(){
           if(EventSource){
           this.setName();
-          this.initSevr(); 
+          this.initSevr();
+
           } else{
           alert("Use latest Chrome or FireFox");
         }
      };
      //Kasutajanime loomiseks
      this.setName=function(){
+
           name = prompt("Enter your name:","Anonymous");
           if (!name || name ==="") {
-             name = "Anonymous";  
+             name = "Anonymous";
+
           }
           name = name.replace(/(<([^>]+)>)/ig,"");
      };
      //Sonumite saatmiseks
-     this.sendMsg=function(){ 
+
+     this.sendMsg=function(){
           msg=document.getElementById("msg").value;
           chatZone.innerHTML+='<div class="chatmsg"><b>'+name+'</b>: '+msg+'<br/></div>';
-          oldata='<div class="chatmsg"><b>'+name+'</b>: '+msg+'<br/></div>';          
-          this.ajaxSent();  
+          oldata='<div class="chatmsg"><b>'+name+'</b>: '+msg+'<br/></div>';
+          this.ajaxSent();
+
           return false;
      };
      //Sonumite saatmiseks serverisse
@@ -44,20 +51,26 @@ var ChatEngine=function(){
                     if(xhr.status == 200) {
                          msg.value="";
                     }
-               }     
+
+               }
+
           };
           xhr.send();
      };
      this.initSevr=function(){
           sevr = new EventSource('chatprocess.php');
-          sevr.onmessage = function(e){ 
+          sevr.onmessage = function(e){
+
           if(oldata!=e.data){
                chatZone.innerHTML+=e.data;
                oldata = e.data;
           }
-          };     
+
+          };
+
      };
 };
 //Teeb objekte ChatEngine jaoks
 var chat= new ChatEngine();
+
 chat.init();
