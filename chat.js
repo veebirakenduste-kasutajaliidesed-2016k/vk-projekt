@@ -5,6 +5,7 @@ var ChatEngine=function(){
      var oldata ="";
      var sevr=" ";
      var xhr=" ";
+     var gotInternet = navigator.online; //tee sellele appcache juurde
 
      this.init=function(){
           if(EventSource){
