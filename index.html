@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" manifest="example.appcache">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>Chat</title>
@@ -68,10 +68,10 @@ background: #333537;
 border-radius: 5px;
 }
 </style>
-	
+
 </head>
 <body>
-	<div class="container">		
+	<div class="container">
 		<div class="chat">
 			<div id="chatZone" name="chatZone"></div>
 				<form onsubmit="chat.sendMsg(); return false;">
