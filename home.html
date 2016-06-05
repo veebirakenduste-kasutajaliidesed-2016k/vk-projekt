@@ -1,18 +1,18 @@
 <!DOCTYPE html PUBLIC>
-<!-- <html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en" manifest="sayings.appcache"> -->
-<html lang="en" manifest="sayings.appcache">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr">
 <head>
-  <!-- <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'> -->
- <!-- <link href='https://fonts.googleapis.com/css?family=Candal' rel='stylesheet' type='text/css'> -->
+	<html lang="en" manifest="sayings.appcache">
+	<link rel="stylesheet" href="bootstrap.min.css" >
+  <link href='css/font1.css' rel='stylesheet' type='text/css'>
+  <link href='css/font2.css' rel='stylesheet' type='text/css'>
   <meta charset="UTF-8">
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title> Chat </title>
 	<link rel="stylesheet" href="css/general.css" type="text/css" media="screen" />
-	<link rel="stylesheet" href="mincsss.css" type="text/css" media="screen" />
+	<!-- <link rel="stylesheet" href="style.css" type="text/css"/>-->
 </head>
 
 <body>
-
 
 
 <div id="container">
@@ -22,7 +22,7 @@
 			<p>
 		</div>
 </div>
-	<form method="post" id="form">
+	<form action="shoutbox.php" method="POST" id="form">
 				<label>Name </label><br>
 				<input class="form-control" id="nick" type="text" MAXLENGTH="25" />
 
@@ -35,6 +35,5 @@
 	</form>
 	<script type="text/javascript" src="jquery.js"></script>
 	<script type="text/javascript" src="shoutbox.js"></script>
-	
 </body>
 </html>

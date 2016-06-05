@@ -14,7 +14,7 @@ $(document).ready(function(){
 			data: "action=update", 
 			complete: function(data){
 				loading.fadeOut();
-				messageList.html(data.responseText);
+				messageList.html(data.responseText);				
 				//messageList.fadeIn("fast");
 			}
 		});
@@ -46,6 +46,7 @@ $(document).ready(function(){
 		});
 	}
 	
+
 	window.setInterval(function(){
 		//loading.fadeOut();
 		getMessages();
@@ -53,24 +54,25 @@ $(document).ready(function(){
 	
 
 // Check the internet connection	
-	window.onload(function connection(){
+	function connection(){
 		if (navigator.onLine == true) { 
         console.log("You have the internet connection");
     } else {
         console.log("You aren't connected to the internet.");
+		//messageList.innerHTML = messageList.value();				
+
     }
 	
-});
+}
 
- /* function cacheListener(){
+  function cacheListener(){
         window.applicationCache.addEventListener('cached',function(){
             window.applicationCache.swapCache();
             console.log('swap cache has been called');
             },false);
     }
-	*/
-
-
+	cacheListener();
+	
 
 	//on submit event
 	$("#form").submit(function(){
@@ -95,7 +97,6 @@ $(document).ready(function(){
 					//reactivate the send button
 					$("#send").attr({ disabled:false, value:"Send" });
                 }
-				
 			 });
 		}
 		else alert("Please, write your name or message");
@@ -103,3 +104,4 @@ $(document).ready(function(){
 		return false;
 	});
 });
+

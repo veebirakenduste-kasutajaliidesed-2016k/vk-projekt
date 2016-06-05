@@ -1,13 +1,17 @@
 CACHE MANIFEST
-# 2016-06-01 v0.0.1
+# 2016-06-05 v0.0.1
 home.html
 shoutbox.js
 css/general.css
 css/images/landscape.jpg
 css/images/loading.gif
 css/images/bubble.jpg
+css/images/bullet.gif
 jquery.js
-mincsss.css
+css/font1.css
+css/font2.css
 
 NETWORK:
-*
+shoutbox.php
+
+

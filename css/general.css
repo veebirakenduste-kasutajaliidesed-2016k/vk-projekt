@@ -13,9 +13,9 @@ padding:0pt;
 vertical-align:baseline;
 }
 body{
-
-  background: url(imges/landscape.jpg) no-repeat;
-  background-size: cover;
+ 
+  background: url(images/landscape.jpg) no-repeat;
+  background-size: cover; 
   background-position: bottom;
 	line-height:14px;
 	font-size: 15px;

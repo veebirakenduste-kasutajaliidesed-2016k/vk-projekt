@@ -7,7 +7,6 @@ define("USER", "if15");
 define("PASSWORD", "ifikad15");
 define("DB", "if15_jekavor");
 
-
 //
 function connect($db, $user, $password){
 	$link = mysql_connect($db, $user, $password);
@@ -69,6 +68,7 @@ else{
 			//result
 			foreach($temparray as $row){
 				$result .= "<p><strong><font color='0066CC'>".$row['user']."</strong></font><img src=\"css/images/bullet.gif\" alt='-\' >".$row['message']." <span class=\"date\">".$row['date']."</span></p>";
+                //$_SESSION[$result];
 			}
 
 			echo $result;
