@@ -16,6 +16,7 @@
 	this.adrs=[];
 	this.container = null;
 	this.map = null;
+	this.map2=null;
 	
 	
     this.init();
@@ -115,7 +116,7 @@
 	
     this.bindEvents();
 	this.addMarker();
-	
+	this.createMarker();
     },
 	MakeMap: function(){
 		
@@ -134,60 +135,82 @@
 				mapTypeControl: false
 							
 			};
-			
+			var geocoder = new google.maps.Geocoder;
+			var infowindow = new google.maps.InfoWindow;
 			this.map = new google.maps.Map(this.container, options);
-			var map2 = new google.maps.Map(document.getElementById("map_canvas2"), options);
+			this.map2 = new google.maps.Map(document.getElementById("map_canvas2"), options);
+			
+			var map = new google.maps.Map(document.getElementById("map_canvas2"), options);
+			
 		
+			
+			document.getElementById("map_canvas2").addEventListener('click', function(e) {
+				console.log(e.latLng.lat());
+				AutoAed.instance.createMarker(geocoder, map, infowindow,e.latLng.lat(), e.latLng.lng());
+			});
 	},
+	createMarker: function(newLat, newLng,geocoder,map2,infowindow){
+	var options= {center: {lat: 59.439252, lng: 24.7721997}, zoom:11,streetViewControl: false,mapTypeControl: false};
+	var map = new google.maps.Map(document.getElementById("map_canvas2"), options);
+	var geocoder = new google.maps.Geocoder();
+
+	var latlng ={lat: newLat, lng: newLng};
+  geocoder.geocode({'location': latlng}, function(results, status) {
+    if (status === google.maps.GeocoderStatus.OK) {
+      if (results[1]) {
+        map.setZoom(11);
+		console.log(latlng);
+        var marker = new google.maps.Marker({
+          position: latlng,
+          map: map
+        });
+        infowindow.setContent(results[1].formatted_address);
+        infowindow.open(map, marker);
+      } else {
+        window.alert('No results found');
+      }
+    } else {
+      window.alert('Geocoder failed due to: ' + status);
+    }
+  });
+    },
 	addMarker: function(geocoder, resultsMap){
 	
-				var options = {
-				center: {
-					lat: 59.439252, 
-					lng: 24.7721997
-				},
-				zoom:11,
-				//styles: [ { "elementType": "labels", "stylers": [ { "visibility": "off" } ] },{ "featureType": "water", "stylers": [ { "color": "#8080ed" } ] },{ "featureType": "road.highway", "stylers": [ { "hue": "#ff0022" } ] } ],
-				streetViewControl: false,
-				mapTypeControl: false
-							
-			};
-
+	var options= {center: {lat: 59.439252, lng: 24.7721997}, zoom:11,streetViewControl: false,mapTypeControl: false};
+	var address2=[];
 	 var map = new google.maps.Map(this.container, options);
 	 var geocoder = new google.maps.Geocoder();
 	 this.cars = JSON.parse(localStorage.cars);
 	 console.log(this.cars);
 	 for(var i=0; i<this.cars.length; i++){
-		 if(this.cars[i].address != ""){
-			 var address = this.cars[i].address;
-			 console.log(address+' address');
-			 		geocoder.geocode({'address': address}, function(results, status) {
-					if (status === google.maps.GeocoderStatus.OK) {
-							map.setCenter(results[0].geometry.location);
-							var marker = new google.maps.Marker({
-							map: map,
-							position: results[0].geometry.location
-							
-							});
-							//console.log(address);
-							var cars = JSON.parse(localStorage.cars);
-														
-							for(var i=0; i<cars.length; i++){
-									if(cars[i].address==marker.position){
-										console.log(cars[i].title);
-										var infoOptions = {
-										content: cars[i].title
-										};
-									}
-									
+		var address = this.cars[i].address;
+		geocoder.geocode({'address': address}, function(results, status) {
+				if (status === google.maps.GeocoderStatus.OK) {
+					map.setCenter(results[0].geometry.location);
+					var address2=results[0].geometry.location;
+					var marker = new google.maps.Marker({
+					map: map,
+					position: results[0].geometry.location
+					}); 
+												
+					google.maps.event.addListener(marker, 'click', function() {	
+					console.log(i);
+					var infowindow = new google.maps.InfoWindow();	
+					
+						console.log(i);
+						this.cars = JSON.parse(localStorage.cars);
+						for(var i=0; i<this.cars.length; i++){
+							if(results[0].geometry.location==address2){
+								infowindow.setContent('<div><strong>' + this.cars[i].title + '</strong><br>' +
+								this.cars[i].address +'</div>');
+								infowindow.open(map, this);
 							}
-									var infoWindow = new google.maps.InfoWindow(infoOptions);
-									infoWindow.open(map, marker);
-							
-							
+						}			
+					
+					});
 					} else { alert('Geocode was not successful for the following reason: ' + status); }
 					});
-		 }
+		 
 	}
 	},
 
@@ -197,7 +220,7 @@
 		
        for(var i=0; i<this.cars.length; i++){
          if(this.cars[i].id != ""){
-			counter++;
+			counter++; 
          }
        }
 
