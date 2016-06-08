@@ -140,40 +140,34 @@
 			this.map = new google.maps.Map(this.container, options);
 			this.map2 = new google.maps.Map(document.getElementById("map_canvas2"), options);
 			
-			var map = new google.maps.Map(document.getElementById("map_canvas2"), options);
 			
+			this.map2.addListener('click', function(e){
+				console.log(e.latLng.lat());
+				AutoAed.instance.createMarker(e.latLng.lat(), e.latLng.lng());
+			});
 		
 			
-			document.getElementById("map_canvas2").addEventListener('click', function(e) {
-				console.log(e.latLng.lat());
-				AutoAed.instance.createMarker(geocoder, map, infowindow,e.latLng.lat(), e.latLng.lng());
-			});
 	},
-	createMarker: function(newLat, newLng,geocoder,map2,infowindow){
-	var options= {center: {lat: 59.439252, lng: 24.7721997}, zoom:11,streetViewControl: false,mapTypeControl: false};
-	var map = new google.maps.Map(document.getElementById("map_canvas2"), options);
-	var geocoder = new google.maps.Geocoder();
-
-	var latlng ={lat: newLat, lng: newLng};
-  geocoder.geocode({'location': latlng}, function(results, status) {
-    if (status === google.maps.GeocoderStatus.OK) {
-      if (results[1]) {
-        map.setZoom(11);
-		console.log(latlng);
-        var marker = new google.maps.Marker({
-          position: latlng,
-          map: map
-        });
-        infowindow.setContent(results[1].formatted_address);
-        infowindow.open(map, marker);
-      } else {
-        window.alert('No results found');
-      }
-    } else {
-      window.alert('Geocoder failed due to: ' + status);
-    }
-  });
+	createMarker: function(newLat, newLng){
+				var markerOptions = {
+				map: this.map2,
+				position: {lat: newLat, lng: newLng},
+				animation: google.maps.Animation.DROP
+			};
+			console.log(newLat, newLng);
+			var newMarker = new google.maps.Marker(markerOptions);
+			
+			
+			
+			var infoWindow = new google.maps.InfoWindow();
+			infoWindow.setContent('<div><strong>' +newLat+'   ' + newLng );
+			
+		
+			infoWindow.open(this.map2, newMarker);
+			
+		
     },
+
 	addMarker: function(geocoder, resultsMap){
 	
 	var options= {center: {lat: 59.439252, lng: 24.7721997}, zoom:11,streetViewControl: false,mapTypeControl: false};
@@ -212,6 +206,7 @@
 					});
 		 
 	}
+	
 	},
 
 	countCars: function(){
