@@ -10,6 +10,8 @@ window.onload = function(){
 };
 
 jQuery(document).ready(function() {
+	
+	createNewVideo('https://www.youtube.com/watch?v=C0DPdy98e4c');
 
     // declare object for video
     var player = new MediaElementPlayer('#player1');
@@ -24,8 +26,21 @@ jQuery(document).ready(function() {
 });
 
 function getSource(){
-
-  $('#source').attr( 'src', document.getElementById('vid').value );
+	$('#videoDiv').html('');
+	createNewVideo(document.getElementById('vid').value);
+	
+	 // declare object for video
+    var player = new MediaElementPlayer('#player1');
+    $('audio,video').mediaelementplayer({
+       // automatically create these translations on load
+       translations:['es','ar','yi','zh-cn'],
+       // allow the user to add additional translations
+       translationSelector: true,
+       // start with English automatically turned on
+       startLanguage: 'en'
+   });
+	
+  //player1.loadVideoById(document.getElementById('vid').value);
   //source.setAttribute('src', document.getElementById('vid').value);
   //player1.appendChild(source);
 
@@ -38,7 +53,17 @@ function setFilter(){
 	saturation = document.getElementById('setsaturate').value;
 
 
-	player1.style.filter = 'brightness(' + brightness + '%) contrast(' + contrast + '%) saturate(' + saturation + '%)';
-	player1.style.WebkitFilter = 'brightness(' + brightness + '%) contrast(' + contrast + '%) saturate(' + saturation + '%)';
+	$('.html5-main-video').style.filter = 'brightness(' + brightness + '%) contrast(' + contrast + '%) saturate(' + saturation + '%)';
+	$('.html5-main-video').style.WebkitFilter = 'brightness(' + brightness + '%) contrast(' + contrast + '%) saturate(' + saturation + '%)';
 
+}
+
+function createNewVideo(src){
+	console.log(src);
+	var new_div = '<video width="640" height="360" id="player1" preload="none">'
+						+'<source id="source" type="video/youtube" src="'+src+'" />'
+						+'<track kind="subtitles" src="subtitles.srt" srclang="en" />'
+					+'</video>';
+		
+	$('#videoDiv').html(new_div);
 }
