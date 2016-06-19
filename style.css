@@ -32,10 +32,17 @@ main {
     margin-bottom: 10px;
     width: 100%;
 }
+.very-important-number,
+.important-number,
+.not-important-number{
+  color:red;
+}
 #search {
   border: 1px solid rgb(0, 17, 255);
 }
-.importance-title{
+.not-important-title,
+.important-title,
+.very-important-title{
   text-align: center;
   border: 1px solid rgb(150, 190, 255);
   cursor: pointer;

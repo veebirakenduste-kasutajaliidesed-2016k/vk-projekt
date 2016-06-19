@@ -54,6 +54,9 @@
   };
 
   // Kõik funktsioonid lähevad ToDo külge
+  var very_important_number = 0;
+  var important_number = 0;
+  var not_important_number = 0;
   ToDo.prototype = {
     init: function(){
       //kuulan aadressirea vahetust
@@ -67,7 +70,6 @@
         //esimesel käivitamisel vaatame urli üle ja uuendame menüüd
         this.routeChange();
       }
-
       //saan kätte ülesanded localStorage'ist kui on
       if(localStorage.tasks){
         //võtan stringi ja teen tagasi objektideks
@@ -82,10 +84,13 @@
           var imp = item.importance;
           if(imp == "very_important"){
             $('.list-of-very-important-tasks').append(li);
+            very_important_number++;
           }else if(imp == "important"){
             $('.list-of-important-tasks').append(li);
+            important_number++;
           }else if(imp == "not_important"){
             $('.list-of-not-important-tasks').append(li);
+            not_important_number++;
           }else{
             console.log("midagi oleks pidanud juhtuma");
           }
@@ -106,10 +111,13 @@
               var imp = item.importance;
               if(imp == "very_important"){
                 $('.list-of-very-important-tasks').append(li);
+                very_important_number++;
               }else if(imp == "important"){
                 $('.list-of-important-tasks').append(li);
+                important_number++;
               }else if(imp == "not_important"){
                 $('.list-of-not-important-tasks').append(li);
+                not_important_number++;
               }else{
                 console.log("midagi oleks pidanud juhtuma");
               }
@@ -121,6 +129,9 @@
         xhttp.open("GET", "save.php", true);
         xhttp.send();
       }
+      $(".very-important-number").html("["+very_important_number+"]");
+      $(".important-number").html("["+important_number+"]");
+      $(".not-important-number").html("["+not_important_number+"]");
       // esimene loogika oleks see, et kuulame hiireklikki nupul
       this.bindEvents();
     },
@@ -133,8 +144,10 @@
       $('.add-new-note').on('click', this.AddNoteClick.bind(this));
       $('.hide-notes').on('click', this.HideNotesClick.bind(this));
       $('.show-notes').on('click', this.ShowNotesClick.bind(this));
-      //kuulan trükkimist otsikastis
       $('#search').on('keyup', this.search.bind(this));
+      $('.very-important-title').on('click', this.VeryImportantClick.bind(this));
+      $('.important-title').on('click', this.ImportantClick.bind(this));
+      $('.not-important-title').on('click', this.NotImportantClick.bind(this));
     },
 
     deleteItem: function(event){
@@ -162,6 +175,18 @@
 
       for(var i = 0; i < this.tasks.length; i++){
         if(this.tasks[i].id == delete_id){
+          if(this.tasks[i].importance == "very_important"){
+            very_important_number--;
+            $(".very-important-number").html("["+very_important_number+"]");
+          }else if(this.tasks[i].importance == "important"){
+            important_number--;
+            $(".important-number").html("["+important_number+"]");
+          }else if(this.tasks[i].importance == "not_important"){
+            not_important_number--;
+            $(".not-important-number").html("["+not_important_number+"]");
+          }else{
+            console.log("Ei muutnud ülesannet arvu");
+          }
           //kustuta kohal i objekt ära
           this.tasks.splice(i, 1);
           break;
@@ -207,8 +232,6 @@
       console.log(needle);
 
       var list = $('ul.united-ul li');
-      var list2= $('ul.list-of-not-important-tasks li');
-      var list3= $('ul.list-of-very-important-tasks li');
       console.log(list);
 
       for(var i = 0; i < list.length; i++){
@@ -224,6 +247,15 @@
           li.style.display = 'none';
         }
       }
+    },
+    VeryImportantClick: function(){
+      $(".list-of-very-important-tasks").toggle('1000');
+    },
+    ImportantClick: function(){
+      $(".list-of-important-tasks").toggle('1000');
+    },
+    NotImportantClick: function(){
+      $(".list-of-not-important-tasks").toggle('1000');
     },
     LoadNotesClick: function(){
       $.PostItAll.load();
@@ -364,10 +396,13 @@
       var li = new_item.createHtmlElement();
       if(importance == "very_important"){
         $('.list-of-very-important-tasks').append(li);
+        very_important_number++;
       }else if(importance == "important"){
         $('.list-of-important-tasks').append(li);
+        important_number++;
       }else if(importance == "not_important"){
         $('.list-of-not-important-tasks').append(li);
+        not_important_number++;
       }else{
         console.log("midagi oleks pidanud juhtuma");
       }
@@ -382,6 +417,9 @@
       window.setTimeout(function(){
       $(".adding-message").css({ display: "none" });
       }, 5000);
+      $(".very-important-number").html("["+very_important_number+"]");
+      $(".important-number").html("["+important_number+"]");
+      $(".not-important-number").html("["+not_important_number+"]");
     },
 
     routeChange: function(event){
