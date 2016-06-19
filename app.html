@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>ToDo</title>
+  <script src="app.js" charset="utf-8"></script>
+  <script src="node_modules/jquery/dist/jquery.js"></script>
+  <link rel="stylesheet" href="dist/jquery.postitall.css">
+  <script src="dist/jquery.postitall.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav class="menu">
+    <ul class="menu-list">
+      <li class="menu-item"><a href="#home-view" class="menu-link home-view active-menu">Avaleht</a></li>
+      <li class="menu-item"><a href="#list-view" class="menu-link list-view">Loend</a></li>
+      <li class="menu-item"><a href="#manage-view" class="menu-link manage-view">Haldus</a></li>
+    </ul>
+  </nav>
+
+  <main role="main">
+
+    <div id="list-view">
+      <h1>Loend</h1>
+      <p class="loading">Laeb...</p><br>
+      <input type="search" placeholder="Otsi ülesannet..." id="search"><br>
+      <div class="change">
+        <p name="id_holder" class="id_holder"></p>
+        <select name="change_importance" class="change_importance">
+          <option value="very_important">väga tähtis</option>
+          <option value="important">tähtis</option>
+          <option value="not_important">pole tähtis</option>
+        </select><br>
+        <label for="change_title">Nimi: </label><br>
+        <input type="text" placeholder="..." name="change_title" class="change_title"><br>
+
+        <label for="change_task">Ülesanne: </label><br>
+        <input type="text" placeholder="..." name="change_task" class="change_task"><br>
+
+        <label for="change_due_date">Kuupäevaks: </lable><br>
+        <input type="date" name="change_due_date" class="change_due_date"><br>
+
+        <button class="cancel-change-item pull-left">Loobu</button><button class="change-item pull-left">Muuda</button><br>
+      </div>
+      <ul class="united-ul">
+        <h2 class="importance-title">Väga tähtsad ülesanded</h2>
+        <ul class="list-of-very-important-tasks"></ul>
+        <h2 class="importance-title">Tähtsad ülesanded</h2>
+        <ul class="list-of-important-tasks"></ul>
+        <h2 class="importance-title">Mitte tähtsad ülesanded</h2>
+        <ul class="list-of-not-important-tasks"></ul>
+      </ul>
+    </div>
+    <div id="manage-view">
+      <h1>Haldus</h1>
+
+      <p class="adding-message"><p>
+      <label for="importance">Tähtsus: </label><br>
+      <select name="importance" class="importance">
+        <option value="very_important">väga tähtis</option>
+        <option value="important">tähtis</option>
+        <option value="not_important">pole tähtis</option>
+      </select><br>
+
+      <!--<input type="text" name="importance" class="importance"><br>-->
+
+      <label for="title">Nimi: </label><br>
+      <input type="text" placeholder="..." name="title" class="title"><br>
+
+      <label for="task">Ülesanne: </label><br>
+      <input type="text" placeholder="..." name="task" class="task"><br>
+
+      <label for="due_date">Kuupäevaks: </lable><br>
+      <input type="date" name="due_date" class="due_date"><br>
+      <button class="add-new-item pull-right">Lisa uus ülesanne</button>
+    </div>
+    <div id="home-view">
+      <h1>Märkmed</h1>
+      <div class="notes-div">
+        <button class="add-new-note">Lisa uus märkmeleht</button><br>
+        <button class="load-notes">Laadi salvestatud märkmelehed</button><br>
+        <button class="hide-notes">Peida kõik märkmed</button>
+        <button class="show-notes">Näita kõiki märkmeid</button>
+      </div>
+    </div>
+  </main>
+
+</body>
+</html>

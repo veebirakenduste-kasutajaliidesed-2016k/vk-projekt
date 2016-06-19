@@ -1,0 +1,18 @@
+CACHE MANIFEST
+# 2016-05-18 v0.0.15
+
+CACHE:
+app.html
+app.js
+style.css
+data.txt
+save.php
+delete.php
+dist/jquery.postitall.js
+dist/jquery.postitall.css
+dist/jquery.postitall.ajax.js
+dist/jquery.postitall.chromeManager.js
+node_modules/jquery/dist/jquery.js
+
+NETWORK:
+*

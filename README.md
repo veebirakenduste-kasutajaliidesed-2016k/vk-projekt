@@ -1,6 +1,21 @@
 # Projekt
+Nimi: ToDo
+Tegija: Tauri Kirsipuu
+Eesmärk: Teha endale ToDo list, et saaks jälgida tegevusi, mis vajavad tegemist.
+Funktsionaalus:
+  * Saab lisada ülesandeid
+  * Saab kustutada ülesandeid
+  * Saab muuta ülesandeid
+  * Saab otsida ülesandeid märksõnadega
+  * Saab lisada märkmelehti
+  * Saab märkmelehti peita
+  * Saab märkmelehti localStorage'ist laadida
+  * Saab kasutada rakendust offline'is
+  * Saab määrata ülesande tähtsust
+  * Ülesanded on katergoriseeritud tähtsuse järgi
 
-## Tähtaeg 
+
+## Tähtaeg
 
 Rühma viimane tund esitletakse
 
