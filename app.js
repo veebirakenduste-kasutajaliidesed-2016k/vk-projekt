@@ -249,13 +249,16 @@
       }
     },
     VeryImportantClick: function(){
-      $(".list-of-very-important-tasks").toggle('1000');
+      $('.list-of-very-important-tasks').toggle('1000');
+      $('div.very-important-arrow').toggleClass('rotate-reset');
     },
     ImportantClick: function(){
-      $(".list-of-important-tasks").toggle('1000');
+      $('.list-of-important-tasks').toggle('1000');
+      $('div.important-arrow').toggleClass('rotate-reset');
     },
     NotImportantClick: function(){
-      $(".list-of-not-important-tasks").toggle('1000');
+      $('.list-of-not-important-tasks').toggle('1000');
+      $('div.not-important-arrow').toggleClass('rotate-reset');
     },
     LoadNotesClick: function(){
       $.PostItAll.load();
