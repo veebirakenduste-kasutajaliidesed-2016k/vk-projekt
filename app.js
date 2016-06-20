@@ -26,29 +26,26 @@
     this.init();
   };
 
-  window.ToDo = ToDo; // Paneme muuutja külge
+  window.ToDo = ToDo; // Paneme muuutuja külge
 
   ToDo.routes = {
     'home-view': {
       'render': function(){
-        // käivitame siis kui lehte laeme
-        console.log('>>>>avaleht');
       }
     },
     'list-view': {
       'render': function(){
-        // käivitame siis kui lehte laeme
-        console.log('>>>>loend');
-        //simulatsioon laeb kaua
         window.setTimeout(function(){
-        //document.querySelector('.loading').innerHTML = 'laetud!';
         $(".loading").css({ display: "none" });
         }, 3000);
       }
     },
     'manage-view': {
       'render': function(){
-      // käivitame siis kui lehte laeme
+      }
+    },
+    'archive-view':{
+      'render': function(){
       }
     }
   };
@@ -57,6 +54,7 @@
   var very_important_number = 0;
   var important_number = 0;
   var not_important_number = 0;
+  var in_process_number = 0;
   ToDo.prototype = {
     init: function(){
       //kuulan aadressirea vahetust
@@ -91,9 +89,18 @@
           }else if(imp == "not_important"){
             $('.list-of-not-important-tasks').append(li);
             not_important_number++;
+          }else if(imp == "in_process"){
+            $('.list-of-in-process-tasks').append(li);
+            in_process_number++;
+          }else if(imp == "archive"){
+            $('.list-of-archived-tasks').append(li);
           }else{
             console.log("midagi oleks pidanud juhtuma");
           }
+          $(".very-important-number").html("["+very_important_number+"]");
+          $(".important-number").html("["+important_number+"]");
+          $(".not-important-number").html("["+not_important_number+"]");
+          $(".in-process-number").html("["+in_process_number+"]");
         });
       }else {
         //küsin AJAXiga
@@ -108,6 +115,7 @@
             ToDo.instance.tasks.forEach(function(item){
               var new_item = new Item(item.id, item.importance, item.title, item.task, item.due_date);
               var li = new_item.createHtmlElement();
+              console.log(item.importance);
               var imp = item.importance;
               if(imp == "very_important"){
                 $('.list-of-very-important-tasks').append(li);
@@ -118,9 +126,18 @@
               }else if(imp == "not_important"){
                 $('.list-of-not-important-tasks').append(li);
                 not_important_number++;
+              }else if(imp == "in_process"){
+                $('.list-of-in-process-tasks').append(li);
+                in_process_number++;
+              }else if(imp == "archive"){
+                $('.list-of-archived-tasks').append(li);
               }else{
                 console.log("midagi oleks pidanud juhtuma");
               }
+              $(".very-important-number").html("["+very_important_number+"]");
+              $(".important-number").html("["+important_number+"]");
+              $(".not-important-number").html("["+not_important_number+"]");
+              $(".in-process-number").html("["+in_process_number+"]");
             });
             //salvestan localStoragisse
             localStorage.setItem('tasks', JSON.stringify(ToDo.instance.tasks));
@@ -129,9 +146,6 @@
         xhttp.open("GET", "save.php", true);
         xhttp.send();
       }
-      $(".very-important-number").html("["+very_important_number+"]");
-      $(".important-number").html("["+important_number+"]");
-      $(".not-important-number").html("["+not_important_number+"]");
       // esimene loogika oleks see, et kuulame hiireklikki nupul
       this.bindEvents();
     },
@@ -148,19 +162,140 @@
       $('.very-important-title').on('click', this.VeryImportantClick.bind(this));
       $('.important-title').on('click', this.ImportantClick.bind(this));
       $('.not-important-title').on('click', this.NotImportantClick.bind(this));
+      $('.in-process-title').on('click', this.InProcessClick.bind(this));
     },
+    processItem: function(){
+      var tasks = JSON.parse(localStorage.tasks);
+      var id, title, task, due_date, importance;
+      for(var t=0; t < tasks.length; t++){
+        if(tasks[t].id== event.target.dataset.id){
+          id = tasks[t].id;
+          title = tasks[t].title;
+          task = tasks[t].task;
+          due_date = tasks[t].due_date;
+          importance = "in_process";
+          break;
+        }
+      }
+      for(var i = 0; i < this.tasks.length; i++){
+        if(this.tasks[i].id == id){
+          //kustuta kohal i objekt ära
+          this.tasks.splice(i, 1);
+          break;
+        }
+      }
+      localStorage.setItem('tasks', JSON.stringify(this.tasks));
 
+      // KUSTUTAN HTMLI
+      var ul = event.target.parentNode.parentNode;
+      var li = event.target.parentNode;
+
+      ul.removeChild(li);
+
+      //AJAX
+      var xhttp = new XMLHttpRequest();
+      //mis juhtub kui päring lõppeb
+      xhttp.onreadystatechange = function() {
+        console.log(xhttp.readyState);
+        if (xhttp.readyState == 4 && xhttp.status == 200) {
+          console.log(xhttp.responseText);
+        }
+      };
+      //teeb päringu
+      xhttp.open("GET", "delete.php?delete_id="+id, true);
+      xhttp.send();
+      location.reload();
+
+      var new_item = new Item(id, importance, title, task, due_date);
+
+      this.tasks.unshift(new_item);
+      console.log(JSON.stringify(this.tasks));
+      // JSON'i stringina salvestan localStorage'isse
+      localStorage.setItem('tasks', JSON.stringify(this.tasks));
+
+      //AJAX
+      var xhttp2 = new XMLHttpRequest();
+      //mis juhtub kui päring lõppeb
+      xhttp2.onreadystatechange = function() {
+        console.log(xhttp2.readyState);
+        if (xhttp2.readyState == 4 && xhttp2.status == 200) {
+          console.log(xhttp2.responseText);
+        }
+      };
+      //teeb päringu
+      console.log("Importance:" + importance);
+      xhttp2.open("GET", "save.php?id="+id+"&importance="+importance+"&title="+title+"&task="+task+"&due_date="+due_date, true);
+      xhttp2.send();
+
+    },
+    archiveItem: function(){
+      var c = confirm("Oled kindel, et tahad ülesannet arhiveerida?");
+      // vajutas no, pani ristist kinni
+      if(!c){	return; }
+      var tasks = JSON.parse(localStorage.tasks);
+      var id, title, task, due_date, importance;
+      for(var t=0; t < tasks.length; t++){
+        if(tasks[t].id== event.target.dataset.id){
+          id = tasks[t].id;
+          title = tasks[t].title;
+          task = tasks[t].task;
+          due_date = tasks[t].due_date;
+          importance = "archive";
+          break;
+        }
+      }
+      for(var i = 0; i < this.tasks.length; i++){
+        if(this.tasks[i].id == id){
+          //kustuta kohal i objekt ära
+          this.tasks.splice(i, 1);
+          break;
+        }
+      }
+      localStorage.setItem('tasks', JSON.stringify(this.tasks));
+
+      // KUSTUTAN HTMLI
+      var ul = event.target.parentNode.parentNode;
+      var li = event.target.parentNode;
+
+      ul.removeChild(li);
+
+      //AJAX
+      var xhttp = new XMLHttpRequest();
+      //mis juhtub kui päring lõppeb
+      xhttp.onreadystatechange = function() {
+        console.log(xhttp.readyState);
+        if (xhttp.readyState == 4 && xhttp.status == 200) {
+          console.log(xhttp.responseText);
+        }
+      };
+      //teeb päringu
+      xhttp.open("GET", "delete.php?delete_id="+id, true);
+      xhttp.send();
+      location.reload();
+
+      var new_item = new Item(id, importance, title, task, due_date);
+
+      this.tasks.unshift(new_item);
+      console.log(JSON.stringify(this.tasks));
+      // JSON'i stringina salvestan localStorage'isse
+      localStorage.setItem('tasks', JSON.stringify(this.tasks));
+
+      //AJAX
+      var xhttp2 = new XMLHttpRequest();
+      //mis juhtub kui päring lõppeb
+      xhttp2.onreadystatechange = function() {
+        console.log(xhttp2.readyState);
+        if (xhttp2.readyState == 4 && xhttp2.status == 200) {
+          console.log(xhttp2.responseText);
+        }
+      };
+      //teeb päringu
+      console.log("Importance:" + importance);
+      xhttp2.open("GET", "save.php?id="+id+"&importance="+importance+"&title="+title+"&task="+task+"&due_date="+due_date, true);
+      xhttp2.send();
+    },
     deleteItem: function(event){
-      // millele vajutasin SPAN
-      console.log(event.target);
-      // tema parent ehk mille sees ta on LI
-      console.log(event.target.parentNode);
-      //mille sees see on UL
-      console.log(event.target.parentNode.parentNode);
-      //id
-      console.log(event.target.dataset.id);
-
-      var c = confirm("Oled kindel?");
+      var c = confirm("Oled kindel, et tahad ülesannet kustutada?");
       // vajutas no, pani ristist kinni
       if(!c){	return; }
 
@@ -215,7 +350,7 @@
 
       var tasks = JSON.parse(localStorage.tasks);
       for(var t=0; t < tasks.length; t++){
-        if(tasks[t] .id== event.target.dataset.id){
+        if(tasks[t].id== event.target.dataset.id){
           $('.id_holder').html(tasks[t].id);
           $('.change_title').val(tasks[t].title);
           $('.change_task').val(tasks[t].task);
@@ -248,6 +383,10 @@
         }
       }
     },
+    InProcessClick: function(){
+      $('.list-of-in-process-tasks').toggle('1000');
+      $('div.in-process-arrow').toggleClass('rotate-reset');
+    },
     VeryImportantClick: function(){
       $('.list-of-very-important-tasks').toggle('1000');
       $('div.very-important-arrow').toggleClass('rotate-reset');
@@ -266,28 +405,24 @@
 
     AddNoteClick: function(){
       $.PostItAll.new({
-      features: {
-          savable : true
-      }
+        features: {
+            savable : true
+        }
       });
     },
-
     HideNotesClick: function(){
       $.PostItAll.hide();
       $(".show-notes").css({ display: "block" });
       $(".hide-notes").css({ display: "none" });
     },
-
     ShowNotesClick: function(){
       $.PostItAll.show();
       $(".show-notes").css({ display: "none" });
       $(".hide-notes").css({ display: "block" });
     },
-
     CancelChangeClick: function(){
       $('.change').hide();
     },
-
     ChangeClick: function(event){
       console.log("ChangeClick");
       var id = $('.id_holder').text();
@@ -357,7 +492,10 @@
         $('.list-of-important-tasks').append(li);
       }else if(importance == "not_important"){
         $('.list-of-not-important-tasks').append(li);
-      }else{
+      }else if(importance == "in_process"){
+        $('.list-of-in-process-tasks').append(li);
+      }
+      else{
         console.log("midagi oleks pidanud juhtuma");
       }
       $('.change').hide();
@@ -406,6 +544,9 @@
       }else if(importance == "not_important"){
         $('.list-of-not-important-tasks').append(li);
         not_important_number++;
+      }else if(importance == "in_process"){
+        $('.list-of-in-process-tasks').append(li);
+        in_process_number++;
       }else{
         console.log("midagi oleks pidanud juhtuma");
       }
@@ -423,6 +564,7 @@
       $(".very-important-number").html("["+very_important_number+"]");
       $(".important-number").html("["+important_number+"]");
       $(".not-important-number").html("["+not_important_number+"]");
+      $(".in-process-number").html("["+in_process_number+"]");
     },
 
     routeChange: function(event){
@@ -481,34 +623,64 @@
       span_with_content.appendChild(content);
 
       li.appendChild(span_with_content);
+      if(this.importance !== "archive"){
+        //CHANGE nupp
+        var span_change = document.createElement('span');
+        span_change.style.color = "green";
+        span_change.style.cursor = "pointer";
 
-      //DELETE nupp
-      var span_delete = document.createElement('span');
-      span_delete.style.color = "red";
-      span_delete.style.cursor = "pointer";
+        //muutmiseks id kaasa
+        span_change.setAttribute("data-id", this.id);
+        span_change.innerHTML = "  Muuda";
+        li.appendChild(span_change);
+        //keegi vajutas nuppu
+        span_change.addEventListener("click", ToDo.instance.changeItem.bind(ToDo.instance));
+      }
+      if(this.importance == "very_important" || this.importance == "important" || this.importance == "not_important"){
+        var span_process = document.createElement('span');
+        span_process.style.color = "grey";
+        span_process.style.cursor = "pointer";
 
-      //kustutamiseks panen id kaasa
-      span_delete.setAttribute("data-id", this.id);
+        //kustutamiseks panen id kaasa
+        span_process.setAttribute("data-id", this.id);
 
-      span_delete.innerHTML = "  Kustuta";
+        span_process.innerHTML = "  Lisa tegemisse";
 
-      li.appendChild(span_delete);
+        li.appendChild(span_process);
 
-      //keegi vajutas nuppu
-      span_delete.addEventListener("click", ToDo.instance.deleteItem.bind(ToDo.instance));
+        //keegi vajutas nuppu
+        span_process.addEventListener("click", ToDo.instance.processItem.bind(ToDo.instance));
+      }
+      if(this.importance == "in_process"){
+        var span_archive = document.createElement('span');
+        span_archive.style.color = "blue";
+        span_archive.style.cursor = "pointer";
 
-      //CHANGE nupp
-      var span_change = document.createElement('span');
-      span_change.style.color = "green";
-      span_change.style.cursor = "pointer";
+        //arhiveerimiseks panen id kaasa
+        span_archive.setAttribute("data-id", this.id);
 
-      //muutmiseks id kaasa
-      span_change.setAttribute("data-id", this.id);
-      span_change.innerHTML = "  Muuda";
-      li.appendChild(span_change);
-      //keegi vajutas nuppu
-      span_change.addEventListener("click", ToDo.instance.changeItem.bind(ToDo.instance));
+        span_archive.innerHTML = "  Arhiveeri";
 
+        li.appendChild(span_archive);
+
+        //keegi vajutas nuppu
+        span_archive.addEventListener("click", ToDo.instance.archiveItem.bind(ToDo.instance));
+      }else{
+        //DELETE nupp
+        var span_delete = document.createElement('span');
+        span_delete.style.color = "red";
+        span_delete.style.cursor = "pointer";
+
+        //kustutamiseks panen id kaasa
+        span_delete.setAttribute("data-id", this.id);
+
+        span_delete.innerHTML = "  Kustuta";
+
+        li.appendChild(span_delete);
+
+        //keegi vajutas nuppu
+        span_delete.addEventListener("click", ToDo.instance.deleteItem.bind(ToDo.instance));
+      }
       return li;
     }
   };

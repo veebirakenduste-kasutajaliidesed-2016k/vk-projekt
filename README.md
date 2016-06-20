@@ -13,6 +13,9 @@ Funktsionaalus:
   * Saab kasutada rakendust offline'is
   * Saab määrata ülesande tähtsust
   * Ülesanded on katergoriseeritud tähtsuse järgi
+  * Saab ülesandeid peita kategooriate kaupa
+  * Saab märkida ülesandeid tegemisel olevaks
+  * Saab ülesandeid arhiveerida
 
 
 ## Tähtaeg

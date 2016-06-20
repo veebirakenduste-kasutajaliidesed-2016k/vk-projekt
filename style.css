@@ -34,7 +34,8 @@ main {
 }
 .very-important-number,
 .important-number,
-.not-important-number{
+.not-important-number,
+.in-process-number{
   color:red;
 }
 .rotate{
@@ -55,20 +56,23 @@ main {
 }
 .not-important-title,
 .important-title,
-.very-important-title{
+.very-important-title,
+.in-process-title{
   text-align: center;
   border: 1px solid rgb(150, 190, 255);
   cursor: pointer;
 }
 .very-important-arrow,
 .important-arrow,
-.not-important-arrow{
+.not-important-arrow,
+.in-process-arrow{
   float:right;
   margin-right:5px;
 }
 .change,
 .show-notes {
   display: none;
+  padding-bottom:75px;
 }
 .adding-message {
   display:none;
@@ -180,13 +184,17 @@ td {
 }
 .list-of-not-important-tasks,
 .list-of-important-tasks,
-.list-of-very-important-tasks {
+.list-of-very-important-tasks,
+.list-of-in-process-tasks,
+.list-of-archived-tasks {
     list-style-type: none;
     padding-left: 20px;
 }
 .list-of-not-important-tasks li,
 .list-of-important-tasks li,
-.list-of-very-important-tasks li {
+.list-of-very-important-tasks li,
+.list-of-in-process-tasks li,
+.list-of-archived-tasks li {
     margin-bottom: 10px;
 }
 .united-ul{
