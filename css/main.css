@@ -8,7 +8,7 @@ body {
 
 #content {
     position: absolute;
-    font-size: 4rem;
+    font-size: 6rem;
     padding: 10px;
     width: 100%;
     top: 10%;
@@ -21,7 +21,14 @@ input[type=text] {
   width: 50%;
   text-align: center;
   font-family: "Courier";
-  font-size: 8rem;
+  font-size: 6rem;
+}
+
+ h2 {
+
+  text-align: center;
+  font-family: "Courier";
+  font-size: 6rem;
 }
 
 input[type=submit] {
@@ -34,5 +41,5 @@ input[type=submit] {
     border-radius: 5px;
     text-align: center;
     font-family: "Courier";
-    font-size: 4rem;
+    font-size: 6rem;
 }

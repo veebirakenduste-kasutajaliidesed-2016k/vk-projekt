@@ -38,7 +38,7 @@
         $('h3').text(correctAnswers + '/' + totalAnswers); //progress
         $("input:first").val('');  //inputi väärtuse tühjendamine, jquery
         if(totalAnswers === 10) {
-          bootbox.confirm("Kokku said: " + correctAnswers + " punkti!", function(result) {
+          bootbox.confirm("Kokku said " + correctAnswers + " punkti!", function(result) {
             totalAnswers=0;
             correctAnswers=0;
             difficulty=1;
