@@ -35,7 +35,7 @@
           saveData(false);
         }
         totalAnswers++;
-        $('h3').text(correctAnswers+'/'+totalAnswers); //progress
+        $('h3').text(correctAnswers + '/' + totalAnswers); //progress
         $("input:first").val('');  //inputi väärtuse tühjendamine, jquery
         if(totalAnswers === 10) {
           bootbox.confirm("Kokku said: " + correctAnswers + " punkti!", function(result) {
