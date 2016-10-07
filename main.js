@@ -11,10 +11,10 @@
       var difficulty=1;
       function newQuestion(){
         startTime = Date.now();
-        if (totalAnswers % 5 === 0) {
+        if (totalAnswers % 5 === 0 && totalAnswers !==0) {
           difficulty=2;
         }
-        question[0] = Math.floor(Math.random()*10 +1)*difficulty;
+        question[0] = Math.floor(Math.random()*10 +1);
         question[1] = Math.floor(Math.random()*10 +1)*difficulty;
         $('h2').text(question[0] +'*'+question[1]); //jquery html elementide viitamine, text - elemendi sisu muutmine
       }
