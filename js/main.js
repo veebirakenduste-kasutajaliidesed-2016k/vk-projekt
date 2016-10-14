@@ -1,6 +1,7 @@
 (function($) {   //funktsioon läheb kohe tööle (an immediately-invoked function expression)
   "use strict";
-
+  var appCache=window.applicationCache;
+  
   var GameLogic = (function(){
     var instance; //üks koopia klassist, ei kordu
 
@@ -89,5 +90,14 @@
      logic.checkAnswer();
      logic.newQuestion();
   });
+  window.addEventListener("load", function(t) {
+    window.applicationCache.addEventListener("updateready", function(e) {
+      if (appCache.status == window.applicationCache.UPDATEREADY) {  //offline loogika
+        window.location.reload();
+        // appCache.swapCache();
+      }
+    }, false);
+  }, false);
+
 
 }(window.jQuery));

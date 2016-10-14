@@ -1,23 +1,38 @@
 <!DOCTYPE html>
-<html>
-  <head>
+<html manifest="game.appcache">
+
+<head>
     <meta charset="utf-8">
     <title>Arvutaja</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="Arvutaja">
+    <meta name="apple-mobile-web-app-title" content="Arvutaja">
+    <meta name="theme-color" content="#00BCD4">
+    <meta name="msapplication-navbutton-color" content="#00BCD4">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="msapplication-starturl" content="/">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <script src="js/jquery-3.1.1.min.js" crossorigin="anonymous"></script>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/main.css" media="screen" title="no title" charset="utf-8">
-  </head>
-  <body id="content">
+</head>
+
+<body id="content">
     <!-- h2 kuvab küsimust, h3 näitab progressi -->
-    Siin on ülesanne <h2></h2>
+    Siin on ülesanne
+    <h2></h2>
     <form>
-      Kirjuta vastus siia:
-      <br> <input type="text" size="20"><br>  <!-- .js failis saab viidata input first ehk esimene rida siit-->
-      <input type="submit" value="vasta">
+        Kirjuta vastus siia:
+        <br> <input type="text" size="20"><br>
+        <!-- .js failis saab viidata input first ehk esimene rida siit-->
+        <input type="submit" value="vasta">
     </form>
-  <h3></h3>
-  </body>
-  <script src="js/bootstrap.min.js" charset="utf-8"></script>
-  <script src="js/bootbox.min.js" charset="utf-8"></script>
-  <script src="js/main.js" charset="utf-8"></script>
+    <h3></h3>
+</body>
+<script src="js/bootstrap.min.js" charset="utf-8"></script>
+<script src="js/bootbox.min.js" charset="utf-8"></script>
+<script src="js/main.js" charset="utf-8"></script>
+
 </html>
