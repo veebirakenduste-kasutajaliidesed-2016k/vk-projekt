@@ -1,5 +1,5 @@
 <?php
-$data = $_POST['data'];
+$data = $_POST['data']; //sama mis saveData funktsioonis
 
 if(file_exists('data.json')){
   // $results on JSON kujul, $data on php massiivi
