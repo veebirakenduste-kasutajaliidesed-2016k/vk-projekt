@@ -1,0 +1,61 @@
+/*mobiil*/
+html, body {
+		margin: 0;
+		padding: 0;
+		width: 100%;
+		height: 100%;
+}
+
+#content {
+		position: absolute;
+		font-size: 2.5rem;
+		padding: 2px;
+		width: 100%;
+		top: 2%;
+		text-align: center;
+		font-family: 'Roboto', sans-serif;
+}
+
+input[type=text] {
+		font-size: 2.5rem;
+		font-family: 'Roboto', sans-serif;
+}
+
+h2 {
+		text-align: center;
+		font-family: 'Roboto', sans-serif;
+		font-size: 2.5rem;
+}
+
+/*suurem kui mobiil*/
+@media screen and (min-width: 768px) {
+	html, body {
+	    margin: 0;
+	    padding: 0;
+	    width: 100%;
+	    height: 100%;
+	}
+	.form-control {
+		height: 15vh;
+	}
+	#content {
+	    position: absolute;
+	    font-size: 6rem;
+	    padding: 10px;
+	    width: 100%;
+	    top: 15%;
+	    text-align: center;
+	    font-family: 'Roboto', sans-serif;
+	}
+
+	input[type=text] {
+	    font-size: 6rem;
+	    font-family: 'Roboto', sans-serif;
+	}
+
+	h2 {
+	    text-align: center;
+	    font-family: 'Roboto', sans-serif;
+	    font-size: 6rem;
+	}
+}

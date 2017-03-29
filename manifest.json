@@ -1,0 +1,8 @@
+{
+  "name": "Arvutaja",
+  "short_name": "Arvutaja",
+  "lang": "en-US",
+  "start_url": "/~merit26/vk/vk-projekt/",
+  "display": "standalone",
+  "theme_color": "#8c220b"
+}

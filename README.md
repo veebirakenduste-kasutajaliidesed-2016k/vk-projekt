@@ -1,11 +1,11 @@
 # Projekt
 
-## Tähtaeg 
+## Tähtaeg
 
 Rühma viimane tund esitletakse
 
-## Liikmete arv
-Võib teha üksi või kahekesi
+## Liikmed
+Merit Paist
 
 **Juhul kui tehakse kahekesi, peab olema näha githubis, kes ja mida on kirjutanud. Kui ei ole näha, kes midagi kirjutanud on, tööd ei arvesta! Kui ei tea kuidas seda teha, küsi!**
 
@@ -18,12 +18,13 @@ Võib teha üksi või kahekesi
 ### Nõuded
 
 1. **README.md sisaldab:**
-    * suurelt projekti nime;
-    * kes teeb;
-    * eesmärki (3-4 lauset, mis probleemi rakendus lahendab);
+    * Õpime korrutama;
+    * Merit Paist;
+    * Korrutustabeli õppimine algkoolis, telefonirakendus. Arvuti annab tehte, inimene kirjutab vastuse. Loeb kokku õiged ja valed vastused, vale vastuse korral küsib sama uuesti 2 korda. Alguses küsib, mitu tehet ette anda. Lõpus annab õigete ja valede vastuste arvu.
+
     * funktsionaalsuse loetelu prioriteedi järjekorras, nt
-        * v0.1 Saab teha kasutaja ja sisselogida
-        * v0.2 Saab lisada ...
+        * töötab korrutamine, tehe antakse ette ja inimesel on võimalik vastus kirjutada
+        * õiged ja valed vastused, kokku lugeda ja tagasiside anda
         * ...
     * andmete liikumise skeem loetava pildina (mis lehed ja mis andmeid mis lehel käideldakse);
 

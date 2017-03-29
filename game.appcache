@@ -1,0 +1,14 @@
+CACHE MANIFEST
+#V0.1.22
+index.html
+manifest.json
+css/bootstrap.min.css
+css/main.css
+js/bootstrap.min.js
+js/bootbox.min.js
+js/main.js
+js/jquery-3.1.1.min.js
+fonts/Roboto-Regular.ttf
+
+NETWORK:
+*
