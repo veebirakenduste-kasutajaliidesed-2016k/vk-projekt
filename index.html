@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html manifest="invader.appcache">
+    <head>
+        
+        <title>Space Invaders</title>
+        <link rel="stylesheet" type="text/css" href="css/core.css">
+        <link rel="stylesheet" type="text/css" href="css/typeography.css">
+        <style>
+
+            /* Styling needed for a fullscreen canvas and no scrollbars. */
+            body, html {
+              width: 100%;
+              height: 100%;
+              margin: 0;
+              padding: 0;
+              overflow: hidden;
+<<<<<<< HEAD
+            }
+
+            .noselect {
+              -webkit-touch-callout: none; /* iOS Safari */
+              -webkit-user-select: none;   /* Chrome/Safari/Opera */
+              -khtml-user-select: none;    /* Konqueror */
+              -moz-user-select: none;      /* Firefox */
+              -ms-user-select: none;       /* Internet Explorer/Edge */
+              user-select: none;           /* Non-prefixed version, currently
+                                              not supported by any browser */
+=======
+>>>>>>> refs/remotes/origin/pr/3
+            }
+
+            /*.noselect {
+              -webkit-touch-callout: none; /* iOS Safari */
+              /*-webkit-user-select: none;   /* Chrome/Safari/Opera */
+              /*-khtml-user-select: none;    /* Konqueror */
+              /*-moz-user-select: none;      /* Firefox */
+              /*-ms-user-select: none;       /* Internet Explorer/Edge */
+              /*user-select: none;           /* Non-prefixed version, currently
+                                              not supported by any browser */
+            /*}*/
+
+            #starfield {
+                width:100%;
+                height:100%;
+                z-index: -1;
+                position: absolute;
+                left: 0px;
+                top: 0px;
+            }
+            #gamecontainer {
+                width: 80%;
+                float: left;
+            }
+            #gamecanvas {
+                width: 80%;
+                height: 600px;
+            }
+            #info {
+                width: 20%;
+                color: yellow;
+                float:left;
+            }
+            #score {
+              width: 20%;
+              color: yellow;
+              float:left;
+            }
+            li{
+              width: 100%;
+              color: blue;
+            }
+        </style>
+    </head>
+    <body class="noselect">
+        <div id="starfield"></div>
+        <div id="gamecontainer">
+        <canvas id="gameCanvas"></canvas>
+        </div>
+        <div id="info">
+            <p>Move with arrow keys, fire with the space bar. The invaders get faster and drop
+                more bombs as you complete each level!</p>
+            <p><a id="muteLink" href="#" onclick="toggleMute()">mute</a> |
+                <a href="http://github.com/dwmkerr/spaceinvaders">spaceinvaders on github</a> |
+                <a href="http://www.dwmkerr.com/experiments">more experiments</a> | <a href="http://www.dwmkerr.com">dwmkerr.com</a></p>
+        </div>
+        <div id="score">
+          <p id="scoreP">High scores</p>
+          <ul id="scoreUl">
+          </ul>
+          <pre class="output"></pre>
+        </div>
+
+        <script src="js/starfield.js"></script>
+        <script src="js/spaceinvaders.js"></script>
+        <script>
+
+            //  Create the starfield.
+            var container = document.getElementById('starfield');
+            var starfield = new Starfield();
+            starfield.initialise(container);
+            starfield.start();
+
+            //  Setup the canvas.
+            var canvas = document.getElementById("gameCanvas");
+            canvas.width = window.innerWidth*0.75;
+            canvas.height = window.innerHeight*0.75;
+
+            //  Create the game.
+            var game = new Game();
+
+            //  Initialise it with the game canvas.
+            game.initialise(canvas);
+
+            //  Start the game.
+            game.start();
+
+            window.addEventListener('deviceorientation', handleOrientation);
+
+            //  Listen for keyboard events.
+            window.addEventListener("keydown", function keydown(e) {
+                var keycode = e.which || window.event.keycode;
+                //  Supress further processing of left/right/space (37/29/32)
+                if(keycode == 37 || keycode == 39 || keycode == 32) {
+                    e.preventDefault();
+                }
+                game.keyDown(keycode);
+            });
+            window.addEventListener("keyup", function keydown(e) {
+                var keycode = e.which || window.event.keycode;
+                game.keyUp(keycode);
+            });
+
+            function toggleMute() {
+                game.mute();
+                document.getElementById("muteLink").innerText = game.sounds.mute ? "unmute" : "mute";
+            }
+        </script>
+        <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-41728580-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+    </body>
+</html>
