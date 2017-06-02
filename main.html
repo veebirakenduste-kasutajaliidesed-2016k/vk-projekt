@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Fuel Costs</title>
+  <script src="app.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav class="menu">
+    <ul class="menu-list">
+      <li class="menu-item"><a href="#home-view" class="menu-link home-view active-menu">Home</a></li>
+      <li class="menu-item"><a href="#history-view" class="menu-link history-view">History</a></li>
+      <li class="menu-item"><a href="#manage-view" class="menu-link manage-view">Management</a></li>
+    </ul>
+  </nav>
+
+  <main role="main">
+
+      <div id="history-view">
+        <h1>History</h1>
+        <div>
+        <!--  <p id="results"></p>
+          <div id="resultss"></div>-->
+		  <div id="result5">
+
+
+
+          <ul class="result5"></ul>
+
+        </div>
+        </div>
+        <p id="totalTrips"></p>
+        <p id="totalFuelCosts"></p>
+        <p id="Averages"></p>
+
+
+      </div>
+
+      <div id="manage-view">
+        <h1>Management</h1>
+
+        <div>
+        <label for="fuelQuantity">Kütuse kogus</label>
+          <input type="text" id="fuelQuantity">
+        <label for="fuelQuantity">Kütuse hind kokku</label>
+          <input type="text" id="fuelCost">
+        <label for="fuelQuantity">Trip</label>
+          <input type="text" id="trip">
+          <input type="submit" id='button'>
+        </div>
+        <div id='fuelCostText'>
+        </div>
+
+        <div>
+        <p id="output"></p>
+        <p id="averageConsumption"></p>
+        <p id="averageKmCost"></p>
+        </div>
+
+      </div>
+
+      <div id="home-view">
+        <h1>Home</h1>
+
+
+
+      </div>
+
+
+    </main>
+
+
+
+
+
+</body>
+</html>

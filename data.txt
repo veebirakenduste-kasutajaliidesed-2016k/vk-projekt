@@ -1,0 +1,1 @@
+[{"fuelQuantity":"25","fuelCost":"28","trip":"230"},{"fuelQuantity":"25","fuelCost":"28","trip":"230"},{"fuelQuantity":"5","fuelCost":"1.20","trip":"120"},{"fuelQuantity":"10","fuelCost":"12","trip":"80"},{"fuelQuantity":"85","fuelCost":"100","trip":"1300"}]

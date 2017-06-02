@@ -1,8 +1,26 @@
+1. **README.md sisaldab:**
+
+	#Projekt Bensuäpp
+	
+	#Liikmed: Karl Grossberg
+	
+	#Eesmärk: Kasutaja saab jälgida oma kütusekulu ja kütusele kulunud raha.
+	
+	#Funktsionaalsused:
+	
+	###V 0.1: Sisestused: Kütuse kogus, kütuse hind, odomeetri näit.
+	###V 0.2: Sisestatud andmete kirjutamine serverisse. 
+	###V 0.3: Keskmise kütusekulu arvutamine.
+	###V 0.4: Andmete kuvamine serverist.
+
+
+
+
 # Projekt
 
 ## Tähtaeg 
 
-Rühma viimane tund esitletakse
+
 
 ## Liikmete arv
 Võib teha üksi või kahekesi
@@ -17,7 +35,11 @@ Võib teha üksi või kahekesi
 
 ### Nõuded
 
-1. **README.md sisaldab:**
+
+
+
+
+
     * suurelt projekti nime;
     * kes teeb;
     * eesmärki (3-4 lauset, mis probleemi rakendus lahendab);
