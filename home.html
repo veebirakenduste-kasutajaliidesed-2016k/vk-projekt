@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC>
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr">
+<head>
+	<html lang="en" manifest="sayings.appcache">
+	<link rel="stylesheet" href="bootstrap.min.css" >
+  <link href='css/font1.css' rel='stylesheet' type='text/css'>
+  <link href='css/font2.css' rel='stylesheet' type='text/css'>
+  <meta charset="UTF-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title> Chat </title>
+	<link rel="stylesheet" href="css/general.css" type="text/css" media="screen" />
+	<!-- <link rel="stylesheet" href="style.css" type="text/css"/>-->
+</head>
+
+<body>
+
+
+<div id="container">
+<div class="content">
+			<!--  <h1>Messages</h1> -->
+			<div id="loading"><img src="css/images/loading.gif" alt="Loading..." /></div>
+			<p>
+		</div>
+</div>
+	<form action="shoutbox.php" method="POST" id="form">
+				<label>Name </label><br>
+				<input class="form-control" id="nick" type="text" MAXLENGTH="25" />
+
+				<br><label>Message</label><br>
+				<!--<td><input class="text" id="message" type="text" MAXLENGTH="255" /></td>-->
+				<!--<textarea class="text" id="message" rows="4" cols="20"></textarea>-->
+				<textarea class="form-control" id="message" rows="5" cols="5"></textarea>
+			<br><button id="send" type="submit" class="btn btn-success" center>Send message</button>
+
+	</form>
+	<script type="text/javascript" src="jquery.js"></script>
+	<script type="text/javascript" src="shoutbox.js"></script>
+</body>
+</html>

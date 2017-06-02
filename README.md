@@ -1,30 +1,15 @@
-# Projekt
-
-## Tähtaeg 
-
-Rühma viimane tund esitletakse
-
-## Liikmete arv
-Võib teha üksi või kahekesi
-
-**Juhul kui tehakse kahekesi, peab olema näha githubis, kes ja mida on kirjutanud. Kui ei ole näha, kes midagi kirjutanud on, tööd ei arvesta! Kui ei tea kuidas seda teha, küsi!**
-
-## Tööjuhend
-1. Üks fork'ib endale käesoleva repositooriumi ning annab vajadusele kirjutamisõiguse/ligipääsu
-1. Tee kohe Pull request
-1. Muuda repositooriumi `README.md faili` vastavalt nõutele
-1. Tee valmis korralik veebirakendus
+# Projekt "chatroom"
 
 ### Nõuded
-
+dd
 1. **README.md sisaldab:**
-    * suurelt projekti nime;
-    * kes teeb;
-    * eesmärki (3-4 lauset, mis probleemi rakendus lahendab);
+    * chat;
+    * Jekaterina Voroshilova, Vitali Maksimov;
+    * AJAX, jQuery, gruppi-chattimine,  ;
     * funktsionaalsuse loetelu prioriteedi järjekorras, nt
-        * v0.1 Saab teha kasutaja ja sisselogida
-        * v0.2 Saab lisada ...
-        * ...
+        * v0.1 Teha chatti ruumi
+        * v0.2 Anonüümne kirjevahetus ilma registreerimata
+        * v0.3 Teha sessiooni, et oli võimalik teada, kas on keegi ruumis või mitte.
     * andmete liikumise skeem loetava pildina (mis lehed ja mis andmeid mis lehel käideldakse);
 
 2. **Veebirakenduse nõuded:**
